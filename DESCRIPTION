@@ -1,0 +1,12 @@
+Package: blscrapeR
+Type: Package
+Title: Scrapes and Analyzes data from the Bureau of Labor Statistics (BLS)
+Version: 0.1.0
+Author: Kris Eberwein
+Maintainer: Kris Eberwein <kris.eberwein@gmail.com>
+Description: Scrapes various data from the Bureau of Labor Statistics, which is the statistical branch of the United States Department of Labor. The package has additional functions to help parse, analyze and visualize the data.
+Depends: R (>= 3.1.2)
+Imports: dplyr, RCurl, RJSONIO, xts
+License: MIT + file LICENSE
+LazyData: true
+RoxygenNote: 5.0.1
