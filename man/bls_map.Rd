@@ -12,16 +12,9 @@ Return a ggplot object to render a cloropleth map.
 \examples{
 
 ## Not run:
-## One or More Series with Optional Parameters
-bls_id <- list(
-    'seriesid'=c('LNS14000000','LNS12300000'),
-    'startyear'=2010,
-    'endyear'=2012,
-    'catalog'=FALSE,
-    'calculations'=TRUE,
-    'annualaverage'=TRUE,
-    'registrationKey'='2a8526b8746f4889966f64957c56b8fd')
-df <- get_data(bls_id, api.version=2)
+
+bls_gg <- bls_map()
+bls_gg
 
 ## End (Not run)
 
