@@ -19,7 +19,7 @@ bls_map <- function(){
 #Maps by County
 #Load pre-formatted map for ggplot.
 #load("data/cb_2015_us_county.RData")
-map = cb_2015_us_county
+map = county_map
 #Unemployment statistics by county: Get and process data.
 temp<-tempfile()
 download.file("http://www.bls.gov/lau/laucntycur14.txt", temp)
