@@ -5,18 +5,19 @@
 #' @import ggplot2
 #' @export bls_map
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.
+#' @param fill_rate Column name from the dataframe that you want to use as a fill value.
 #' @examples
 #' 
 #' ## Not run:
 #' df <- format_county_data()
-#' bls_gg <- bls_map(df)
+#' bls_gg <- bls_map(map_data = df, fill_rate = "unemp_rate")
 #' bls_gg
 #' 
 #' ## End (Not run)
 #'
 #'
 
-bls_map <- function(map_data){
+bls_map <- function(map_data, fill_rate){
 #Maps by County
 #Load pre-formatted map for ggplot.
 map = county_map
@@ -26,11 +27,11 @@ ggplot() +
     geom_map(data=map, map=map,
              aes(x=long, y=lat, map_id=id, group=group),
              fill="#ffffff", color="#0e0e0e", size=0.15) +
-    geom_map(data=map_data, map=map, aes(map_id=fips, fill=unemp_rate),
+    geom_map(data=map_data, map=map, aes_string(map_id="fips", fill=fill_rate),
              color="#0e0e0e", size=0.15) +
     scale_fill_gradientn(colors = terrain.colors(9)) +
     coord_equal() +
-    labs(title="Current Unemployment Rate by State") + 
+    labs(title=fill_rate) + 
     theme_bw() +
     theme(axis.line=element_blank(),
           axis.text.x=element_blank(),
@@ -41,5 +42,6 @@ ggplot() +
           panel.grid.major = element_blank(),
           panel.grid.minor = element_blank(),
           panel.border = element_blank(),
-          panel.background = element_blank())
+          panel.background = element_blank(),
+          legend.title=element_blank())
 }
