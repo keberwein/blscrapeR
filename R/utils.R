@@ -6,8 +6,9 @@
 #' @export format_state_data
 #'
 # Borrowed this bit from the following link.
-# TODO re-write the function so it doesn't depend on pbapply or dplyr.
 # https://rud.is/b/2015/03/12/streamgraph-htmlwidget-version-0-7-released-adds-support-for-markers-annotations/
+# TODO re-write the function so it doesn't depend on dplyr.
+# TODO need to figure out way to do a FIPS match and add a column.
 
 
 format_state_data <- function(state, seasonality = TRUE){
@@ -45,7 +46,7 @@ format_state_data <- function(state, seasonality = TRUE){
                unemployed=V6, unemployed_pct=V7)
 }
 
-# state_unemployment <- dplyr::bind_rows(pblapply(state.name, seasonality = TRUE, format_state_data))
+#df <- dplyr::bind_rows(pblapply(state.name, seasonality = TRUE, format_state_data))
 
 
 #
