@@ -46,8 +46,6 @@ format_state_data <- function(state, seasonality = TRUE){
                unemployed=V6, unemployed_pct=V7)
 }
 
-#df <- dplyr::bind_rows(pblapply(state.name, seasonality = TRUE, format_state_data))
-
 
 #
 #' @title Helper funtion for county map
