@@ -2,7 +2,7 @@
 #' @title Helper funtion for state map.
 #' @description Helper function to download and format state employment data.
 #' @param state A list of states to run through the loop.
-#' @param seasonality TRUE or FALSE
+#' @param seasonality TRUE or FALSE. The default value is TRUE.
 #' @export format_state_data
 #'
 # Borrowed this bit from the following link.
@@ -11,15 +11,19 @@
 # TODO need to figure out way to do a FIPS match and add a column.
 
 
-format_state_data <- function(state, seasonality = TRUE){
+format_state_data <- function(state, seasonality = NA){
     seas <- "http://www.bls.gov/lau/ststdsadata.txt"
     notseas <- "http://www.bls.gov/lau/ststdnsadata.txt"
     if (seasonality == TRUE){
         dat <- readLines(seas)
     }
-    if (seasonality == FALSE){
+    else if (seasonality == FALSE){
         dat <- readLines(notseas)
     }
+    else if (missing(seasonality)){
+        dat <- readLines(seas)
+    }
+
     section <- paste("^%s|    (", paste0(month.name, sep="", collapse="|"), ")\ +[[:digit:]]{4}", sep="", collapse="")
     section <- sprintf(section, state)
     vals <- gsub("^\ +|\ +$", "", grep(section, dat, value=TRUE))
@@ -45,7 +49,6 @@ format_state_data <- function(state, seasonality = TRUE){
                employed=V4, employed_pct=V5,
                unemployed=V6, unemployed_pct=V7)
 }
-
 
 #
 #' @title Helper funtion for county map
@@ -84,3 +87,13 @@ countyemp$fips_state <- formatC(countyemp$fips_state, width = 2, format = "d", f
 countyemp$fips=paste(countyemp$fips_state,countyemp$fips_county,sep="")
 return(countyemp)
 }
+
+#' Pipe operator
+#'
+#' @name %>%
+#' @rdname pipe
+#' @keywords internal
+#' @export
+#' @importFrom magrittr %>%
+#' @usage lhs \%>\% rhs
+NULL
