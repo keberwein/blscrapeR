@@ -2,7 +2,7 @@
 % Please edit documentation in R/utils.R
 \name{format_state_data}
 \alias{format_state_data}
-\title{Helper funtion.}
+\title{Helper funtion for state map.}
 \usage{
 format_state_data(state, seasonality = TRUE)
 }

@@ -1,5 +1,5 @@
 #
-#' @title Helper funtion.
+#' @title Helper funtion for state map.
 #' @description Helper function to download and format state employment data.
 #' @param state A list of states to run through the loop.
 #' @param seasonality TRUE or FALSE
@@ -48,3 +48,40 @@ format_state_data <- function(state, seasonality = TRUE){
 # state_unemployment <- dplyr::bind_rows(pblapply(state.name, seasonality = TRUE, format_state_data))
 
 
+#
+#' @title Helper funtion for county map
+#' @description Helper function to download and format state employment data.
+#' @export format_county_data
+#'
+format_county_data <- function(){
+temp<-tempfile()
+download.file("http://www.bls.gov/lau/laucntycur14.txt", temp)
+countyemp<-read.csv(temp,
+                    fill=TRUE,
+                    header=FALSE,
+                    sep="|",
+                    skip=6,
+                    stringsAsFactors=FALSE,
+                    strip.white=TRUE)
+colnames(countyemp) <- c("area_code", "fips_state", "fips_county", "area_title", "period",
+                         "civilian_labor_force", "employed", "unemp_level", "unemp_rate")
+unlink(temp)
+#Get rid of empty rows at the bottom.
+countyemp <- na.omit(countyemp)
+#Set period to proper date format.
+countyemp$period <- as.Date(paste("01-", countyemp$period, sep = ""), format = "%d-%b-%y")
+#Subset data frame to selected month.
+recent <- max(countyemp$period)
+countyemp <- countyemp[ which(countyemp$period==recent), ]
+
+#Correct column data fromats
+countyemp$unemp_level <- as.numeric(gsub(",", "", as.character(countyemp$unemp_level)))
+countyemp$employed <- as.numeric(gsub(",", "", as.character(countyemp$employed)))
+countyemp$civilian_labor_force <- as.numeric(gsub(",", "", as.character(countyemp$civilian_labor_force)))
+
+#Get the FIPS code: Have to add leading zeros to any single digit number and combine them.
+countyemp$fips_county <- formatC(countyemp$fips_county, width = 3, format = "d", flag = "0")
+countyemp$fips_state <- formatC(countyemp$fips_state, width = 2, format = "d", flag = "0")
+countyemp$fips=paste(countyemp$fips_state,countyemp$fips_county,sep="")
+return(countyemp)
+}

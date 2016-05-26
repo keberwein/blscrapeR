@@ -4,7 +4,10 @@
 \alias{bls_map}
 \title{Cloropleth mapping of BLS data.}
 \usage{
-bls_map()
+bls_map(map_data)
+}
+\arguments{
+\item{map_data}{Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.}
 }
 \description{
 Return a ggplot object to render a cloropleth map.
@@ -12,8 +15,8 @@ Return a ggplot object to render a cloropleth map.
 \examples{
 
 ## Not run:
-
-bls_gg <- bls_map()
+df <- format_county_data()
+bls_gg <- bls_map(df)
 bls_gg
 
 ## End (Not run)
