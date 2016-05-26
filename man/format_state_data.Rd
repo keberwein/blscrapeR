@@ -4,12 +4,12 @@
 \alias{format_state_data}
 \title{Helper funtion for state map.}
 \usage{
-format_state_data(state, seasonality = TRUE)
+format_state_data(state, seasonality = NA)
 }
 \arguments{
 \item{state}{A list of states to run through the loop.}
 
-\item{seasonality}{TRUE or FALSE}
+\item{seasonality}{TRUE or FALSE. The default value is TRUE.}
 }
 \description{
 Helper function to download and format state employment data.
