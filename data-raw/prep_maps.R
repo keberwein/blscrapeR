@@ -1,6 +1,5 @@
-#TODO
-# Lookup fips code function
-# Dataset containing historic unemployment, employment state/national
+# This function removes a lot of the US territories from the shapefile.
+# It also re-locates Alaska and Hawaii
 
 library(sp)
 library(ggplot2)
