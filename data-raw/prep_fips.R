@@ -1,27 +1,34 @@
-library(maps)
-library(data.table)
+# 2015 FIPS:
+# This will have to be examined every year for county name changes.
+fileUrl <- "http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt"
+download.file(fileUrl, destfile="county_fips.txt", method="curl")
 
-# Grab FIPS codes from the maps package. Warning, county names sometimes change.
-state_fips <- state.fips
-names(state_fips) <- c("fips_state", "ssa", "region", "division", "state_abb", "state")
-#Get the FIPS code: Have to add leading zeros to any single digit number and combine them.
-state_fips$fips_state <- formatC(state_fips$fips_state, width = 2, format = "d", flag = "0")
+county_fips<-read.csv('county_fips.txt',
+                    header=FALSE,
+                    sep=",",
+                    colClasses = "character")
+
+names(county_fips) <- c("state", "fips_state", "fips_county", "county", "type")
 # Make sure there's no Random.seed. Build will fail.
 rm(.Random.seed)
-# Use devtools to save data set.
-devtools::use_data(state_fips, overwrite = TRUE)
-rm(state_fips)
-
-
-# Do the same thing with county FIPS
-county_fips <- county.fips
-county_fips$polyname <- as.character(county_fips$polyname)
-setDT(county_fips)[, paste0("polyname", 1:2) := tstrsplit(county_fips$polyname, ",")]
-colnames(county_fips) <- c("fips_county", "oldname","state", "county")
-county_fips <- county_fips[, oldname:=NULL]
-# Make sure there's no Random.seed. Build will fail.
-rm(.Random.seed)
+rm(fileUrl)
 # Use devtools to save data set.
 devtools::use_data(county_fips, overwrite = TRUE)
 rm(county_fips)
 
+
+# Do the same thing with county FIPS.
+fileUrl <- "http://www2.census.gov/geo/docs/reference/state.txt"
+download.file(fileUrl, destfile="state_fips.txt", method="curl")
+
+state_fips<-read.csv('state_fips.txt',
+                      header=TRUE,
+                      sep="|",
+                      colClasses = "character")
+names(state_fips) <- c("fips_state", "state", "state_name", "gnisid")
+# Make sure there's no Random.seed. Build will fail.
+rm(.Random.seed)
+rm(fileUrl)
+# Use devtools to save data set.
+devtools::use_data(state_fips, overwrite = TRUE)
+rm(state_fips)

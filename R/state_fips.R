@@ -9,11 +9,9 @@
 #'
 #' \itemize{
 #'   \item \code{fips_state}: FIPS code for state
-#'   \item \code{saa}: saa cross-walk id
-#'   \item \code{region}: Geographic region
-#'   \item \code{division}: Geographic division
-#'   \item \code{state_abb}: State abbreviation
-#'   \item \code{state}: State name
+#'   \item \code{state}: State abbreviation
+#'   \item \code{state_name}: State name
+#'   \item \code{gnisid}: Geographic Names Information System ID
 #' }
 #'
 #' @docType data
@@ -22,5 +20,5 @@
 #'
 #' @usage data(state_fips)
 #' @note Last updated 2016-05-27
-#' @format A data frame with 63 rows and 6 variables
+#' @format A data frame with 57 rows and 4 variables
 "state_fips"
