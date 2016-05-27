@@ -26,5 +26,9 @@ bls_state_data <- function(seasonality = NA){
     df <- bind_rows(lapply(state.name, format_state_data, seasonality))
     print("Downloading data, please be patient..................")
     }
+    state_fips=state_fips    
 return(df)
 }
+
+
+

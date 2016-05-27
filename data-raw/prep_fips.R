@@ -25,7 +25,7 @@ state_fips<-read.csv('state_fips.txt',
                       header=TRUE,
                       sep="|",
                       colClasses = "character")
-names(state_fips) <- c("fips_state", "state", "state_name", "gnisid")
+names(state_fips) <- c("fips_state", "state_abb", "state", "gnisid")
 # Make sure there's no Random.seed. Build will fail.
 rm(.Random.seed)
 rm(fileUrl)

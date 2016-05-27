@@ -9,8 +9,8 @@
 #'
 #' \itemize{
 #'   \item \code{fips_state}: FIPS code for state
-#'   \item \code{state}: State abbreviation
-#'   \item \code{state_name}: State name
+#'   \item \code{state_abb}: State abbreviation
+#'   \item \code{state}: State name
 #'   \item \code{gnisid}: Geographic Names Information System ID
 #' }
 #'
