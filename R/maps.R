@@ -3,6 +3,7 @@
 #' @description Return a ggplot object to render a cloropleth map with county outlines.
 #' @keywords bls api economics unemployment map geo geography
 #' @import ggplot2
+#' @import grDevices
 #' @export bls_map
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.
@@ -52,6 +53,7 @@ ggplot() +
 #' @description Return a ggplot object to render a cloropleth map with state outlines.
 #' @keywords bls api economics unemployment map geo geography
 #' @import ggplot2
+#' @import grDevices
 #' @export bls_map_state
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.

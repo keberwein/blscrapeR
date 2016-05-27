@@ -1,3 +1,5 @@
+library(utils)
+
 # 2015 FIPS:
 # This will have to be examined every year for county name changes.
 fileUrl <- "http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt"
