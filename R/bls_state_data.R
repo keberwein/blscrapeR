@@ -5,6 +5,7 @@
 #' @importFrom dplyr select
 #' @importFrom dplyr mutate
 #' @importFrom dplyr rename
+#' @importFrom dplyr left_join
 #' @param seasonality TRUE or FALSE. Would you like seasonally adjusted data? The default value is TRUE.
 #' @export bls_state_data
 #' @examples
@@ -26,9 +27,8 @@ bls_state_data <- function(seasonality = NA){
     df <- bind_rows(lapply(state.name, format_state_data, seasonality))
     print("Downloading data, please be patient..................")
     }
-    state_fips=state_fips    
+    state_fips<-state_fips
+    df <- left_join(df, state_fips, by="state")
 return(df)
 }
-
-
 
