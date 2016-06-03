@@ -54,7 +54,7 @@ inflation_adjust <- function(base_year=NA){
         #cf <- round(cf, 2)
         dat <- merge(avg.cpi, cf)
         # Xts object to data frame
-        dat <- data.frame(date=zoo:::index(dat), coredata(dat))
+        dat <- data.frame(date=zoo::index(dat), coredata(dat))
         dat$base.year <- as.character(base_year)
         dat$pct_increase <- (1-dat$adj_value) * -100
         # Round dollar amounts

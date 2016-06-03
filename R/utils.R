@@ -14,12 +14,6 @@ NULL
 #' @description Stores your BLS API key in your .renviron file for security.
 #' @export bls_key
 #' @param force TRUE or FALSE. The default value is FALSE.
-#' @examples
-#' 
-#' ## Not run:
-#' bls_key()
-#' 
-#' ## End (Not run)
 #'
 bls_key <- function(force = FALSE) {
     env <- Sys.getenv('BLS_KEY')
