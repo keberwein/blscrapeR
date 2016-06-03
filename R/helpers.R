@@ -3,6 +3,7 @@
 #' @description Helper function to download and format state employment data.
 #' @param state A list of states to run through the loop.
 #' @param seasonality TRUE or FALSE. The default value is TRUE.
+#' @importFrom utils download.file read.csv read.table
 #' @export format_state_data
 #'
 # Borrowed this bit from the following link.
