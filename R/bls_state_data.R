@@ -1,11 +1,8 @@
 #' @title Gather State Employment Data from the BLS.
 #' @description Returns data from 1976 to current in a dataframe. Data includes, Civilian Labor Force, Number of Employed, Number of Unemployed and Unemployment rate.
 #' @keywords bls employment, unemployment, labor force, data
-#' @importFrom dplyr bind_rows
-#' @importFrom dplyr select
-#' @importFrom dplyr mutate
-#' @importFrom dplyr rename
-#' @importFrom dplyr left_join
+#' @importFrom dplyr bind_rows select mutate rename left_join
+#' @importFrom datasets state.name
 #' @param seasonality TRUE or FALSE. Would you like seasonally adjusted data? The default value is TRUE.
 #' @export bls_state_data
 #' @examples
