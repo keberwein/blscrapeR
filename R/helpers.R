@@ -54,6 +54,7 @@ format_state_data <- function(state, seasonality = NA){
 #
 #' @title Helper funtion for county map
 #' @description Helper function to download and format state employment data.
+#' @importFrom stats na.omit
 #' @export format_county_data
 #'
 format_county_data <- function(){
