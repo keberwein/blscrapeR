@@ -15,13 +15,13 @@
 
 bls_state_data <- function(seasonality = NA){
     if (missing(seasonality)){
-        print("The default seasonality is seasonally adjusted.......")
-        print("Downloading data, please be patient..................")
+        message("The default seasonality is seasonally adjusted.......")
+        message("Downloading data, please be patient..................")
         seasonality = TRUE
     }
     else{
     df <- bind_rows(lapply(state.name, format_state_data, seasonality))
-    print("Downloading data, please be patient..................")
+    message("Downloading data, please be patient..................")
     }
     state_fips<-state_fips
     df <- left_join(df, state_fips, by="state")
