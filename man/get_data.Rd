@@ -4,7 +4,9 @@
 \alias{get_data}
 \title{Basic Request Mechanism for BLS Tables}
 \usage{
-get_data(bls_id = NA, api.version = 1)
+get_data(seriesid, startyear = NULL, endyear = NULL,
+  registrationKey = NULL, catalog = NULL, calculations = NULL,
+  annualaverage = NULL)
 }
 \arguments{
 \item{bls_id}{a specific BLS series id or a list of series ids to be called.}
@@ -19,52 +21,7 @@ Return data frame from one or more requests via the US Bureau of Labor Statistic
 ## Not run:
 ## API Version 1.0 R Script Sample Code
 ## Single Series request
-df <- get_data('LNS14000000')
-
-## End (Not run)
-
-## Not run:
-## Multiple Series
-bls_id <- list('seriesid'=c('LNS12300000','LNS14000000'))
-df <- get_data(bls_id)
-
-## End (Not run)
-
-## Not run:
-## One or More Series, Specifying Years
-bls_id <- list(
-    'seriesid'=c('LNS14000000','LNS12300000'),
-    'startyear'=2010,
-    'endyear'=2012)
-df <- get_data(bls_id)
-
-## End (Not run)
-
-## Not run:
-## API Version 2.0 R Script Sample Code
-## Single Series
-df <- get_data('LNS14000000', api.version=2)
-
-## End (Not run)
-
-## Not run:
-## Multiple Series
-bls_id <- list('seriesid'=c('LNS14000000','LNS12300000'))
-df <- get_data(bls_id, 2)
-
-## End (Not run)
-
-## Not run:
-## One or More Series with Optional Parameters
-bls_id <- list(
-    'seriesid'=c('LNS14000000','LNS12300000'),
-    'startyear'=2010,
-    'endyear'=2012,
-    'catalog'=FALSE,
-    'calculations'=TRUE,
-    'annualaverage'=TRUE,
-    'registrationKey'='2a8526b8746f4889966f64957c56b8fd')
-df <- get_data(bls_id, api.version=2)
+df <- get_data('LAUCN040010000000005')
 
 ## End (Not run)
 

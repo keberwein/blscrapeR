@@ -4,99 +4,69 @@
 #' @param bls_id a specific BLS series id or a list of series ids to be called.
 #' @param api.version An integer of the BLS veriosn number (1 or 2), 1 is the default, version 2 requires registration.
 #' @keywords bls api economics cpi unemployment inflation
-#' @import RCurl RJSONIO
+#' @import httr jsonlite data.table
 #' @export get_data
 #' @examples
 #' 
 #' ## Not run:
 #' ## API Version 1.0 R Script Sample Code
 #' ## Single Series request
-#' df <- get_data('LNS14000000')
+#' df <- get_data('LAUCN040010000000005')
 #' 
-#' ## End (Not run)
-#' 
-#' ## Not run:
-#' ## Multiple Series
-#' bls_id <- list('seriesid'=c('LNS12300000','LNS14000000'))
-#' df <- get_data(bls_id)
-#' 
-#' ## End (Not run)
-#' 
-#' ## Not run:
-#' ## One or More Series, Specifying Years
-#' bls_id <- list(
-#'     'seriesid'=c('LNS14000000','LNS12300000'),
-#'     'startyear'=2010,
-#'     'endyear'=2012)
-#' df <- get_data(bls_id)
-#' 
-#' ## End (Not run)
-#' 
-#' ## Not run:
-#' ## API Version 2.0 R Script Sample Code
-#' ## Single Series
-#' df <- get_data('LNS14000000', api.version=2)
-#' 
-#' ## End (Not run)
-#' 
-#' ## Not run:
-#' ## Multiple Series
-#' bls_id <- list('seriesid'=c('LNS14000000','LNS12300000'))
-#' df <- get_data(bls_id, 2)
-#' 
-#' ## End (Not run)
-#' 
-#' ## Not run:
-#' ## One or More Series with Optional Parameters
-#' bls_id <- list(
-#'     'seriesid'=c('LNS14000000','LNS12300000'),
-#'     'startyear'=2010,
-#'     'endyear'=2012,
-#'     'catalog'=FALSE,
-#'     'calculations'=TRUE,
-#'     'annualaverage'=TRUE,
-#'     'registrationKey'='2a8526b8746f4889966f64957c56b8fd')
-#' df <- get_data(bls_id, api.version=2)
-#'
 #' ## End (Not run)
 #'
 #'
-get_data <- function(bls_id=NA, api.version=1){
-    h = basicTextGatherer()
-    h$reset()
-    if(class(bls_id)=='logical'){
-        message('Please provide a valid BLS ID.')
+
+# TODO: Put an a warning if user exceeds maximun number of years allowed by the BLS.
+get_data <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey = NULL, 
+                  catalog = NULL, calculations = NULL, annualaverage = NULL){
+    
+    payload <- list(seriesid = seriesid)
+    # Payload won't take NULL values, have to check every field.
+    # Probably a more elegant way do do this using a list and apply function.
+    if (exists("registrationKey") & !is.null(registrationKey)){
+        if (exists("catalog") & !is.null(catalog)){
+            payload["catalog"] <- tolower(as.character(catalog))}
+        if (exists("calculations") & !is.null(calculations)){
+            payload["calculations"] <- tolower(as.character(calculations))}
+        if (exists("annualaverage") & !is.null(annualaverage)){
+            payload["annualaverage"] <- tolower(as.character(annualaverage))}
+        payload["registrationKey"] <- as.character(registrationKey)
+        # Base URL for V2 for folks who have a key.
+        base_url <- "http://api.bls.gov/publicAPI/v2/timeseries/data/"}
+    else{
+        if (exists("startyear") & !is.null(startyear)){
+            payload["startyear"] <- as.character(startyear)}
+        if (exists("endyear") & !is.null(endyear)){
+            payload["endyear"] <- as.character(endyear)}
+        # Base URL for no key.
+        base_url <- "http://api.bls.gov/publicAPI/v1/timeseries/data/"}
+    
+    # Here's the actual API call.
+    jsondat <- content(POST(base_url, body = toJSON(payload), content_type_json()))
+    if(length(jsondat$Results) > 0) {
+        # Put results into data.table format.
+        # Try to figure out a way to do this without importing data.table with the package.
+        # Method borrowed from here:
+        # https://github.com/fcocquemas/bulast/blob/master/R/bulast.R
+        dt <- data.table::rbindlist(lapply(jsondat$Results$series, function(s) {
+            dt <- data.table::rbindlist(lapply(s$data, function(d) {
+                d[["footnotes"]] <- paste(unlist(d[["footnotes"]]), collapse = " ")
+                d <- lapply(lapply(d, unlist), paste, collapse=" ")
+            }), use.names = TRUE, fill=TRUE)
+            dt[, seriesID := s[["seriesID"]]]
+            dt
+        }), use.names = TRUE, fill=TRUE)
+        
+        # Convert periods to dates.
+        # This is for convenience--don't want to touch any of the raw data.
+        dt[, date := seq(as.Date(paste(year, ifelse(period == "M13", 12, substr(period, 2, 3)), "01", sep = "-")),
+                         length = 2, by = "months")[2]-1,by="year,period"]
+        jsondat$Results <- dt
+        df <- as.data.frame(jsondat$Results)
+        return(df)
     }
     else{
-        api.url <- paste0('http://api.bls.gov/publicAPI/v',api.version,'/timeseries/data/')
-        if(is.list(bls_id)){
-            bls_id <- toJSON(bls_id)
-            m <- regexpr('\\"seriesid\\":\\"[a-zA-Z0-9]*\\",', bls_id)
-            str <- regmatches(bls_id, m)
-            if(length(str)>0){
-                replace <- sub(',', '],', sub(':', ':[',str))
-                bls_id <- sub(str, replace, bls_id)
-            }
-            curlPerform(url=api.url,
-                        httpheader=c('Content-Type' = "application/json;"),
-                        postfields=bls_id,
-                        verbose = FALSE, 
-                        writefunction = h$update
-            )
-        }else{
-            curlPerform(url=paste0(api.url,bls_id),
-                        verbose = FALSE, 
-                        writefunction = h$update
-            )
-        }
-        h$value()  
-    }
-    jsondat <- fromJSON(h$value())
-    jsondat <-  jsondat$Results$series[[1]]$data
-    jsondat <- lapply(jsondat, function(x) {
-        x[sapply(x, is.null)] <- NA
-        unlist(x)
-    })
-    df = as.data.frame(do.call("rbind", jsondat))
-    return(df)
+        message("Woops, something went wrong. Your request returned zero rows! Are you over your daily query limit?")
+    }   
 }
