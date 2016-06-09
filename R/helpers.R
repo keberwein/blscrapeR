@@ -58,7 +58,6 @@ format_state_data <- function(state, seasonality = NA){
 #' @export format_county_data
 #'
 format_county_data <- function(){
-    temp<-tempfile()
     download.file("http://www.bls.gov/lau/laucntycur14.txt", temp)
     countyemp<-read.csv(temp,
                         fill=TRUE,
@@ -69,14 +68,13 @@ format_county_data <- function(){
                         strip.white=TRUE)
     colnames(countyemp) <- c("area_code", "fips_state", "fips_county", "area_title", "period",
                              "civilian_labor_force", "employed", "unemp_level", "unemp_rate")
-    unlink(temp)
     #Get rid of empty rows at the bottom.
     countyemp <- na.omit(countyemp)
     #Set period to proper date format.
     countyemp$period <- as.Date(paste("01-", countyemp$period, sep = ""), format = "%d-%b-%y")
     #Subset data frame to selected month.
     recent <- max(countyemp$period)
-    countyemp <- countyemp[ which(countyemp$period==recent), ]
+    countyemp <- countyemp[which(countyemp$period==recent),]
     
     #Correct column data fromats
     countyemp$unemp_level <- as.numeric(gsub(",", "", as.character(countyemp$unemp_level)))
