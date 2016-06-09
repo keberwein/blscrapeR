@@ -1,8 +1,13 @@
 #
 #' @title Basic Request Mechanism for BLS Tables
 #' @description Return data frame from one or more requests via the US Bureau of Labor Statistics API. Provided arguments are in the form of BLS series ids.
-#' @param bls_id a specific BLS series id or a list of series ids to be called.
-#' @param api.version An integer of the BLS veriosn number (1 or 2), 1 is the default, version 2 requires registration.
+#' @param seriesid The BLS id of the series your trying to load. A common format would be 'LAUCN040010000000005'
+#' @param startyear The first year in your data set.
+#' @param endyear The last year in your data set.
+#' @param registrationKey The API key issued to you from the BLS website.
+#' @param catalog Series description information available only for certian data sets.
+#' @param calculations Returns year-over-year calculations if set to TRUE.
+#' @param annualaverage Retruns an annual average if set to TRUE.
 #' @keywords bls api economics cpi unemployment inflation
 #' @import httr jsonlite data.table
 #' @export get_data
