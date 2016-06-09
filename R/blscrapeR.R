@@ -19,36 +19,82 @@
 #' df <- get_data('LAUCN040010000000005')
 #' 
 #' ## End (Not run)
-#'
-#'
-
+#' 
+#' ## Not run:
+#' ## API Version 1.0 R Script Sample Code
+#' ## Multiple Series request with date params.
+#' df <- get_data(c('LAUCN040010000000005', 'LAUCN040010000000006'), 
+#' startyear = '2010', endyear = '2012')
+#' 
+#' ## End (Not run)
+#' 
+#' ## Not run:
+#' ## API Version 1.0 R Script Sample Code
+#' ## Multiple Series request with date params.
+#' df <- get_data(c('LAUCN040010000000005', 'LAUCN040010000000006'), 
+#' startyear = '2010', endyear = '2012')
+#' 
+#' ## End (Not run)
+#' #' ## Not run:
+#' ## API Version 2.0 R Script Sample Code
+#' ## Multiple Series request with full params allowed by v2.
+#' df <- get_data(c("LAUCN040010000000005", "LAUCN040010000000006"),
+#' startyear = 2010, endyear = 2012,
+#' registrationKey = "2a8526b8746f4889966f64957c56b8fd", 
+#' calculations = TRUE, annualaverage = TRUE, catalog = TRUE)
+#' 
+#' 
+#' ## End (Not run)
 # TODO: Put an a warning if user exceeds maximun number of years allowed by the BLS.
 get_data <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey = NULL, 
-                  catalog = NULL, calculations = NULL, annualaverage = NULL){
+                      catalog = NULL, calculations = NULL, annualaverage = NULL){
     
     payload <- list(seriesid = seriesid)
     # Payload won't take NULL values, have to check every field.
-    # Probably a more elegant way do do this using a list and apply function.
-    if (exists("registrationKey") & !is.null(registrationKey)){
-        if (exists("catalog") & !is.null(catalog)){
-            payload["catalog"] <- tolower(as.character(catalog))}
-        if (exists("calculations") & !is.null(calculations)){
-            payload["calculations"] <- tolower(as.character(calculations))}
-        if (exists("annualaverage") & !is.null(annualaverage)){
-            payload["annualaverage"] <- tolower(as.character(annualaverage))}
+    # Probably a more elegant way do do this using an apply function.
+    if (exists("registrationKey") & !is.null(registrationKey)){ 
         payload["registrationKey"] <- as.character(registrationKey)
         # Base URL for V2 for folks who have a key.
-        base_url <- "http://api.bls.gov/publicAPI/v2/timeseries/data/"}
-    else{
-        if (exists("startyear") & !is.null(startyear)){
-            payload["startyear"] <- as.character(startyear)}
-        if (exists("endyear") & !is.null(endyear)){
-            payload["endyear"] <- as.character(endyear)}
-        # Base URL for no key.
-        base_url <- "http://api.bls.gov/publicAPI/v1/timeseries/data/"}
+        base_url <- "http://api.bls.gov/publicAPI/v2/timeseries/data/"
+        if (exists("catalog") & !is.null(catalog)){
+            if (!is.logical(catalog)){
+                message("Please select TRUE or FALSE for catalog argument.")
+            }
+            payload["catalog"] <- tolower(as.character(catalog))
+        }
+        if (exists("calculations") & !is.null(calculations)){
+            if (!is.logical(calculations)){
+                message("Please select TRUE or FALSE for calculations argument.")
+            }
+            payload["calculations"] <- tolower(as.character(calculations))
+        }
+        if (exists("annualaverage") & !is.null(annualaverage)){
+            if (!is.logical(annualaverage)){
+                message("Please select TRUE or FALSE for calculations argument.")
+            }
+            payload["annualaverage"] <- tolower(as.character(annualaverage))
+        }
+    } else {
+        # Base URL for everyone else.
+        base_url <- "http://api.bls.gov/publicAPI/v1/timeseries/data/"
+    }
+    # Both sets of users can select these args.
+    if (exists("startyear") & !is.null(startyear)){
+        payload["startyear"] <- as.character(startyear)
+    }
+    if (exists("endyear") & !is.null(endyear)){
+        payload["endyear"] <- as.character(endyear)
+    }
+    # Manually construct payload since the BLS formatting is wakey.
+    payload <- toJSON(payload)
+    loadparse <- regmatches(payload, regexpr("],", payload), invert = TRUE)
+    parse1 <- loadparse[[1]][1]
+    parse2 <- gsub("\\[|\\]", "", loadparse[[1]][2])
+    payload <- paste(parse1, parse2, sep = "],")
     
     # Here's the actual API call.
-    jsondat <- content(POST(base_url, body = toJSON(payload), content_type_json()))
+    jsondat <- content(POST(base_url, body = payload, content_type_json()))
+    
     if(length(jsondat$Results) > 0) {
         # Put results into data.table format.
         # Try to figure out a way to do this without importing data.table with the package.
