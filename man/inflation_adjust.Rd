@@ -13,7 +13,6 @@ inflation_adjust(base_year = NA)
 Returns a data frame that uses data from the Consumer Price Index (All Goods) to convert the value of a US Dollar [$1.00 USD] over time.
 }
 \examples{
-
 ## Not run:
 ## Get historical USD values based on a 2010 dollar.
 values <- inflation_adjust(base_year = 2010)
