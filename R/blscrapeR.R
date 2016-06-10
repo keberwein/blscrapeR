@@ -1,7 +1,7 @@
 #
 #' @title Basic Request Mechanism for BLS Tables
 #' @description Return data frame from one or more requests via the US Bureau of Labor Statistics API. Provided arguments are in the form of BLS series ids.
-#' @param seriesid The BLS id of the series your trying to load. A common format would be 'LAUCN040010000000005'
+#' @param seriesid The BLS id of the series your trying to load. A common format would be 'LAUCN040010000000005'. WARNING: All seriesIDs must contain the same time resolution. For example, monthly data sets can not be combined with annual or semi-annual data.
 #' @param startyear The first year in your data set.
 #' @param endyear The last year in your data set.
 #' @param registrationKey The API key issued to you from the BLS website.
@@ -111,8 +111,10 @@ get_data <- function (seriesid, startyear = NULL, endyear = NULL, registrationKe
         
         # Convert periods to dates.
         # This is for convenience--don't want to touch any of the raw data.
+        if("M01" %in% names(dt[, period])){
         dt[, date := seq(as.Date(paste(year, ifelse(period == "M13", 12, substr(period, 2, 3)), "01", sep = "-")),
                          length = 2, by = "months")[2]-1,by="year,period"]
+        }
         jsondat$Results <- dt
         df <- as.data.frame(jsondat$Results)
         df$value <- as.numeric(as.character(df$value))
@@ -123,7 +125,3 @@ get_data <- function (seriesid, startyear = NULL, endyear = NULL, registrationKe
         message("Woops, something went wrong. Your request returned zero rows! Are you over your daily query limit?")
     }   
 }
-
-
-
-
