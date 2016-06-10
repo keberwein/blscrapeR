@@ -115,9 +115,15 @@ get_data <- function (seriesid, startyear = NULL, endyear = NULL, registrationKe
                          length = 2, by = "months")[2]-1,by="year,period"]
         jsondat$Results <- dt
         df <- as.data.frame(jsondat$Results)
+        df$value <- as.numeric(as.character(df$value))
+        df$year <- as.numeric(as.character(df$year))
         return(df)
     }
     else{
         message("Woops, something went wrong. Your request returned zero rows! Are you over your daily query limit?")
     }   
 }
+
+
+
+
