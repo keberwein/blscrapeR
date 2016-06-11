@@ -1,24 +1,28 @@
 #
 #' @title Cloropleth mapping of BLS data.
 #' @description Return a ggplot object to render a cloropleth map with county outlines.
+#' The map files contain 2015 FIPS codes and can be used with any data set containing
+#' county and state FIPS codes. They can not be used with Leaflet but the original 
+#' shapefiles can be downloaded at \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html}
+#' for analysis which requires more customized mapping.
 #' @keywords bls api economics unemployment map geo geography
 #' @import ggplot2
 #' @import grDevices
-#' @export bls_map
+#' @export bls_map_county
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.
 #' @examples
 #' 
 #' ## Not run:
 #' df <- format_county_data()
-#' bls_gg <- bls_map(map_data = df, fill_rate = "unemp_rate")
+#' bls_gg <- bls_map_county(map_data = df, fill_rate = "unemp_rate")
 #' bls_gg
 #' 
 #' ## End (Not run)
 #'
 #'
 
-bls_map <- function(map_data, fill_rate){
+bls_map_county <- function(map_data, fill_rate){
 #Maps by County
 #Load pre-formatted map for ggplot.
 map = county_map
@@ -51,10 +55,14 @@ ggplot() +
 #
 #' @title Cloropleth mapping of BLS data.
 #' @description Return a ggplot object to render a cloropleth map with state outlines.
+#' #' The map files contain 2015 FIPS codes and can be used with any data set containing
+#' county and state FIPS codes. They can not be used with Leaflet but the original 
+#' shapefiles can be downloaded at \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html}
+#' for analysis which requires more customized mapping.
 #' @keywords bls api economics unemployment map geo geography
 #' @import ggplot2
 #' @import grDevices
-#' @export bls_map_state
+#' @export bls_map_county_state
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.
 #' @examples
@@ -66,14 +74,14 @@ ggplot() +
 #' recent <- max(df$month)
 #' df <- df[ which(df$month==recent), ]
 #' 
-#' bls_gg <- bls_map_state(map_data = df, fill_rate = "unemployed_pct")
+#' bls_gg <- bls_map_county_state(map_data = df, fill_rate = "unemployed_pct")
 #' bls_gg
 #' 
 #' ## End (Not run)
 #'
 #'
 
-bls_map_state <- function(map_data, fill_rate){
+bls_map_county_state <- function(map_data, fill_rate){
     #Maps by County
     #Load pre-formatted map for ggplot.
     map = state_map

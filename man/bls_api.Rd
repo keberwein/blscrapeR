@@ -9,7 +9,9 @@ bls_api(seriesid, startyear = NULL, endyear = NULL,
   annualaverage = NULL)
 }
 \arguments{
-\item{seriesid}{The BLS id of the series your trying to load. A common format would be 'LAUCN040010000000005'. WARNING: All seriesIDs must contain the same time resolution. For example, monthly data sets can not be combined with annual or semi-annual data.}
+\item{seriesid}{The BLS id of the series your trying to load. A common format would be 'LAUCN040010000000005'. 
+WARNING: All seriesIDs must contain the same time resolution. For example, monthly data sets can not be combined with annual or semi-annual data.
+If you need help finding seriesIDs, check the BLS website \url{http://www.bls.gov/data/} or the BLS Data Finder \url{http://beta.bls.gov/dataQuery/search}}
 
 \item{startyear}{The first year in your data set.}
 
