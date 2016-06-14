@@ -7,6 +7,6 @@
 format_county_data()
 }
 \description{
-Helper function to download and format state employment data.
+Helper function to download and format state employment data. Note: This returns only non seasonally adjusted data.
 }
 
