@@ -1,5 +1,5 @@
 #' @title Gather State Employment Data from the BLS.
-#' @description Returns data from 1976 to current in a dataframe. Data includes, Civilian Labor Force, 
+#' @description Returns state level data from 1976 to current in a dataframe. Data includes, Civilian Labor Force, 
 #' Number of Employed, Number of Unemployed and Unemployment rate.
 #' NOTE: These data are from a text file and do not count against your daily API calls.
 #' @keywords bls employment, unemployment, labor force, data
