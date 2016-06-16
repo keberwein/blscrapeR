@@ -35,7 +35,7 @@ ggplot() +
     geom_map(data=map_data, map=map, aes_string(map_id="fips", fill=fill_rate),
              color="#0e0e0e", size=0.15) +
     scale_fill_gradientn(colors = terrain.colors(9)) +
-    coord_equal() +
+    coord_map() +
     labs(title=fill_rate) + 
     theme(axis.line=element_blank(),
           axis.text.x=element_blank(),
@@ -93,7 +93,7 @@ bls_map_county_state <- function(map_data, fill_rate){
         geom_map(data=map_data, map=map, aes_string(map_id="fips_state", fill=fill_rate),
                  color="#0e0e0e", size=0.15) +
         scale_fill_gradientn(colors = topo.colors(20)) +
-        coord_equal() +
+        coord_map() +
         labs(title=fill_rate) + 
         theme(axis.line=element_blank(),
               axis.text.x=element_blank(),

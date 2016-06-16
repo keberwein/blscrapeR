@@ -10,7 +10,7 @@ bls_state_data(seasonality = NA)
 \item{seasonality}{TRUE or FALSE. Would you like seasonally adjusted data? The default value is TRUE.}
 }
 \description{
-Returns data from 1976 to current in a dataframe. Data includes, Civilian Labor Force, 
+Returns state level data from 1976 to current in a dataframe. Data includes, Civilian Labor Force, 
 Number of Employed, Number of Unemployed and Unemployment rate.
 NOTE: These data are from a text file and do not count against your daily API calls.
 }
