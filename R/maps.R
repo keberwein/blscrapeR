@@ -26,7 +26,7 @@
 bls_map_county <- function(map_data, fill_rate, labtitle=NULL){
 #Maps by County
 #Load pre-formatted map for ggplot.
-map = county_map
+map = county_map_data
 #Unemployment statistics by county: Get and process data.
 #Plot
 ggplot() +
@@ -85,7 +85,7 @@ ggplot() +
 bls_map_state <- function(map_data, fill_rate, labtitle=NULL){
     #Maps by County
     #Load pre-formatted map for ggplot.
-    map = state_map
+    map = state_map_data
     #Unemployment statistics by county: Get and process data.
     #Plot
     ggplot() +
