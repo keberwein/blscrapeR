@@ -1,11 +1,11 @@
 #' Dataset with the lat. / long. of county FIPS codes used for mapping.
 #'
-#' Built-in dataset for use with the \code{bls_map} function.
-#' To access the data directly, issue the command \code{datastate_map)}.
+#' Built-in dataset for use with the \code{bls_state_map} function.
+#' To access the data directly, issue the command \code{datastate_map_data)}.
 
 #' @title Dataset with the lat. / long. of county FIPS codes used for mapping.
-#' @description Built-in dataset for use with the \code{bls_map} function.
-#'              To access the data directly, issue the command \code{data(datastate_map)}.
+#' @description Built-in dataset for use with the \code{bls_state_map} function.
+#'              To access the data directly, issue the command \code{data(datastate_map_data)}.
 #'
 #' \itemize{
 #'   \item \code{long}: State longitude
@@ -19,9 +19,9 @@
 #'
 #' @docType data
 #' @keywords datasets
-#' @name state_map
+#' @name state_map_data
 #'
 #' @usage data(state_map)
 #' @note Last updated 2016-05-26
 #' @format A data frame with 206,500 rows and 7 variables
-"state_map"
+"state_map_data"
