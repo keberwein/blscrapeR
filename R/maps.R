@@ -109,3 +109,4 @@ bls_map_state <- function(map_data, fill_rate, labtitle=NULL){
               panel.background = element_blank(),
               legend.title=element_blank())
 }
+

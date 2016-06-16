@@ -29,7 +29,7 @@ df <- bls_state_data(seasonality = TRUE)
 recent <- max(df$month)
 df <- df[ which(df$month==recent), ]
 
-bls_gg <- bls_map_state(map_data = df, fill_rate = "unemp_rate", labtitle = "Unemployment Rate")
+bls_gg <- bls_map_state(map_data = df, fill_rate = "unemployed_pct", labtitle = "Unemployment Rate")
 bls_gg
 
 ## End (Not run)
