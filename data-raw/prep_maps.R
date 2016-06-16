@@ -6,10 +6,11 @@ library(ggplot2)
 library(rgeos)
 library(rgdal)
 library(maptools)
+library(devtools)
 
 # Read county shapefile from Tiger.
 # https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html
-county <- readOGR(dsn = "cb_2015_us_county_5m", layer = "cb_2015_us_county_5m")
+county <- readOGR(dsn = ".", layer = "cb_2015_us_county_5m")
 
 # convert it to  equal area
 us.map <- spTransform(county, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
@@ -39,20 +40,20 @@ us.map <- us.map[!us.map$STATEFP %in% c("81", "84", "86", "87", "89", "71", "76"
 us.map <- rbind(us.map, ak, hawi)
 
 # Projuce map
-county_map <- fortify(us.map, region="GEOID")
+county_map_data <- fortify(us.map, region="GEOID")
 # Remove helper data and save file. Be sure to remove .Randdom.seed if exists.
 rm(ak, county, hawi, us.map)
 rm(.Random.seed)
 # Use devtools to save data set.
-devtools::use_data(county_map, overwrite = TRUE)
-rm(county_map)
+devtools::use_data(county_map_data, overwrite = TRUE)
+rm(county_map_data)
 
 
 ## State Map
 
 # Read shapefile from Tiger
 # https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html
-state <- readOGR(dsn = "cb_2015_us_state_5m", layer = "cb_2015_us_state_5m")
+state <- readOGR(dsn = ".", layer = "cb_2015_us_state_5m")
 
 # convert it to Albers equal area
 us.map <- spTransform(state, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
@@ -83,13 +84,13 @@ us.map <- us.map[!us.map$STATEFP %in% c("81", "84", "86", "87", "89", "71", "76"
 us.map <- rbind(us.map, ak, hawi)
 
 #Projuce map
-state_map <- fortify(us.map, region="GEOID")
+state_map_data <- fortify(us.map, region="GEOID")
 # Remove helper data and save file. Be sure to remove .Randdom.seed if exists.
 rm(ak, state, hawi, us.map)
 rm(.Random.seed)
 # Use devtools to save data set.
-devtools::use_data(state_map, overwrite = TRUE)
-rm(state_map)
+devtools::use_data(state_map_data, overwrite = TRUE)
+rm(state_map_data)
 
 
 
