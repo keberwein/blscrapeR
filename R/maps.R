@@ -96,7 +96,7 @@ bls_map_state <- function(map_data, fill_rate, labtitle=NULL){
                  color="#0e0e0e", size=0.15) +
         scale_fill_gradientn(colors = c("green", "red")) +
         coord_equal() +
-        labs(title=fill_rate) + 
+        labs(title=labtitle) + 
         theme(axis.line=element_blank(),
               axis.text.x=element_blank(),
               axis.text.y=element_blank(),
