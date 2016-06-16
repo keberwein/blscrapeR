@@ -4,12 +4,14 @@
 \alias{bls_map_county}
 \title{Cloropleth mapping of BLS data.}
 \usage{
-bls_map_county(map_data, fill_rate)
+bls_map_county(map_data, fill_rate, labtitle = NULL)
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.}
 
 \item{fill_rate}{Column name from the dataframe that you want to use as a fill value.}
+
+\item{labtitle}{The main title label for your map passed as a string. The default is no title}
 }
 \description{
 Return a ggplot object to render a cloropleth map with county outlines.
@@ -22,7 +24,7 @@ for analysis which requires more customized mapping.
 
 ## Not run:
 df <- format_county_data()
-bls_gg <- bls_map_county(map_data = df, fill_rate = "unemp_rate")
+bls_gg <- bls_map_county(map_data = df, fill_rate = "unemp_rate", labtitle = "Unemployment Rate")
 bls_gg
 
 ## End (Not run)

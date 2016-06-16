@@ -3,7 +3,7 @@
 export("%>%")
 export(bls_api)
 export(bls_map_county)
-export(bls_map_county_state)
+export(bls_map_state)
 export(bls_state_data)
 export(format_county_data)
 export(format_state_data)
