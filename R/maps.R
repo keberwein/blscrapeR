@@ -37,7 +37,6 @@ ggplot() +
     scale_fill_gradientn(colors = terrain.colors(9)) +
     coord_equal() +
     labs(title=fill_rate) + 
-    theme_bw() +
     theme(axis.line=element_blank(),
           axis.text.x=element_blank(),
           axis.text.y=element_blank(),
@@ -96,7 +95,6 @@ bls_map_county_state <- function(map_data, fill_rate){
         scale_fill_gradientn(colors = topo.colors(20)) +
         coord_equal() +
         labs(title=fill_rate) + 
-        theme_bw() +
         theme(axis.line=element_blank(),
               axis.text.x=element_blank(),
               axis.text.y=element_blank(),
