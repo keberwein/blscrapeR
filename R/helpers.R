@@ -46,9 +46,9 @@ format_state_data <- function(state, seasonality = NA){
                V5=V5/100,
                V7=V7/100) %>%
         rename(civ_pop=V1,
-               labor_force=V2, labor_force_pct=V3,
-               employed=V4, employed_pct=V5,
-               unemployed=V6, unemployed_pct=V7)
+               labor_force=V2, labor_force_rate=V3,
+               employed=V4, employed_rate=V5,
+               unemployed=V6, unemployed_rate=V7)
 }
 
 #
@@ -68,7 +68,7 @@ format_county_data <- function(){
                         stringsAsFactors=FALSE,
                         strip.white=TRUE)
     colnames(countyemp) <- c("area_code", "fips_state", "fips_county", "area_title", "period",
-                             "civilian_labor_force", "employed", "unemp_level", "unemp_rate")
+                             "labor_force", "employed", "unemployed", "unemployed_rate")
     unlink(temp)
     #Get rid of empty rows at the bottom.
     countyemp <- na.omit(countyemp)
@@ -79,9 +79,9 @@ format_county_data <- function(){
     countyemp <- countyemp[ which(countyemp$period==recent), ]
     
     #Correct column data fromats
-    countyemp$unemp_level <- as.numeric(gsub(",", "", as.character(countyemp$unemp_level)))
+    countyemp$unemployed_rate <- as.numeric(gsub(",", "", as.character(countyemp$unemployed_rate)))
     countyemp$employed <- as.numeric(gsub(",", "", as.character(countyemp$employed)))
-    countyemp$civilian_labor_force <- as.numeric(gsub(",", "", as.character(countyemp$civilian_labor_force)))
+    countyemp$labor_force <- as.numeric(gsub(",", "", as.character(countyemp$labor_force)))
     
     #Get the FIPS code: Have to add leading zeros to any single digit number and combine them.
     countyemp$fips_county <- formatC(countyemp$fips_county, width = 3, format = "d", flag = "0")
