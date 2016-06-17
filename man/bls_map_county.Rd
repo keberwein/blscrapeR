@@ -24,7 +24,7 @@ for analysis which requires more customized mapping.
 
 ## Not run:
 df <- format_county_data()
-bls_gg <- bls_map_county(map_data = df, fill_rate = "unemp_rate", labtitle = "Unemployment Rate")
+bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", labtitle = "Unemployment Rate")
 bls_gg
 
 ## End (Not run)
