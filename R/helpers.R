@@ -79,7 +79,7 @@ format_county_data <- function(){
     countyemp <- countyemp[ which(countyemp$period==recent), ]
     
     #Correct column data fromats
-    countyemp$unemployed_rate <- as.numeric(gsub(",", "", as.character(countyemp$unemployed_rate)))
+    countyemp$unemployed <- as.numeric(gsub(",", "", as.character(countyemp$unemployed)))
     countyemp$employed <- as.numeric(gsub(",", "", as.character(countyemp$employed)))
     countyemp$labor_force <- as.numeric(gsub(",", "", as.character(countyemp$labor_force)))
     
