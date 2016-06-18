@@ -2,10 +2,7 @@
 #'
 #' Built-in dataset for use with the \code{bls_map} function.
 #' To access the data directly, issue the command \code{datastate_fips)}.
-
-#' @title Dataset containing FIPS codes for mapping and lookup.
-#' @description Built-in dataset for use with the \code{bls_map} function.
-#'              To access the data directly, issue the command \code{data(datastate_fips)}.
+#' 
 #'
 #' \itemize{
 #'   \item \code{fips_state}: FIPS code for state
@@ -15,8 +12,8 @@
 #' }
 #'
 #' @docType data
-#' @keywords datasets
-#' @name state_fips
+#' @keywords internal
+#' @noRd
 #'
 #' @usage data(state_fips)
 #' @note Last updated 2016-05-27

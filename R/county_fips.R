@@ -2,11 +2,6 @@
 #'
 #' Built-in dataset for use with the \code{bls_map} function.
 #' To access the data directly, issue the command \code{datacounty_fips)}.
-
-#' @title Dataset containing FIPS codes for mapping and lookup.
-#' @description Built-in dataset for use with the \code{bls_map} function.
-#'              To access the data directly, issue the command \code{data(datacounty_fips)}.
-#'
 #' \itemize{
 #'   \item \code{state}: State name
 #'   \item \code{fips_state}: FIPS code for State
@@ -16,8 +11,8 @@
 #' }
 #'
 #' @docType data
-#' @keywords datasets
-#' @name county_fips
+#' @keywords internal
+#' @noRd
 #'
 #' @usage data(county_fips)
 #' @note Last updated 2016-05-27
