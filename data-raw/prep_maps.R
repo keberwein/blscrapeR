@@ -10,7 +10,7 @@ library(devtools)
 
 # Read county shapefile from Tiger.
 # https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html
-county <- readOGR(dsn = ".", layer = "cb_2015_us_county_5m")
+county <- readOGR(dsn = ".", layer = "cb_2015_us_county_20m")
 
 # convert it to  equal area
 us.map <- spTransform(county, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
@@ -53,7 +53,7 @@ rm(county_map_data)
 
 # Read shapefile from Tiger
 # https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html
-state <- readOGR(dsn = ".", layer = "cb_2015_us_state_5m")
+state <- readOGR(dsn = ".", layer = "cb_2015_us_state_20m")
 
 # convert it to Albers equal area
 us.map <- spTransform(state, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
