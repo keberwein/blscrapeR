@@ -1,12 +1,13 @@
 # This function removes a lot of the US territories from the shapefile.
 # It also re-locates ak and hawi
+# This only needs to be run onece per year, or when the census releases a new shape file.
 
-library(sp)
-library(ggplot2)
-library(rgeos)
-library(rgdal)
-library(maptools)
-library(devtools)
+#library(sp)
+#library(ggplot2)
+#library(rgeos)
+#library(rgdal)
+#library(maptools)
+#library(devtools)
 
 # Read county shapefile from Tiger.
 # https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html
