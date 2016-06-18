@@ -2,16 +2,31 @@
 % Please edit documentation in R/get_bls_state.R
 \name{get_bls_state}
 \alias{get_bls_state}
-\title{Function that returns county-level labor statistics for the last three months.}
+\title{Gather State Employment Data from the BLS.}
 \usage{
-get_bls_state(state, seasonality = NA)
+get_bls_state(seasonality = NA)
 }
 \arguments{
-\item{state}{A list of states to run through the loop.}
-
-\item{seasonality}{TRUE or FALSE. The default value is TRUE.}
+\item{seasonality}{TRUE or FALSE. Would you like seasonally adjusted data? The default value is TRUE.}
 }
 \description{
-Helper function to download and format state employment data.
+Returns state level data from 1976 to current in a dataframe. Data includes, Civilian Labor Force, 
+Number of Employed, Number of Unemployed and Unemployment rate.
+NOTE: These data are from a text file and do not count against your daily API calls.
 }
+\examples{
+
+## Not run:
+df <- get_bls_state(seasonality = TRUE)
+
+## End (Not run)
+
+
+}
+\keyword{bls}
+\keyword{data}
+\keyword{employment,}
+\keyword{force,}
+\keyword{labor}
+\keyword{unemployment,}
 

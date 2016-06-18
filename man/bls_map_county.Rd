@@ -23,7 +23,7 @@ for analysis which requires more customized mapping.
 \examples{
 
 ## Not run:
-df <- format_county_data()
+df <- get_bls_county()
 bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", labtitle = "Unemployment Rate")
 bls_gg
 

@@ -23,7 +23,7 @@ for analysis which requires more customized mapping.
 \examples{
 
 ## Not run:
-df <- bls_state_data(seasonality = TRUE)
+df <- get_bls_state(seasonality = TRUE)
 
 #Subset data frame to most recent month.
 recent <- max(df$month)

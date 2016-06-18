@@ -15,7 +15,7 @@
 #'
 #' @docType data
 #' @keywords internal
-#' @noRd
+#' 
 #'
 #' @usage data(county_map_data)
 #' @note Last updated 2016-05-26

@@ -12,7 +12,7 @@
 #'
 #' @docType data
 #' @keywords internal
-#' @noRd
+#' 
 #'
 #' @usage data(county_fips)
 #' @note Last updated 2016-05-27

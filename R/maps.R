@@ -15,7 +15,7 @@
 #' @examples
 #' 
 #' ## Not run:
-#' df <- format_county_data()
+#' df <- get_bls_county()
 #' bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", labtitle = "Unemployment Rate")
 #' bls_gg
 #' 
@@ -69,7 +69,7 @@ ggplot() +
 #' @examples
 #' 
 #' ## Not run:
-#' df <- bls_state_data(seasonality = TRUE)
+#' df <- get_bls_state(seasonality = TRUE)
 #' 
 #' #Subset data frame to most recent month.
 #' recent <- max(df$month)

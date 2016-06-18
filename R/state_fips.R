@@ -1,6 +1,6 @@
 #' Dataset with the lat. / long. of county FIPS codes used for mapping.
 #'
-#' Built-in dataset for use with the \code{bls_map} function.
+#' @description Built-in dataset for use with the \code{bls_map} function.
 #' To access the data directly, issue the command \code{datastate_fips)}.
 #' 
 #'
@@ -13,7 +13,7 @@
 #'
 #' @docType data
 #' @keywords internal
-#' @noRd
+#' 
 #'
 #' @usage data(state_fips)
 #' @note Last updated 2016-05-27
