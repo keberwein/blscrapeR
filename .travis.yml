@@ -4,5 +4,3 @@ language: R
 sudo: false
 cache: packages
 
-before_deploy:
-- R -e "install.packages('xml2', repos = 'http://cran.rstudio.com')"
