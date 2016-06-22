@@ -9,14 +9,17 @@
 #' @import ggplot2
 #' @import grDevices
 #' @export bls_map_county
-#' @param map_data Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.
+#' @param map_data Dataframe to be used as the map's measures. Usually a result of 
+#' function calls format_county_data or format_state_data, but other dataframes, 
+#' which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.
 #' @param labtitle The main title label for your map passed as a string. The default is no title
 #' @examples
 #' 
 #' ## Not run:
 #' df <- get_bls_county()
-#' bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", labtitle = "Unemployment Rate")
+#' bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
+#'                  labtitle = "Unemployment Rate")
 #' bls_gg
 #' 
 #' ## End (Not run)
@@ -63,7 +66,9 @@ ggplot() +
 #' @import ggplot2
 #' @import grDevices
 #' @export bls_map_state
-#' @param map_data Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.
+#' @param map_data Dataframe to be used as the map's measures. Usually a result of 
+#' function calls format_county_data or format_state_data, but other dataframes, 
+#' which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.
 #' @param labtitle The main title label for your map passed as a string. The default is no title
 #' @examples
@@ -75,7 +80,8 @@ ggplot() +
 #' recent <- max(df$month)
 #' df <- df[ which(df$month==recent), ]
 #' 
-#' bls_gg <- bls_map_state(map_data = df, fill_rate = "unemployed_rate", labtitle = "Unemployment Rate")
+#' bls_gg <- bls_map_state(map_data = df, fill_rate = "unemployed_rate", 
+#'              labtitle = "Unemployment Rate")
 #' bls_gg
 #' 
 #' ## End (Not run)

@@ -7,7 +7,9 @@
 bls_map_county(map_data, fill_rate, labtitle = NULL)
 }
 \arguments{
-\item{map_data}{Dataframe to be used as the map's measures. Usually a result of function calls format_county_data or format_state_data, but other dataframes, which include FIPS codes may be used as well.}
+\item{map_data}{Dataframe to be used as the map's measures. Usually a result of 
+function calls format_county_data or format_state_data, but other dataframes, 
+which include FIPS codes may be used as well.}
 
 \item{fill_rate}{Column name from the dataframe that you want to use as a fill value.}
 
@@ -24,7 +26,8 @@ for analysis which requires more customized mapping.
 
 ## Not run:
 df <- get_bls_county()
-bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", labtitle = "Unemployment Rate")
+bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
+                 labtitle = "Unemployment Rate")
 bls_gg
 
 ## End (Not run)
