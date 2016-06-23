@@ -10,3 +10,4 @@ Imports: httr, jsonlite, ggplot2, dplyr, magrittr, utils, stats, grDevices, data
 License: MIT + file LICENSE
 LazyData: true
 RoxygenNote: 5.0.1
+Suggests: testthat
