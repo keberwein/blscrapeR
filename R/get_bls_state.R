@@ -22,8 +22,9 @@ get_bls_state <- function(seasonality = NA){
         seasonality = TRUE
     }
     else{
-        df <- bind_rows(lapply(state.name, bls_state_data, seasonality))
         message("Downloading data, please be patient..................")
+        df <- bind_rows(lapply(state.name, bls_state_data, seasonality))
+        
     }
     state_fips<-state_fips
     df <- left_join(df, state_fips, by="state")
