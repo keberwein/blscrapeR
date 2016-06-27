@@ -78,7 +78,15 @@ get_bls_state <- function(seasonality = NA){
         df <- bind_rows(lapply(state.name, bls_state_data, seasonality))
         
     }
+    if (current=TRUE){
+        # Subset data frame to most recent month.
+        recent <- max(df$month)
+        df <- df[ which(df$month==recent), ]
+    }
+    
     state_fips<-state_fips
     df <- left_join(df, state_fips, by="state")
     return(df)
 }
+
+
