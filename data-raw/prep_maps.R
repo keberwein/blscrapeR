@@ -28,7 +28,7 @@ proj4string(ak) <- proj4string(us.map)
 # Rotate and Shift hawi
 hawi <- us.map[us.map$STATEFP=="15",]
 hawi <- elide(hawi, rotate=-35)
-hawi <- elide(hawi, shift=c(5400000, -1400000))
+hawi <- elide(hawi, shift=c(5400000, -1600000))
 proj4string(hawi) <- proj4string(us.map)
 
 # Also remove Puerto Rico (72), Guam (66), Virgin Islands (78), American Samoa (60) Mariana Islands (69)
@@ -71,7 +71,7 @@ proj4string(ak) <- proj4string(us.map)
 # Extract Hawaii, shift and rotate.
 hawi <- us.map[us.map$STATEFP=="15",]
 hawi <- elide(hawi, rotate=-35)
-hawi <- elide(hawi, shift=c(5400000, -1400000))
+hawi <- elide(hawi, shift=c(5400000, -1600000))
 proj4string(hawi) <- proj4string(us.map)
 
 # Remove Alaska and Hawaii from map
