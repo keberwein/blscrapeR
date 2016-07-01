@@ -74,11 +74,7 @@ ggplot() +
 #' @examples
 #' 
 #' ## Not run:
-#' df <- get_bls_state(seasonality = TRUE)
-#' 
-#' #Subset data frame to most recent month.
-#' recent <- max(df$month)
-#' df <- df[ which(df$month==recent), ]
+#' df <- get_bls_state("April 2016", seasonality = TRUE)
 #' 
 #' bls_gg <- bls_map_state(map_data = df, fill_rate = "unemployed_rate", 
 #'              labtitle = "Unemployment Rate")
@@ -115,4 +111,3 @@ bls_map_state <- function(map_data, fill_rate, labtitle=NULL){
               panel.background = element_blank(),
               legend.title=element_blank())
 }
-
