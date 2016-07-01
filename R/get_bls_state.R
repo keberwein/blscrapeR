@@ -14,7 +14,6 @@
 #' get_bls_state(date_mth = c("April 2016", "May 2016"), seasonality = FALSE)
 #' }
 #'
-# TODO need to figure out way to do a FIPS match and add a column.
 
 get_bls_state <- function(date_mth, seasonality = NA){
     seas <- "http://www.bls.gov/lau/ststdsadata.txt"

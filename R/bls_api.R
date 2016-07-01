@@ -113,10 +113,8 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
         
         # Convert periods to dates.
         # This is for convenience--don't want to touch any of the raw data.
-        if("M01" %in% names(dt[, period])){
         dt[, date := seq(as.Date(paste(year, ifelse(period == "M13", 12, substr(period, 2, 3)), "01", sep = "-")),
                          length = 2, by = "months")[2]-1,by="year,period"]
-        }
         jsondat$Results <- dt
         df <- as.data.frame(jsondat$Results)
         df$value <- as.numeric(as.character(df$value))
