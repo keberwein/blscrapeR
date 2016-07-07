@@ -122,6 +122,6 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
         return(df)
     }
     else{
-        message("Woops, something went wrong. Your request returned zero rows! Are you over your daily query limit?")
+        stop(sprintf(jsondat$status))
     }   
 }
