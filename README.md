@@ -45,8 +45,7 @@ API Keys
 
 Before you get any further, you should really consider getting an API key form the BLS, why? More data, that’s why! The package has a function to install your key in your `.Renviron` so you’ll only have to worry about it once. Plus, it will add extra security by not having your key hard-coded in your scripts for all the world to see.
 
-From the BLS:
-=============
+### From the BLS:
 
 <table style="width:111%;">
 <colgroup>
@@ -95,16 +94,15 @@ From the BLS:
 </tbody>
 </table>
 
-Key Install
-===========
+### Key Install
 
     ```R
     set_bls_key("111111abc")
     # First time, relead your enviornment so you can use the key without restarting R.
     readRenviron("~/.Renviron")
     # You can check it with:
-    #' Sys.getenv("BLS_KEY")
-    ````    
+    Sys.getenv("BLS_KEY")
+    ````
 
 Advanced Usage
 --------------
@@ -124,4 +122,4 @@ ggplot(df,
     geom_line()
 ```
 
-![Red=Dollars spend on all items, Blue=Dollars spent on education. Source:Consumer Price Index.](https://www.datascienceriot.com/wp-content/uploads/2016/07/fig1.png)
+![](https://www.datascienceriot.com/wp-content/uploads/2016/07/fig1.png)
