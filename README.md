@@ -15,9 +15,9 @@ Install
 
 -   The latest development version from Github with
 
-    ``` r
-    devtools::install_github("keberwein/blscrapeR")
-    ```
+``` r
+devtools::install_github("keberwein/blscrapeR")
+```
 
 Before getting started, you’ll probably want to head over to the BLS and get [set up with an API key](http://data.bls.gov/registrationEngine/). While an API key is not required to use the package, the query limits are much higher if you have a key and you’ll have access to more data. Plus, it’s free (as in beer), so why not?
 
@@ -115,12 +115,32 @@ Now that you have an API key installed, you can call your key in the package’s
 df <- bls_api(c("CUSR0000SA0", "CUSR0000SAE"),
                startyear = 1995, endyear = 2015,
                registrationKey = "BLS_KEY")
+```
 
-# with a little hel from ggplot
+``` r
+# A little help from ggplot2!
 library(ggplot2)
-ggplot(df,
+gg<- ggplot(df,
        aes(x=date, y=value, color=seriesID)) +
     geom_line()
 ```
 
 ![](https://www.datascienceriot.com/wp-content/uploads/2016/07/fig1.png)
+
+Mapping
+-------
+
+Much the the “quick functions” for requesting data without series ids, there are two map functions, `bls_map_county` and `bls_map_state`. These functions are designed to work with two specifically designed helper functions `get_bls_county` and get `get_bls_state`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force. **Note:** Even though the `get_bls` functions return data in the correct formats, the `bls_map` functions can be used with any data set that includes FIPS codes.
+
+The example below maps the current unemployment rate by county. Note, that Alaska and Hawaii have to re-located. To save space. This is a "quick function," if you would like your map formatted differently, please see the Advanced Mapping section in the documentation.
+
+``` r
+# Grap the data in a pre-formatted data frame.
+df <- get_bls_county()
+
+#Use map function with arguments.
+bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
+               labtitle = "Unemployment Rate by County")
+```
+
+![](https://www.datascienceriot.com/wp-content/uploads/2016/07/fig2.png)
