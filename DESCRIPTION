@@ -1,6 +1,6 @@
 Package: blscrapeR
 Type: Package
-Title: A Smarter API Wrapper for the Bureau of Labor Statistics (BLS)
+Title: An API Wrapper for the Bureau of Labor Statistics (BLS)
 Version: 0.4.0
 Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
                   role = c("aut", "cre"))
@@ -18,7 +18,8 @@ Imports:
 Suggests: 
 	chron,
 	testthat,
-	leaflet
+	leaflet,
+	tigris
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/blscrapeR
 BugReports: https://github.com/keberwein/blscrapeR/issues

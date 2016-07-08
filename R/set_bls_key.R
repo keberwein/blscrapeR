@@ -14,6 +14,8 @@
 #' set_bls_key("111111abc")
 #' # First time, relead your enviornment so you can use the key without restarting R.
 #' readRenviron("~/.Renviron")
+#' # You can check it with:
+#' Sys.getenv("BLS_KEY")
 #' }
 #' 
 #' \dontrun{
@@ -21,6 +23,8 @@
 #' set_bls_key("111111abc", overwrite = TRUE)
 #' # First time, relead your enviornment so you can use the key without restarting R.
 #' readRenviron("~/.Renviron")
+#' # You can check it with:
+#' Sys.getenv("BLS_KEY")
 #' }
 
 set_bls_key <- function(key=NA, overwrite=NA){
