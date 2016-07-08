@@ -96,13 +96,13 @@ Before you get any further, you should really consider getting an API key form t
 
 ### Key Install
 
-    ```R
-    set_bls_key("111111abc")
-    # First time, relead your enviornment so you can use the key without restarting R.
-    readRenviron("~/.Renviron")
-    # You can check it with:
-    Sys.getenv("BLS_KEY")
-    ````
+``` r
+set_bls_key("111111abc")
+# First time, relead your enviornment so you can use the key without restarting R.
+readRenviron("~/.Renviron")
+# You can check it with:
+Sys.getenv("BLS_KEY")
+```
 
 Advanced Usage
 --------------
@@ -116,7 +116,7 @@ df <- bls_api(c("CUSR0000SA0", "CUSR0000SAE"),
                startyear = 1995, endyear = 2015,
                registrationKey = "BLS_KEY")
 
-
+# with a little hel from ggplot
 library(ggplot2)
 ggplot(df,
        aes(x=date, y=value, color=seriesID)) +
