@@ -16,13 +16,11 @@
 #' @param labtitle The main title label for your map passed as a string. The default is no title
 #' @examples
 #' 
-#' ## Not run:
 #' df <- get_bls_county()
 #' bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
 #'                  labtitle = "Unemployment Rate")
 #' bls_gg
 #' 
-#' ## End (Not run)
 #'
 #'
 
@@ -73,14 +71,12 @@ ggplot() +
 #' @param labtitle The main title label for your map passed as a string. The default is no title
 #' @examples
 #' 
-#' ## Not run:
 #' df <- get_bls_state("April 2016", seasonality = TRUE)
 #' 
 #' bls_gg <- bls_map_state(map_data = df, fill_rate = "unemployed_rate", 
 #'              labtitle = "Unemployment Rate")
 #' bls_gg
 #' 
-#' ## End (Not run)
 #'
 #'
 

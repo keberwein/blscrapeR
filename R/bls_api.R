@@ -15,38 +15,31 @@
 #' @export bls_api
 #' @examples
 #' 
-#' ## Not run:
 #' ## API Version 1.0 R Script Sample Code
 #' ## Single Series request
-#' df <- bls_api('LAUCN040010000000005')
+#' df <- bls_api("LAUCN040010000000005")
 #' 
-#' ## End (Not run)
 #' 
-#' ## Not run:
 #' ## API Version 1.0 R Script Sample Code
 #' ## Multiple Series request with date params.
-#' df <- bls_api(c('LAUCN040010000000005', 'LAUCN040010000000006'), 
-#' startyear = '2010', endyear = '2012')
+#' df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"), 
+#' startyear = "2010", endyear = "2012")
 #' 
-#' ## End (Not run)
 #' 
-#' ## Not run:
 #' ## API Version 1.0 R Script Sample Code
 #' ## Multiple Series request with date params.
-#' df <- bls_api(c('LAUCN040010000000005', 'LAUCN040010000000006'), 
-#' startyear = '2010', endyear = '2012')
+#' df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"), 
+#' startyear = "2010", endyear = "2012")
 #' 
-#' ## End (Not run)
-#' #' ## Not run:
+#' 
 #' ## API Version 2.0 R Script Sample Code
 #' ## Multiple Series request with full params allowed by v2.
 #' df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"),
-#' startyear = 2010, endyear = 2012,
+#' startyear = "2010", endyear = "2012",
 #' registrationKey = "2a8526b8746f4889966f64957c56b8fd", 
 #' calculations = TRUE, annualaverage = TRUE, catalog = TRUE)
 #' 
 #' 
-#' ## End (Not run)
 # TODO: Put an a warning if user exceeds maximun number of years allowed by the BLS.
 bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey = NULL, 
                       catalog = NULL, calculations = NULL, annualaverage = NULL){
