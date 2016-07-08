@@ -1,3 +1,21 @@
+# blscrapeR 0.4.0
+
+## Major Changes
+* Added the `set_bls_key()` function to be used with the `bls_api()` function. The new function writes the user's api key to the Renviron.
+The change is backward compatible since the user is sill able to enter their api key as a string. However, for security purposes, the stored key method is preferred and should be promoted.
+
+* Added testthat directory and added `test_bls_api.R`. The tests won't affect anything in the package functionality, but will be useful for future testing.
+
+## Deprecated Features
+* Truncated the `bls_state_data()` function and added those features to the `get_bls_state()` function.
+
+* Removed dplyr from imports since it's not necessary anymore. Added leaflet and cron to package recommends.
+
+## Documentation
+* Renamed `blscrape.R` to `bls_api.R` since the `bls_api()` function was the only function in that file.
+
+* Added testthat to recommends.
+
 # blscrapeR 0.3.2
 
 ## New Features
