@@ -4,7 +4,7 @@
 #' @param date_mth The month or months you would like data for. Accepts full month names and four-digit year.
 #' @param seasonality TRUE or FALSE. The default value is TRUE.
 #' @importFrom utils download.file read.csv read.table
-#' @importFrom dplyr select mutate rename bind_rows left_join
+#' @importFrom data.table rbindlist
 #' @export get_bls_state
 #' @examples  \dontrun{
 #' # Single series
@@ -43,24 +43,26 @@ get_bls_state <- function(date_mth, seasonality = NA){
         # Split out state names, so read.table doesn't get confused.
         state_vals <- gsub("^.* \\.+", "", vals)
         cols <- read.table(text=state_vals)
+        colnames(cols) <- c("civ_pop", "labor_force", "labor_force_rate", "employed",
+                            "employed_rate", "unemployed", "unemployed_rate")
         cols$month <- i
         cols$state <- state.name
-        
-        cols <- cols %>%
-            select(8:9, 1:8) %>%
-            mutate(V1=as.numeric(gsub(",", "", V1)), V2=as.numeric(gsub(",", "", V2)),
-                   V4=as.numeric(gsub(",", "", V4)), V6=as.numeric(gsub(",", "", V6)),
-                   V3=V3/100, V5=V5/100, V7=V7/100) %>%
-            rename(civ_pop=V1, labor_force=V2, labor_force_rate=V3,
-                   employed=V4, employed_rate=V5, unemployed=V6, unemployed_rate=V7)
+        # Put data frames into a list to be rebound later.                             
         datalist[[i]] <- cols
     }
-    df <- bind_rows(datalist)
+    df <- rbindlist(datalist)
+    
     # Convert month colunm to ISO 8601 date format.
     df$month <- as.Date(paste('01', df$month), format = '%d %b %Y')
+    # Yes, I know this is ugly but I didn't want to import dplyr for this one operation.
+    cols$civ_pop <- as.numeric(gsub(",", "", cols$civ_pop))
+    cols$labor_force <- as.numeric(gsub(",", "", cols$labor_force))
+    cols$employed <- as.numeric(gsub(",", "", cols$employed))
+    cols$unemployed <- as.numeric(gsub(",", "", cols$unemployed))
     # Add colunm for state fips codes.
     state_fips<-state_fips
-    df <- left_join(df, state_fips, by="state")
-    
-    return(df)
+    df <- merge(df, state_fips, by = "state")
+    df <- df[order(df$month, df$state),]
+                                                                                                                        
+return(df)
 }
