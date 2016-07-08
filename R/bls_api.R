@@ -11,7 +11,9 @@
 #' @param calculations Returns year-over-year calculations if set to TRUE.
 #' @param annualaverage Retruns an annual average if set to TRUE.
 #' @keywords bls api economics cpi unemployment inflation
-#' @import httr jsonlite data.table
+#' @importFrom data.table rbindlist
+#' @importFrom jsonlite toJSON
+#' @importFrom httr content POST content_type_json
 #' @export bls_api
 #' @examples
 #' 
@@ -95,8 +97,8 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
         # Try to figure out a way to do this without importing data.table with the package.
         # Method borrowed from here:
         # https://github.com/fcocquemas/bulast/blob/master/R/bulast.R
-        dt <- data.table::rbindlist(lapply(jsondat$Results$series, function(s) {
-            dt <- data.table::rbindlist(lapply(s$data, function(d) {
+        dt <- rbindlist(lapply(jsondat$Results$series, function(s) {
+            dt <- rbindlist(lapply(s$data, function(d) {
                 d[["footnotes"]] <- paste(unlist(d[["footnotes"]]), collapse = " ")
                 d <- lapply(lapply(d, unlist), paste, collapse=" ")
             }), use.names = TRUE, fill=TRUE)
