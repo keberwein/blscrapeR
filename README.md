@@ -130,7 +130,7 @@ gg<- ggplot(df,
 Mapping
 -------
 
-Much the the “quick functions” for requesting data without series ids, there are two map functions, `bls_map_county` and `bls_map_state`. These functions are designed to work with two specifically designed helper functions `get_bls_county` and get `get_bls_state`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force. **Note:** Even though the `get_bls` functions return data in the correct formats, the `bls_map` functions can be used with any data set that includes FIPS codes.
+Much like the the “quick functions” for requesting data without series ids, there are two map functions, `bls_map_county` and `bls_map_state`. These functions are designed to work with two specifically designed helper functions `get_bls_county` and get `get_bls_state`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force. **Note:** Even though the `get_bls` functions return data in the correct formats, the `bls_map` functions can be used with any data set that includes FIPS codes.
 
 The example below maps the current unemployment rate by county. Note, that Alaska and Hawaii have to re-located. To save space. This is a "quick function," if you would like your map formatted differently, please see the Advanced Mapping section in the documentation.
 
