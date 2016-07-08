@@ -1,7 +1,5 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-    ## Warning: package 'jsonlite' was built under R version 3.2.5
 
-    ## Warning: package 'httr' was built under R version 3.2.5
 
 blscrapeR
 =========
