@@ -38,7 +38,7 @@ tail(df, 5)
 #> 30 2016    M01    January   4.9           LNS14000000 2016-01-31
 ```
 
-Easy right? DISCLAIMER: Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” As doubtful as that statement is, there’s not much we can do about it. The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers I’m looking for.
+**DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” As doubtful as that statement is, there’s not much we can do about it. The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers I’m looking for.
 
 API Keys
 --------
@@ -115,7 +115,8 @@ Now that you have an API key installed, you can call your key in the package’s
 df <- bls_api(c("CUSR0000SA0", "CUSR0000SAE"),
                startyear = 1995, endyear = 2015,
                registrationKey = "BLS_KEY")
-df <- df[,c("date", "seriesID", "value")]
+
+
 library(ggplot2)
 ggplot(df,
        aes(x=date, y=value, color=seriesID)) +
