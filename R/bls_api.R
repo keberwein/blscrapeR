@@ -33,14 +33,14 @@
 #' df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"), 
 #' startyear = "2010", endyear = "2012")
 #' 
-#' 
+#' \dontrun{
 #' ## API Version 2.0 R Script Sample Code
 #' ## Multiple Series request with full params allowed by v2.
 #' df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"),
 #' startyear = "2010", endyear = "2012",
-#' registrationKey = "2a8526b8746f4889966f64957c56b8fd", 
+#' registrationKey = "BLS_KEY", 
 #' calculations = TRUE, annualaverage = TRUE, catalog = TRUE)
-#' 
+#' }
 #' 
 # TODO: Put an a warning if user exceeds maximun number of years allowed by the BLS.
 bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey = NULL, 
@@ -49,8 +49,13 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
     payload <- list(seriesid = seriesid)
     # Payload won't take NULL values, have to check every field.
     # Probably a more elegant way do do this using an apply function.
-    if (exists("registrationKey") & !is.null(registrationKey)){ 
+    if (exists("registrationKey") & !is.null(registrationKey)){
+        if (registrationKey=="BLS_KEY"){
+            payload["registrationKey"] <- as.character(Sys.getenv("BLS_KEY"))
+        }
+        else{
         payload["registrationKey"] <- as.character(registrationKey)
+        }
         # Base URL for V2 for folks who have a key.
         base_url <- "http://api.bls.gov/publicAPI/v2/timeseries/data/"
         if (exists("catalog") & !is.null(catalog)){

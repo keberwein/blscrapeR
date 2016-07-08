@@ -46,14 +46,14 @@ startyear = "2010", endyear = "2012")
 df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"), 
 startyear = "2010", endyear = "2012")
 
-
+\dontrun{
 ## API Version 2.0 R Script Sample Code
 ## Multiple Series request with full params allowed by v2.
 df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"),
 startyear = "2010", endyear = "2012",
-registrationKey = "2a8526b8746f4889966f64957c56b8fd", 
+registrationKey = "BLS_KEY", 
 calculations = TRUE, annualaverage = TRUE, catalog = TRUE)
-
+}
 
 }
 \keyword{api}
