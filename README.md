@@ -35,12 +35,12 @@ tail(df, 5)
 #> 30 2016    M01    January   4.9           LNS14000000 2016-01-31
 ```
 
-**DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” As doubtful as that statement is, there’s not much we can do about it. The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers I’m looking for.
+**DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” As doubtful as that statement is, there’s not much we can do about it. The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
 
 API Keys
 --------
 
-Before you get any further, you should really consider getting an API key form the BLS, why? More data, that’s why! The package has a function to install your key in your `.Renviron` so you’ll only have to worry about it once. Plus, it will add extra security by not having your key hard-coded in your scripts for all the world to see.
+Before you get any further, you should really consider [getting an API key]((http://data.bls.gov/registrationEngine/)) form the BLS, why? More data, that’s why! The package has a function to install your key in your `.Renviron` so you’ll only have to worry about it once. Plus, it will add extra security by not having your key hard-coded in your scripts for all the world to see.
 
 ### From the BLS:
 
@@ -107,11 +107,11 @@ Advanced Usage
 Now that you have an API key installed, you can call your key in the package’s function arguments with `"BLS_KEY"`. Don't forget the quotes! If you just HAVE to have your key hard-coded in your scripts, you can also pass they key as a string.
 
 ``` r
-# Amount spent on all items vs. amount spent on education. 
-# Seasonally adjusted from the Consumer Price Index
-df <- bls_api(c("CUSR0000SA0", "CUSR0000SAE"),
-               startyear = 1995, endyear = 2015,
-               registrationKey = "BLS_KEY")
+# Median Usual Weekly Earnings by Occupation, Unadjusted Second Quartile.
+# In current dollars
+df <- bls_api(c("LEU0254530800", "LEU0254530600"),
+                startyear = 2000, endyear = 2015,
+                registrationKey = "BLS_KEY")
 ```
 
 ``` r
@@ -120,7 +120,7 @@ library(ggplot2)
 ggplot(df,
        aes(x=date, y=value, color=seriesID)) +
     geom_line() +
-    labs(title = "Median Pay by Occupation") +
+    labs(title = "Median Weekly Earnings by Occupation") +
     theme(legend.position="top") +
     scale_color_discrete(name="Occupation",
         breaks=c("LEU0254530800", "LEU0254530600"),
@@ -132,11 +132,11 @@ ggplot(df,
 Basic Mapping
 -------------
 
-Much like the the “quick functions” for requesting data without series ids, there are two map functions, `bls_map_county` and `bls_map_state`. These functions are designed to work with two specifically designed helper functions `get_bls_county` and get `get_bls_state`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force.
+Like the the “quick functions” for requesting data without series ids, there are two map functions, `bls_map_county` and `bls_map_state`. These functions are designed to work with two specifically designed helper functions `get_bls_county` and get `get_bls_state`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force.
 
 **Note:** Even though the `get_bls` functions return data in the correct formats, the `bls_map` functions can be used with any data set that includes FIPS codes.
 
-The example below maps the current unemployment rate by county. Note, that Alaska and Hawaii have to re-located. To save space. This is a "quick function," if you would like your map formatted differently, please see the Advanced Mapping section in the documentation.
+The example below maps the current unemployment rate by county. Note, that Alaska and Hawaii have to re-located to save space.
 
 ``` r
 # Grap the data in a pre-formatted data frame.
@@ -147,7 +147,7 @@ bls_map_county(map_data = df, fill_rate = "unemployed_rate",
                labtitle = "Unemployment Rate by County")
 ```
 
-![](https://www.datascienceriot.com/wp-content/uploads/2016/07/fig2.png)
+![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig3.png)
 
 Advanced Mapping
 ----------------
