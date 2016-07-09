@@ -1,7 +1,4 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-    ## Warning: package 'jsonlite' was built under R version 3.2.5
-
-    ## Warning: package 'httr' was built under R version 3.2.5
 
 blscrapeR
 =========
@@ -155,4 +152,37 @@ bls_map_county(map_data = df, fill_rate = "unemployed_rate",
 Advanced Mapping
 ----------------
 
-![](https://www.datascienceriot.com/wp-content/uploads/2016/06/leaflet_counties.html)
+What's R mapping without some interactivity? Below we’re using two additional packages, `leaflet`, which is popular for creating interactive maps and `tigris`, which allows us to download the exact shape files we need for these data and includes a few other nice tools.
+
+``` r
+# Leaflet map
+library(tigris)
+library(leaflet)
+map.shape <- counties(cb = TRUE, year = 2015)
+df <- get_bls_county()
+
+# Slice the df down to only the variables we need and rename "fips" colunm
+# so I can get a cleaner merge later.
+df <- df[, c("unemployed_rate", "fips")]
+colnames(df) <- c("unemployed_rate", "GEOID")
+
+# Merge df with spatial object.
+leafmap <- geo_join(map.shape, df, by="GEOID")
+
+# Format popup data for leaflet map.
+popup_dat <- paste0("<strong>County: </strong>", 
+                    leafmap$NAME, 
+                    "<br><strong>Value: </strong>", 
+                    leafmap$unemployed_rate)
+
+pal <- colorQuantile("YlOrRd", NULL, n = 20)
+# Render final map in leaflet.
+leaflet(data = leafmap) %>% addTiles() %>%
+    addPolygons(fillColor = ~pal(unemployed_rate), 
+                fillOpacity = 0.8, 
+                color = "#BDBDC3", 
+                weight = 1,
+                popup = popup_dat)
+```
+
+**Note:** This is just a static image since the full map would not be as portable for the purpose of documentation. ![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig2.png)
