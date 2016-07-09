@@ -1,5 +1,7 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+    ## Warning: package 'jsonlite' was built under R version 3.2.5
 
+    ## Warning: package 'httr' was built under R version 3.2.5
 
 blscrapeR
 =========
@@ -19,8 +21,8 @@ devtools::install_github("keberwein/blscrapeR")
 
 Before getting started, you’ll probably want to head over to the BLS and get [set up with an API key](http://data.bls.gov/registrationEngine/). While an API key is not required to use the package, the query limits are much higher if you have a key and you’ll have access to more data. Plus, it’s free (as in beer), so why not?
 
-Very Basic Usage
-----------------
+Basic Usage
+-----------
 
 For “quick and dirty” type of analysis, The package has some quick functions that will pull metrics from the API without series numbers. These quick functions include unemployment, employment, and civilian labor force on a national level.
 
@@ -118,15 +120,20 @@ df <- bls_api(c("CUSR0000SA0", "CUSR0000SAE"),
 ``` r
 # A little help from ggplot2!
 library(ggplot2)
-gg<- ggplot(df,
+ggplot(df,
        aes(x=date, y=value, color=seriesID)) +
-    geom_line()
+    geom_line() +
+    labs(title = "Median Pay by Occupation") +
+    theme(legend.position="top") +
+    scale_color_discrete(name="Occupation",
+        breaks=c("LEU0254530800", "LEU0254530600"),
+        labels=c("Database Admins.", "Software Devs."))
 ```
 
-![](https://www.datascienceriot.com/wp-content/uploads/2016/07/fig1.png)
+![](hhttps://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig1.png)
 
 Basic Mapping
--------
+-------------
 
 Much like the the “quick functions” for requesting data without series ids, there are two map functions, `bls_map_county` and `bls_map_state`. These functions are designed to work with two specifically designed helper functions `get_bls_county` and get `get_bls_state`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force.
 
@@ -144,3 +151,8 @@ bls_map_county(map_data = df, fill_rate = "unemployed_rate",
 ```
 
 ![](https://www.datascienceriot.com/wp-content/uploads/2016/07/fig2.png)
+
+Advanced Mapping
+----------------
+
+![](https://www.datascienceriot.com/wp-content/uploads/2016/06/leaflet_counties.html)
