@@ -127,7 +127,7 @@ ggplot(df,
         labels=c("Database Admins.", "Software Devs."))
 ```
 
-![](hhttps://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig1.png)
+![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig1.png)
 
 Basic Mapping
 -------------
