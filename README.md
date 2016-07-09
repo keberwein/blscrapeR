@@ -6,7 +6,7 @@ blscrapeR
 
 [![Build Status](https://travis-ci.org/keberwein/blscrapeR.png?branch=master)](https://travis-ci.org/keberwein/blscrapeR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/blscrapeR)](http://www.r-pkg.org/badges/version/blscrapeR)
 
-Designed to be a better API wrapper for the Bureau of Labor Statistics (BLS.) The package has additional functions to help parse, analyze and visualize the data. With fundamental ideas borrowed from the `acs` package, which has similar functionality with he Census Bureau API.
+Designed to be a better API wrapper for the Bureau of Labor Statistics (BLS.) The package has additional functions to help parse, analyze and visualize the data. With fundamental ideas borrowed from the `acs` package, which has similar functionality for the Census Bureau API.
 
 Install
 -------
@@ -125,7 +125,7 @@ gg<- ggplot(df,
 
 ![](https://www.datascienceriot.com/wp-content/uploads/2016/07/fig1.png)
 
-Mapping
+Basic Mapping
 -------
 
 Much like the the “quick functions” for requesting data without series ids, there are two map functions, `bls_map_county` and `bls_map_state`. These functions are designed to work with two specifically designed helper functions `get_bls_county` and get `get_bls_state`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force.
