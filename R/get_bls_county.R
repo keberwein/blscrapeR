@@ -1,11 +1,20 @@
 #
-#' @title Function that returns county-level labor statistics for the last three months.
+#' @title Function that returns county-level labor statistics for a selected month within the last year.
 #' @description Helper function to download and format state employment data. Note: This returns only non-seasonally adjusted data.
+#' @param date_mth The month you would like data for. Accepts full month names and four-digit year.
+#' If NULL, it will return the most recent month in the database.
 #' @importFrom stats na.omit
 #' @export get_bls_county
+#' @examples  \dontrun{
+#' # Most recent month in the data set.
+#' get_bls_county()
+#' 
+#' # A specific month
+#' get_bls_county("June 2016")
+#' }
 #'
+
 get_bls_county <- function(date_mth = NULL){
-    date_mth <- as.Date(paste('01', date_mth), format = '%d %b %Y')
     temp<-tempfile()
     download.file("http://www.bls.gov/lau/laucntycur14.txt", temp)
     countyemp<-read.csv(temp,
@@ -23,6 +32,14 @@ get_bls_county <- function(date_mth = NULL){
     
     # Set period to proper date format.
     countyemp$period <- as.Date(paste("01-", countyemp$period, sep = ""), format = "%d-%b-%y")
+    
+    # Figure out what date is wanted.
+    if(!is.null(date_mth)){
+        date_mth <- as.Date(paste('01', date_mth), format = '%d %b %Y')
+    }
+      else{
+        date_mth <- max(countyemp$period)
+    }
     
     # Check to see if users date exists
     dt_exist <- any(grepl(date_mth, countyemp$period))
@@ -43,7 +60,7 @@ get_bls_county <- function(date_mth = NULL){
     # Subset data frame to selected month.
     countyemp <- subset(countyemp, period==date_mth)
    }
-    else{
+     else{
         current <- max(countyemp$period)
         countyemp <- countyemp[ which(countyemp$period==current), ]
         

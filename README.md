@@ -140,6 +140,7 @@ The example below maps the current unemployment rate by county. Note, that Alask
 
 ``` r
 # Grap the data in a pre-formatted data frame.
+# If no argument is passed to function it will load the most recent month's data.
 df <- get_bls_county()
 
 #Use map function with arguments.
@@ -185,4 +186,4 @@ leaflet(data = leafmap) %>% addTiles() %>%
                 popup = popup_dat)
 ```
 
-**Note:** This is just a static image since the full map would not be as portable for the purpose of documentation. ![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig2.png)
+**Note:** This is just a static image since the full map would not be as portable for the purpose of documentation. ![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig2.png%20=300x400)

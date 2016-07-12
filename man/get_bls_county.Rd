@@ -2,11 +2,25 @@
 % Please edit documentation in R/get_bls_county.R
 \name{get_bls_county}
 \alias{get_bls_county}
-\title{Function that returns county-level labor statistics for the last three months.}
+\title{Function that returns county-level labor statistics for a selected month within the last year.}
 \usage{
-get_bls_county()
+get_bls_county(date_mth = NULL)
+}
+\arguments{
+\item{date_mth}{The month you would like data for. Accepts full month names and four-digit year.
+If NULL, it will return the most recent month in the database.}
 }
 \description{
 Helper function to download and format state employment data. Note: This returns only non-seasonally adjusted data.
+}
+\examples{
+ \dontrun{
+# Most recent month in the data set.
+get_bls_county()
+
+# A specific month
+get_bls_county("June 2016")
+}
+
 }
 
