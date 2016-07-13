@@ -1,3 +1,6 @@
+---
+output: html_document
+---
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 blscrapeR
@@ -139,7 +142,7 @@ The example below maps the current unemployment rate by county. Alaska and Hawai
 
 ``` r
 # Grap the data in a pre-formatted data frame.
-# If no argument is passed to function it will load the most recent month's data.
+# If no argument is passed to the function it will load the most recent month's data.
 df <- get_bls_county()
 
 #Use map function with arguments.
