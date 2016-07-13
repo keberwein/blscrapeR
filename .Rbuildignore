@@ -2,3 +2,5 @@
 ^\.Rproj\.user$
 ^data-raw$
 ^\.travis\.yml$
+^README\.Rmd$
+^NEWS\.Rmd$ 

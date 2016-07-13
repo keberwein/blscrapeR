@@ -5,12 +5,12 @@ blscrapeR
 
 [![Build Status](https://travis-ci.org/keberwein/blscrapeR.png?branch=master)](https://travis-ci.org/keberwein/blscrapeR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/blscrapeR)](http://www.r-pkg.org/badges/version/blscrapeR)
 
-Designed to be a better API wrapper for the Bureau of Labor Statistics (BLS.) The package has additional functions to help parse, analyze and visualize the data. With fundamental ideas borrowed from the `acs` package, which has similar functionality for the Census Bureau API.
+Designed to be a better API wrapper for the Bureau of Labor Statistics (BLS.) The package has additional functions to help parse, analyze and visualize the data. Fundamental ideas borrowed from the `acs` package, which has similar functionality for the Census Bureau API.
 
 Install
 -------
 
--   The latest development version from Github with
+-   The latest development version from Github:
 
 ``` r
 devtools::install_github("keberwein/blscrapeR")
@@ -21,7 +21,7 @@ Before getting started, you’ll probably want to head over to the BLS and get [
 Basic Usage
 -----------
 
-For “quick and dirty” type of analysis, The package has some quick functions that will pull metrics from the API without series numbers. These quick functions include unemployment, employment, and civilian labor force on a national level.
+For “quick and dirty” type of analysis, the package has some quick functions that will pull metrics from the API without series numbers. These quick functions include unemployment, employment, and civilian labor force on a national level.
 
 ``` r
 # Grab the Unemployment Rate (U-3) 
@@ -35,12 +35,12 @@ tail(df, 5)
 #> 30 2016    M01    January   4.9           LNS14000000 2016-01-31
 ```
 
-**DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” As doubtful as that statement is, there’s not much we can do about it. The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
+**DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
 
 API Keys
 --------
 
-Before you get any further, you should really consider [getting an API key]((http://data.bls.gov/registrationEngine/)) form the BLS, why? More data, that’s why! The package has a function to install your key in your `.Renviron` so you’ll only have to worry about it once. Plus, it will add extra security by not having your key hard-coded in your scripts for all the world to see.
+You should consider [getting an API key]((http://data.bls.gov/registrationEngine/)) form the BLS. The package has a function to install your key in your `.Renviron` so you’ll only have to worry about it once. Plus, it will add extra security by not having your key hard-coded in your scripts for all the world to see.
 
 ### From the BLS:
 
@@ -117,8 +117,7 @@ df <- bls_api(c("LEU0254530800", "LEU0254530600"),
 ``` r
 # A little help from ggplot2!
 library(ggplot2)
-ggplot(df,
-       aes(x=date, y=value, color=seriesID)) +
+ggplot(df, aes(x=date, y=value, color=seriesID)) +
     geom_line() +
     labs(title = "Median Weekly Earnings by Occupation") +
     theme(legend.position="top") +
@@ -132,11 +131,11 @@ ggplot(df,
 Basic Mapping
 -------------
 
-Like the the “quick functions” for requesting data without series ids, there are two map functions, `bls_map_county` and `bls_map_state`. These functions are designed to work with two specifically designed helper functions `get_bls_county` and get `get_bls_state`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force.
+Like the the “quick functions” for requesting API data, there are two "quick" map functions, `bls_map_county()` and `bls_map_state()`. These functions are designed to work with two helper functions `get_bls_county()` and get `get_bls_state()`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force. These functions do not pull data from the API, rather they pull data from text files and *do not* count against daily query limits.
 
 **Note:** Even though the `get_bls` functions return data in the correct formats, the `bls_map` functions can be used with any data set that includes FIPS codes.
 
-The example below maps the current unemployment rate by county. Note, that Alaska and Hawaii have to re-located to save space.
+The example below maps the current unemployment rate by county. Alaska and Hawaii have to re-located to save space.
 
 ``` r
 # Grap the data in a pre-formatted data frame.
@@ -186,4 +185,6 @@ leaflet(data = leafmap) %>% addTiles() %>%
                 popup = popup_dat)
 ```
 
-**Note:** This is just a static image since the full map would not be as portable for the purpose of documentation. ![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig2.png%20=300x400)
+**Note:** This is just a static image since the full map would not be as portable for the purpose of documentation.
+
+![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig2.png=300x400)
