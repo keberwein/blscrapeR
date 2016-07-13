@@ -4,13 +4,17 @@
 #' @param date_mth The month you would like data for. Accepts full month names and four-digit year.
 #' If NULL, it will return the most recent month in the database.
 #' @importFrom stats na.omit
+#' @importFrom data.table rbindlist
 #' @export get_bls_county
 #' @examples  \dontrun{
 #' # Most recent month in the data set.
 #' get_bls_county()
 #' 
 #' # A specific month
-#' get_bls_county("June 2016")
+#' get_bls_county("May 2016")
+#' 
+#' # Multiple months
+#' get_bls_county(c("April 2016","May 2016"))
 #' }
 #'
 
@@ -33,40 +37,37 @@ get_bls_county <- function(date_mth = NULL){
     # Set period to proper date format.
     countyemp$period <- as.Date(paste("01-", countyemp$period, sep = ""), format = "%d-%b-%y")
     
-    # Figure out what date is wanted.
-    if(!is.null(date_mth)){
-        date_mth <- as.Date(paste('01', date_mth), format = '%d %b %Y')
-    }
-      else{
-        date_mth <- max(countyemp$period)
-    }
+    # Check for date or dates.
+    if (!is.null(date_mth)){
+        date_mth <- as.Date(paste("01", date_mth, sep = ""), format = '%d %b %Y')
     
-    # Check to see if users date exists
-    dt_exist <- any(grepl(date_mth, countyemp$period))
-    if(dt_exist==FALSE){
-        message("Are you sure that month is published? Please check the BLS release schedule.")
-        if(date_mth>Sys.Date()-54){
-            stop(
-            message("County-wide statistics are usually published on the third Friday of each month for the previous month."))
-        }
-        if(date_mth<Sys.Date()-360){
-            stop(
-                message("This data set only goes back one year. Make sure your date is correct.")
-            )
+        if (is.null(date_mth)){
+            date_mth <- max(countyemp$period)
+            date_mth <- as.Date(paste("01", date_mth, sep = ""), format = '%d %b %Y')
         }
     }
-    
-   if(!is.null(date_mth)){
-    # Subset data frame to selected month.
-    countyemp <- subset(countyemp, period==date_mth)
-   }
-     else{
-        current <- max(countyemp$period)
-        countyemp <- countyemp[ which(countyemp$period==current), ]
-        
+
+    # Check to see if users date exists in data set.
+    dt_exist <- sapply(date_mth, function(x) any(grepl(x, countyemp$period)))
+    if(any(dt_exist==FALSE)){
+        message("Are you sure your date(s) is published? Please check the BLS release schedule.")
+        if(i>Sys.Date()-54){
+            stop(message("County-wide statistics are usually published on the third Friday of each month for the previous month."))
+        }
+        if(i<Sys.Date()-360){
+            stop(message("This data set only goes back one year. Make sure your date(s) is correct."))
+        }
     }
     
-    # Correct column data fromats
+    # Put months to loop in list.
+    datalist <- list()
+    for (i in date_mth) {
+        mth_vals <- subset(countyemp, period==i)
+        datalist[[i]] <- mth_vals
+    }
+    # Rebind.
+    df <- rbindlist(datalist)
+    # Correct column data fromats.
     countyemp$unemployed <- as.numeric(gsub(",", "", as.character(countyemp$unemployed)))
     countyemp$employed <- as.numeric(gsub(",", "", as.character(countyemp$employed)))
     countyemp$labor_force <- as.numeric(gsub(",", "", as.character(countyemp$labor_force)))
@@ -75,5 +76,6 @@ get_bls_county <- function(date_mth = NULL){
     countyemp$fips_county <- formatC(countyemp$fips_county, width = 3, format = "d", flag = "0")
     countyemp$fips_state <- formatC(countyemp$fips_state, width = 2, format = "d", flag = "0")
     countyemp$fips=paste(countyemp$fips_state,countyemp$fips_county,sep="")
-    return(countyemp)
+    
+    return(df)
 }

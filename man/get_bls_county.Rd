@@ -19,7 +19,10 @@ Helper function to download and format state employment data. Note: This returns
 get_bls_county()
 
 # A specific month
-get_bls_county("June 2016")
+get_bls_county("May 2016")
+
+# Multiple months
+get_bls_county(c("April 2016","May 2016"))
 }
 
 }

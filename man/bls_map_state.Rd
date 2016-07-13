@@ -23,12 +23,14 @@ shapefiles can be downloaded at \url{https://www.census.gov/geo/maps-data/data/c
 for analysis which requires more customized mapping.
 }
 \examples{
+\dontrun{
 
 df <- get_bls_state("April 2016", seasonality = TRUE)
 
 bls_gg <- bls_map_state(map_data = df, fill_rate = "unemployed_rate", 
              labtitle = "Unemployment Rate")
 bls_gg
+}
 
 
 

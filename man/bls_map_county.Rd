@@ -23,12 +23,12 @@ shapefiles can be downloaded at \url{https://www.census.gov/geo/maps-data/data/c
 for analysis which requires more customized mapping.
 }
 \examples{
-
+\dontrun{
 df <- get_bls_county()
 bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
                  labtitle = "Unemployment Rate")
 bls_gg
-
+}
 
 
 }
