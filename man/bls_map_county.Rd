@@ -24,7 +24,10 @@ for analysis which requires more customized mapping.
 }
 \examples{
 \dontrun{
+# Download the most current month unemployment statistics on a county level.
 df <- get_bls_county()
+
+# Map the unemployment rate by county.
 bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
                  labtitle = "Unemployment Rate")
 bls_gg

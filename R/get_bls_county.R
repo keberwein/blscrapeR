@@ -66,7 +66,7 @@ get_bls_county <- function(date_mth = NULL){
         datalist[[i]] <- mth_vals
     }
     # Rebind.
-    df <- rbindlist(datalist)
+    df <- data.table::rbindlist(datalist)
     # Correct column data fromats.
     countyemp$unemployed <- as.numeric(gsub(",", "", as.character(countyemp$unemployed)))
     countyemp$employed <- as.numeric(gsub(",", "", as.character(countyemp$employed)))

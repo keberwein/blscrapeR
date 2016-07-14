@@ -50,7 +50,7 @@ get_bls_state <- function(date_mth, seasonality = NA){
         # Put data frames into a list to be rebound later.                             
         datalist[[i]] <- cols
     }
-    df <- rbindlist(datalist)
+    df <- data.table::rbindlist(datalist)
     
     # Convert month colunm to ISO 8601 date format.
     df$month <- as.Date(paste('01', df$month), format = '%d %b %Y')

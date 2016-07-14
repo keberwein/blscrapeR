@@ -24,9 +24,10 @@ for analysis which requires more customized mapping.
 }
 \examples{
 \dontrun{
-
+# Downlaod employment statistics for April 2016.
 df <- get_bls_state("April 2016", seasonality = TRUE)
 
+# Map the unemployment rate from data set.
 bls_gg <- bls_map_state(map_data = df, fill_rate = "unemployed_rate", 
              labtitle = "Unemployment Rate")
 bls_gg

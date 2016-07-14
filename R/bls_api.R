@@ -88,21 +88,21 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
         payload["endyear"] <- as.character(endyear)
     }
     # Manually construct payload since the BLS formatting is wakey.
-    payload <- toJSON(payload)
+    payload <- jsonlite::toJSON(payload)
     loadparse <- regmatches(payload, regexpr("],", payload), invert = TRUE)
     parse1 <- loadparse[[1]][1]
     parse2 <- gsub("\\[|\\]", "", loadparse[[1]][2])
     payload <- paste(parse1, parse2, sep = "],")
     
     # Here's the actual API call.
-    jsondat <- content(POST(base_url, body = payload, content_type_json()))
+    jsondat <- httr::content(httr::POST(base_url, body = payload, httr::content_type_json()))
     
     if(length(jsondat$Results) > 0) {
         # Put results into data.table format.
         # Try to figure out a way to do this without importing data.table with the package.
         # Method borrowed from here:
         # https://github.com/fcocquemas/bulast/blob/master/R/bulast.R
-        dt <- rbindlist(lapply(jsondat$Results$series, function(s) {
+        dt <- data.table::rbindlist(lapply(jsondat$Results$series, function(s) {
             dt <- rbindlist(lapply(s$data, function(d) {
                 d[["footnotes"]] <- paste(unlist(d[["footnotes"]]), collapse = " ")
                 d <- lapply(lapply(d, unlist), paste, collapse=" ")

@@ -32,7 +32,7 @@ bls_map_county <- function(map_data, fill_rate, labtitle=NULL){
 map = county_map_data
 #Unemployment statistics by county: Get and process data.
 #Plot
-ggplot() +
+ggplot2::ggplot() +
     geom_map(data=map, map=map,
              aes(x=long, y=lat, map_id=id, group=group),
              fill="#ffffff", color="#0e0e0e", size=0.15) +
@@ -90,7 +90,7 @@ bls_map_state <- function(map_data, fill_rate, labtitle=NULL){
     map = state_map_data
     #Unemployment statistics by county: Get and process data.
     #Plot
-    ggplot() +
+    ggplot2::ggplot() +
         geom_map(data=map, map=map,
                  aes(x=long, y=lat, map_id=id, group=group),
                  fill="#ffffff", color="#0e0e0e", size=0.15) +
