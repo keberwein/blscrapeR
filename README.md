@@ -1,6 +1,3 @@
----
-output: html_document
----
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 blscrapeR
@@ -190,4 +187,4 @@ leaflet(data = leafmap) %>% addTiles() %>%
 
 **Note:** This is just a static image since the full map would not be as portable for the purpose of documentation.
 
-![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig2.png=300x400)
+![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig2.png)
