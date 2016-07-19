@@ -14,7 +14,8 @@ Imports:
 	utils,
 	stats,
 	grDevices,
-	data.table
+	data.table,
+	xts
 Suggests: 
 	chron,
 	testthat,
