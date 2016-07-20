@@ -8,8 +8,8 @@ vignette: >
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = FALSE, fig.width = 4, fig.height = 4)
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 4, fig.height = 4)
 ```
 
 ## The BLS Data Landscape

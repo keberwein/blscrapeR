@@ -1,0 +1,99 @@
+---
+title: "Advanced BLS API Pay and Benefits"
+author: "Vignette Author"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Advanced BLS API Pay and Benefits}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE, fig.width = 4, fig.height = 4)
+```
+
+## The BLS Data Landscape
+
+The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](http://www.bls.gov/data/). The selected examples below do not include all series or databases.
+
+###Catagories you will find useful are:
+
+* [OES](http://beta.bls.gov/dataQuery/find?fq=survey:[oe]&q=oe) (Occupational Employment Statistics) includes employment, benefits, and wages segmented by metro area and occupation.
+
+* [Employer Cost for Employee Compensation](http://data.bls.gov/cgi-bin/surveymost?cm)
+
+* [National Compensation Survey-Benefits](http://data.bls.gov/cgi-bin/surveymost?nb) includes survey data of those who have benefits available and who takes advantage of those benefits.
+
+* [Work Stoppages Data](http://data.bls.gov/cgi-bin/surveymost?ws)
+
+* Other wage data can be found in the CPS, CES, and QCEW, which are covered in the [Employment seciton](https://github.com/keberwein/blscrapeR/blob/master/vignettes/bls-query.Rmd) of these vignettes.
+
+*Note: The hyperlinks above link to lists of the most popular seriesIDs, but are only a small sample of all the data tracked by the BLS.*
+
+####OES
+
+The OES contains similar wage data found in the CPS, but often has more resolution in certain geographic areas. Unlike the CPS, the OES is an annual survey and does not keep time series data.
+
+For example, we may want to compare the average hourly wage of Computer and Information Systems Managers in Orlando, FL to those in San Jose, CA. Notice, below the survey only returns values for 2015.
+
+```{r}
+# Computer adn Information Systems Managers in Orlando, FL and San Jose, CA.
+# Orlando: "OEUM003674000000011302103"
+# San Jose: "OEUM004194000000011302108"
+library(blscrapeR)
+df <- bls_api(c("OEUM003674000000011302103", "OEUM004194000000011302108"),
+              registrationKey = "BLS_KEY")
+head(df)
+```
+
+
+Another OES example would be to grab the most recent Annual mean wage for All Occupations in All Industries in the United States.
+
+```{r}
+library(blscrapeR)
+df <- bls_api("OEUN000000000000000000004",
+              registrationKey = "BLS_KEY")
+df
+```
+
+
+####Employer Cost for Employee Compensation
+
+This data set includes time series data on how much employers pay for employee benefits as a total cost and as a percent of employee wages and salaries.
+
+For example, if we want to see the total cost of benefits per hour work and also see what percentage that is of the total compensation, we could run the following script.
+
+```{r}
+library(blscrapeR)
+library(tidyr)
+df <- bls_api(c("CMU1030000000000D", "CMU1030000000000P"), 
+              registrationKey = "BLS_KEY")
+df <- spread(df, seriesID, value)
+colnames(df) <- c("year", "period", "periodName", "footnotes", "date", "hourly_cost", "pct_of_wages")
+# Percentages are represented as floating integers. Fix this to avoid confusion.
+df$pct_of_wages <- df$pct_of_wages*0.01
+df
+```
+
+
+####National Compensation Survey-Benefits
+
+This survey includes data on how many Americans have access to certain benefits. For example, we can see the percentage of those who have access to paid vacation days and those who have access to Health insurance through their employers.
+
+```{r}
+library(blscrapeR)
+library(tidyr)
+df <- bls_api(c("NBU10500000000000033030", "NBU11500000000000028178"), 
+              registrationKey = "BLS_KEY")
+
+df <- spread(df, seriesID, value)
+colnames(df) <- c("year", "period", "periodName", "footnotes", "date", "pct_paid_vacation", "pct_health_ins")
+
+# Value data are in whole numbers but represent percentages. Fix this to avoid confusion.
+df$pct_paid_vacation <- df$pct_paid_vacation*0.01
+df$pct_health_ins <- df$pct_health_ins*0.01
+df
+```
+
+
+
