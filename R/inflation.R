@@ -11,7 +11,11 @@
 #' values <- inflation_adjust(base_year = 2010)
 #' }
 #' 
-inflation_adjust <- function(base_year=NA){  
+inflation_adjust <- function(base_year=NA){
+    pkgs <- "xts"
+    for(p in pkgs) 
+        if (p %in% rownames(installed.packages()) == FALSE) 
+        {stop(message("One or more dependencies did not load. Please make sure the xts package is installed and loading correctly."))}
     if (nchar(base_year) != 4){
         stop(message("Please enter your date as a four-digit integer."))
     }

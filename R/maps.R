@@ -27,6 +27,10 @@
 #'
 
 bls_map_county <- function(map_data, fill_rate, labtitle=NULL){
+    pkgs <- c("ggplot2", "grDevices")
+    for(p in pkgs) 
+        if (p %in% rownames(installed.packages()) == FALSE) 
+        {stop(message("One or more dependencies did not load. Please make sure the ggplot2 and grDevices packages are installed and loading correctly."))}
 #Maps by County
 #Load pre-formatted map for ggplot.
 map = county_map_data
@@ -85,6 +89,10 @@ ggplot2::ggplot() +
 #'
 
 bls_map_state <- function(map_data, fill_rate, labtitle=NULL){
+    pkgs <- c("ggplot2", "grDevices")
+    for(p in pkgs) 
+        if (p %in% rownames(installed.packages()) == FALSE) 
+        {stop(message("One or more dependencies did not load. Please make sure the ggplot2 and grDevices packages are installed and loading correctly."))}
     #Maps by County
     #Load pre-formatted map for ggplot.
     map = state_map_data
