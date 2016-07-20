@@ -24,6 +24,7 @@ Basic Usage
 For “quick and dirty” type of analysis, the package has some quick functions that will pull metrics from the API without series numbers. These quick functions include unemployment, employment, and civilian labor force on a national level.
 
 ``` r
+library(blscrapeR)
 # Grab the Unemployment Rate (U-3) 
 df <- quick_unemp_rate()
 tail(df, 5)
@@ -94,6 +95,7 @@ You should consider [getting an API key]((http://data.bls.gov/registrationEngine
 ### Key Install
 
 ``` r
+library(blscrapeR)
 set_bls_key("111111abc")
 # First time, relead your enviornment so you can use the key without restarting R.
 readRenviron("~/.Renviron")
@@ -107,6 +109,7 @@ Advanced Usage
 Now that you have an API key installed, you can call your key in the package’s function arguments with `"BLS_KEY"`. Don't forget the quotes! If you just HAVE to have your key hard-coded in your scripts, you can also pass they key as a string.
 
 ``` r
+library(blscrapeR)
 # Median Usual Weekly Earnings by Occupation, Unadjusted Second Quartile.
 # In current dollars
 df <- bls_api(c("LEU0254530800", "LEU0254530600"),
@@ -138,6 +141,7 @@ Like the the “quick functions” for requesting API data, there are two "quick
 The example below maps the current unemployment rate by county. Alaska and Hawaii have to re-located to save space.
 
 ``` r
+library(blscrapeR)
 # Grap the data in a pre-formatted data frame.
 # If no argument is passed to the function it will load the most recent month's data.
 df <- get_bls_county()
@@ -156,6 +160,7 @@ What's R mapping without some interactivity? Below we’re using two additional 
 
 ``` r
 # Leaflet map
+library(blscrapeR)
 library(tigris)
 library(leaflet)
 map.shape <- counties(cb = TRUE, year = 2015)

@@ -27,13 +27,14 @@ inflation_adjust <- function(base_year=NA){
         colnames(cu_main)<-c("series_id", "year", "period", "value", "footnote_codes")
         unlink(temp)
         # Data prep.
-        cpi_main <- subset(cu_main, series_id=="CUSR0000SA0" &
-                              !period %in% c("M13", "S01", "S02", "S03"))
-        
-        cpi_main <- mutate(cpi_main, 
-                           date = as.Date(paste(cpi_main$year, cpi_main$period,"01",sep="-"),"%Y-M%m-%d"))
-        cpi_main <- subset(cpi_main, select =(c("date", "value")))
-        cpi_main <- xts::xts(cpi_main[,-1], order.by=cpi_main[,1])
+        cu_main <- subset(cu_main, series_id=="CUSR0000SA0" &
+                              period!="M13" &
+                              period!="S01" &
+                              period!="S02" &
+                              period!="S03") 
+        cu_main$date <-as.Date(paste(cu_main$year, cu_main$period,"01",sep="-"),"%Y-M%m-%d")
+        cu_main <- cu_main[c('date','value')]
+        cpi_main <- xts::xts(cu_main[,-1], order.by=cu_main[,1])
         
         # Get average yearly CPI.
         avg.cpi <- xts::apply.yearly(cpi_main, mean)

@@ -44,7 +44,7 @@
 #' 
 # TODO: Put an a warning if user exceeds maximun number of years allowed by the BLS.
 bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey = NULL, 
-                      catalog = NULL, calculations = NULL, annualaverage = NULL){
+                     catalog = NULL, calculations = NULL, annualaverage = NULL){
     
     payload <- list(seriesid = seriesid)
     # Payload won't take NULL values, have to check every field.
@@ -54,7 +54,7 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
             payload["registrationKey"] <- as.character(Sys.getenv("BLS_KEY"))
         }
         else{
-        payload["registrationKey"] <- as.character(registrationKey)
+            payload["registrationKey"] <- as.character(registrationKey)
         }
         # Base URL for V2 for folks who have a key.
         base_url <- "http://api.bls.gov/publicAPI/v2/timeseries/data/"
@@ -107,21 +107,27 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
                 d[["footnotes"]] <- paste(unlist(d[["footnotes"]]), collapse = " ")
                 d <- lapply(lapply(d, unlist), paste, collapse=" ")
             }), use.names = TRUE, fill=TRUE)
-            dt[, seriesID := s[["seriesID"]]]
+            #dt[, seriesID := s[["seriesID"]]]
             dt
         }), use.names = TRUE, fill=TRUE)
         
-        # Convert periods to dates.
-        # This is for convenience--don't want to touch any of the raw data.
-        dt[, date := seq(as.Date(paste(year, ifelse(period == "M13", 12, substr(period, 2, 3)), "01", sep = "-")),
-                         length = 2, by = "months")[2]-1,by="year,period"]
         jsondat$Results <- dt
+        # Convert year and period to date. Remove annual averages.
+        if ("period" %in% colnames(dt)){
+            dt[, date := seq(as.Date(paste(year, ifelse(period == "M13", 12, substr(period, 2, 3)), "01", sep = "-")),
+                             length = 2, by = "months")[2]-1,by="year,period"]
+        }
         df <- as.data.frame(jsondat$Results)
         df$value <- as.numeric(as.character(df$value))
+        if ("year" %in% colnames(df)){
         df$year <- as.numeric(as.character(df$year))
-        return(df)
+        }
+        if (nrow(df)==0){
+            stop(print(jsondat$message),
+                 print(jsondat$status))
+        }
     }
     else{
         stop(sprintf(jsondat$status))
-    }   
+    }
 }
