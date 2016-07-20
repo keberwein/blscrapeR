@@ -52,9 +52,7 @@ df <- bls_api(c("LNS13327709", "LNS14000000"),
                startyear = 2000, endyear = 2015,
                registrationKey = "BLS_KEY")
 tail(df)
-```
 
-```{r}
 ggplot(data=df, aes(x = date, y = value, color=seriesID)) + 
     geom_line() +
     labs(title = "US Unemployment") +
@@ -73,9 +71,7 @@ df <- bls_api(c("LEU0254530800", "LEU0254530600"),
                 startyear = 2000, endyear = 2015,
                 registrationKey = "BLS_KEY")
 tail(df)
-```
 
-```{r}
 ggplot(df, aes(x=date, y=value, color=seriesID)) +
     geom_line() +
     labs(title = "Median Pay by Occupation") +
@@ -84,6 +80,7 @@ ggplot(df, aes(x=date, y=value, color=seriesID)) +
         breaks=c("LEU0254530800", "LEU0254530600"),
         labels=c("Database Admins.", "Software Devs."))
 ```
+
 
 ####ATUS
 
@@ -96,9 +93,7 @@ df <- bls_api(c("TUU10101AA01014236", "TUU10101AA01013951"),
                 startyear = 2005, endyear = 2015,
                 registrationKey = "BLS_KEY")
 tail(df)
-```
 
-```{r}
 ggplot(df, aes(x=date, y=value, color=seriesID)) +
     geom_line() +
     labs(title = "Time Use (in hours)") +
@@ -107,6 +102,7 @@ ggplot(df, aes(x=date, y=value, color=seriesID)) +
         breaks=c("TUU10101AA01014236", "TUU10101AA01013951"),
         labels=c("Watching TV", "Communicating"))
 ```
+
 
 ####CES
 
@@ -136,9 +132,8 @@ library(ggplot2)
 df <- bls_api(c("ENU0608510010", "ENU1209510010"),
                 startyear = 2005, endyear = 2015,
                 registrationKey = "BLS_KEY")
-```
+tail(df)
 
-```{r}
 ggplot(df, aes(x=date, y=value, color=seriesID)) +
     geom_line() +
     labs(title = "Total Employed by County") +
@@ -147,5 +142,3 @@ ggplot(df, aes(x=date, y=value, color=seriesID)) +
         breaks=c("ENU0608510010", "ENU1209510010"),
         labels=c("Santa Clara, CA", "Orange, FL"))
 ```
-
-
