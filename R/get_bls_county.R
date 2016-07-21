@@ -19,10 +19,6 @@
 #'
 
 get_bls_county <- function(date_mth = NULL){
-    pkgs <- c("stats", "data.table")
-    for(p in pkgs) 
-        if (p %in% rownames(installed.packages()) == FALSE) 
-        {stop(message("One or more dependencies did not load. Please make sure the stats and data.table packages are installed and loading correctly."))}
     temp<-tempfile()
     download.file("http://www.bls.gov/lau/laucntycur14.txt", temp)
     countyemp<-read.csv(temp,

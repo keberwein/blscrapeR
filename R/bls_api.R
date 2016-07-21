@@ -45,13 +45,6 @@
 # TODO: Put an a warning if user exceeds maximun number of years allowed by the BLS.
 bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey = NULL, 
                      catalog = NULL, calculations = NULL, annualaverage = NULL){
-    
-    # Check package dependecies first.
-    pkgs <- c("httr", "jsonlite", "data.table")
-    for(p in pkgs) 
-        if (p %in% rownames(installed.packages()) == FALSE) 
-        {stop(message("One or more dependencies did not load. Please make sure the httr, jsonlite and data.table packages are installed and loading correctly."))}
-    
     payload <- list(seriesid = seriesid)
     # Payload won't take NULL values, have to check every field.
     # Probably a more elegant way do do this using an apply function.

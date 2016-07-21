@@ -16,11 +16,6 @@
 #'
 
 get_bls_state <- function(date_mth, seasonality = NA){
-    pkgs <- c("utils", "data.table")
-    for(p in pkgs) 
-        if (p %in% rownames(installed.packages()) == FALSE) 
-        {stop(message("One or more dependencies did not load. Please make sure the utils and data.table packages are installed and loading correctly."))}
-    
     seas <- "http://www.bls.gov/lau/ststdsadata.txt"
     notseas <- "http://www.bls.gov/lau/ststdnsadata.txt"
     if (seasonality == TRUE){
