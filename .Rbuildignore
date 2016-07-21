@@ -5,3 +5,4 @@
 ^README\.Rmd$
 ^NEWS\.Rmd$
 ^cran-comments\.md$
+^appveyor\.yml$
