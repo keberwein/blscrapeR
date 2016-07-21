@@ -129,9 +129,6 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
                  print(jsondat$status))
         }
     }
-    else{
-        stop(sprintf(jsondat$status))
-    }
     return(df)
 }
 

@@ -1,15 +1,15 @@
 ---
-title: "Advanced BLS API Pay and Benefits"
+title: "BLS API Pay and Benefits"
 author: "Vignette Author"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Advanced BLS API Pay and Benefits}
+  %\VignetteIndexEntry{BLS API Pay and Benefits}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 ```{r setup, include=TRUE}
-knitr::opts_chunk$set(echo = TRUE, fig.width = 4, fig.height = 4)
+knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## The BLS Data Landscape

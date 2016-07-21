@@ -1,10 +1,10 @@
 ---
-title: "Advanced BLS API Employment"
+title: "BLS API Employment and Unemployment"
 author: "Kris Eberwein"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Advanced BLS API Employment}
+  %\VignetteIndexEntry{BLS API Employment and Unemployment}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
