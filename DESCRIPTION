@@ -28,7 +28,11 @@ Suggests:
 	scales,
 	reshape2,
 	plyr,
-	Rcpp
+	Rcpp,
+	munsell,
+	zoo,
+	grid
+	
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/blscrapeR
 BugReports: https://github.com/keberwein/blscrapeR/issues
