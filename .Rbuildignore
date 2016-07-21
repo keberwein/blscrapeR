@@ -3,4 +3,5 @@
 ^data-raw$
 ^\.travis\.yml$
 ^README\.Rmd$
-^NEWS\.Rmd$ 
+^NEWS\.Rmd$
+^cran-comments\.md$

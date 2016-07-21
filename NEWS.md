@@ -1,3 +1,22 @@
+# blscrapeR 0.4.1
+
+## New Features
+
+* Added quick functions to pull popular data sets from the API without the need of the user inputing a series id.
+
+* Addded data argument to get_bls_county. If NULL the function will return the most recent month.
+
+* Added the inflaction_adjust() function to help users with calculating inflation from the CPI. Since the API will only allow twenty years of data, the inflation function pulls data from a text file instead that allows the user to get CPI data back to 1947.
+
+* Added more error handling to bls_api() function.
+
+## Documentation
+
+* Added documentation to get_bls_county() to explain the new date argument.
+
+* Added package vignetts.
+
+
 # blscrapeR 0.4.0
 
 ## Major Changes
@@ -15,6 +34,7 @@ The change is backward compatible since the user is sill able to enter their api
 * Renamed `blscrape.R` to `bls_api.R` since the `bls_api()` function was the only function in that file.
 
 * Added testthat to recommends.
+
 
 # blscrapeR 0.3.2
 
