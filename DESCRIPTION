@@ -24,7 +24,10 @@ Suggests:
     	knitr,
     	rmarkdown,
 	tidyr,
-	gtable
+	gtable,
+	scales,
+	reshape2,
+	plyr
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/blscrapeR
 BugReports: https://github.com/keberwein/blscrapeR/issues
