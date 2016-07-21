@@ -93,12 +93,6 @@ You should consider [getting an API key]((http://data.bls.gov/registrationEngine
 
 ### Key Install
 
-Note: This script will add a line to your `.Renviron` file to be re-used when ever you are in the package. If you are not comfortable with that, you can add the following line to your `.Renviron` file manually to produce the same result.
-
-`BLS_KEY='3edfadsfadsdafakdshfklhadjklh'`
-
-If you like, you can also hard-code your key into the `bls_api` function as a string.
-
 ``` r
 library(blscrapeR)
 set_bls_key("111111abc")
@@ -107,6 +101,12 @@ readRenviron("~/.Renviron")
 # You can check it with:
 Sys.getenv("BLS_KEY")
 ```
+
+Note: The above script will add a line to your `.Renviron` file to be re-used when ever you are in the package. If you are not comfortable with that, you can add the following line to your `.Renviron` file manually to produce the same result.
+
+`BLS_KEY='YOUR_KEY_IN_SINGLE_QUOTES'`
+
+If you like, you can also hard-code your key into the `bls_api` function as a string.
 
 Advanced Usage
 --------------

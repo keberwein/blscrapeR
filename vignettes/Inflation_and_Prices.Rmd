@@ -9,7 +9,6 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 ```{r setup, include=TRUE}
-knitr::opts_chunk$set(echo = TRUE)
 ```
 
 ## The BLS Data Landscape
@@ -18,7 +17,7 @@ The most difficult thing about working with BLS data is gaining a clear understa
 
 ###Catagories you will find useful are:
 
-### CPI (Consumer Price Index)
+#### CPI (Consumer Price Index)
 The CPI data tracks the prices paid by urban consumers for a representative basket of goods and services. The CPI is the primary metric used to calculate inflation.
 
 * [CPI All Urban Consumers (Current Series)](http://data.bls.gov/cgi-bin/surveymost?cu)
@@ -29,14 +28,14 @@ The CPI data tracks the prices paid by urban consumers for a representative bask
 
 * [CPI Average Price Data](http://data.bls.gov/cgi-bin/surveymost?ap)
 
-### PPI (Producer Price Index)
+#### PPI (Producer Price Index)
 The PPI data tracks the average change in selling prices received by domestic producers for their output over time.
 
 * [PPI Industry Data](http://data.bls.gov/cgi-bin/surveymost?ap)
 
 * [PPI Commodity Data](http://data.bls.gov/cgi-bin/surveymost?wp) includes "headline" FD-ID indexes.
 
-### IPP (International Price Program)
+#### IPP (International Price Program)
 
 * [IPP Import/Export Price Indexes](http://data.bls.gov/cgi-bin/surveymost?ei)
 
@@ -68,9 +67,11 @@ df <- inflation_adjust(1995)
 tail(df)
 ```
 
+If we want to check our results, we can head over to the CPI [Inflation Calculator](http://data.bls.gov/cgi-bin/cpicalc.pl) on the BLS website.
+
 ####CPI: Tracking Escalation
 
-Another typical use of the CPI is to determine price escalation. This is especially common in escalation contracts. While there are many different ways one could calculate escalation below is a simple example. Note: the BLS recomends using non-seasonally adjusted data for escalation calculations.
+Another typical use of the CPI is to determine price escalation. This is especially common in escalation contracts. While there are many different ways one could calculate escalation below is a simple example. Note: the BLS recommends using non-seasonally adjusted data for escalation calculations.
 
 Suppose we want the price escalation of $100 investment we made in January 2014 to February 2015:
 
