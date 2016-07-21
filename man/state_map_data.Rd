@@ -9,7 +9,7 @@
 data(state_map_data)
 }
 \description{
-Built-in dataset for use with the \code{bls_state_map} function.
+Built-in dataset for use with the \code{bls_map_state} function.
 To access the data directly, issue the command \code{datastate_map_data)}.
 }
 \details{

@@ -10,15 +10,8 @@ This is the first CRAN release of blscrapeR.
 
 
 ## R CMD check results
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 0 notes
 
-There was 1 note:
-
-* checking R code for possible problems ... NOTE
-
-  no visible binding for global variable...
-
-These variables are not defined in the function, but refer to the data sets that are built into the package and will not change. These data are located in the data/ folder as county_map_data.rda and state_map_data.rda.
 
 ## Downstream dependencies
 There are currently no downstream dependencies.

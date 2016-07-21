@@ -3,6 +3,7 @@
 #' @description Helper function to download and format state employment data.
 #' @param date_mth The month or months you would like data for. Accepts full month names and four-digit year.
 #' @param seasonality TRUE or FALSE. The default value is TRUE.
+#' @import datasets
 #' @importFrom utils download.file read.csv read.table
 #' @importFrom data.table rbindlist
 #' @export get_bls_state
@@ -16,6 +17,7 @@
 #'
 
 get_bls_state <- function(date_mth, seasonality = NA){
+    state.name=NULL
     seas <- "http://www.bls.gov/lau/ststdsadata.txt"
     notseas <- "http://www.bls.gov/lau/ststdnsadata.txt"
     if (seasonality == TRUE){
@@ -46,7 +48,7 @@ get_bls_state <- function(date_mth, seasonality = NA){
         colnames(cols) <- c("civ_pop", "labor_force", "labor_force_rate", "employed",
                             "employed_rate", "unemployed", "unemployed_rate")
         cols$month <- i
-        cols$state <- state.name
+        cols$state <- datasets::state.name
         # Put data frames into a list to be rebound later.                             
         datalist[[i]] <- cols
     }

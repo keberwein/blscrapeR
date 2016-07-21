@@ -45,6 +45,9 @@
 # TODO: Put an a warning if user exceeds maximun number of years allowed by the BLS.
 bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey = NULL, 
                      catalog = NULL, calculations = NULL, annualaverage = NULL){
+    # Set some dummy variables. This keeps CRAN check happy.
+    year=period=':='=seriesID=NULL
+    # Begin constructing payload.
     payload <- list(seriesid = seriesid)
     # Payload won't take NULL values, have to check every field.
     # Probably a more elegant way do do this using an apply function.

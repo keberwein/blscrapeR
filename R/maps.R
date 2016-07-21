@@ -8,6 +8,7 @@
 #' @keywords bls api economics unemployment map geo geography
 #' @import ggplot2
 #' @import grDevices
+#' @import utils
 #' @export bls_map_county
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of 
 #' function calls format_county_data or format_state_data, but other dataframes, 
@@ -27,32 +28,33 @@
 #'
 
 bls_map_county <- function(map_data, fill_rate, labtitle=NULL){
-#Maps by County
-#Load pre-formatted map for ggplot.
-map = county_map_data
-#Unemployment statistics by county: Get and process data.
-#Plot
-ggplot2::ggplot() +
-    geom_map(data=map, map=map,
-             aes(x=long, y=lat, map_id=id, group=group),
-             fill="#ffffff", color="#0e0e0e", size=0.15) +
-    geom_map(data=map_data, map=map, aes_string(map_id="fips", fill=fill_rate),
-             color="#0e0e0e", size=0.15) +
-    scale_fill_gradientn(colors = c("green", "red")) +
-    coord_equal() +
-    labs(title=labtitle) + 
-    theme(axis.line=element_blank(),
-          axis.text.x=element_blank(),
-          axis.text.y=element_blank(),
-          axis.ticks=element_blank(),
-          axis.title.x=element_blank(),
-          axis.title.y=element_blank(),
-          panel.grid.major = element_blank(),
-          panel.grid.minor = element_blank(),
-          panel.border = element_blank(),
-          panel.background = element_blank(),
-          legend.title=element_blank())
-}
+    # Set some dummy variables. This keeps CRAN check happy.
+    map=long=lat=id=group=county_map_data=NULL
+    # Load pre-formatted map for ggplot.
+    map <- county_map_data
+    # Unemployment statistics by county: Get and process data.
+    # Plot
+    ggplot2::ggplot() +
+        geom_map(data=map, map=map,
+                 aes(x=long, y=lat, map_id=id, group=group),
+                 fill="#ffffff", color="#0e0e0e", size=0.15) +
+        geom_map(data=map_data, map=map, aes_string(map_id="fips", fill=fill_rate),
+                 color="#0e0e0e", size=0.15) +
+        scale_fill_gradientn(colors = c("green", "red")) +
+        coord_equal() +
+        labs(title=labtitle) + 
+        theme(axis.line=element_blank(),
+              axis.text.x=element_blank(),
+              axis.text.y=element_blank(),
+              axis.ticks=element_blank(),
+              axis.title.x=element_blank(),
+              axis.title.y=element_blank(),
+              panel.grid.major = element_blank(),
+              panel.grid.minor = element_blank(),
+              panel.border = element_blank(),
+              panel.background = element_blank(),
+              legend.title=element_blank())
+    }
 
 
 #
@@ -65,6 +67,7 @@ ggplot2::ggplot() +
 #' @keywords bls api economics unemployment map geo geography
 #' @import ggplot2
 #' @import grDevices
+#' @import utils
 #' @export bls_map_state
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of 
 #' function calls format_county_data or format_state_data, but other dataframes, 
@@ -85,9 +88,11 @@ ggplot2::ggplot() +
 #'
 
 bls_map_state <- function(map_data, fill_rate, labtitle=NULL){
+    # Set some dummy variables. This keeps CRAN check happy.
+    map=long=lat=id=group=state_map_data=state.name=NULL
     #Maps by County
     #Load pre-formatted map for ggplot.
-    map = state_map_data
+    map <- state_map_data
     #Unemployment statistics by county: Get and process data.
     #Plot
     ggplot2::ggplot() +

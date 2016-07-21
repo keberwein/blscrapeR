@@ -16,8 +16,8 @@
 #' @docType data
 #' @keywords internal
 #' 
-#'
+#' @name county_map_data
 #' @usage data(county_map_data)
 #' @note Last updated 2016-05-26
 #' @format A data frame with 206,500 rows and 7 variables
-"county_map_data"
+NULL

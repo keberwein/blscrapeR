@@ -19,9 +19,11 @@
 #'
 
 get_bls_county <- function(date_mth = NULL){
+    # Set some dummy variables. This keeps CRAN check happy.
+    countyemp=contyemp=NULL
     temp<-tempfile()
     download.file("http://www.bls.gov/lau/laucntycur14.txt", temp)
-    countyemp<-read.csv(temp,
+    countyemp <- read.csv(temp,
                         fill=TRUE,
                         header=FALSE,
                         sep="|",
@@ -35,6 +37,7 @@ get_bls_county <- function(date_mth = NULL){
     countyemp <- na.omit(countyemp)
     
     # Set period to proper date format.
+    period <- contyemp$period
     countyemp$period <- as.Date(paste("01-", countyemp$period, sep = ""), format = "%d-%b-%y")
     
     # Check for date or dates.
