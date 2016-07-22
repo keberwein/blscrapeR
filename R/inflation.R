@@ -55,6 +55,7 @@ inflation_adjust <- function(base_year=NA){
         # Round dollar amounts
         dat$adj_value <- round(dat$adj_value, 2)
         # Reorder cols in a more usable fassion
-        dat <- dat[c('date','base.year', 'adj_value', 'pct_increase')]
+        dat <- dat[c("date", "base.year", "adj_value", "pct_increase")]
+        colnames(dat)<-c("date", "base_year", "adj_value", "pct_increase")
         return(dat)
 }

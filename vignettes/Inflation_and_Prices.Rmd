@@ -9,6 +9,9 @@ vignette: >
   %\VignetteEncoding{UTF-8}
 ---
 ```{r setup, include=TRUE}
+library(blscrapeR)
+library(xts)
+library(zoo)
 ```
 
 ## The BLS Data Landscape
