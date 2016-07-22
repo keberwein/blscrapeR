@@ -76,6 +76,7 @@ Another typical use of the CPI is to determine price escalation. This is especia
 Suppose we want the price escalation of $100 investment we made in January 2014 to February 2015:
 
 ```{r}
+library(blscrapeR)
 df <- bls_api("CUSR0000SA0",
               startyear = 2014, endyear = 2015,
               registrationKey = "BLS_KEY")
