@@ -47,7 +47,7 @@ Although there are many measures of inflation, the CPI's "Consumer Price Index f
 
 Getting these data from the `blscrapeR` package is easy enough:
 
-```{r}
+```{r eval=FALSE}
 library(blscrapeR)
 df <- bls_api("CUSR0000SA0")
 head(df)
@@ -59,7 +59,7 @@ The package includes a function that collects information form the CPI beginning
 
 To find out the value of a 1995 dollar in 2015, we just make a simple function call. Note that in the results, 2016 represents an incomplete year at the time this document was created.
 
-```{r}
+```{r eval=FALSE}
 library(blscrapeR)
 df <- inflation_adjust(1995)
 tail(df)
@@ -73,7 +73,7 @@ Another typical use of the CPI is to determine price escalation. This is especia
 
 Suppose we want the price escalation of $100 investment we made in January 2014 to February 2015:
 
-```{r}
+```{r eval=FALSE}
 library(blscrapeR)
 df <- bls_api("CUSR0000SA0",
               startyear = 2014, endyear = 2015)

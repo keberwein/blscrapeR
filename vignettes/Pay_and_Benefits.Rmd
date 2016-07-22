@@ -35,7 +35,7 @@ The OES contains similar wage data found in the CPS, but often has more resoluti
 
 For example, we may want to compare the average hourly wage of Computer and Information Systems Managers in Orlando, FL to those in San Jose, CA. Notice, below the survey only returns values for 2015.
 
-```{r}
+```{r eval=FALSE}
 # Computer adn Information Systems Managers in Orlando, FL and San Jose, CA.
 # Orlando: "OEUM003674000000011302103"
 # San Jose: "OEUM004194000000011302108"
@@ -47,7 +47,7 @@ head(df)
 
 Another OES example would be to grab the most recent Annual mean wage for All Occupations in All Industries in the United States.
 
-```{r}
+```{r eval=FALSE}
 library(blscrapeR)
 df <- bls_api("OEUN000000000000000000004")
 df
@@ -60,7 +60,7 @@ This data set includes time series data on how much employers pay for employee b
 
 For example, if we want to see the total cost of benefits per hour work and also see what percentage that is of the total compensation, we could run the following script.
 
-```{r}
+```{r eval=FALSE}
 library(blscrapeR)
 library(tidyr)
 library(dplyr)
@@ -80,7 +80,7 @@ df.sp
 
 This survey includes data on how many Americans have access to certain benefits. For example, we can see the percentage of those who have access to paid vacation days and those who have access to Health insurance through their employers.
 
-```{r}
+```{r eval=FALSE}
 library(blscrapeR)
 library(tidyr)
 library(dplyr)

@@ -41,7 +41,7 @@ An example of employment statistics from is a comparison of two different [unemp
 
 Below is the U-3 Unemployment Rate (the "official" rate) vs. the U-6 Unemployment Rate, which includes all persons marginally attached to the labor force, plus total employed part time for economic reasons, plus all persons marginally attached to the labor force.
 
-```{r}
+```{r eval=FALSE}
 # U3 Unemployment vs. U6 Unemployment
 # More information on unemployment rates here:
 # http://www.bls.gov/news.release/empsit.t15.htm
@@ -62,7 +62,7 @@ ggplot(data=df, aes(x = date, y = value, color=seriesID)) +
 
 Another example from the CPS deals with median weekly earnings by occupation. In this case, database administrators vs. software developers.
 
-```{r}
+```{r eval=FALSE}
 library(blscrapeR)
 library(ggplot2)
 df <- bls_api(c("LEU0254530800", "LEU0254530600"),
@@ -83,7 +83,7 @@ ggplot(df, aes(x=date, y=value, color=seriesID)) +
 
 The ATUS is a survey of how Americans use their time. A simple analysis could be how much time Americans spend watching television vs. how much time they spend socializing and communicating in a given day.
 
-```{r}
+```{r eval=FALSE}
 library(blscrapeR)
 library(ggplot2)
 df <- bls_api(c("TUU10101AA01014236", "TUU10101AA01013951"),
@@ -106,7 +106,7 @@ An example from the CES would be to calculate the penetration rate of a certain 
 
 For example, to determine the workforce penetration rate for the Education and Health Services industry in the state of Alabama:
 
-```{r warning=FALSE}
+```{r eval=FALSE}
 library(blscrapeR)
 library(tidyr)
 df <- bls_api(c("SMS01000000000000001", "SMS01000006500000001"),
@@ -121,7 +121,7 @@ tail(df)
 
 The QCEW is a quarterly report that focuses primarily on specific cities, states and industries. For example, we could look at the total workforce in the Software Publishing industry in Santa Clara County, CA as compared to Orange County, FL:
 
-```{r}
+```{r eval=FALSE}
 library(blscrapeR)
 library(ggplot2)
 df <- bls_api(c("ENU0608510010", "ENU1209510010"),
