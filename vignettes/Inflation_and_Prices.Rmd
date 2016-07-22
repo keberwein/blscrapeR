@@ -49,9 +49,7 @@ Getting these data from the `blscrapeR` package is easy enough:
 
 ```{r}
 library(blscrapeR)
-df <- bls_api("CUSR0000SA0",
-              startyear = 1995, endyear = 2015,
-              registrationKey = "BLS_KEY")
+df <- bls_api("CUSR0000SA0")
 head(df)
 ```
 
@@ -78,8 +76,7 @@ Suppose we want the price escalation of $100 investment we made in January 2014 
 ```{r}
 library(blscrapeR)
 df <- bls_api("CUSR0000SA0",
-              startyear = 2014, endyear = 2015,
-              registrationKey = "BLS_KEY")
+              startyear = 2014, endyear = 2015)
 head(df)
 # Set base value.
 base_value <- 100
