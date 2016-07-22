@@ -67,11 +67,13 @@ library(blscrapeR)
 library(tidyr)
 df <- bls_api(c("CMU1030000000000D", "CMU1030000000000P"), 
               registrationKey = "BLS_KEY")
-df <- spread(df, seriesID, value)
-colnames(df) <- c("year", "period", "periodName", "footnotes", "date", "hourly_cost", "pct_of_wages")
+
+df.sp <- spread(df, seriesID, value)
+colnames(df.sp) <- c("year", "period", "periodName", "footnotes", "date", "hourly_cost", "pct_of_wages")
+
 # Percentages are represented as floating integers. Fix this to avoid confusion.
-df$pct_of_wages <- df$pct_of_wages*0.01
-df
+df.sp$pct_of_wages <- df.sp$pct_of_wages*0.01
+df.sp
 ```
 
 
@@ -85,13 +87,13 @@ library(tidyr)
 df <- bls_api(c("NBU10500000000000033030", "NBU11500000000000028178"), 
               registrationKey = "BLS_KEY")
 
-df <- spread(df, seriesID, value)
-colnames(df) <- c("year", "period", "periodName", "footnotes", "date", "pct_paid_vacation", "pct_health_ins")
+df.sp <- spread(df, seriesID, value)
+colnames(df.sp) <- c("year", "period", "periodName", "footnotes", "date", "pct_paid_vacation", "pct_health_ins")
 
 # Value data are in whole numbers but represent percentages. Fix this to avoid confusion.
-df$pct_paid_vacation <- df$pct_paid_vacation*0.01
-df$pct_health_ins <- df$pct_health_ins*0.01
-df
+df.sp$pct_paid_vacation <- df.sp$pct_paid_vacation*0.01
+df.sp$pct_health_ins <- df.sp$pct_health_ins*0.01
+df.sp
 ```
 
 
