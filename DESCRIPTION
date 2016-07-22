@@ -18,13 +18,13 @@ Imports:
 	xts,
 	zoo
 Suggests:
-	chron,
 	testthat,
 	leaflet,
 	tigris,
     	knitr,
     	rmarkdown,
-	tidyr	
+	tidyr,
+	dplyr	
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/blscrapeR
 BugReports: https://github.com/keberwein/blscrapeR/issues

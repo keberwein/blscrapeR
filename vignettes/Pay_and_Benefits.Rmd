@@ -1,6 +1,6 @@
 ---
 title: "BLS API Pay and Benefits"
-author: "Vignette Author"
+author: "Kris Eberwein"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
@@ -65,11 +65,13 @@ For example, if we want to see the total cost of benefits per hour work and also
 ```{r}
 library(blscrapeR)
 library(tidyr)
+library(dplyr)
 df <- bls_api(c("CMU1030000000000D", "CMU1030000000000P"), 
               registrationKey = "BLS_KEY")
 
-df.sp <- spread(df, seriesID, value)
-colnames(df.sp) <- c("year", "period", "periodName", "footnotes", "date", "hourly_cost", "pct_of_wages")
+# Spread series ids and rename columns to human readable format.
+df.sp <- spread(df, seriesID, value) %>%
+    rename("hourly_cost"=CMU1030000000000D, "pct_of_wages"=CMU1030000000000P)
 
 # Percentages are represented as floating integers. Fix this to avoid confusion.
 df.sp$pct_of_wages <- df.sp$pct_of_wages*0.01
@@ -84,11 +86,13 @@ This survey includes data on how many Americans have access to certain benefits.
 ```{r}
 library(blscrapeR)
 library(tidyr)
+library(dplyr)
 df <- bls_api(c("NBU10500000000000033030", "NBU11500000000000028178"), 
               registrationKey = "BLS_KEY")
 
-df.sp <- spread(df, seriesID, value)
-colnames(df.sp) <- c("year", "period", "periodName", "footnotes", "date", "pct_paid_vacation", "pct_health_ins")
+# Spread series ids and rename columns to human readable format.
+df.sp <- spread(df, seriesID, value) %>%
+    rename("pct_paid_vacation"=NBU10500000000000033030, "pct_health_ins"=NBU11500000000000028178)
 
 # Value data are in whole numbers but represent percentages. Fix this to avoid confusion.
 df.sp$pct_paid_vacation <- df.sp$pct_paid_vacation*0.01
