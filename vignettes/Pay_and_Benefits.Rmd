@@ -70,8 +70,8 @@ df <- bls_api(c("CMU1030000000000D", "CMU1030000000000P"),
               registrationKey = "BLS_KEY")
 
 # Spread series ids and rename columns to human readable format.
-df.sp <- spread(df, seriesID, value) %>%
-    rename("hourly_cost"=CMU1030000000000D, "pct_of_wages"=CMU1030000000000P)
+df.sp <- spread(df, seriesID, value)
+rename(df.sp, "hourly_cost"=CMU1030000000000D, "pct_of_wages"=CMU1030000000000P)
 
 # Percentages are represented as floating integers. Fix this to avoid confusion.
 df.sp$pct_of_wages <- df.sp$pct_of_wages*0.01
@@ -91,8 +91,8 @@ df <- bls_api(c("NBU10500000000000033030", "NBU11500000000000028178"),
               registrationKey = "BLS_KEY")
 
 # Spread series ids and rename columns to human readable format.
-df.sp <- spread(df, seriesID, value) %>%
-    rename("pct_paid_vacation"=NBU10500000000000033030, "pct_health_ins"=NBU11500000000000028178)
+df.sp <- spread(df, seriesID, value)
+rename(df.sp, "pct_paid_vacation"=NBU10500000000000033030, "pct_health_ins"=NBU11500000000000028178)
 
 # Value data are in whole numbers but represent percentages. Fix this to avoid confusion.
 df.sp$pct_paid_vacation <- df.sp$pct_paid_vacation*0.01
