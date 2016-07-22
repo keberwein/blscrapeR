@@ -3,7 +3,8 @@
 #' @param base_year = A string or integer argument to represent the base year that you would like dollar values converted to. 
 #' For example, if you want to see the value of a 2007 dollar in 2015, you would select 2015 as a base year and find 2007 in the table.
 #' @keywords bls api economics cpi unemployment inflation
-#' @importFrom xts xts apply.yearly 
+#' @importFrom xts xts apply.yearly
+#' @importFrom zoo index coredata
 #' @export inflation_adjust
 #' @examples
 #' \dontrun{
@@ -48,7 +49,7 @@ inflation_adjust <- function(base_year=NA){
         dat <- merge(avg.cpi, cf)
         
         # Xts object to data frame
-        dat <- data.frame(date=index(dat), coredata(dat))
+        dat <- data.frame(date=zoo::index(dat), zoo::coredata(dat))
         dat$base.year <- as.character(base_year)
         dat$pct_increase <- (1-dat$adj_value) * -100
         # Round dollar amounts

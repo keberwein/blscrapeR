@@ -15,7 +15,8 @@ Imports:
 	stats,
 	grDevices,
 	data.table,
-	xts
+	xts,
+	zoo
 Suggests:
 	chron,
 	testthat,
