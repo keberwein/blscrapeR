@@ -15,7 +15,7 @@ Install
 devtools::install_github("keberwein/blscrapeR")
 ```
 
-Before getting started, you’ll probably want to head over to the BLS and get [set up with an API key](http://data.bls.gov/registrationEngine/). While an API key is not required to use the package, the query limits are much higher if you have a key and you’ll have access to more data. Plus, it’s free (as in beer), so why not?
+Before getting started, you’ll probably want to head over to the BLS and get set up with an API key. While an API key is not required to use the package, the query limits are much higher if you have a key and you’ll have access to more data. Plus, it’s free (as in beer), so why not?
 
 Basic Usage
 -----------
