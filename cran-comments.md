@@ -1,5 +1,7 @@
-## Release summary
-This is the first CRAN release of blscrapeR.
+## Resubmission
+This is a resubmission. In this version I have:
+* Changed the LICENSE to the CRAN format.
+* Removed the non-standard hyperlink from the README file.
 
 ## Test environments
 * local OS X 10.11.5, R 3.3.1
