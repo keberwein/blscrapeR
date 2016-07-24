@@ -40,7 +40,7 @@ tail(df, 5)
 API Keys
 --------
 
-You should consider [getting an API key]((http://data.bls.gov/registrationEngine/)) form the BLS. The package has a function to install your key in your `.Renviron` so you’ll only have to worry about it once. Plus, it will add extra security by not having your key hard-coded in your scripts for all the world to see.
+You should consider [getting an API key](http://www.bls.gov/developers/api_faqs.htm) form the BLS. The package has a function to install your key in your `.Renviron` so you’ll only have to worry about it once. Plus, it will add extra security by not having your key hard-coded in your scripts for all the world to see.
 
 ### From the BLS:
 
