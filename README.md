@@ -101,7 +101,7 @@ You should consider [getting an API key](http://data.bls.gov/registrationEngine/
 
 ``` r
 library(blscrapeR)
-set_bls_key("111111abc")
+set_bls_key("YOUR_KEY_IN_QUOTATIONS")
 # First time, relead your enviornment so you can use the key without restarting R.
 readRenviron("~/.Renviron")
 # You can check it with:
