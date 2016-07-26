@@ -3,6 +3,8 @@
 #' @description Helper function to download and format state employment data. Note: This returns only non-seasonally adjusted data.
 #' @param date_mth The month you would like data for. Accepts full month names and four-digit year.
 #' If NULL, it will return the most recent month in the database.
+#' @param stateName is an optional argument if you only want data for certain state(s). The argument is NULL by default and
+#' will return data for all 50 states.
 #' @importFrom stats na.omit
 #' @importFrom data.table rbindlist
 #' @export get_bls_county
@@ -11,16 +13,24 @@
 #' get_bls_county()
 #' 
 #' # A specific month
-#' get_bls_county("May 2016")
+#' df <- get_bls_county("May 2016")
 #' 
 #' # Multiple months
-#' get_bls_county(c("April 2016","May 2016"))
+#' df <- get_bls_county(c("April 2016","May 2016"))
+#' 
+#' # A specific state
+#' df <- get_bls_county("Florida")
+#' 
+#' # Multiple states, multiple months
+#' df<- get_bls_county(date_mth = "April 2015", 
+#'              stateName = c("Florida", "Alabama"))
 #' }
 #'
 
-get_bls_county <- function(date_mth = NULL){
+get_bls_county <- function(date_mth = NULL, stateName = NULL){
     # Set some dummy variables. This keeps CRAN check happy.
-    countyemp=contyemp=NULL
+    countyemp=contyemp=fips_state=NULL
+    state_fips <- blscrapeR::state_fips
     temp<-tempfile()
     download.file("http://www.bls.gov/lau/laucntycur14.txt", temp)
     countyemp <- read.csv(temp,
@@ -39,6 +49,25 @@ get_bls_county <- function(date_mth = NULL){
     # Set period to proper date format.
     period <- contyemp$period
     countyemp$period <- as.Date(paste("01-", countyemp$period, sep = ""), format = "%d-%b-%y")
+    
+    # Check to see if user selected specific state(s).
+    if (!is.null(stateName)){
+        # Check to see if states exists.
+        state_check <- sapply(stateName, function(x) any(grepl(x, state_fips$state)))
+        if(any(state_check==FALSE)){
+            stop(message("Please make sure you state names are spelled correctly using full state names."))
+        }
+        # If state list is valid. Grab State FIPS codes from internal data set and subset countyemp
+        state_rows <- sapply(stateName, function(x) grep(x, state_fips$state))
+        state_selection <- state_fips$fips_state[state_rows]
+        statelist <- list()
+        for (s in as.numeric(state_selection)) {
+            state_vals <- subset(countyemp, fips_state==s)
+            statelist[[s]] <- state_vals
+        }
+        
+        countyemp <- data.table::rbindlist(statelist)
+    }
     
     # Check for date or dates.
     if (!is.null(date_mth)){
@@ -63,6 +92,9 @@ get_bls_county <- function(date_mth = NULL){
     }
     
     # Put months to loop in list.
+    if (is.null(date_mth)){
+        date_mth <- max(countyemp$period)
+    }
     datalist <- list()
     for (i in date_mth) {
         mth_vals <- subset(countyemp, period==i)
@@ -71,14 +103,14 @@ get_bls_county <- function(date_mth = NULL){
     # Rebind.
     df <- data.table::rbindlist(datalist)
     # Correct column data fromats.
-    countyemp$unemployed <- as.numeric(gsub(",", "", as.character(countyemp$unemployed)))
-    countyemp$employed <- as.numeric(gsub(",", "", as.character(countyemp$employed)))
-    countyemp$labor_force <- as.numeric(gsub(",", "", as.character(countyemp$labor_force)))
+    df$unemployed <- as.numeric(gsub(",", "", as.character(df$unemployed)))
+    df$employed <- as.numeric(gsub(",", "", as.character(df$employed)))
+    df$labor_force <- as.numeric(gsub(",", "", as.character(df$labor_force)))
     
     # Get the FIPS code: Have to add leading zeros to any single digit number and combine them.
-    countyemp$fips_county <- formatC(countyemp$fips_county, width = 3, format = "d", flag = "0")
-    countyemp$fips_state <- formatC(countyemp$fips_state, width = 2, format = "d", flag = "0")
-    countyemp$fips=paste(countyemp$fips_state,countyemp$fips_county,sep="")
+    df$fips_county <- formatC(df$fips_county, width = 3, format = "d", flag = "0")
+    df$fips_state <- formatC(df$fips_state, width = 2, format = "d", flag = "0")
+    df$fips <- paste(df$fips_state,df$fips_county,sep="")
     
     return(df)
 }

@@ -13,8 +13,10 @@
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of 
 #' function calls format_county_data or format_state_data, but other dataframes, 
 #' which include FIPS codes may be used as well.
-#' @param fill_rate Column name from the dataframe that you want to use as a fill value.
-#' @param labtitle The main title label for your map passed as a string. The default is no title
+#' @param fill_rate Column name from the dataframe that you want to use as a fill value, in quotes. NOTE: This argument is mandatory!
+#' @param stateName Optional argument if you only want to map a single state or a group of selected staes. The argument
+#' accepts state full state names in quotes.
+#' @param labtitle The main title label for your map passed as a string. The default is no title.
 #' @examples \dontrun{
 #' # Download the most current month unemployment statistics on a county level.
 #' df <- get_bls_county()
@@ -23,16 +25,46 @@
 #' bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
 #'                  labtitle = "Unemployment Rate")
 #' bls_gg
+#' 
+#' 
+#' # Map the unemployment rate for Florida and Alabama.
+#' 
+#' df <- get_bls_county(stateName = c("Florida", "Alabama"))
+#' 
+#' bls_gg <- bls_map_county(map_data=df, fill_rate = "unemployed_rate", 
+#' stateName = c("Florida", "Alabama"))
+#' 
+#' bls_gg
 #' }
 #'
 #'
 
-bls_map_county <- function(map_data, fill_rate, labtitle=NULL){
+bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL){
+    if (is.null(fill_rate)){
+        stop(message("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?"))
+    }
     # Set some dummy variables. This keeps CRAN check happy.
     map=long=lat=id=group=county_map_data=NULL
     # Load pre-formatted map for ggplot.
-    map <- county_map_data
+    map <- blscrapeR::county_map_data
     # Unemployment statistics by county: Get and process data.
+    # Check to see if user selected specific state(s).
+    if (!is.null(stateName)){
+        # Get state FIPS from internal dataset.
+        state_fips <- blscrapeR::state_fips
+        # Check to see if states exists.
+        state_check <- sapply(stateName, function(x) any(grepl(x, state_fips$state)))
+        if(any(state_check==FALSE)){
+            stop(message("Please make sure you state names are spelled correctly using full state names."))
+        }
+        # If state list is valid. Grab State FIPS codes from internal data set and subset map.
+        # Add state_id to map frame
+        map$state_id <- substr(map$id, 1,2)
+        state_rows <- sapply(stateName, function(x) grep(x, state_fips$state))
+        state_selection <- state_fips$fips_state[state_rows]
+        statelist <- list()
+        map <- map[(map$state_id %in% state_selection),]
+    }
     # Plot
     ggplot2::ggplot() +
         geom_map(data=map, map=map,
@@ -87,12 +119,15 @@ bls_map_county <- function(map_data, fill_rate, labtitle=NULL){
 #'
 #'
 
-bls_map_state <- function(map_data, fill_rate, labtitle=NULL){
+bls_map_state <- function(map_data, fill_rate=NULL, labtitle=NULL){
+    if (is.null(fill_rate)){
+        stop(message("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?"))
+    }
     # Set some dummy variables. This keeps CRAN check happy.
     map=long=lat=id=group=state_map_data=state.name=NULL
     #Maps by County
     #Load pre-formatted map for ggplot.
-    map <- state_map_data
+    map <- blscrapeR::state_map_data
     #Unemployment statistics by county: Get and process data.
     #Plot
     ggplot2::ggplot() +
@@ -116,3 +151,5 @@ bls_map_state <- function(map_data, fill_rate, labtitle=NULL){
               panel.background = element_blank(),
               legend.title=element_blank())
 }
+
+

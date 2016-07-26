@@ -4,11 +4,14 @@
 \alias{get_bls_county}
 \title{Function that returns county-level labor statistics for a selected month within the last year.}
 \usage{
-get_bls_county(date_mth = NULL)
+get_bls_county(date_mth = NULL, stateName = NULL)
 }
 \arguments{
 \item{date_mth}{The month you would like data for. Accepts full month names and four-digit year.
 If NULL, it will return the most recent month in the database.}
+
+\item{stateName}{is an optional argument if you only want data for certain state(s). The argument is NULL by default and
+will return data for all 50 states.}
 }
 \description{
 Helper function to download and format state employment data. Note: This returns only non-seasonally adjusted data.
@@ -19,10 +22,17 @@ Helper function to download and format state employment data. Note: This returns
 get_bls_county()
 
 # A specific month
-get_bls_county("May 2016")
+df <- get_bls_county("May 2016")
 
 # Multiple months
-get_bls_county(c("April 2016","May 2016"))
+df <- get_bls_county(c("April 2016","May 2016"))
+
+# A specific state
+df <- get_bls_county("Florida")
+
+# Multiple states, multiple months
+df<- get_bls_county(date_mth = "April 2015", 
+             stateName = c("Florida", "Alabama"))
 }
 
 }

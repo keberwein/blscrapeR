@@ -4,7 +4,7 @@
 \alias{bls_map_state}
 \title{Cloropleth mapping of BLS data.}
 \usage{
-bls_map_state(map_data, fill_rate, labtitle = NULL)
+bls_map_state(map_data, fill_rate = NULL, labtitle = NULL)
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 

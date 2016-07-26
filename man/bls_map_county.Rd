@@ -4,16 +4,20 @@
 \alias{bls_map_county}
 \title{Cloropleth mapping of BLS data.}
 \usage{
-bls_map_county(map_data, fill_rate, labtitle = NULL)
+bls_map_county(map_data, fill_rate = NULL, labtitle = NULL,
+  stateName = NULL)
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 
 function calls format_county_data or format_state_data, but other dataframes, 
 which include FIPS codes may be used as well.}
 
-\item{fill_rate}{Column name from the dataframe that you want to use as a fill value.}
+\item{fill_rate}{Column name from the dataframe that you want to use as a fill value, in quotes. NOTE: This argument is mandatory!}
 
-\item{labtitle}{The main title label for your map passed as a string. The default is no title}
+\item{labtitle}{The main title label for your map passed as a string. The default is no title.}
+
+\item{stateName}{Optional argument if you only want to map a single state or a group of selected staes. The argument
+accepts state full state names in quotes.}
 }
 \description{
 Return a ggplot object to render a cloropleth map with county outlines.
@@ -30,6 +34,16 @@ df <- get_bls_county()
 # Map the unemployment rate by county.
 bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
                  labtitle = "Unemployment Rate")
+bls_gg
+
+
+# Map the unemployment rate for Florida and Alabama.
+
+df <- get_bls_county(stateName = c("Florida", "Alabama"))
+
+bls_gg <- bls_map_county(map_data=df, fill_rate = "unemployed_rate", 
+stateName = c("Florida", "Alabama"))
+
 bls_gg
 }
 
