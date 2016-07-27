@@ -1,6 +1,7 @@
 library(jsonlite)
 library(httr)
 library(data.table)
+library(testthat)
 
 seriesid <-  'LAUCN040010000000005'
 payload <- list(seriesid = seriesid)
@@ -44,5 +45,5 @@ if(length(jsondat$Results) > 0) {
 # Check actual fucntion
 out <- bls_api('LAUCN040010000000005')
 
-expect_identical(out, df)
+testthat::expect_identical(out, df)
     
