@@ -1,7 +1,3 @@
-## Resubmission
-This is a resubmission. In this version I have:
-* Changed ALL incorrect hyperlinks and removed parentheses.
-
 ## Test environments
 * local OS X 10.11.5, R 3.3.1
 * local Windows Server 2012 R2, R 3.3.1
