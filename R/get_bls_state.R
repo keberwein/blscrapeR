@@ -6,29 +6,38 @@
 #' @import datasets
 #' @importFrom utils download.file read.csv read.table
 #' @importFrom data.table rbindlist
+#' @importFrom zoo as.yearmon
 #' @export get_bls_state
-#' @examples  \dontrun{
+#' @examples
 #' # Single series
 #' get_bls_state(date_mth = "May 2016", seasonality = TRUE)
 #' 
 #' # Multiple series
 #' get_bls_state(date_mth = c("April 2016", "May 2016"), seasonality = FALSE)
-#' }
+#' 
 #'
 
-get_bls_state <- function(date_mth, seasonality = NA){
+get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
     state.name=NULL
     seas <- "http://www.bls.gov/lau/ststdsadata.txt"
     notseas <- "http://www.bls.gov/lau/ststdnsadata.txt"
     if (seasonality == TRUE){
         dat <- readLines(seas)
     }
-    else if (seasonality == FALSE){
+    if (seasonality == FALSE){
         dat <- readLines(notseas)
     }
-    else if (missing(seasonality)){
-        dat <- readLines(seas)
+    
+    # If no date_mth is specified, find the latest month and return.
+    # Not happy with this method. Would rather find max(month) in data. But data format is a bit crazy.
+    if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-30), "%B %Y"), dat)))){
+        date_mth <- format(zoo::as.yearmon(Sys.Date()-30), "%B %Y")
+    }else{
+        if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-60), "%B %Y"), dat)))){
+            date_mth <- format(zoo::as.yearmon(Sys.Date()-60), "%B %Y")
+        }else{date_mth <- format(zoo::as.yearmon(Sys.Date()-90), "%B %Y")}
     }
+    
     # Make an empty list for data frames and iterate in big nasty for loop.
     datalist <- list()
     for (i in date_mth) {
@@ -38,9 +47,14 @@ get_bls_state <- function(date_mth, seasonality = NA){
         vals <- gsub("^\ +|\ +$", "", dat[datebegin:dateend])
         vals <- unique(grep(paste(state.name, sep="", collapse="|"), 
                             vals, value=TRUE))
-        # Grep will confuse "New York" and "NYC," so manually get rid of NYC.
-        nycrow <- grep("New York city", vals)
+        # Get rid of MSAs in the data (DC, LA and NYC).
+        # There's a more elegant way to do this but don't have time at the moment.
+        nycrow <- grep(c("New York city"), vals)
+        larow <- grep(c("Los Angeles County"), vals)
+        dcrow <- grep(c("District of Columbia"), vals)
         vals <- vals[-c(nycrow)]
+        vals <- vals[-c(larow)]
+        vals <- vals[-c(dcrow)]
         
         # Split out state names, so read.table doesn't get confused.
         state_vals <- gsub("^.* \\.+", "", vals)

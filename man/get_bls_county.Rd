@@ -26,14 +26,14 @@ df <- get_bls_county("May 2016")
 
 # Multiple months
 df <- get_bls_county(c("April 2016","May 2016"))
-
+}
 # A specific state
-df <- get_bls_county("Florida")
+df <- get_bls_county(stateName = "Florida")
 
 # Multiple states, multiple months
 df<- get_bls_county(date_mth = "April 2015", 
              stateName = c("Florida", "Alabama"))
-}
+
 
 }
 

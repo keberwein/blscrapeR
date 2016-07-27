@@ -4,7 +4,7 @@
 \alias{get_bls_state}
 \title{Function that returns county-level labor statistics for the last three months.}
 \usage{
-get_bls_state(date_mth, seasonality = NA)
+get_bls_state(date_mth = NULL, seasonality = TRUE)
 }
 \arguments{
 \item{date_mth}{The month or months you would like data for. Accepts full month names and four-digit year.}
@@ -15,13 +15,12 @@ get_bls_state(date_mth, seasonality = NA)
 Helper function to download and format state employment data.
 }
 \examples{
- \dontrun{
 # Single series
 get_bls_state(date_mth = "May 2016", seasonality = TRUE)
 
 # Multiple series
 get_bls_state(date_mth = c("April 2016", "May 2016"), seasonality = FALSE)
-}
+
 
 }
 
