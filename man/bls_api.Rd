@@ -11,7 +11,7 @@ bls_api(seriesid, startyear = NULL, endyear = NULL,
 \arguments{
 \item{seriesid}{The BLS id of the series your trying to load. A common format would be 'LAUCN040010000000005'. 
 WARNING: All seriesIDs must contain the same time resolution. For example, monthly data sets can not be combined with annual or semi-annual data.
-If you need help finding seriesIDs, check the BLS website \url{http://www.bls.gov/data/} or the BLS Data Finder \url{http://beta.bls.gov/dataQuery/search}}
+If you need help finding seriesIDs, check the BLS website or the BLS Data Finder--links below.}
 
 \item{startyear}{The first year in your data set.}
 
@@ -30,6 +30,7 @@ Return data frame from one or more requests via the US Bureau of Labor Statistic
 }
 \examples{
 
+\dontrun{
 ## API Version 1.0 R Script Sample Code
 ## Single Series request
 df <- bls_api("LAUCN040010000000005")
@@ -46,7 +47,7 @@ startyear = "2010", endyear = "2012")
 df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"), 
 startyear = "2010", endyear = "2012")
 
-\dontrun{
+
 ## API Version 2.0 R Script Sample Code
 ## Multiple Series request with full params allowed by v2.
 df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"),
@@ -55,6 +56,11 @@ registrationKey = "BLS_KEY",
 calculations = TRUE, annualaverage = TRUE, catalog = TRUE)
 }
 
+}
+\seealso{
+\url{http://www.bls.gov/data/}
+
+\url{http://beta.bls.gov/dataQuery/search}
 }
 \keyword{api}
 \keyword{bls}

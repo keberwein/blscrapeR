@@ -8,6 +8,8 @@
 ## Documentation
 * Added mapping vignette.
 
+* Added manual pages for the `county_map_data` and `state_map_data` internal data sets.
+
 ## Data
 * Added tigris and broom packages to prep_maps.R in data-raw folder.
 
@@ -15,6 +17,8 @@
 * Fixed date argument in get_bls_county() and get_bls_state() to return the most recent date if argument is NULL.
 
 * Added error handling to map_bls_state() and map_bls_county().
+
+* Added tests for map_bls_state() and map_bls_county() to the /testthat directory.
 
 
 # blscrapeR 0.4.1

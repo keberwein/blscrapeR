@@ -1,6 +1,7 @@
 
-#' @title Function that returns county-level labor statistics for the last three months.
-#' @description Helper function to download and format state employment data.
+#' @title A function that returns county-level labor statistics
+#' @description A function to download and format state employment data. These data begin on January 1976 to current. 
+#' NOTE: The most current data will always be at least 30 days behind the current date, and depending on the day of your query, those numbers may be estimates.
 #' @param date_mth The month or months you would like data for. Accepts full month names and four-digit year.
 #' @param seasonality TRUE or FALSE. The default value is TRUE.
 #' @import datasets
@@ -9,12 +10,13 @@
 #' @importFrom zoo as.yearmon
 #' @export get_bls_state
 #' @examples
+#' \dontrun{
 #' # Single series
 #' get_bls_state(date_mth = "May 2016", seasonality = TRUE)
 #' 
 #' # Multiple series
 #' get_bls_state(date_mth = c("April 2016", "May 2016"), seasonality = FALSE)
-#' 
+#' }
 #'
 
 get_bls_state <- function(date_mth=NULL, seasonality = TRUE){

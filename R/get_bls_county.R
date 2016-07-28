@@ -1,6 +1,9 @@
 #
-#' @title Function that returns county-level labor statistics for a selected month within the last year.
-#' @description Helper function to download and format state employment data. Note: This returns only non-seasonally adjusted data.
+#' @title A function that returns county-level labor statistics
+#' @description A function to download and format state employment data.
+#' Due to limitations in the data source, the function can only return data from the last 12 months.
+#' NOTE: Unlike many other BLS data sets, these data are never estimated, meaning the most current data may be as much as
+#' 60 days behind the current data. The county data are also never seasonally adjusted.
 #' @param date_mth The month you would like data for. Accepts full month names and four-digit year.
 #' If NULL, it will return the most recent month in the database.
 #' @param stateName is an optional argument if you only want data for certain state(s). The argument is NULL by default and
@@ -17,14 +20,14 @@
 #' 
 #' # Multiple months
 #' df <- get_bls_county(c("April 2016","May 2016"))
-#' }
+#' 
 #' # A specific state
 #' df <- get_bls_county(stateName = "Florida")
 #' 
 #' # Multiple states, multiple months
 #' df<- get_bls_county(date_mth = "April 2015", 
 #'              stateName = c("Florida", "Alabama"))
-#' 
+#'}
 #'
 
 get_bls_county <- function(date_mth = NULL, stateName = NULL){

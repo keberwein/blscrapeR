@@ -1,22 +1,23 @@
 #
-#' @title Cloropleth mapping of BLS data.
+#' @title Cloropleth mapping of BLS data
 #' @description Return a ggplot object to render a cloropleth map with county outlines.
 #' The map files contain 2015 FIPS codes and can be used with any data set containing
-#' county and state FIPS codes. They can not be used with Leaflet but the original 
-#' shapefiles can be downloaded at \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html}
-#' for analysis which requires more customized mapping.
+#' county and state FIPS codes. They can not be used with the leaflet package but the shape files can be
+#' downloaded from the Census website or with the tigris package. See the "Mapping BLS Data" vignette for this package.
 #' @keywords bls api economics unemployment map geo geography
 #' @import ggplot2
 #' @import grDevices
 #' @import utils
 #' @export bls_map_county
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of 
-#' function calls format_county_data or format_state_data, but other dataframes, 
+#' calls to the \code{get_bls_county()} or \code{get_bls_state()} functions, but other dataframes, 
 #' which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value, in quotes. NOTE: This argument is mandatory!
 #' @param stateName Optional argument if you only want to map a single state or a group of selected staes. The argument
 #' accepts state full state names in quotes.
 #' @param labtitle The main title label for your map passed as a string. The default is no title.
+#' @seealso \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html}
+#' @seealso \url{https://cran.r-project.org/web/packages/tigris/index.html}
 #' @examples \dontrun{
 #' # Download the most current month unemployment statistics on a county level.
 #' df <- get_bls_county()
@@ -90,22 +91,23 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
 
 
 #
-#' @title Cloropleth mapping of BLS data.
+#' @title Cloropleth mapping of BLS data
 #' @description Return a ggplot object to render a cloropleth map with state outlines.
-#' #' The map files contain 2015 FIPS codes and can be used with any data set containing
-#' county and state FIPS codes. They can not be used with Leaflet but the original 
-#' shapefiles can be downloaded at \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html}
-#' for analysis which requires more customized mapping.
+#' The map files contain 2015 FIPS codes and can be used with any data set containing
+#' state FIPS codes. They can not be used with the leaflet package but the shape files can be
+#' downloaded from the Census website or with the tigris package. See the "Mapping BLS Data" vignette for this package.
 #' @keywords bls api economics unemployment map geo geography
 #' @import ggplot2
 #' @import grDevices
 #' @import utils
 #' @export bls_map_state
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of 
-#' function calls format_county_data or format_state_data, but other dataframes, 
+#' calls to the \code{get_bls_state()} function but other dataframes, 
 #' which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.
 #' @param labtitle The main title label for your map passed as a string. The default is no title
+#' @seealso \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html}
+#' @seealso \url{https://cran.r-project.org/web/packages/tigris/index.html}
 #' @examples \dontrun{
 #' # Downlaod employment statistics for April 2016.
 #' df <- get_bls_state("April 2016", seasonality = TRUE)

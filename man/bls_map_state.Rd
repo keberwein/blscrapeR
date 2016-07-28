@@ -2,13 +2,13 @@
 % Please edit documentation in R/maps.R
 \name{bls_map_state}
 \alias{bls_map_state}
-\title{Cloropleth mapping of BLS data.}
+\title{Cloropleth mapping of BLS data}
 \usage{
 bls_map_state(map_data, fill_rate = NULL, labtitle = NULL)
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 
-function calls format_county_data or format_state_data, but other dataframes, 
+calls to the \code{get_bls_state()} function but other dataframes, 
 which include FIPS codes may be used as well.}
 
 \item{fill_rate}{Column name from the dataframe that you want to use as a fill value.}
@@ -17,10 +17,9 @@ which include FIPS codes may be used as well.}
 }
 \description{
 Return a ggplot object to render a cloropleth map with state outlines.
-#' The map files contain 2015 FIPS codes and can be used with any data set containing
-county and state FIPS codes. They can not be used with Leaflet but the original 
-shapefiles can be downloaded at \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html}
-for analysis which requires more customized mapping.
+The map files contain 2015 FIPS codes and can be used with any data set containing
+state FIPS codes. They can not be used with the leaflet package but the shape files can be
+downloaded from the Census website or with the tigris package. See the "Mapping BLS Data" vignette for this package.
 }
 \examples{
 \dontrun{
@@ -35,6 +34,11 @@ bls_gg
 
 
 
+}
+\seealso{
+\url{https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html}
+
+\url{https://cran.r-project.org/web/packages/tigris/index.html}
 }
 \keyword{api}
 \keyword{bls}

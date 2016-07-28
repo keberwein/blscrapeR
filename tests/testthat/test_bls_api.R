@@ -1,3 +1,4 @@
+library(blscrapeR)
 library(jsonlite)
 library(httr)
 library(data.table)
@@ -43,7 +44,7 @@ if(length(jsondat$Results) > 0) {
 
 
 # Check actual fucntion
-out <- bls_api('LAUCN040010000000005')
+out <- blscrapeR::bls_api('LAUCN040010000000005')
 
 testthat::expect_identical(out, df)
     

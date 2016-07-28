@@ -1,9 +1,8 @@
-#
 #' @title Basic Request Mechanism for BLS Tables
 #' @description Return data frame from one or more requests via the US Bureau of Labor Statistics API. Provided arguments are in the form of BLS series ids.
 #' @param seriesid The BLS id of the series your trying to load. A common format would be 'LAUCN040010000000005'. 
 #' WARNING: All seriesIDs must contain the same time resolution. For example, monthly data sets can not be combined with annual or semi-annual data.
-#' If you need help finding seriesIDs, check the BLS website \url{http://www.bls.gov/data/} or the BLS Data Finder \url{http://beta.bls.gov/dataQuery/search}
+#' If you need help finding seriesIDs, check the BLS website or the BLS Data Finder--links below. 
 #' @param startyear The first year in your data set.
 #' @param endyear The last year in your data set.
 #' @param registrationKey The API key issued to you from the BLS website.
@@ -15,8 +14,11 @@
 #' @importFrom jsonlite toJSON
 #' @importFrom httr content POST content_type_json
 #' @export bls_api
+#' @seealso \url{http://www.bls.gov/data/}
+#' @seealso \url{http://beta.bls.gov/dataQuery/search}
 #' @examples
 #' 
+#' \dontrun{
 #' ## API Version 1.0 R Script Sample Code
 #' ## Single Series request
 #' df <- bls_api("LAUCN040010000000005")
@@ -33,7 +35,7 @@
 #' df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"), 
 #' startyear = "2010", endyear = "2012")
 #' 
-#' \dontrun{
+#' 
 #' ## API Version 2.0 R Script Sample Code
 #' ## Multiple Series request with full params allowed by v2.
 #' df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"),

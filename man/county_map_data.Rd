@@ -3,16 +3,15 @@
 \docType{data}
 \name{county_map_data}
 \alias{county_map_data}
-\title{Dataset with the lat. / long. of county FIPS codes used for mapping.}
+\title{Dataset for mapping U.S. counties}
 \format{A data frame with 206,500 rows and 7 variables}
 \usage{
 data(county_map_data)
 }
 \description{
-Built-in dataset for use with the \code{bls_map_county} function.
-To access the data directly, issue the command \code{datacounty_map_data)}.
-}
-\details{
+A fortified data set that includes U.S. counties and is suitable for making maps with \code{ggplot2}.
+The county FIPS codes and boundary lines from the most recent TIGER release from the U.S. Census Bureau.
+
 \itemize{
   \item \code{long}: County longitude
   \item \code{lat}: County latitude
@@ -23,8 +22,14 @@ To access the data directly, issue the command \code{datacounty_map_data)}.
   \item \code{group}: group
 }
 }
+\details{
+Dataset with the lat. / long. of county FIPS codes used for mapping.
+
+Built-in dataset for use with the \code{bls_map_county()} function.
+To access the data directly, issue the command \code{datacounty_map_data)}.
+}
 \note{
 Last updated 2016-05-26
 }
-\keyword{internal}
+\keyword{datasets}
 

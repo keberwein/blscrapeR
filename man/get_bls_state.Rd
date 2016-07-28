@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_bls_state.R
 \name{get_bls_state}
 \alias{get_bls_state}
-\title{Function that returns county-level labor statistics for the last three months.}
+\title{A function that returns county-level labor statistics}
 \usage{
 get_bls_state(date_mth = NULL, seasonality = TRUE)
 }
@@ -12,15 +12,17 @@ get_bls_state(date_mth = NULL, seasonality = TRUE)
 \item{seasonality}{TRUE or FALSE. The default value is TRUE.}
 }
 \description{
-Helper function to download and format state employment data.
+A function to download and format state employment data. These data begin on January 1976 to current. 
+NOTE: The most current data will always be at least 30 days behind the current date, and depending on the day of your query, those numbers may be estimates.
 }
 \examples{
+\dontrun{
 # Single series
 get_bls_state(date_mth = "May 2016", seasonality = TRUE)
 
 # Multiple series
 get_bls_state(date_mth = c("April 2016", "May 2016"), seasonality = FALSE)
-
+}
 
 }
 
