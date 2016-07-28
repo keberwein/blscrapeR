@@ -40,18 +40,18 @@ stateName = c("Florida", "Georgia", "Alabama"))
 
 ## Build Your Own Maps
 
-If you don't like any of the pre-farbricated maps, that's alright because `blscrapeR` provides the fortified map data, which includes `longitude`, `latitude` and `FIPS` codes. This data set is suitable for any kind of `ggplot2` map you can think of.
+If you don't like any of the pre-fabricated maps, that's alright because `blscrapeR` provides the fortified map data, which includes `longitude`, `latitude` and `FIPS` codes. This data set is suitable for any kind of `ggplot2` map you can think of.
 
-First, call the internal map data and have a look:
+####First, call the internal map data and have a look:
 ```{r}
 library(blscrapeR)
 us_map <- county_map_data
 head(us_map)
 ```
 
-Notice the `id` column looks a lot like one of the FIPS codes returned by the `get_bls_county()` function? This is actually a concatanation of the state + county FIPS codes. The first two numbers are the state FIPS and the last four are the county FIPS. These boundaries currently represent 20015/2016 and will be updated accordingly so they always represent the current year.
+Notice the `id` column looks a lot like one of the FIPS codes returned by the `get_bls_county()` function? This is actually a concatenation of the state + county FIPS codes. The first two numbers are the state FIPS and the last four are the county FIPS. These boundaries currently represent 20015/2016 and will be updated accordingly so they always represent the current year.
 
-Next, produce your custom map:
+####Next, produce your custom map:
 ```{r eval=FALSE}
 library(blscrapeR)
 library(ggplot2)
@@ -60,10 +60,32 @@ df <- get_bls_county()
 # Get map data
 us_map <- county_map_data
 
+# Insert larger breaks in unemployment rates
+df$rate_d <- cut(df$unemployed_rate, breaks = c(seq(0, 10, by = 2), 35))
 # Plot
-
+ggplot() +
+    geom_map(data=us_map, map=us_map,
+             aes(x=long, y=lat, map_id=id, group=group),
+             fill="#ffffff", color="#0e0e0e", size=0.15) +
+    geom_map(data=df, map=us_map, aes_string(map_id="fips", fill=df$rate_d),
+             color="#0e0e0e", size=0.15) +
+    scale_fill_brewer()+
+    coord_equal() +
+    theme(axis.line=element_blank(),
+          axis.text.x=element_blank(),
+          axis.text.y=element_blank(),
+          axis.ticks=element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),
+          panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          panel.border = element_blank(),
+          panel.background = element_blank(),
+          legend.title=element_blank())
 
 ```
+
+![](https://www.datascienceriot.com/wp-content/uploads/2016/07/bls_custom_map.png)
 
 
 ## More Advanced Mapping
