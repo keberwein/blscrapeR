@@ -94,5 +94,3 @@ rm(.Random.seed)
 devtools::use_data(state_map_data, overwrite = TRUE)
 rm(state_map_data)
 
-
-t=plyr::join(tmap, us.map@data, by='id')
