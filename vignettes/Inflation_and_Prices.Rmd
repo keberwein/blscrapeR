@@ -1,6 +1,6 @@
 ---
 title: "BLS API Inflation and Prices"
-author: "Vignette Author"
+author: "Kris Eberwein"
 date: "`r Sys.Date()`"
 output: rmarkdown::html_vignette
 vignette: >
