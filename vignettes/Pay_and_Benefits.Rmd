@@ -36,7 +36,7 @@ The OES contains similar wage data found in the CPS, but often has more resoluti
 For example, we may want to compare the average hourly wage of Computer and Information Systems Managers in Orlando, FL to those in San Jose, CA. Notice, below the survey only returns values for 2015.
 
 ```{r eval=FALSE}
-# Computer adn Information Systems Managers in Orlando, FL and San Jose, CA.
+# Computer and Information Systems Managers in Orlando, FL and San Jose, CA.
 # Orlando: "OEUM003674000000011302103"
 # San Jose: "OEUM004194000000011302108"
 library(blscrapeR)
