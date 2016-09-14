@@ -12,7 +12,7 @@
 
 # Read county shapefile from Tiger.
 # https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html
-county <- tigris::counties(cb = TRUE, year = 2015)
+county <- tigris::counties(cb = TRUE, year = 2016)
 
 # convert it to  equal area
 us.map <- spTransform(county, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
