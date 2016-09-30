@@ -16,7 +16,6 @@
 #' @param stateName Optional argument if you only want to map a single state or a group of selected staes. The argument
 #' accepts state full state names in quotes.
 #' @param labtitle The main title label for your map passed as a string. The default is no title.
-#' @seealso \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html}
 #' @seealso \url{https://cran.r-project.org/package=tigris}
 #' @examples \dontrun{
 #' # Download the most current month unemployment statistics on a county level.
@@ -106,7 +105,6 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
 #' which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.
 #' @param labtitle The main title label for your map passed as a string. The default is no title
-#' @seealso \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html}
 #' @seealso \url{https://cran.r-project.org/package=tigris}
 #' @examples \dontrun{
 #' # Downlaod employment statistics for April 2016.

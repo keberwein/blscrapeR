@@ -22,16 +22,16 @@
 #' 
 #' \dontrun{
 #' # A request for the employment levels and wages for NIACS 5112: Software Publishers.
-#' dat <- qcew_api(year=2016, qtr=1, slice="industry", sliceCode=5112)
+#' dat <- qcew_api(year=2015, qtr=1, slice="industry", sliceCode=5112)
 #' }
 #' 
 qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
     if (is.null("slice") | is.null("sliceCode")){
         message("Please specify a Slice and sliceCode. See function documentation for examples.")
     }
-    slice <- as.character(tolower(slice))
-    sliceCode <- as.character(sliceCode)
     slice.options <- c("industry", "area", "size")
+    if (!is.character(slice)){slice <- as.character(slice)}
+    if (!is.character(sliceCode)){sliceCode <- as.character(sliceCode)}
     if (!isTRUE(any(grepl(slice, slice.options)))){
         message("Please select slice as 'area', 'industry', or 'size'")
     }
@@ -48,26 +48,24 @@ qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
     }   
     baseURL <- "http://data.bls.gov/cew/data/api/"
     url <- paste0(baseURL, year, "/", qtr, "/", slice, "/", sliceCode, ".csv")
-    temp <- tempfile()
+
     out <- tryCatch(
         {
             message("Trying BLS servers...")
+            temp <- tempfile()
             download.file(url, temp, quiet = TRUE)
+            qcewDat <- read.csv(temp, fill=TRUE, header=TRUE, sep=",", stringsAsFactors=FALSE,
+                                strip.white=TRUE)
+            message("Payload successful.")
         },
         error=function(cond) {
-            message(paste("URL does not seem to exist:", url))
+            message(paste("URL does not seem to exist. Please check your parameters and try again.", url))
             return(NA)
         },
         warning=function(cond) {
-            message(paste("URL caused a warning:", url))
+            message(paste("URL caused a warning. Please check your parameters and try again:", url))
             return(NULL)
-        },
-        finally={
-            message(paste("Processed URL:", url))
-            qcewDat <- read.csv(temp, fill=TRUE, header=TRUE, sep=",", stringsAsFactors=FALSE,
-                                strip.white=TRUE)
         }
     )    
     return(qcewDat)
 }
-

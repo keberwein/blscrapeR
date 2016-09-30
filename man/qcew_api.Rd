@@ -16,7 +16,10 @@ as an integer or a character. The default is 1, which returns the first quarter.
 \item{slice}{The slice should be one of the three data slices offered by the API; "industry", "area", or "size."}
 
 \item{sliceCode}{The slice codes depend on what slice you select. For example, if you select the "area" slice,
-your \code{sliceCode} should be a FIPS code. If you select "industry," your \code{sliceCode} should be a NIACS code.}
+your \code{sliceCode} should be a FIPS code. If you select "industry," your \code{sliceCode} should be a NIACS code.
+There are three internal data sets containing acceptable slice codes to help with selections; \code{blscrapeR::niacs}
+contains industry codes and descriptions, \code{blscrapeR::area_titles} contains FIPS codes and area descriptions,
+and \code{blscrapeR::size_titles} contains industry size codes. These codes can be used for the \code{sliceCode} argument.}
 }
 \description{
 Return data from the QCEW API. This is seperate from the main BLS API and returns quarterly data
@@ -27,7 +30,7 @@ A key is not required for the QCEW API.
 
 \dontrun{
 # A request for the employment levels and wages for NIACS 5112: Software Publishers.
-dat <- qcew_api(year=2016, qtr=1, slice="industry", sliceCode=5112)
+dat <- qcew_api(year=2015, qtr=1, slice="industry", sliceCode=5112)
 }
 
 }
