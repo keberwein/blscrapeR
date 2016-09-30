@@ -1,3 +1,29 @@
+# blscrapeR 1.0.1
+
+## Major Release
+* The BLS changed the location of their county level employment data on the server side. Changes were made in the get_bls_county() function that were not backwards compatible.
+
+## New Features
+* Added the qcew_api() function to gather data from the BLS Quarterly Census of Employment and Wages. This API is owned by the QCEW and is seperate from the main BLS API.
+
+* Added 404 error handling to the main bls_api() function.
+
+## Data
+* Added three data sets; niacs, size_titles, and area_titles. These data sets act as helpers for the QCEW API and provide industry and area codes that the API regularly uses.
+
+## Bug Fixes
+* Updated URLs for the get_bls_county() function.
+
+## Documentation
+* Added documentation for the qcew_api() function.
+
+* Added documentation for the three new data sets; niacs, size_titles, and area_titles.
+
+* Added a vignette for the qcew_api() function.
+
+## Tets
+* Added a test for the qcew_api() function.
+
 # blscrapeR 0.4.2
 
 ## New Features
