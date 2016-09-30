@@ -9,6 +9,9 @@
 #' @param slice The slice should be one of the three data slices offered by the API; "industry", "area", or "size."
 #' @param sliceCode The slice codes depend on what slice you select. For example, if you select the "area" slice,
 #' your \code{sliceCode} should be a FIPS code. If you select "industry," your \code{sliceCode} should be a NIACS code.
+#' There are three internal data sets containing acceptable slice codes to help with selections; \code{blscrapeR::niacs}
+#' contains industry codes and descriptions, \code{blscrapeR::area_titles} contains FIPS codes and area descriptions,
+#' and \code{blscrapeR::size_titles} contains industry size codes. These codes can be used for the \code{sliceCode} argument.
 #' @keywords bls api economics cpi unemployment inflation
 #' @importFrom data.table rbindlist
 #' @importFrom jsonlite toJSON
