@@ -51,7 +51,7 @@ bls_gg
 \seealso{
 \url{https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html}
 
-\url{https://cran.r-project.org/web/packages/tigris/index.html}
+\url{https://cran.r-project.org/package=tigris}
 }
 \keyword{api}
 \keyword{bls}

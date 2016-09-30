@@ -35,7 +35,7 @@ get_bls_county <- function(date_mth = NULL, stateName = NULL){
     countyemp=contyemp=fips_state=NULL
     state_fips <- blscrapeR::state_fips
     temp<-tempfile()
-    download.file("http://www.bls.gov/lau/laucntycur14.txt", temp)
+    download.file("http://www.bls.gov/web/metro/laucntycur14.txt", temp)
     countyemp <- read.csv(temp,
                         fill=TRUE,
                         header=FALSE,
