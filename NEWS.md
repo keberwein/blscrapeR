@@ -1,3 +1,11 @@
+# blscrapeR 1.0.2
+
+## Bug Fixes
+* Updated URLs for the get_bls_state() function.
+
+## Tets
+* Updated tests for the get_bls_state() function.
+
 # blscrapeR 1.0.1
 
 ## Major Release

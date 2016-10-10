@@ -101,7 +101,7 @@ testthat::expect_identical(nrow(out), nrow(df))
 date_mth=NULL
 seasonality = TRUE
 state.name=NULL
-seas <- "http://www.bls.gov/lau/ststdsadata.txt"
+seas <- "http://www.bls.gov/web/laus/ststdsadata.txt"
 dat <- readLines(seas)
 
 # If no date_mth is specified, find the latest month and return.

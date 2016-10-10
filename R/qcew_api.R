@@ -60,7 +60,7 @@ qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
         },
         error=function(cond) {
             message(paste("URL does not seem to exist. Please check your parameters and try again.", url))
-            return(NA)
+            return(NULL)
         },
         warning=function(cond) {
             message(paste("URL caused a warning. Please check your parameters and try again:", url))
