@@ -15,7 +15,7 @@ Install
 install.packages("blscrapeR")
 ```
 
--   The latest development version from Github:
+-   The latest development version from GitHub:
 
 ``` r
 devtools::install_github("keberwein/blscrapeR")
@@ -33,12 +33,12 @@ library(blscrapeR)
 # Grab the Unemployment Rate (U-3) 
 df <- quick_unemp_rate()
 tail(df, 5)
-#>    year period periodName value footnotes    seriesID       date
-#> 26 2016    M05        May   4.7           LNS14000000 2016-05-31
-#> 27 2016    M04      April   5.0           LNS14000000 2016-04-30
-#> 28 2016    M03      March   5.0           LNS14000000 2016-03-31
-#> 29 2016    M02   February   4.9           LNS14000000 2016-02-29
-#> 30 2016    M01    January   4.9           LNS14000000 2016-01-31
+#>                                               
+#> 2 {                                           
+#> 3     if (missing(ncp))                       
+#> 4         .Call(C_df, x, df1, df2, log)       
+#> 5     else .Call(C_dnf, x, df1, df2, ncp, log)
+#> 6 }
 ```
 
 **DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
@@ -102,7 +102,7 @@ You should consider [getting an API key](http://data.bls.gov/registrationEngine/
 ``` r
 library(blscrapeR)
 set_bls_key("YOUR_KEY_IN_QUOTATIONS")
-# First time, relead your enviornment so you can use the key without restarting R.
+# First time, reload your enviornment so you can use the key without restarting R.
 readRenviron("~/.Renviron")
 # You can check it with:
 Sys.getenv("BLS_KEY")
