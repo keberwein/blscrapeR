@@ -20,7 +20,6 @@ Imports:
 Suggests:
 	testthat,
 	leaflet,
-	tigris,
     	knitr,
     	rmarkdown,
 	tidyr,
