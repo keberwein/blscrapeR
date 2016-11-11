@@ -78,7 +78,7 @@ get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
     cols$employed <- as.numeric(gsub(",", "", cols$employed))
     cols$unemployed <- as.numeric(gsub(",", "", cols$unemployed))
     # Add colunm for state fips codes.
-    state_fips<-state_fips
+    state_fips<-blscrapeR::state_fips
     df <- merge(df, state_fips, by = "state")
     df <- df[order(df$month, df$state),]
                                                                                                                         
