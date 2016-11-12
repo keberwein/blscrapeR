@@ -19,7 +19,6 @@ Imports:
 	zoo
 Suggests:
 	testthat,
-	leaflet,
     	knitr,
     	rmarkdown,
 	tidyr,
