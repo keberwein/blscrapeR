@@ -58,9 +58,9 @@ calculations = TRUE, annualaverage = TRUE, catalog = TRUE)
 
 }
 \seealso{
-\url{http://www.bls.gov/data/}
+\url{https://www.bls.gov/data/}
 
-\url{http://beta.bls.gov/dataQuery/search}
+\url{https://beta.bls.gov/dataQuery/search}
 }
 \keyword{api}
 \keyword{bls}

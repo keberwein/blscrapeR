@@ -35,7 +35,7 @@ dat <- qcew_api(year=2015, qtr=1, slice="industry", sliceCode=5112)
 
 }
 \seealso{
-\url{http://data.bls.gov/cew/doc/access/csv_data_slices.htm}
+\url{https://data.bls.gov/cew/doc/access/csv_data_slices.htm}
 }
 \keyword{api}
 \keyword{bls}
