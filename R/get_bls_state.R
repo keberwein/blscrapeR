@@ -21,8 +21,8 @@
 
 get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
     state.name=NULL
-    seas <- "http://www.bls.gov/web/laus/ststdsadata.txt"
-    notseas <- "http://www.bls.gov/web/laus/ststdnsadata.txt"
+    seas <- "https://www.bls.gov/web/laus/ststdsadata.txt"
+    notseas <- "https://www.bls.gov/web/laus/ststdnsadata.txt"
     if (seasonality == TRUE){
         dat <- readLines(seas)
     }

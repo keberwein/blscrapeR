@@ -14,8 +14,8 @@
 #' @importFrom jsonlite toJSON
 #' @importFrom httr content POST content_type_json
 #' @export bls_api
-#' @seealso \url{http://www.bls.gov/data/}
-#' @seealso \url{http://beta.bls.gov/dataQuery/search}
+#' @seealso \url{https://www.bls.gov/data/}
+#' @seealso \url{https://beta.bls.gov/dataQuery/search}
 #' @examples
 #' 
 #' \dontrun{
@@ -61,7 +61,7 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
             payload["registrationKey"] <- as.character(registrationKey)
         }
         # Base URL for V2 for folks who have a key.
-        base_url <- "http://api.bls.gov/publicAPI/v2/timeseries/data/"
+        base_url <- "https://api.bls.gov/publicAPI/v2/timeseries/data/"
         if (exists("catalog") & !is.null(catalog)){
             if (!is.logical(catalog)){
                 message("Please select TRUE or FALSE for catalog argument.")
@@ -82,7 +82,7 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
         }
     } else {
         # Base URL for everyone else.
-        base_url <- "http://api.bls.gov/publicAPI/v1/timeseries/data/"
+        base_url <- "https://api.bls.gov/publicAPI/v1/timeseries/data/"
     }
     # Both sets of users can select these args.
     if (exists("startyear") & !is.null(startyear)){

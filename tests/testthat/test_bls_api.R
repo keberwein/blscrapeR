@@ -6,7 +6,7 @@ library(testthat)
 
 seriesid <-  'LAUCN040010000000005'
 payload <- list(seriesid = seriesid)
-base_url <- "http://api.bls.gov/publicAPI/v1/timeseries/data/"
+base_url <- "https://api.bls.gov/publicAPI/v1/timeseries/data/"
 
 # Manually construct payload since the BLS formatting is wakey.
 payload <- toJSON(payload)

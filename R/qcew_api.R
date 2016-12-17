@@ -17,7 +17,7 @@
 #' @importFrom jsonlite toJSON
 #' @importFrom httr content POST content_type_json
 #' @export qcew_api
-#' @seealso \url{http://data.bls.gov/cew/doc/access/csv_data_slices.htm}
+#' @seealso \url{https://data.bls.gov/cew/doc/access/csv_data_slices.htm}
 #' @examples
 #' 
 #' \dontrun{
@@ -46,7 +46,7 @@ qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
     if (slice=="size" & is.numeric(sliceCode) & !isTRUE(sliceCode %in% blscrapeR::size_titles$size_code)){
         message("Invalid sliceCode, please enter an integer between 0 and 9.")
     }   
-    baseURL <- "http://data.bls.gov/cew/data/api/"
+    baseURL <- "https://data.bls.gov/cew/data/api/"
     url <- paste0(baseURL, year, "/", qtr, "/", slice, "/", sliceCode, ".csv")
 
     out <- tryCatch(

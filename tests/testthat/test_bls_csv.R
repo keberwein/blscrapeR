@@ -9,7 +9,7 @@ date_mth = NULL
 countyemp=contyemp=fips_state=NULL
 state_fips <- blscrapeR::state_fips
 temp<-tempfile()
-download.file("http://www.bls.gov/web/metro/laucntycur14.txt", temp)
+download.file("https://www.bls.gov/web/metro/laucntycur14.txt", temp)
 countyemp <- read.csv(temp,
                       fill=TRUE,
                       header=FALSE,
@@ -101,7 +101,7 @@ testthat::expect_identical(nrow(out), nrow(df))
 date_mth=NULL
 seasonality = TRUE
 state.name=NULL
-seas <- "http://www.bls.gov/web/laus/ststdsadata.txt"
+seas <- "https://www.bls.gov/web/laus/ststdsadata.txt"
 dat <- readLines(seas)
 
 # If no date_mth is specified, find the latest month and return.

@@ -2,7 +2,7 @@ library(blscrapeR)
 library(testthat)
 
 year=2013; qtr=1; slice="industry"; sliceCode="5112";
-baseURL <- "http://data.bls.gov/cew/data/api/"
+baseURL <- "https://data.bls.gov/cew/data/api/"
 url <- paste0(baseURL, year, "/", qtr, "/", slice, "/", sliceCode, ".csv")
 temp <- tempfile()
 download.file(url, temp, quiet = TRUE)

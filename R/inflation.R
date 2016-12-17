@@ -20,7 +20,7 @@ inflation_adjust <- function(base_year=NA){
     }
         #Load file from BLS servers
         temp<-tempfile()
-        download.file("http://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems",temp)
+        download.file("https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems",temp)
         cu_main<-read.table(temp,
                             header=FALSE,
                             sep="\t",
