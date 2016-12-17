@@ -1,0 +1,92 @@
+---
+title: "BLS API Inflation and Prices"
+author: "Kris Eberwein"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{BLS API Inflation and Prices}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r setup, include=TRUE}
+```
+
+## The BLS Data Landscape
+
+The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](http://www.bls.gov/data/). The selected examples below do not include all series or databases.
+
+###Catagories you will find useful are:
+
+#### CPI (Consumer Price Index)
+The CPI data tracks the prices paid by urban consumers for a representative basket of goods and services. The CPI is the primary metric used to calculate inflation.
+
+* [CPI All Urban Consumers (Current Series)](http://data.bls.gov/cgi-bin/surveymost?cu)
+
+* [CPI Urban Wage Earners and Clerical Workers (Current Series)](http://data.bls.gov/cgi-bin/surveymost?cw)
+
+* [CPI All Urban Consumers (Chained CPI)](http://data.bls.gov/cgi-bin/surveymost?su)
+
+* [CPI Average Price Data](http://data.bls.gov/cgi-bin/surveymost?ap)
+
+#### PPI (Producer Price Index)
+The PPI data tracks the average change in selling prices received by domestic producers for their output over time.
+
+* [PPI Industry Data](http://data.bls.gov/cgi-bin/surveymost?ap)
+
+* [PPI Commodity Data](http://data.bls.gov/cgi-bin/surveymost?wp) includes "headline" FD-ID indexes.
+
+#### IPP (International Price Program)
+
+* [IPP Import/Export Price Indexes](http://data.bls.gov/cgi-bin/surveymost?ei)
+
+*Note: The hyperlinks above link to lists of the most popular seriesIDs, but are only a small sample of all the data tracked by the BLS.*
+
+####CPI: Tracking Inflation
+
+Although there are many measures of inflation, the CPI's "Consumer Price Index for All Urban Consumers: All Items" is normally the headline inflation rate one would hear about on the news ([see FRED](https://fred.stlouisfed.org/series/CPIAUCSL)). For other measures of inflation, the [BLS FAQ](http://www.bls.gov/cpi/cpifaq.htm#Question_12) on the subject is worth reading.
+
+Getting these data from the `blscrapeR` package is easy enough:
+
+```{r eval=FALSE}
+library(blscrapeR)
+df <- bls_api("CUSR0000SA0")
+head(df)
+```
+
+Due to the limitations of the API, we are only able to gather twenty years of data per request. However the formula for calculating inflation is based on the 1980 dollar, so the data from the API aren't sufficient.
+
+The package includes a function that collects information form the CPI beginning at 1947 and calculates inflation. Since these data are not pulled directly from the API, the `inflation_adjust()` function does not count against your daily API call limit.
+
+To find out the value of a 1995 dollar in 2015, we just make a simple function call. Note that in the results, 2016 represents an incomplete year at the time this document was created.
+
+```{r eval=FALSE}
+library(blscrapeR)
+df <- inflation_adjust(1995)
+tail(df)
+```
+
+If we want to check our results, we can head over to the CPI [Inflation Calculator](http://data.bls.gov/cgi-bin/cpicalc.pl) on the BLS website.
+
+####CPI: Tracking Escalation
+
+Another typical use of the CPI is to determine price escalation. This is especially common in escalation contracts. While there are many different ways one could calculate escalation below is a simple example. Note: the BLS recommends using non-seasonally adjusted data for escalation calculations.
+
+Suppose we want the price escalation of $100 investment we made in January 2014 to February 2015:
+
+```{r eval=FALSE}
+library(blscrapeR)
+df <- bls_api("CUSR0000SA0",
+              startyear = 2014, endyear = 2015)
+head(df)
+# Set base value.
+base_value <- 100
+# Get CPI from base period (January 2014).
+base_cpi <- subset(df, year==2014 & periodName=="January", select = "value")
+# Get the CPI for the new period (February 2015).
+new_cpi <- subset(df, year==2015 & periodName=="February", select = "value")
+# Calculate the updated value of our $100 investment.
+(base_value / base_cpi) * new_cpi
+# Woops, looks like we lost a penny!
+```
+
+**Disclaimer:** Escalation is normally formulated by lawyers and bankers, the author(s) of this package are neither, so the above should only be considered a code example.
