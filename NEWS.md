@@ -1,3 +1,8 @@
+# blscrapeR 2.0.0
+
+## Major Release
+* The BLS changed their servers from http to https. API protocols changed in accordance.
+
 # blscrapeR 1.0.2.9000
 
 ## Bug Fixes
