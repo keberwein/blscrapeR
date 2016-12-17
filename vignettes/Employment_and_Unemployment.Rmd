@@ -1,0 +1,138 @@
+---
+title: "BLS API Employment and Unemployment"
+author: "Kris Eberwein"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{BLS API Employment and Unemployment}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+```{r setup, include=TRUE}
+```
+
+## The BLS Data Landscape
+
+The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](http://www.bls.gov/data/). The selected examples below do not include all series or databases.
+
+###Catagories you will find useful are:
+
+* [CPS](http://data.bls.gov/cgi-bin/surveymost?ln) (Current Population Survey) includes employment and unemployment rates nationally.
+
+* [LAUS](http://data.bls.gov/cgi-bin/surveymost?la) (Local Area Unemployment Statistics)
+
+* [CES](http://data.bls.gov/cgi-bin/surveymost?ce) (Current Employment Statistics) includes employment by industry.
+
+* [OES](http://beta.bls.gov/dataQuery/find?fq=survey:[oe]&q=oe) (Occupational Employment Statistics) includes earnings and wages by industry, age, sex, etc.
+
+* [JOLTS](http://data.bls.gov/cgi-bin/surveymost?jt) (Job Openings and Labor Turnover Survey)
+
+* [QCEW](http://data.bls.gov/cgi-bin/surveymost?en) (Quarterly Census of Employment & Wages)
+
+* [BDM](http://data.bls.gov/cgi-bin/surveymost?bd) (Business Employment Dynamics)
+
+* [ATUS](http://data.bls.gov/cgi-bin/surveymost?tu) (American Time Use Survey)
+
+*Note: The hyperlinks above link to lists of the most popular seriesIDs, but are only a small sample of all the data tracked by the BLS.*
+
+####CPS
+
+An example of employment statistics from is a comparison of two different [unemployment rates](http://www.bls.gov/news.release/empsit.t15.htm) from the CPS. 
+
+Below is the U-3 Unemployment Rate (the "official" rate) vs. the U-6 Unemployment Rate, which includes all persons marginally attached to the labor force, plus total employed part time for economic reasons, plus all persons marginally attached to the labor force.
+
+```{r eval=FALSE}
+# U3 Unemployment vs. U6 Unemployment
+# More information on unemployment rates here:
+# http://www.bls.gov/news.release/empsit.t15.htm
+library(blscrapeR)
+library(ggplot2)
+df <- bls_api(c("LNS13327709", "LNS14000000"),
+               startyear = 2000, endyear = 2015)
+tail(df)
+
+ggplot(data=df, aes(x = date, y = value, color=seriesID)) + 
+    geom_line() +
+    labs(title = "US Unemployment") +
+    theme(legend.position="top") +
+    scale_color_discrete(breaks=c("LNS13327709", "LNS14000000"),
+                         labels=c("U-6", "U-3"))
+```
+
+
+Another example from the CPS deals with median weekly earnings by occupation. In this case, database administrators vs. software developers.
+
+```{r eval=FALSE}
+library(blscrapeR)
+library(ggplot2)
+df <- bls_api(c("LEU0254530800", "LEU0254530600"),
+                startyear = 2000, endyear = 2015)
+tail(df)
+
+ggplot(df, aes(x=date, y=value, color=seriesID)) +
+    geom_line() +
+    labs(title = "Median Pay by Occupation") +
+    theme(legend.position="top") +
+    scale_color_discrete(name="Occupation",
+        breaks=c("LEU0254530800", "LEU0254530600"),
+        labels=c("Database Admins.", "Software Devs."))
+```
+
+
+####ATUS
+
+The ATUS is a survey of how Americans use their time. A simple analysis could be how much time Americans spend watching television vs. how much time they spend socializing and communicating in a given day.
+
+```{r eval=FALSE}
+library(blscrapeR)
+library(ggplot2)
+df <- bls_api(c("TUU10101AA01014236", "TUU10101AA01013951"),
+                startyear = 2005, endyear = 2015)
+tail(df)
+
+ggplot(df, aes(x=date, y=value, color=seriesID)) +
+    geom_line() +
+    labs(title = "Time Use (in hours)") +
+    theme(legend.position="top") +
+    scale_color_discrete(name="Activity",
+        breaks=c("TUU10101AA01014236", "TUU10101AA01013951"),
+        labels=c("Watching TV", "Communicating"))
+```
+
+
+####CES
+
+An example from the CES would be to calculate the penetration rate of a certain industry. We can do this by dividing the number of people employed in an industry by the total employed workforce.
+
+For example, to determine the workforce penetration rate for the Education and Health Services industry in the state of Alabama:
+
+```{r eval=FALSE}
+library(blscrapeR)
+library(tidyr)
+df <- bls_api(c("SMS01000000000000001", "SMS01000006500000001"),
+                startyear = 2006, endyear = 2016)
+
+df <- spread(df, seriesID, value)
+df$penetration_rt <- df$SMS01000006500000001 / df$SMS01000000000000001
+tail(df)
+```
+
+####QCEW
+
+The QCEW is a quarterly report that focuses primarily on specific cities, states and industries. For example, we could look at the total workforce in the Software Publishing industry in Santa Clara County, CA as compared to Orange County, FL:
+
+```{r eval=FALSE}
+library(blscrapeR)
+library(ggplot2)
+df <- bls_api(c("ENU0608510010", "ENU1209510010"),
+                startyear = 2005, endyear = 2015)
+tail(df)
+
+ggplot(df, aes(x=date, y=value, color=seriesID)) +
+    geom_line() +
+    labs(title = "Total Employed by County") +
+    theme(legend.position="top") +
+    scale_color_discrete(name="Activity",
+        breaks=c("ENU0608510010", "ENU1209510010"),
+        labels=c("Santa Clara, CA", "Orange, FL"))
+```

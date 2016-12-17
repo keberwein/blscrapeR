@@ -1,0 +1,57 @@
+---
+title: "Quarterly Census of Employment and Wages API"
+author: "Kris Eberwein"
+date: "`r Sys.Date()`"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Quarterly Census of Employment and Wages API}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+## The QCEW Data Landscape
+
+The Quarterly Census of Employment and Wages (QCEW) is a division of the BLS. Some QCEW time-series data is available via the main BLS API, but the QCEW also houses quarterly data on their own API. The QCEW API returns employment and wage statistics sliced by area, industry type, or industry size. For further documentation on the QCEW API, you can refer to the [QCEW website](http://data.bls.gov/cew/doc/access/csv_data_slices.htm).
+
+###The QCEW API
+
+The QCEW API is structured differently than the main BLS API. For this reason, the blscrapeR package includes a function for extracting these data.
+
+For example, if we wanted to gather the quarterly employment and wage information for the Software Publishing industry in Q1 of 2016, we could run the following code:
+
+```{r, eval=FALSE}
+library(blscrapeR)
+dat <- qcew_api(year=2016, qtr=1, slice="industry", sliceCode=5112)
+```
+
+###Function Arguments
+
+* The `year` argument is passed as a four-digit numeral. The data in the QCEW API begin on Q1 2012 and are current up to the most recently completed quarter.
+
+* The `qtr` argument is passed as a one-digit numeral. Values between 1 and 4 are accepted.
+
+* The `slice` argument defines the QCEW data slice we would like to query. The current options are "industry", "area", and "size." One of these terms should be passed in quotes.
+
+* The `sliceCode` argument should be either a NIACS code, FIPS code, or size code; depending on what is specified in the `slice` argument. For example, if "industry" is selected for the `slice` argument, the `sliceCode` argument must be a NIACS code. Likewise, if the `slice` argument is "area," a FIPS code should be specified. There are three data sets included in the `blscrapeR` package that lists the acceptable codes and their descriptions; `data(niacs)`, `data(area_codes)`, and `data(size_codes)`/
+
+###Included Data Sets
+
+The `qcew_api()` function accepts various codes in the `sliceCode` argument. The `sliceCode` that is used will depend on the slice we wish to see. There are three built-in data sets to help with our `sliceCode` selections.
+
+####Area Description Data (FIPS codes)
+```{r, eval=FALSE}
+areaCodes <- blscrapeR::area_titles
+head(areaCodes)
+```
+
+####Industry Description Data (NIACS codes)
+```{r, eval=FALSE}
+industryCodes <- blscrapeR::niacs
+head(industryCodes)
+```
+
+####Industry Size Data (Size codes)
+```{r, eval=FALSE}
+sizeCodes <- blscrapeR::size_titles
+head(sizeCodes)
+```
