@@ -7,7 +7,7 @@
 set_bls_key(key = NA, overwrite = NA)
 }
 \arguments{
-\item{key}{The API key provided to you from the BLS formated in quotes. A key can be aquired at \url{http://data.bls.gov/registrationEngine/}}
+\item{key}{The API key provided to you from the BLS formated in quotes. A key can be aquired at \url{https://data.bls.gov/registrationEngine/}}
 
 \item{overwrite}{If this is set to TRUE, it will overwrite an existing BLS_KEY that you already have in your \code{.Renviron} file.}
 }
