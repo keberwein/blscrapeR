@@ -1,3 +1,9 @@
+# blscrapeR 2.0.1
+
+## Bug Fixes
+* Fixed date parsing with the get_bls_state() function.
+
+
 # blscrapeR 2.0.0
 
 ## Major Release
