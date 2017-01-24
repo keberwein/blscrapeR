@@ -45,8 +45,11 @@ get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
     # Make an empty list for data frames and iterate in big nasty for loop.
     datalist <- list()
     for (i in date_mth) {
-        #datebegin <- unique(grep(paste(i, collapse = "|"),dat)) + 3
-        datebegin <- grep(i, dat) +3
+        if(i=="January 1976"){
+            datebegin=4
+        }else{
+            datebegin <- grep(i, dat) +3
+        }
         dateend = datebegin+52
         vals <- gsub("^\ +|\ +$", "", dat[datebegin:dateend])
         vals <- unique(grep(paste(state.name, sep="", collapse="|"), 
@@ -56,9 +59,15 @@ get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
         nycrow <- grep(c("New York city"), vals)
         larow <- grep(c("Los Angeles County"), vals)
         dcrow <- grep(c("District of Columbia"), vals)
-        vals <- vals[-c(nycrow)]
-        vals <- vals[-c(larow)]
-        vals <- vals[-c(dcrow)]
+        if(length(nycrow)>0){
+            vals <- vals[-c(nycrow)]
+        }
+        if(length(larow)>0){
+            vals <- vals[-c(larow)]
+        }
+        if(length(dcrow)>0){
+            vals <- vals[-c(dcrow)]
+        }
         
         # Split out state names, so read.table doesn't get confused.
         state_vals <- gsub("^.* \\.+", "", vals)
