@@ -32,12 +32,14 @@ get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
     
     # If no date_mth is specified, find the latest month and return.
     # Not happy with this method. Would rather find max(month) in data. But data format is a bit crazy.
-    if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-30), "%B %Y"), dat)))){
-        date_mth <- format(zoo::as.yearmon(Sys.Date()-30), "%B %Y")
-    }else{
-        if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-60), "%B %Y"), dat)))){
-            date_mth <- format(zoo::as.yearmon(Sys.Date()-60), "%B %Y")
-        }else{date_mth <- format(zoo::as.yearmon(Sys.Date()-90), "%B %Y")}
+    if (is.null(date_mth)){
+        if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-30), "%B %Y"), dat)))){
+            date_mth <- format(zoo::as.yearmon(Sys.Date()-30), "%B %Y")
+        }else{
+            if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-60), "%B %Y"), dat)))){
+                date_mth <- format(zoo::as.yearmon(Sys.Date()-60), "%B %Y")
+            }else{date_mth <- format(zoo::as.yearmon(Sys.Date()-90), "%B %Y")}
+        }
     }
     
     # Make an empty list for data frames and iterate in big nasty for loop.
@@ -81,6 +83,6 @@ get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
     state_fips<-blscrapeR::state_fips
     df <- merge(df, state_fips, by = "state")
     df <- df[order(df$month, df$state),]
-                                                                                                                        
-return(df)
+    
+    return(df)
 }

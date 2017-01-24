@@ -54,7 +54,7 @@ rm(county_map_data)
 
 # Read shapefile from Tiger
 # https://www.census.gov/geo/maps-data/data/cbf/cbf_state.html
-state <- readOGR(dsn = ".", layer = "cb_2015_us_state_20m")
+state <- tigris::states(cb = TRUE, resolution = "20m", year = 2015)
 
 # convert it to Albers equal area
 us.map <- spTransform(state, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
