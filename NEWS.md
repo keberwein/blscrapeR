@@ -1,4 +1,12 @@
-# blscrapeR 2.0.1
+# blscrapeR 2.1.1
+
+## New Features
+* Added Mercator projection for county maps.
+
+* Enhanced error handling for the get_bls_state() function.
+
+## Data
+* Added Mercator projection data set.
 
 ## Bug Fixes
 * Fixed date parsing with the get_bls_state() function.
@@ -22,6 +30,7 @@
 
 ## Tets
 * Updated tests for the get_bls_state() function.
+
 
 # blscrapeR 1.0.1
 
@@ -48,6 +57,7 @@
 
 ## Tets
 * Added a test for the qcew_api() function.
+
 
 # blscrapeR 0.4.2
 

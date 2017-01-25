@@ -22,6 +22,6 @@
 #' 
 #' @name state_map_data
 #' @usage data(state_map_data)
-#' @note Last updated 2016-05-26
-#' @format A data frame with 206,500 rows and 7 variables
+#' @note Last updated 2017-01-26
+#' @format A data frame with 13,660 rows and 7 variables
 "state_map_data"
