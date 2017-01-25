@@ -39,14 +39,18 @@
 #'
 #'
 
-bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL){
+bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection="mercator"){
     if (is.null(fill_rate)){
         stop(message("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?"))
     }
     # Set some dummy variables. This keeps CRAN check happy.
     map=long=lat=id=group=county_map_data=NULL
     # Load pre-formatted map for ggplot.
-    map <- blscrapeR::county_map_data
+    if (tolower(projection)=="lambert"){
+        map <- blscrapeR::county_map_data
+    }else{
+        map <- blscrapeR::county_map_merc
+    }
     # Unemployment statistics by county: Get and process data.
     # Check to see if user selected specific state(s).
     if (!is.null(stateName)){
