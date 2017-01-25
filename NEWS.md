@@ -1,7 +1,7 @@
 # blscrapeR 2.1.1
 
 ## New Features
-* Added Mercator projection for county maps.
+* Added a map projection argument to the bls_map_county() function. Choices are either Lambert or Mercator. Mercator is the default for single states, and Lambert the default for national views.
 
 * Enhanced error handling for the get_bls_state() function.
 

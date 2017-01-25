@@ -24,7 +24,7 @@ bls_map_county(map_data=df, fill_rate = "unemployed_rate",
                stateName = "Florida")
 ```
 
-![](https://www.datascienceriot.com/wp-content/uploads/2016/07/bus_fl_map.png)
+![](https://www.datascienceriot.com/wp-content/uploads/2017/01/bus_fl_map.png)
 
 Also, the states can be called together to form larger districts. Below is an example of the most recent unemployment rates for the southeastern states of Florida, Georgia and Alabama.
 

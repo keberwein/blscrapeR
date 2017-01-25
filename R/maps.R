@@ -16,6 +16,8 @@
 #' @param stateName Optional argument if you only want to map a single state or a group of selected staes. The argument
 #' accepts state full state names in quotes.
 #' @param labtitle The main title label for your map passed as a string. The default is no title.
+#' @param projection Choices of map projection are "lambert" or "mercator". By default, the function selects Mercator for single states
+#' and Lambert for nationwide views.
 #' @seealso \url{https://cran.r-project.org/package=tigris}
 #' @examples \dontrun{
 #' # Download the most current month unemployment statistics on a county level.
@@ -46,11 +48,7 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
     # Set some dummy variables. This keeps CRAN check happy.
     map=long=lat=id=group=county_map_data=NULL
     # Load pre-formatted map for ggplot.
-    if (tolower(projection)=="lambert"){
-        map <- blscrapeR::county_map_data
-    }else{
-        map <- blscrapeR::county_map_merc
-    }
+
     # Unemployment statistics by county: Get and process data.
     # Check to see if user selected specific state(s).
     if (!is.null(stateName)){
@@ -61,6 +59,12 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
         if(any(state_check==FALSE)){
             stop(message("Please make sure you state names are spelled correctly using full state names."))
         }
+        # User Mercator projection for states unless the user overrides.
+        if (tolower(projection)=="lambert"){
+            map <- blscrapeR::county_map_data
+        }else{
+            map <- blscrapeR::county_map_merc
+        }
         # If state list is valid. Grab State FIPS codes from internal data set and subset map.
         # Add state_id to map frame
         map$state_id <- substr(map$id, 1,2)
@@ -68,6 +72,13 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
         state_selection <- state_fips$fips_state[state_rows]
         statelist <- list()
         map <- map[(map$state_id %in% state_selection),]
+    }else{
+        # Use Lambert projection if plotting the entire US, unless user overrides.
+        if (tolower(projection)=="mercator"){
+            map <- blscrapeR::county_map_merc
+        }else{
+            map <- blscrapeR::county_map_data
+        }
     }
     # Plot
     ggplot() +

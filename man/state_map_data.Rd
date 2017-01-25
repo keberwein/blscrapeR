@@ -4,7 +4,7 @@
 \name{state_map_data}
 \alias{state_map_data}
 \title{Dataset for mapping U.S. states}
-\format{A data frame with 206,500 rows and 7 variables}
+\format{A data frame with 13,660 rows and 7 variables}
 \usage{
 data(state_map_data)
 }
@@ -29,7 +29,7 @@ Built-in dataset for use with the \code{bls_map_state()} function.
 To access the data directly, issue the command \code{datastate_map_data)}.
 }
 \note{
-Last updated 2016-05-26
+Last updated 2017-01-26
 }
 \keyword{datasets}
 

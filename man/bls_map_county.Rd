@@ -5,7 +5,7 @@
 \title{Cloropleth mapping of BLS data}
 \usage{
 bls_map_county(map_data, fill_rate = NULL, labtitle = NULL,
-  stateName = NULL)
+  stateName = NULL, projection = "mercator")
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 
@@ -18,6 +18,9 @@ which include FIPS codes may be used as well.}
 
 \item{stateName}{Optional argument if you only want to map a single state or a group of selected staes. The argument
 accepts state full state names in quotes.}
+
+\item{projection}{Choices of map projection are "lambert" or "mercator". By default, the function selects Mercator for single states
+and Lambert for nationwide views.}
 }
 \description{
 Return a ggplot object to render a cloropleth map with county outlines.
