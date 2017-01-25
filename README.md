@@ -33,12 +33,12 @@ library(blscrapeR)
 # Grab the Unemployment Rate (U-3) 
 df <- quick_unemp_rate()
 tail(df, 5)
-#>                                               
-#> 2 {                                           
-#> 3     if (missing(ncp))                       
-#> 4         .Call(C_df, x, df1, df2, log)       
-#> 5     else .Call(C_dnf, x, df1, df2, ncp, log)
-#> 6 }
+#>    year period periodName value footnotes    seriesID       date
+#> 32 2014    M05        May   6.3           LNS14000000 2014-05-31
+#> 33 2014    M04      April   6.2           LNS14000000 2014-04-30
+#> 34 2014    M03      March   6.7           LNS14000000 2014-03-31
+#> 35 2014    M02   February   6.7           LNS14000000 2014-02-28
+#> 36 2014    M01    January   6.6           LNS14000000 2014-01-31
 ```
 
 **DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
@@ -50,52 +50,14 @@ You should consider [getting an API key](http://data.bls.gov/registrationEngine/
 
 ### From the BLS:
 
-<table style="width:111%;">
-<colgroup>
-<col width="34%" />
-<col width="37%" />
-<col width="38%" />
-</colgroup>
-<thead>
-<tr class="header">
-<th align="left">Service</th>
-<th align="left">Version 2.0 (Registered)</th>
-<th align="left">Version 1.0 (Unregistered)</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="left">Daily query limit</td>
-<td align="left">500</td>
-<td align="left">25</td>
-</tr>
-<tr class="even">
-<td align="left">Series per query limit</td>
-<td align="left">50</td>
-<td align="left">25</td>
-</tr>
-<tr class="odd">
-<td align="left">Years per query limit</td>
-<td align="left">20</td>
-<td align="left">10</td>
-</tr>
-<tr class="even">
-<td align="left">Net/Percent Changes</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-</tr>
-<tr class="odd">
-<td align="left">Optional annual averages</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-</tr>
-<tr class="even">
-<td align="left">Series descriptions</td>
-<td align="left">Yes</td>
-<td align="left">No</td>
-</tr>
-</tbody>
-</table>
+| Service                  | Version 2.0 (Registered) | Version 1.0 (Unregistered) |
+|--------------------------|--------------------------|----------------------------|
+| Daily query limit        | 500                      | 25                         |
+| Series per query limit   | 50                       | 25                         |
+| Years per query limit    | 20                       | 10                         |
+| Net/Percent Changes      | Yes                      | No                         |
+| Optional annual averages | Yes                      | No                         |
+| Series descriptions      | Yes                      | No                         |
 
 ### Key Install
 
