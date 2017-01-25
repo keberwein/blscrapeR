@@ -41,7 +41,7 @@
 #'
 #'
 
-bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection="mercator"){
+bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection=NULL){
     if (is.null(fill_rate)){
         stop(message("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?"))
     }
@@ -60,9 +60,7 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
             stop(message("Please make sure you state names are spelled correctly using full state names."))
         }
         # User Mercator projection for states unless the user overrides.
-        if (tolower(projection)=="lambert"){
-            map <- blscrapeR::county_map_data
-        }else{
+        if (is.null(projection)){
             map <- blscrapeR::county_map_merc
         }
         # If state list is valid. Grab State FIPS codes from internal data set and subset map.
@@ -74,9 +72,7 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
         map <- map[(map$state_id %in% state_selection),]
     }else{
         # Use Lambert projection if plotting the entire US, unless user overrides.
-        if (tolower(projection)=="mercator"){
-            map <- blscrapeR::county_map_merc
-        }else{
+        if (is.null(projection)){
             map <- blscrapeR::county_map_data
         }
     }
