@@ -62,6 +62,15 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
         # User Mercator projection for states unless the user overrides.
         if (is.null(projection)){
             map <- blscrapeR::county_map_merc
+        }else{
+            if (tolower(projection)=="lambert"){
+                map <- blscrapeR::county_map_data
+            }
+            if (tolower(projection)=="mercator"){
+                map <- blscrapeR::county_map_merc
+            }else{
+                message("Supported projections are Lambert and Mercator. A null projection argument returns Mercator for this function.")
+            }
         }
         # If state list is valid. Grab State FIPS codes from internal data set and subset map.
         # Add state_id to map frame
@@ -70,11 +79,6 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
         state_selection <- state_fips$fips_state[state_rows]
         statelist <- list()
         map <- map[(map$state_id %in% state_selection),]
-    }else{
-        # Use Lambert projection if plotting the entire US, unless user overrides.
-        if (is.null(projection)){
-            map <- blscrapeR::county_map_data
-        }
     }
     # Plot
     ggplot() +
@@ -136,7 +140,7 @@ bls_map_state <- function(map_data, fill_rate=NULL, labtitle=NULL){
     }
     # Set some dummy variables. This keeps CRAN check happy.
     map=long=lat=id=group=state_map_data=state.name=NULL
-    #Maps by County
+    
     #Load pre-formatted map for ggplot.
     map <- blscrapeR::state_map_data
     #Unemployment statistics by county: Get and process data.
