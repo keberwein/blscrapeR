@@ -5,7 +5,7 @@
 \title{Cloropleth mapping of BLS data}
 \usage{
 bls_map_county(map_data, fill_rate = NULL, labtitle = NULL,
-  stateName = NULL, projection = "mercator")
+  stateName = NULL, projection = NULL)
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 
