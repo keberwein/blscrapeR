@@ -124,7 +124,7 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
 #' which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.
 #' @param labtitle The main title label for your map passed as a string. The default is no title.
-#' #' @param lowFill The fill color of the lower values being mapped. The default color is green, but can be changed to any color accepted by
+#' @param lowFill The fill color of the lower values being mapped. The default color is green, but can be changed to any color accepted by
 #' \code{ggplot2::scale_fill_gradient}.
 #' @param highFill The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
 #' \code{ggplot2::scale_fill_gradient}.

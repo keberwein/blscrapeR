@@ -13,14 +13,11 @@ Imports:
 	magrittr,
 	utils,
 	stats,
-	grDevices,
-	xts,
-	zoo
+	grDevices
 Suggests:
 	testthat,
     	knitr,
     	rmarkdown,
-	tidyr,
 	dplyr	
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/blscrapeR

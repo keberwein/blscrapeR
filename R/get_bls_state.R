@@ -6,7 +6,6 @@
 #' @param seasonality TRUE or FALSE. The default value is TRUE.
 #' @import datasets
 #' @importFrom utils download.file read.csv read.table
-#' @importFrom zoo as.yearmon
 #' @export get_bls_state
 #' @examples
 #' \dontrun{
@@ -18,7 +17,7 @@
 #' }
 #'
 
-get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
+get_bls_state <- function(date_mth=NULL, seasonality=TRUE){
     state.name=NULL
     seas <- "https://www.bls.gov/web/laus/ststdsadata.txt"
     notseas <- "https://www.bls.gov/web/laus/ststdnsadata.txt"
@@ -32,12 +31,12 @@ get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
     # If no date_mth is specified, find the latest month and return.
     # Not happy with this method. Would rather find max(month) in data. But data format is a bit crazy.
     if (is.null(date_mth)){
-        if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-30), "%B %Y"), dat)))){
-            date_mth <- format(zoo::as.yearmon(Sys.Date()-30), "%B %Y")
+        if (isTRUE(any(grepl(format(Sys.Date()-30, "%B %Y"), dat)))){
+            date_mth <- format(Sys.Date()-30, "%B %Y")
         }else{
-            if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-60), "%B %Y"), dat)))){
-                date_mth <- format(zoo::as.yearmon(Sys.Date()-60), "%B %Y")
-            }else{date_mth <- format(zoo::as.yearmon(Sys.Date()-90), "%B %Y")}
+            if (isTRUE(any(grepl(format(Sys.Date()-60, "%B %Y"), dat)))){
+                date_mth <- format(Sys.Date()-60, "%B %Y")
+            }else{date_mth <- format(Sys.Date()-90, "%B %Y")}
         }
     }
     

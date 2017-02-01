@@ -1,5 +1,4 @@
 library(blscrapeR)
-library(zoo)
 library(testthat)
 
 ### TEST DATA SOURCE FOR get_bls_county()
@@ -105,12 +104,12 @@ dat <- readLines(seas)
 
 # If no date_mth is specified, find the latest month and return.
 # Not happy with this method. Would rather find max(month) in data. But data format is a bit crazy.
-if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-30), "%B %Y"), dat)))){
-    date_mth <- format(zoo::as.yearmon(Sys.Date()-30), "%B %Y")
+if (isTRUE(any(grepl(format(Sys.Date()-30, "%B %Y"), dat)))){
+    date_mth <- format(Sys.Date()-30, "%B %Y")
 }else{
-    if (isTRUE(any(grepl(format(zoo::as.yearmon(Sys.Date()-60), "%B %Y"), dat)))){
-        date_mth <- format(zoo::as.yearmon(Sys.Date()-60), "%B %Y")
-    }else{date_mth <- format(zoo::as.yearmon(Sys.Date()-90), "%B %Y")}
+    if (isTRUE(any(grepl(format(Sys.Date()-60, "%B %Y"), dat)))){
+        date_mth <- format(Sys.Date()-60, "%B %Y")
+    }else{date_mth <- format(Sys.Date()-90, "%B %Y")}
 }
 
 # Make an empty list for data frames and iterate in big nasty for loop.
