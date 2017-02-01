@@ -4,7 +4,8 @@
 \alias{bls_map_state}
 \title{Cloropleth mapping of BLS data}
 \usage{
-bls_map_state(map_data, fill_rate = NULL, labtitle = NULL)
+bls_map_state(map_data, fill_rate = NULL, labtitle = NULL,
+  lowFill = "green", highFill = "red")
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 
@@ -13,7 +14,12 @@ which include FIPS codes may be used as well.}
 
 \item{fill_rate}{Column name from the dataframe that you want to use as a fill value.}
 
-\item{labtitle}{The main title label for your map passed as a string. The default is no title}
+\item{labtitle}{The main title label for your map passed as a string. The default is no title.
+#' @param lowFill The fill color of the lower values being mapped. The default color is green, but can be changed to any color accepted by
+\code{ggplot2::scale_fill_gradient}.}
+
+\item{highFill}{The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
+\code{ggplot2::scale_fill_gradient}.}
 }
 \description{
 Return a ggplot object to render a cloropleth map with state outlines.

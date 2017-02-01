@@ -13,9 +13,6 @@
 #' contains industry codes and descriptions, \code{blscrapeR::area_titles} contains FIPS codes and area descriptions,
 #' and \code{blscrapeR::size_titles} contains industry size codes. These codes can be used for the \code{sliceCode} argument.
 #' @keywords bls api economics cpi unemployment inflation
-#' @importFrom data.table rbindlist
-#' @importFrom jsonlite toJSON
-#' @importFrom httr content POST content_type_json
 #' @export qcew_api
 #' @seealso \url{https://data.bls.gov/cew/doc/access/csv_data_slices.htm}
 #' @examples

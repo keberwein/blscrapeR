@@ -6,7 +6,6 @@
 #' @param seasonality TRUE or FALSE. The default value is TRUE.
 #' @import datasets
 #' @importFrom utils download.file read.csv read.table
-#' @importFrom data.table rbindlist
 #' @importFrom zoo as.yearmon
 #' @export get_bls_state
 #' @examples
@@ -79,7 +78,8 @@ get_bls_state <- function(date_mth=NULL, seasonality = TRUE){
         # Put data frames into a list to be rebound later.                             
         datalist[[i]] <- cols
     }
-    df <- data.table::rbindlist(datalist)
+    df <- do.call(rbind, datalist)
+    #df <- data.table::rbindlist(datalist)
     
     # Convert month colunm to ISO 8601 date format.
     df$month <- as.Date(paste('01', df$month), format = '%d %b %Y')

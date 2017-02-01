@@ -9,7 +9,6 @@
 #' @param stateName is an optional argument if you only want data for certain state(s). The argument is NULL by default and
 #' will return data for all 50 states.
 #' @importFrom stats na.omit
-#' @importFrom data.table rbindlist
 #' @export get_bls_county
 #' @examples  \dontrun{
 #' # Most recent month in the data set.
@@ -69,7 +68,8 @@ get_bls_county <- function(date_mth = NULL, stateName = NULL){
             statelist[[s]] <- state_vals
         }
         
-        countyemp <- data.table::rbindlist(statelist)
+        countyemp <- do.call(rbind, statelist)
+        #countyemp <- data.table::rbindlist(statelist)
     }
     
     # Check for date or dates.
@@ -104,7 +104,8 @@ get_bls_county <- function(date_mth = NULL, stateName = NULL){
         datalist[[i]] <- mth_vals
     }
     # Rebind.
-    df <- data.table::rbindlist(datalist)
+    df <- do.call(rbind, datalist)
+    #df <- data.table::rbindlist(datalist)
     # Correct column data fromats.
     df$unemployed <- as.numeric(gsub(",", "", as.character(df$unemployed)))
     df$employed <- as.numeric(gsub(",", "", as.character(df$employed)))

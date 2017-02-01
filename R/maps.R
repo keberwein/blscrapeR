@@ -18,6 +18,10 @@
 #' @param labtitle The main title label for your map passed as a string. The default is no title.
 #' @param projection Choices of map projection are "lambert" or "mercator". By default, the function selects Mercator for single states
 #' and Lambert for nationwide views.
+#' @param lowFill The fill color of the lower values being mapped. The default color is green, but can be changed to any color accepted by
+#' \code{ggplot2::scale_fill_gradient}.
+#' @param highFill The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
+#' \code{ggplot2::scale_fill_gradient}.
 #' @seealso \url{https://cran.r-project.org/package=tigris}
 #' @examples \dontrun{
 #' # Download the most current month unemployment statistics on a county level.
@@ -41,13 +45,25 @@
 #'
 #'
 
-bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection=NULL){
+bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection=NULL, lowFill="green", highFill="red"){
     if (is.null(fill_rate)){
         stop(message("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?"))
     }
     # Set some dummy variables. This keeps CRAN check happy.
     map=long=lat=id=group=county_map_data=NULL
     # Load pre-formatted map for ggplot.
+    if (is.null(projection)){
+        map <- blscrapeR::county_map_data
+    }else{
+        if (tolower(projection)=="lambert"){
+            map <- blscrapeR::county_map_data
+        }
+        if (tolower(projection)=="mercator"){
+            map <- blscrapeR::county_map_merc
+        }else{
+            message("Supported projections are Lambert and Mercator. A null projection argument returns Mercator for this function.")
+        }
+    }
 
     # Unemployment statistics by county: Get and process data.
     # Check to see if user selected specific state(s).
@@ -81,26 +97,14 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
         map <- map[(map$state_id %in% state_selection),]
     }
     # Plot
-    ggplot() +
-        geom_map(data=map, map=map,
-                 aes(x=long, y=lat, map_id=id, group=group),
-                 fill="#ffffff", color="#0e0e0e", size=0.15) +
-        geom_map(data=map_data, map=map, aes_string(map_id="fips", fill=fill_rate),
-                 color="#0e0e0e", size=0.15) +
-        scale_fill_gradientn(colors = c("green", "red")) +
-        coord_equal() +
-        labs(title=labtitle) + 
-        theme(axis.line=element_blank(),
-              axis.text.x=element_blank(),
-              axis.text.y=element_blank(),
-              axis.ticks=element_blank(),
-              axis.title.x=element_blank(),
-              axis.title.y=element_blank(),
-              panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank(),
-              panel.border = element_blank(),
-              panel.background = element_blank(),
-              legend.title=element_blank())
+    ggplot2::ggplot() + 
+        ggplot2::geom_map(data=map, map=map, ggplot2::aes(x=long, y=lat, map_id=id, group=group)) +
+        ggplot2::geom_map(data=map_data, map=map, ggplot2::aes_string(map_id="fips", fill=fill_rate), color="#0e0e0e", size=0.25) +
+        ggplot2::scale_fill_gradient(low=lowFill, high=highFill, na.value="grey50") +
+        ggplot2::labs(title=labtitle) + 
+        ggplot2::theme(axis.line=ggplot2::element_blank(), axis.text.x=ggplot2::element_blank(), axis.text.y=ggplot2::element_blank(), axis.ticks=ggplot2::element_blank(),
+              axis.title.x=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), panel.grid.major=ggplot2::element_blank(), panel.grid.minor=ggplot2::element_blank(),
+              panel.border=ggplot2::element_blank(), panel.background=ggplot2::element_blank(), legend.title=ggplot2::element_blank())
     }
 
 
@@ -119,7 +123,11 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
 #' calls to the \code{get_bls_state()} function but other dataframes, 
 #' which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value.
-#' @param labtitle The main title label for your map passed as a string. The default is no title
+#' @param labtitle The main title label for your map passed as a string. The default is no title.
+#' #' @param lowFill The fill color of the lower values being mapped. The default color is green, but can be changed to any color accepted by
+#' \code{ggplot2::scale_fill_gradient}.
+#' @param highFill The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
+#' \code{ggplot2::scale_fill_gradient}.
 #' @seealso \url{https://cran.r-project.org/package=tigris}
 #' @examples \dontrun{
 #' # Downlaod employment statistics for April 2016.
@@ -134,7 +142,7 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
 #'
 #'
 
-bls_map_state <- function(map_data, fill_rate=NULL, labtitle=NULL){
+bls_map_state <- function(map_data, fill_rate=NULL, labtitle=NULL, lowFill="green", highFill="red"){
     if (is.null(fill_rate)){
         stop(message("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?"))
     }
@@ -145,26 +153,14 @@ bls_map_state <- function(map_data, fill_rate=NULL, labtitle=NULL){
     map <- blscrapeR::state_map_data
     #Unemployment statistics by county: Get and process data.
     #Plot
-    ggplot() +
-        geom_map(data=map, map=map,
-                 aes(x=long, y=lat, map_id=id, group=group),
-                 fill="#ffffff", color="#0e0e0e", size=0.15) +
-        geom_map(data=map_data, map=map, aes_string(map_id="fips_state", fill=fill_rate),
-                 color="#0e0e0e", size=0.15) +
-        scale_fill_gradientn(colors = c("green", "red")) +
-        coord_equal() +
-        labs(title=labtitle) + 
-        theme(axis.line=element_blank(),
-              axis.text.x=element_blank(),
-              axis.text.y=element_blank(),
-              axis.ticks=element_blank(),
-              axis.title.x=element_blank(),
-              axis.title.y=element_blank(),
-              panel.grid.major = element_blank(),
-              panel.grid.minor = element_blank(),
-              panel.border = element_blank(),
-              panel.background = element_blank(),
-              legend.title=element_blank())
+    ggplot2::ggplot() + 
+        ggplot2::geom_map(data=map, map=map, ggplot2::aes(x=long, y=lat, map_id=id, group=group)) +
+        ggplot2::geom_map(data=map_data, map=map, ggplot2::aes_string(map_id="fips", fill=fill_rate), color="#0e0e0e", size=0.25) +
+        ggplot2::scale_fill_gradient(low=lowFill, high=highFill, na.value="grey50") +
+        ggplot2::labs(title=labtitle) + 
+        ggplot2::theme(axis.line=ggplot2::element_blank(), axis.text.x=ggplot2::element_blank(), axis.text.y=ggplot2::element_blank(), axis.ticks=ggplot2::element_blank(),
+                       axis.title.x=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), panel.grid.major=ggplot2::element_blank(), panel.grid.minor=ggplot2::element_blank(),
+                       panel.border=ggplot2::element_blank(), panel.background=ggplot2::element_blank(), legend.title=ggplot2::element_blank())
 }
 
 

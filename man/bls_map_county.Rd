@@ -5,7 +5,8 @@
 \title{Cloropleth mapping of BLS data}
 \usage{
 bls_map_county(map_data, fill_rate = NULL, labtitle = NULL,
-  stateName = NULL, projection = NULL)
+  stateName = NULL, projection = NULL, lowFill = "green",
+  highFill = "red")
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 
@@ -21,6 +22,12 @@ accepts state full state names in quotes.}
 
 \item{projection}{Choices of map projection are "lambert" or "mercator". By default, the function selects Mercator for single states
 and Lambert for nationwide views.}
+
+\item{lowFill}{The fill color of the lower values being mapped. The default color is green, but can be changed to any color accepted by
+\code{ggplot2::scale_fill_gradient}.}
+
+\item{highFill}{The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
+\code{ggplot2::scale_fill_gradient}.}
 }
 \description{
 Return a ggplot object to render a cloropleth map with county outlines.
