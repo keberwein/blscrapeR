@@ -21,20 +21,11 @@ inflation_adjust <- function(base_year=NA){
         #Load file from BLS servers
         temp<-tempfile()
         download.file("https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems",temp)
-        cu_main<-read.table(temp,
-                            header=FALSE,
-                            sep="\t",
-                            skip=1,
-                            stringsAsFactors=FALSE,
-                            strip.white=TRUE)
+        cu_main<-read.table(temp, header=FALSE, sep="\t", skip=1, stringsAsFactors=FALSE, strip.white=TRUE)
         colnames(cu_main)<-c("series_id", "year", "period", "value", "footnote_codes")
         unlink(temp)
         # Data prep.
-        cu_main <- subset(cu_main, series_id=="CUSR0000SA0" &
-                              period!="M13" &
-                              period!="S01" &
-                              period!="S02" &
-                              period!="S03") 
+        cu_main <- subset(cu_main, series_id=="CUSR0000SA0" & period!="M13" & period!="S01" & period!="S02" & period!="S03") 
         cu_main$date <-as.Date(paste(cu_main$year, cu_main$period,"01",sep="-"),"%Y-M%m-%d")
         cu_main <- cu_main[c('date','value')]
         cpi_main <- xts::xts(cu_main[,-1], order.by=cu_main[,1])

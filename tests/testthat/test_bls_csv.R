@@ -1,6 +1,5 @@
 library(blscrapeR)
 library(zoo)
-library(data.table)
 library(testthat)
 
 ### TEST DATA SOURCE FOR get_bls_county()
@@ -43,7 +42,7 @@ if (!is.null(stateName)){
         statelist[[s]] <- state_vals
     }
     
-    countyemp <- data.table::rbindlist(statelist)
+    countyemp <- do.call(rbind, statelist)
 }
 
 # Check for date or dates.
@@ -78,7 +77,7 @@ for (i in date_mth) {
     datalist[[i]] <- mth_vals
 }
 # Rebind.
-df <- data.table::rbindlist(datalist)
+df <- do.call(rbind, datalist)
 # Correct column data fromats.
 df$unemployed <- as.numeric(gsub(",", "", as.character(df$unemployed)))
 df$employed <- as.numeric(gsub(",", "", as.character(df$employed)))
@@ -142,7 +141,7 @@ for (i in date_mth) {
     # Put data frames into a list to be rebound later.                             
     datalist[[i]] <- cols
 }
-df <- data.table::rbindlist(datalist)
+df <- do.call(rbind, datalist)
 
 # Convert month colunm to ISO 8601 date format.
 df$month <- as.Date(paste('01', df$month), format = '%d %b %Y')

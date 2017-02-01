@@ -18,8 +18,6 @@ payload <- paste(parse1, parse2, sep = "],")
 jsondat <- content(POST(base_url, body = payload, content_type_json()))
 
 if(length(jsondat$Results) > 0) {
-    # Put results into data.table format.
-    # Try to figure out a way to do this without importing data.table with the package.
     # Method borrowed from here:
     # https://github.com/fcocquemas/bulast/blob/master/R/bulast.R
     dt <- do.call("rbind",lapply(jsondat$Results$series, function(s) {
