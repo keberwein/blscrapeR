@@ -1,3 +1,18 @@
+# blscrapeR 2.1.2
+## New Features
+* The ability to select custom choropleth colors with all map functions.
+
+* Automatic end dates set for bls_api() function.
+
+* Removed dependencies for xts and zoo packages. Changed to base R.
+
+## Bug fixes
+* Fixed error when rendering national maps with county-wise data.
+
+* Alaska and Hawaii moved further apart in map_data.
+
+* Date column changed to optional for bls_api() function.
+
 # blscrapeR 2.1.1
 
 ## New Features
@@ -38,7 +53,7 @@
 * The BLS changed the location of their county level employment data on the server side. Changes were made in the get_bls_county() function that were not backwards compatible.
 
 ## New Features
-* Added the qcew_api() function to gather data from the BLS Quarterly Census of Employment and Wages. This API is owned by the QCEW and is seperate from the main BLS API.
+* Added the qcew_api() function to gather data from the BLS Quarterly Census of Employment and Wages. This API is owned by the QCEW and is separate from the main BLS API.
 
 * Added 404 error handling to the main bls_api() function.
 
@@ -86,11 +101,11 @@
 
 ## New Features
 
-* Added quick functions to pull popular data sets from the API without the need of the user inputing a series id.
+* Added quick functions to pull popular data sets from the API without the need of the user inputting a series id.
 
-* Addded data argument to get_bls_county. If NULL the function will return the most recent month.
+* Added data argument to get_bls_county. If NULL the function will return the most recent month.
 
-* Added the inflaction_adjust() function to help users with calculating inflation from the CPI. Since the API will only allow twenty years of data, the inflation function pulls data from a text file instead that allows the user to get CPI data back to 1947.
+* Added the inflation_adjust() function to help users with calculating inflation from the CPI. Since the API will only allow twenty years of data, the inflation function pulls data from a text file instead that allows the user to get CPI data back to 1947.
 
 * Added more error handling to bls_api() function.
 
@@ -136,7 +151,7 @@ The change is backward compatible since the user is sill able to enter their api
 
 ## Documentation
 
-* Made documentation for helper functions invisable in the manual.
+* Made documentation for helper functions invisible in the manual.
 
 * Added News.Rd
 
@@ -145,7 +160,7 @@ The change is backward compatible since the user is sill able to enter their api
 
 ## New Features
 
-* Changed name of `county_map()` to avoid conflicts with other packages. I didn't mark this as a major release becasue no other functions in the package are dependant on this.
+* Changed name of `county_map()` to avoid conflicts with other packages. I didn't mark this as a major release because no other functions in the package are dependent on this.
 
 * Various fixes in map functions including removing unused themes and general code tidyness.
 
@@ -171,7 +186,7 @@ The change is backward compatible since the user is sill able to enter their api
 
 ## Major Changes
 
-* Removed shape files from package data to cut down on size. This fundamentaly changes the way the mapping functions work. Opted instead, for spacial poly data frames rendered from the shapefiles.
+* Removed shape files from package data to cut down on size. This fundamentally changes the way the mapping functions work. Opted instead, for spacial poly data frames rendered from the shapefiles.
 
 
 # blscrapeR 0.2.0
