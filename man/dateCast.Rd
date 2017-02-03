@@ -7,7 +7,7 @@
 dateCast(api_df = NULL)
 }
 \arguments{
-\item{df}{The data frame you wish to cast a date column to. Be sure the data frame contains 'year' and 'period' columns as returned
+\item{api_df}{The data frame you wish to cast a date column to. Be sure the data frame contains 'year' and 'period' columns as returned
 by the \code{bls_api()} function.}
 }
 \description{
