@@ -33,12 +33,12 @@ library(blscrapeR)
 # Grab the Unemployment Rate (U-3) 
 df <- quick_unemp_rate()
 tail(df, 5)
-#>    year period periodName value footnotes    seriesID       date
-#> 32 2014    M05        May   6.3           LNS14000000 2014-05-31
-#> 33 2014    M04      April   6.2           LNS14000000 2014-04-30
-#> 34 2014    M03      March   6.7           LNS14000000 2014-03-31
-#> 35 2014    M02   February   6.7           LNS14000000 2014-02-28
-#> 36 2014    M01    January   6.6           LNS14000000 2014-01-31
+#>    year period periodName value footnotes    seriesID
+#> 21 2015    M05        May   5.5           LNS14000000
+#> 22 2015    M04      April   5.4           LNS14000000
+#> 23 2015    M03      March   5.4           LNS14000000
+#> 24 2015    M02   February   5.5           LNS14000000
+#> 25 2015    M01    January   5.7           LNS14000000
 ```
 
 **DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
@@ -85,7 +85,8 @@ library(blscrapeR)
 # In current dollars
 df <- bls_api(c("LEU0254530800", "LEU0254530600"),
                 startyear = 2000, endyear = 2015,
-                registrationKey = "BLS_KEY")
+                registrationKey = "BLS_KEY") %>%
+    dateCast()
 ```
 
 ``` r
