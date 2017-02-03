@@ -50,6 +50,12 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
     year=period=':='=seriesID=NULL
     # Begin constructing payload.
     payload <- list(seriesid = seriesid)
+    # Check for start and end years
+    if (!is.null(startyear) & is.null(endyear)){
+        endyear <- format(Sys.Date(), "%Y")
+        message("The API requires both a start and end year." 
+                ,"\nThe endyear argument has automatically been set to ", format(Sys.Date(), "%Y"),".")
+    }
     # Payload won't take NULL values, have to check every field.
     # Probably a more elegant way do do this using an apply function.
     if (exists("registrationKey") & !is.null(registrationKey)){
@@ -90,9 +96,6 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
     if (exists("endyear") & !is.null(endyear)){
         payload["endyear"] <- as.character(endyear)
     }
-    if (exists("startyear") & !is.null(endyear)){
-        format(Sys.Date()-37, "%B %Y")
-    }
     # Manually construct payload since the BLS formatting is wakey.
     payload <- jsonlite::toJSON(payload)
     loadparse <- regmatches(payload, regexpr("],", payload), invert = TRUE)
@@ -116,12 +119,8 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
         df$value <- as.numeric(as.character(df$value))
         
         if ("year" %in% colnames(df)){
-        df$year <- as.numeric(as.character(df$year))
+            df$year <- as.numeric(as.character(df$year))
         }
-        
-#        if ("year" %in% colnames(df) & "period" %in% colnames(df) & isTRUE(dateCast)){
-#            df$date <- as.Date(paste(df$year, ifelse(df$period == "M13", 12, substr(df$period, 2, 3)), "01", sep="-"))
-#        }
         
         if (nrow(df)==0){
             stop(print(jsondat$message),
@@ -130,3 +129,4 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
     }
     return(df)
 }
+
