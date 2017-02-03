@@ -1,6 +1,6 @@
 #' @title Cast a date column to data frame returned by the bls_api() function
 #' @description A helper function to create a continuous date from Year and Period columns. Dates are formatted in ISO 8601.
-#' @param df The data frame you wish to cast a date column to. Be sure the data frame contains 'year' and 'period' columns as returned
+#' @param api_df The data frame you wish to cast a date column to. Be sure the data frame contains 'year' and 'period' columns as returned
 #' by the \code{bls_api()} function.
 #' @export dateCast
 #' @examples
