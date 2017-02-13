@@ -79,6 +79,58 @@ Advanced Usage
 
 Now that you have an API key installed, you can call your key in the package’s function arguments with `"BLS_KEY"`. Don't forget the quotes! If you just HAVE to have your key hard-coded in your scripts, you can also pass they key as a string.
 
+### Download Multiple BLS Series at Once
+
+``` r
+library(blscrapeR)
+
+# Grab several data sets from the BLS at onece.
+# NOTE on series IDs: 
+# EMPLOYMENT LEVEL - Civilian labor force - LNS12000000
+# UNEMPLOYMENT LEVEL - Civilian labor force - LNS13000000
+# UNEMPLOYMENT RATE - Civilian labor force - LNS14000000
+df <- bls_api(c("LNS12000000", "LNS13000000", "LNS14000000"),
+              startyear = 2008, endyear = 2017) %>%
+    # Add time-series dates
+    dateCast()
+```
+
+``` r
+# Plot employment level
+library(ggplot2)
+gg1200 <- subset(df, seriesID=="LNS12000000")
+library(ggplot2)
+ggplot(gg1200, aes(x=date, y=value)) +
+    geom_line() +
+    labs(title = "Employment Level - Civ. Labor Force")
+```
+
+![](https://www.datascienceriot.com/wp-content/uploads/2017/02/emplevelggreadme.png)
+
+``` r
+# Plot unemployment level
+gg1300 <- subset(df, seriesID=="LNS13000000")
+library(ggplot2)
+ggplot(gg1300, aes(x=date, y=value)) +
+    geom_line() +
+    labs(title = "Unemployment Level - Civ. Labor Force")
+```
+
+![](https://www.datascienceriot.com/wp-content/uploads/2017/02/unemplevggreadme.png)
+
+``` r
+# Plot unemployment rate
+gg1400 <- subset(df, seriesID=="LNS14000000")
+library(ggplot2)
+ggplot(gg1400, aes(x=date, y=value)) +
+    geom_line() +
+    labs(title = "Unemployment Rate - Civ. Labor Force")
+```
+
+![](https://www.datascienceriot.com/wp-content/uploads/2017/02/unempggreadme.png)
+
+### Median Weekly Earnings
+
 ``` r
 library(blscrapeR)
 # Median Usual Weekly Earnings by Occupation, Unadjusted Second Quartile.
