@@ -133,24 +133,22 @@ ggplot(gg1400, aes(x=date, y=value)) +
 
 ``` r
 library(blscrapeR)
+library(tidyr)
 # Median Usual Weekly Earnings by Occupation, Unadjusted Second Quartile.
 # In current dollars
-df <- bls_api(c("LEU0254530800", "LEU0254530600"),
-                startyear = 2000, endyear = 2015,
-                registrationKey = "BLS_KEY") %>%
+df <- bls_api(c("LEU0254530800", "LEU0254530600"), startyear = 2000, endyear = 2015) %>%
+    spread(seriesID, value) %>%
     dateCast()
 ```
 
 ``` r
 # A little help from ggplot2!
 library(ggplot2)
-ggplot(df, aes(x=date, y=value, color=seriesID)) +
-    geom_line() +
-    labs(title = "Median Weekly Earnings by Occupation") +
-    theme(legend.position="top") +
-    scale_color_discrete(name="Occupation",
-        breaks=c("LEU0254530800", "LEU0254530600"),
-        labels=c("Database Admins.", "Software Devs."))
+ggplot(data = df, aes(x = date)) + 
+    geom_line(aes(y = LEU0254530800, color = "Database Admins.")) +
+    geom_line(aes(y = LEU0254530600, color = "Software Devs.")) + 
+    labs(title = "Median Weekly Earnings by Occupation") + ylab("value") +
+    theme(legend.position="top", plot.title = element_text(hjust = 0.5)) 
 ```
 
 ![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig1.png)
