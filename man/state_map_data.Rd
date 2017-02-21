@@ -32,4 +32,3 @@ To access the data directly, issue the command \code{datastate_map_data)}.
 Last updated 2017-01-26
 }
 \keyword{datasets}
-

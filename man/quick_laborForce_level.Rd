@@ -19,4 +19,3 @@ df <- quick_laborForce_level()
 \keyword{quick}
 \keyword{rate}
 \keyword{unemployment}
-

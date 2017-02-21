@@ -43,4 +43,3 @@ dat <- qcew_api(year=2015, qtr=1, slice="industry", sliceCode=5112)
 \keyword{economics}
 \keyword{inflation}
 \keyword{unemployment}
-

@@ -19,4 +19,3 @@ df <- quick_employed_level()
 \keyword{quick}
 \keyword{rate}
 \keyword{unemployment}
-

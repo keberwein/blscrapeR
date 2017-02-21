@@ -39,4 +39,3 @@ df<- get_bls_county(date_mth = "April 2015",
 }
 
 }
-

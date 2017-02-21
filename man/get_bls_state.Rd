@@ -25,4 +25,3 @@ get_bls_state(date_mth = c("April 2016", "May 2016"), seasonality = FALSE)
 }
 
 }
-

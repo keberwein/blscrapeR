@@ -3,6 +3,7 @@
 \docType{data}
 \name{county_map_data}
 \alias{county_map_data}
+\alias{county_map_data}
 \alias{county_map_merc}
 \title{Dataset for mapping U.S. counties}
 \format{A data frame with 55,413 rows and 7 variables}
@@ -55,4 +56,3 @@ Last updated 2017-01-26
 Last updated 2017-01-26
 }
 \keyword{datasets}
-

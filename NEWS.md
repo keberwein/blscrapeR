@@ -1,3 +1,9 @@
+# blscrapeR 2.1.2.9000
+
+## New Features
+* Added the compound pipe operator from the magrittr package to exported functions.
+
+
 # blscrapeR 2.1.2
 ## New Features
 * The ability to select custom choropleth colors with all map functions.

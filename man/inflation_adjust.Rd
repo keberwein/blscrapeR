@@ -26,4 +26,3 @@ values <- inflation_adjust(base_year = 2010)
 \keyword{economics}
 \keyword{inflation}
 \keyword{unemployment}
-

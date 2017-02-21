@@ -20,4 +20,3 @@ To access the data directly, issue the command \code{niacs)}.
 Last updated 2016-09-30
 }
 \keyword{internal}
-

@@ -19,4 +19,3 @@ df <- quick_unemp_rate()
 \keyword{quick}
 \keyword{rate}
 \keyword{unemployment}
-

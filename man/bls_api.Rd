@@ -68,4 +68,3 @@ calculations = TRUE, annualaverage = TRUE, catalog = TRUE)
 \keyword{economics}
 \keyword{inflation}
 \keyword{unemployment}
-

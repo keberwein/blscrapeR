@@ -52,4 +52,3 @@ bls_gg
 \keyword{geography}
 \keyword{map}
 \keyword{unemployment}
-

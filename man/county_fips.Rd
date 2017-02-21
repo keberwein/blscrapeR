@@ -23,4 +23,3 @@ To access the data directly, issue the command \code{datacounty_fips)}.
 Last updated 2016-05-27
 }
 \keyword{internal}
-
