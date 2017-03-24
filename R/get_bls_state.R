@@ -22,10 +22,20 @@ get_bls_state <- function(date_mth=NULL, seasonality=TRUE){
     seas <- "https://www.bls.gov/web/laus/ststdsadata.txt"
     notseas <- "https://www.bls.gov/web/laus/ststdnsadata.txt"
     if (seasonality == TRUE){
-        dat <- readLines(seas)
+        target <- blscrapeR::urlExists(seas)
+        if(!isTRUE(target)){
+            message("Woops, looks like 'https://www.bls.gov/web/laus/ststdsadata.txt' is unavailable right now!")
+        } else {
+            dat <- readLines(seas)
+        }
     }
     if (seasonality == FALSE){
-        dat <- readLines(notseas)
+        target <- blscrapeR::urlExists(notseas)
+        if(!isTRUE(target)){
+            message("Woops, looks like 'https://www.bls.gov/web/laus/ststdsadata.txt' is unavailable right now!")
+        } else {
+            dat <- readLines(notseas)
+        }
     }
     
     # If no date_mth is specified, find the latest month and return.

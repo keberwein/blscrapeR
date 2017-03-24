@@ -33,15 +33,15 @@ get_bls_county <- function(date_mth = NULL, stateName = NULL){
     # Set some dummy variables. This keeps CRAN check happy.
     countyemp=contyemp=fips_state=NULL
     state_fips <- blscrapeR::state_fips
-    temp<-tempfile()
-    download.file("https://www.bls.gov/web/metro/laucntycur14.txt", temp)
-    countyemp <- read.csv(temp,
-                        fill=TRUE,
-                        header=FALSE,
-                        sep="|",
-                        skip=6,
-                        stringsAsFactors=FALSE,
-                        strip.white=TRUE)
+    # See if URL is available
+    target <- blscrapeR::urlExists("https://www.bls.gov/web/metro/laucntycur14.txt")
+    if(!isTRUE(target)){
+        message("Woops, looks like 'https://www.bls.gov/web/metro/laucntycur14.txt' is unavailable right now!")
+    } else {
+        temp<-tempfile()
+        download.file("https://www.bls.gov/web/metro/laucntycur14.txt", temp)
+    }
+    countyemp <- read.csv(temp, fill=T, header=F, sep="|", skip=6, stringsAsFactors=F, strip.white=T)
     colnames(countyemp) <- c("area_code", "fips_state", "fips_county", "area_title", "period",
                              "labor_force", "employed", "unemployed", "unemployed_rate")
     unlink(temp)

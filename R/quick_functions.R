@@ -122,3 +122,24 @@ quick_laborForce_rate <- function (){
         bls_api("LNS11300000")
     }
 }
+
+
+#' @title Quick total nonfarm employment
+#' @description Returns the Total Nonfarm Payroll Employment, seasonally adjusted. BLS id CES0000000001.
+#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+#' @keywords quick nonfarm_employed
+#' @export quick_nonfarm_employed
+#' @examples
+#' \dontrun{
+#' df <- quick_nonfarm_employed()
+#' }
+#' 
+
+quick_nonfarm_employed <- function (){
+    if(Sys.getenv("BLS_KEY")=="BLS_KEY"){
+        bls_api("CES0000000001", registrationKey = "BLS_KEY")
+    }
+    else{
+        bls_api("CES0000000001")
+    }
+}

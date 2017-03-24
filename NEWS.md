@@ -3,6 +3,14 @@
 ## New Features
 * Added the compound pipe operator from the magrittr package to exported functions.
 
+* Added total non-farm employment as a "quick function."
+
+
+## Enhancements
+* Added urlExists as a utility function for more robust error handling.
+
+* Added try/catch to url downloads.
+
 
 # blscrapeR 2.1.2
 ## New Features
