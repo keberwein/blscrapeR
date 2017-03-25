@@ -5,6 +5,8 @@
 
 * Added total non-farm employment as a "quick function."
 
+* Added a dt_format argument to the dateCast() function.
+
 
 ## Enhancements
 * Added urlExists as a utility function for more robust error handling.

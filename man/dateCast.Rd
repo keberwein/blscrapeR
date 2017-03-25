@@ -4,14 +4,16 @@
 \alias{dateCast}
 \title{Cast a date column to data frame returned by the bls_api() function}
 \usage{
-dateCast(api_df = NULL)
+dateCast(api_df = NULL, dt_format = NULL)
 }
 \arguments{
 \item{api_df}{The data frame you wish to cast a date column to. Be sure the data frame contains 'year' and 'period' columns as returned
 by the \code{bls_api()} function.}
+
+\item{dt_format}{A character string containing a valid date format. The default will return the ISO 8601 date format.}
 }
 \description{
-A helper function to create a continuous date from Year and Period columns. Dates are formatted in ISO 8601.
+A helper function to create a continuous date from Year and Period columns.
 }
 \examples{
 \dontrun{
