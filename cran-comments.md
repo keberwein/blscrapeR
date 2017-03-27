@@ -1,6 +1,6 @@
 ## Resubmission
 Uwe Ligges suggested I should add a web reference to "Bureau of Labor Statistics" in the Description.
-Added Scrapes various data from https://www.bls.gov/... to description.
+Added "Scrapes various data from https://www.bls.gov/..."" to description.
 
 
 ## Test environments
