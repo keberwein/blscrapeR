@@ -1,4 +1,4 @@
-# blscrapeR 2.1.2.9000
+# blscrapeR 2.1.3
 
 ## New Features
 * Added the compound pipe operator from the magrittr package to exported functions.
