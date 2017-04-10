@@ -1,7 +1,3 @@
-## Resubmission
-Uwe Ligges suggested I should add a web reference to "Bureau of Labor Statistics" in the Description.
-Added "Scrapes various data from https://www.bls.gov/..."" to description.
-
 
 ## Test environments
 * local OS X 10.11.5, R 3.3.3
