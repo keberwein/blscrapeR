@@ -34,11 +34,11 @@ library(blscrapeR)
 df <- quick_unemp_rate()
 tail(df, 5)
 #>    year period periodName value footnotes    seriesID
-#> 21 2015    M05        May   5.5           LNS14000000
-#> 22 2015    M04      April   5.4           LNS14000000
-#> 23 2015    M03      March   5.4           LNS14000000
-#> 24 2015    M02   February   5.5           LNS14000000
-#> 25 2015    M01    January   5.7           LNS14000000
+#> 24 2015    M05        May   5.5           LNS14000000
+#> 25 2015    M04      April   5.4           LNS14000000
+#> 26 2015    M03      March   5.4           LNS14000000
+#> 27 2015    M02   February   5.5           LNS14000000
+#> 28 2015    M01    January   5.7           LNS14000000
 ```
 
 **DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
@@ -105,7 +105,7 @@ ggplot(gg1200, aes(x=date, y=value)) +
     labs(title = "Employment Level - Civ. Labor Force")
 ```
 
-![](https://www.datascienceriot.com/wp-content/uploads/2017/02/emplevelggreadme.png)
+![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/emplevelggreadme.png?raw=true)
 
 ``` r
 # Plot unemployment level
@@ -116,7 +116,7 @@ ggplot(gg1300, aes(x=date, y=value)) +
     labs(title = "Unemployment Level - Civ. Labor Force")
 ```
 
-![](https://www.datascienceriot.com/wp-content/uploads/2017/02/unemplevggreadme.png)
+![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/unemplevggreadme.png?raw=true)
 
 ``` r
 # Plot unemployment rate
@@ -127,7 +127,7 @@ ggplot(gg1400, aes(x=date, y=value)) +
     labs(title = "Unemployment Rate - Civ. Labor Force")
 ```
 
-![](https://www.datascienceriot.com/wp-content/uploads/2017/02/unempggreadme.png)
+![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/unempggreadme.png?raw=true)
 
 ### Median Weekly Earnings
 
@@ -151,7 +151,7 @@ ggplot(data = df, aes(x = date)) +
     theme(legend.position="top", plot.title = element_text(hjust = 0.5)) 
 ```
 
-![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig1.png)
+![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/blscrape_docfig1.png?raw=true)
 
 *For more advanced usage, please see the [package vignettes](https://github.com/keberwein/blscrapeR/tree/master/vignettes).*
 
@@ -175,7 +175,7 @@ bls_map_county(map_data = df, fill_rate = "unemployed_rate",
                labtitle = "Unemployment Rate by County")
 ```
 
-![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig3.png)
+![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/blscrape_docfig3.png?raw=true)
 
 Advanced Mapping
 ----------------
@@ -216,4 +216,4 @@ leaflet(data = leafmap) %>% addTiles() %>%
 
 **Note:** This is just a static image since the full map would not be as portable for the purpose of documentation.
 
-![](https://www.datascienceriot.com/wp-content/uploads/2016/07/blscrape_docfig3-1.png)
+![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/blscrape_docfig3-1.png?raw=true)
