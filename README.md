@@ -1,6 +1,6 @@
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-blscrapeR
-=========
+blscrapeR <img src="man/figures/blscrapeR_hex.png" align="right" />
+===================================================================
 
 [![Build Status](https://travis-ci.org/keberwein/blscrapeR.png?branch=master)](https://travis-ci.org/keberwein/blscrapeR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/blscrapeR)](http://www.r-pkg.org/badges/version/blscrapeR) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
@@ -34,11 +34,11 @@ library(blscrapeR)
 df <- quick_unemp_rate()
 tail(df, 5)
 #>    year period periodName value footnotes    seriesID
-#> 24 2015    M05        May   5.5           LNS14000000
-#> 25 2015    M04      April   5.4           LNS14000000
-#> 26 2015    M03      March   5.4           LNS14000000
-#> 27 2015    M02   February   5.5           LNS14000000
-#> 28 2015    M01    January   5.7           LNS14000000
+#> 25 2015    M05        May   5.5           LNS14000000
+#> 26 2015    M04      April   5.4           LNS14000000
+#> 27 2015    M03      March   5.4           LNS14000000
+#> 28 2015    M02   February   5.5           LNS14000000
+#> 29 2015    M01    January   5.7           LNS14000000
 ```
 
 **DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
