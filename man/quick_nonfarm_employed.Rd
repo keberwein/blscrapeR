@@ -8,7 +8,7 @@ quick_nonfarm_employed()
 }
 \description{
 Returns the Total Nonfarm Payroll Employment, seasonally adjusted. BLS id CES0000000001.
-If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 }
 \examples{
 \dontrun{

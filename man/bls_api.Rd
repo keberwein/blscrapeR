@@ -19,11 +19,11 @@ If you need help finding seriesIDs, check the BLS website or the BLS Data Finder
 
 \item{registrationKey}{The API key issued to you from the BLS website.}
 
-\item{catalog}{Series description information available only for certian data sets.}
+\item{catalog}{Series description information available only for certain data sets.}
 
 \item{calculations}{Returns year-over-year calculations if set to TRUE.}
 
-\item{annualaverage}{Retruns an annual average if set to TRUE.}
+\item{annualaverage}{Returns an annual average if set to TRUE.}
 }
 \description{
 Return data frame from one or more requests via the US Bureau of Labor Statistics API. Provided arguments are in the form of BLS series ids.

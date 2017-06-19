@@ -8,7 +8,7 @@ quick_unemp_rate()
 }
 \description{
 Returns the "official" unemployment rate. That is, seasonally adjusted, 16 year and over, or the "U-3" rate. SeriesID: LNS14000000.
-If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 }
 \examples{
 \dontrun{

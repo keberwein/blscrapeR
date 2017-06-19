@@ -22,7 +22,7 @@ contains industry codes and descriptions, \code{blscrapeR::area_titles} contains
 and \code{blscrapeR::size_titles} contains industry size codes. These codes can be used for the \code{sliceCode} argument.}
 }
 \description{
-Return data from the QCEW API. This is seperate from the main BLS API and returns quarterly data
+Return data from the QCEW API. This is separate from the main BLS API and returns quarterly data
 sliced by industry, area or size. Industry is identified by NIACS code and area is identified by FIPS code.
 A key is not required for the QCEW API.
 }

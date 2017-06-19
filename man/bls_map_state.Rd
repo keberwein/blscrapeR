@@ -2,7 +2,7 @@
 % Please edit documentation in R/maps.R
 \name{bls_map_state}
 \alias{bls_map_state}
-\title{Cloropleth mapping of BLS data}
+\title{choropleth mapping of BLS data}
 \usage{
 bls_map_state(map_data, fill_rate = NULL, labtitle = NULL,
   lowFill = "green", highFill = "red")
@@ -23,7 +23,7 @@ which include FIPS codes may be used as well.}
 \code{ggplot2::scale_fill_gradient}.}
 }
 \description{
-Return a ggplot object to render a cloropleth map with state outlines.
+Return a ggplot object to render a choropleth map with state outlines.
 The map files contain 2015 FIPS codes and can be used with any data set containing
 state FIPS codes. They can not be used with the leaflet package but the shape files can be
 downloaded from the Census website or with the tigris package. See the "Mapping BLS Data" vignette for this package.

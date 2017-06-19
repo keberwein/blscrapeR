@@ -2,7 +2,7 @@
 % Please edit documentation in R/maps.R
 \name{bls_map_county}
 \alias{bls_map_county}
-\title{Cloropleth mapping of BLS data}
+\title{choropleth mapping of BLS data}
 \usage{
 bls_map_county(map_data, fill_rate = NULL, labtitle = NULL,
   stateName = NULL, projection = NULL, lowFill = "green",
@@ -17,7 +17,7 @@ which include FIPS codes may be used as well.}
 
 \item{labtitle}{The main title label for your map passed as a string. The default is no title.}
 
-\item{stateName}{Optional argument if you only want to map a single state or a group of selected staes. The argument
+\item{stateName}{Optional argument if you only want to map a single state or a group of selected states. The argument
 accepts state full state names in quotes.}
 
 \item{projection}{Choices of map projection are "lambert" or "mercator". By default, the function selects Mercator for single states
@@ -30,7 +30,7 @@ and Lambert for nationwide views.}
 \code{ggplot2::scale_fill_gradient}.}
 }
 \description{
-Return a ggplot object to render a cloropleth map with county outlines.
+Return a ggplot object to render a choropleth map with county outlines.
 The map files contain 2015 FIPS codes and can be used with any data set containing
 county and state FIPS codes. They can not be used with the leaflet package but the shape files can be
 downloaded from the Census website or with the tigris package. See the "Mapping BLS Data" vignette for this package.

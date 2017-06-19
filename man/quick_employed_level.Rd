@@ -8,7 +8,7 @@ quick_employed_level()
 }
 \description{
 Returns the employment level. SeriesID: LNS12000000
-If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 }
 \examples{
 \dontrun{
