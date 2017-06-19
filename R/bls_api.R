@@ -6,9 +6,9 @@
 #' @param startyear The first year in your data set.
 #' @param endyear The last year in your data set.
 #' @param registrationKey The API key issued to you from the BLS website.
-#' @param catalog Series description information available only for certian data sets.
+#' @param catalog Series description information available only for certain data sets.
 #' @param calculations Returns year-over-year calculations if set to TRUE.
-#' @param annualaverage Retruns an annual average if set to TRUE.
+#' @param annualaverage Returns an annual average if set to TRUE.
 #' @keywords bls api economics cpi unemployment inflation
 #' @importFrom jsonlite toJSON
 #' @importFrom httr content POST content_type_json

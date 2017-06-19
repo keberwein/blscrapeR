@@ -1,7 +1,7 @@
 
 #' @title Quick unemployment rate function
 #' @description Returns the "official" unemployment rate. That is, seasonally adjusted, 16 year and over, or the "U-3" rate. SeriesID: LNS14000000.
-#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_unemp_rate
 #' @examples
@@ -22,7 +22,7 @@ quick_unemp_rate <- function (){
 
 #' @title Quick unemployment level function
 #' @description Returns the unemployment level. SeriesID: LNS13000000.
-#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_unemp_level
 #' @examples
@@ -43,7 +43,7 @@ quick_unemp_level <- function (){
 
 #' @title Quick employed rate
 #' @description Returns the "employment to population ratio." SeriesID: LNS12300000
-#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_employed_rate
 #' @examples
@@ -66,7 +66,7 @@ quick_employed_rate <- function (){
 
 #' @title Quick employed level
 #' @description Returns the employment level. SeriesID: LNS12000000
-#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_employed_level
 #' @examples
@@ -86,7 +86,7 @@ quick_employed_level <- function (){
 
 #' @title Quick Civilian Labor Force Level
 #' @description Returns the civilian labor force level. SeriesID: LNS11000000.
-#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_laborForce_level
 #' @examples
@@ -106,7 +106,7 @@ quick_laborForce_level <- function (){
 
 #' @title Quick Civilian Labor Force Rate
 #' @description Returns the civilian labor force participation rate. SeriesID: LNS11300000.
-#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_laborForce_rate
 #' @examples
@@ -126,7 +126,7 @@ quick_laborForce_rate <- function (){
 
 #' @title Quick total nonfarm employment
 #' @description Returns the Total Nonfarm Payroll Employment, seasonally adjusted. BLS id CES0000000001.
-#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will dectect it and use your key. This counts against your daily query limit.
+#' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick nonfarm_employed
 #' @export quick_nonfarm_employed
 #' @examples

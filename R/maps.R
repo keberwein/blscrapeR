@@ -1,6 +1,6 @@
 #
-#' @title Cloropleth mapping of BLS data
-#' @description Return a ggplot object to render a cloropleth map with county outlines.
+#' @title choropleth mapping of BLS data
+#' @description Return a ggplot object to render a choropleth map with county outlines.
 #' The map files contain 2015 FIPS codes and can be used with any data set containing
 #' county and state FIPS codes. They can not be used with the leaflet package but the shape files can be
 #' downloaded from the Census website or with the tigris package. See the "Mapping BLS Data" vignette for this package.
@@ -13,7 +13,7 @@
 #' calls to the \code{get_bls_county()} or \code{get_bls_state()} functions, but other dataframes, 
 #' which include FIPS codes may be used as well.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value, in quotes. NOTE: This argument is mandatory!
-#' @param stateName Optional argument if you only want to map a single state or a group of selected staes. The argument
+#' @param stateName Optional argument if you only want to map a single state or a group of selected states. The argument
 #' accepts state full state names in quotes.
 #' @param labtitle The main title label for your map passed as a string. The default is no title.
 #' @param projection Choices of map projection are "lambert" or "mercator". By default, the function selects Mercator for single states
@@ -109,8 +109,8 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
 
 
 #
-#' @title Cloropleth mapping of BLS data
-#' @description Return a ggplot object to render a cloropleth map with state outlines.
+#' @title choropleth mapping of BLS data
+#' @description Return a ggplot object to render a choropleth map with state outlines.
 #' The map files contain 2015 FIPS codes and can be used with any data set containing
 #' state FIPS codes. They can not be used with the leaflet package but the shape files can be
 #' downloaded from the Census website or with the tigris package. See the "Mapping BLS Data" vignette for this package.

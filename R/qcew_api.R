@@ -1,5 +1,5 @@
 #' @title Request data from the Quarterly Census of Employment and Wages.
-#' @description Return data from the QCEW API. This is seperate from the main BLS API and returns quarterly data
+#' @description Return data from the QCEW API. This is separate from the main BLS API and returns quarterly data
 #' sliced by industry, area or size. Industry is identified by NIACS code and area is identified by FIPS code.
 #' A key is not required for the QCEW API.
 #' @param year These data begin in 2012 and go to the most recent complete quarter. The argument can be entered

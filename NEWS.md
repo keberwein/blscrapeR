@@ -1,3 +1,7 @@
+# blscrapeR 2.1.5
+
+* Document and vignette fixes
+
 # blscrapeR 2.1.4
 
 ## New Features
