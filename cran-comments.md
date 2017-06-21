@@ -1,8 +1,3 @@
-## This is a resubmission
-
-Issues fixed:
-
-* Write "U.S." before Bureau of Labor Statistics in Description.
 
 ## Test environments
 * local OS X 10.11.5, R 3.4.0
