@@ -3,7 +3,7 @@
 language: r
 dist: trusty
 warnings_are_errors: false
-sudo: false
+sudo: required
 cache: packages
 addons:
   apt:
@@ -12,6 +12,7 @@ addons:
       - libproj-dev
 
 r_packages:
+    - units
     - sf
 
 r_binary_packages:
