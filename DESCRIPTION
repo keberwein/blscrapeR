@@ -13,7 +13,12 @@ Imports:
 	magrittr,
 	utils,
 	stats,
-	grDevices
+	grDevices,
+	tigris,
+	maptools,
+	broom,
+	sp,
+	rgdal
 Suggests:
 	testthat,
     	knitr,
