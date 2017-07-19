@@ -10,10 +10,11 @@ addons:
     packages:
       - libgdal-dev
       - libproj-dev
+      - sf-dev
+
 
 r_binary_packages:
   - rgdal
-  - sf
 
 env:
   global:
