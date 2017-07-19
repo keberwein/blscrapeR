@@ -4,6 +4,12 @@
 
 * Added the map_bls() function. This function replaces the deprecated bls_map_county() bls_map_state() functions and is not backward compatible.
 
+## Documentation
+
+* Expanded mapping section of README.
+
+* Edited mapping vignette to include new map_bls() function.
+
 # blscrapeR 2.1.5
 
 * Document and vignette fixes
