@@ -12,6 +12,7 @@ addons:
       - libproj-dev
 
 r_packages:
+    - udunits2
     - units
     - sf
 
