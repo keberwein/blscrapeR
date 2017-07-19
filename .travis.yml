@@ -1,20 +1,23 @@
 # R for travis: see documentation at https://docs.travis-ci.com/user/languages/r
 
 language: r
+r:
+    -ordel
 dist: trusty
 warnings_are_errors: false
-sudo: required
+sudo: false
 cache: packages
 addons:
   apt:
     packages:
       - libgdal-dev
       - libproj-dev
-      - sf-dev
 
+r_packages:
+    - sf
 
 r_binary_packages:
-  - rgdal
+    - rgdal
 
 env:
   global:
