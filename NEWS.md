@@ -1,3 +1,9 @@
+# blscrapeR 3.0
+
+## New Features
+
+* Added the map_bls() function. This function replaces the deprecated bls_map_county() bls_map_state() functions and is not backward compatible.
+
 # blscrapeR 2.1.5
 
 * Document and vignette fixes
