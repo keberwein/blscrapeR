@@ -23,6 +23,7 @@ NULL
 #' @title urlExists
 #' @description A utility function to run a tryCatch on a URL.
 #' @param target url
+#' @importFrom utils capture.output
 #' @export
 urlExists <- function(target) {  
     tryCatch({  
@@ -33,8 +34,10 @@ urlExists <- function(target) {
     },  
     error = function(err) {  
         occur <- grep("cannot open the connection", capture.output(err));  
-        if(length(occur) > 0) FALSE;  
-    }  
-    )  
+        if(length(occur) > 0) {
+            close(con)
+            FALSE;
+        }  
+    })  
 }  
 

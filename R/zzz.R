@@ -17,6 +17,8 @@
 #' @param map_data Dataframe to be used as the map's measures. Usually a result of 
 #' calls to the \code{get_bls_county()} or \code{get_bls_state()} functions, but other dataframes, 
 #' which include FIPS codes may be used as well.
+#' @param level The level of resolution of the data. This should be set to 'county' or 'state.' The function will attempt to assume the level
+#' from the structure of the data, but the argument may need to be set manually, depending on your data.
 #' @param fips_year The year of the available shape files that provides the closest match to your data. Current options are 2010-2016.
 #' The 2016 data is the default and fits the FIPS codes for curent data.
 #' @param fill_rate Column name from the dataframe that you want to use as a fill value, in quotes. NOTE: This argument is mandatory!
@@ -52,34 +54,44 @@
 #'
 #'
 
-map_bls <- function(map_data, fips_year=2016, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection=NULL, lowFill="green", highFill="red"){
+map_bls <- function(map_data, level=NULL, fips_year=2016, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection=NULL, lowFill="green", highFill="red"){
     # Set some dummy variables. This keeps CRAN check happy.
     map=long=lat=id=group=county_map_data=CRS='proj4string<-'=NULL
     # Check to make sure all requred variables are there.
     if (is.null(fill_rate)){
         warning("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?")
     }
-    if (is.null(map_data())){
+    if (is.null(map_data)){
         warning("Please supply a data frame containing variables to be mapped. For help, see the get_bls_county() or get_bls_state() functions.")
     }
 
-    # Load spatial data frame.
-    county <- tigris::counties(cb = TRUE, resolution = "20m", fips_year)
+    # If the 'level' argument is NULL, attempt to figure out the level from the column names in the data.
+    if(is.null(level)){
+        ifelse("fips_county" %in% colnames(map_data),  level <- "county",
+               ifelse("state_abb" %in% colnames(map_data), level <- "state", 
+                      print(warning("Please set the 'level' aregument as 'state' or 'county' according to your data."))))
+    }
+    
+    
+    # This needs to be a normal IF statement. ifelse throwns and s3 error.
+    ifelse(tolower(level)=="county", shape <- tigris::counties(cb = TRUE, resolution = "20m", year = fips_year),
+           ifelse(tolower(level)=="state", shape <- tigris::states(cb = TRUE, resolution = "20m", year = fips_year), 
+                  print(warning("The 'level' argument needs to be set to 'county' or 'state'."))))
     
     # Format spatial data fram to specified projection.
     # User Mercator projection for states unless the user overrides.
 
     if (is.null(projection)){
-        map <- spTransform(county, CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0
+        map <- spTransform(shape, CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0
                                     +x_0=0.0 +y_0=0 +k=1.0 +units=m +no_defs"))
         map@data$id <- rownames(map@data)
     }else{
         if (tolower(projection)=="lambert"){
-            map <- spTransform(county, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
+            map <- spTransform(shape, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
                                   +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"))
             map@data$id <- rownames(map@data)        }
         if (tolower(projection)=="mercator"){
-            map <- spTransform(county, CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0
+            map <- spTransform(shape, CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0
                                     +x_0=0.0 +y_0=0 +k=1.0 +units=m +no_defs"))
             map@data$id <- rownames(map@data)
         }else{
@@ -112,7 +124,7 @@ map_bls <- function(map_data, fips_year=2016, fill_rate=NULL, labtitle=NULL, sta
     # Projuce map
     map <- broom::tidy(map, region="GEOID")
     # Remove helper data and save file. Be sure to remove .Randdom.seed if exists.
-    rm(ak, county, hawi)
+    rm(ak, shape, hawi)
     
     # Unemployment statistics by county: Get and process data.
     # Check to see if user selected specific state(s).
@@ -146,3 +158,6 @@ map_bls <- function(map_data, fips_year=2016, fill_rate=NULL, labtitle=NULL, sta
                        axis.title.x=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), panel.grid.major=ggplot2::element_blank(), panel.grid.minor=ggplot2::element_blank(),
                        panel.border=ggplot2::element_blank(), panel.background=ggplot2::element_blank(), legend.title=ggplot2::element_blank())
 }
+
+
+map_bls(state, fill_rate = "unemployed_rate")
