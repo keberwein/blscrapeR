@@ -4,7 +4,7 @@ blscrapeR <img src="man/figures/blscrapeR_hex.png" align="right" />
 
 [![Build Status](https://travis-ci.org/keberwein/blscrapeR.png?branch=master)](https://travis-ci.org/keberwein/blscrapeR) [![CRAN\_Status\_Badge](http://www.r-pkg.org/badges/version/blscrapeR)](http://www.r-pkg.org/badges/version/blscrapeR) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
-Designed to be a better API wrapper for the Bureau of Labor Statistics (BLS.) The package has additional functions to help parse, analyze and visualize the data. Fundamental ideas borrowed from the `acs` package, which has similar functionality for the Census Bureau API.
+Designed to be a tidy API wrapper for the Bureau of Labor Statistics (BLS.) The package has additional functions to help parse, analyze and visualize the data. The package utalizes "tidyverse" concepts for internal functionality and encourages the use of those concepts with the output data.
 
 Install
 -------
@@ -33,12 +33,14 @@ library(blscrapeR)
 # Grab the Unemployment Rate (U-3) 
 df <- quick_unemp_rate()
 tail(df, 5)
-#>    year period periodName value footnotes    seriesID
-#> 25 2015    M05        May   5.5           LNS14000000
-#> 26 2015    M04      April   5.4           LNS14000000
-#> 27 2015    M03      March   5.4           LNS14000000
-#> 28 2015    M02   February   5.5           LNS14000000
-#> 29 2015    M01    January   5.7           LNS14000000
+#> # A tibble: 5 x 6
+#>    year    period periodName value footnotes  seriesID
+#>   <dbl>    <list>     <list> <dbl>    <list>    <list>
+#> 1  2015 <chr [1]>  <chr [1]>   5.5 <chr [1]> <chr [1]>
+#> 2  2015 <chr [1]>  <chr [1]>   5.4 <chr [1]> <chr [1]>
+#> 3  2015 <chr [1]>  <chr [1]>   5.4 <chr [1]> <chr [1]>
+#> 4  2015 <chr [1]>  <chr [1]>   5.5 <chr [1]> <chr [1]>
+#> 5  2015 <chr [1]>  <chr [1]>   5.7 <chr [1]> <chr [1]>
 ```
 
 **DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
@@ -90,7 +92,7 @@ library(blscrapeR)
 # UNEMPLOYMENT LEVEL - Civilian labor force - LNS13000000
 # UNEMPLOYMENT RATE - Civilian labor force - LNS14000000
 df <- bls_api(c("LNS12000000", "LNS13000000", "LNS14000000"),
-              startyear = 2008, endyear = 2017) %>%
+              startyear = 2008, endyear = 2017, registrationKey = Sys.getenv("BLS_KEY")) %>%
     # Add time-series dates
     dateCast()
 ```
@@ -107,38 +109,15 @@ ggplot(gg1200, aes(x=date, y=value)) +
 
 ![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/emplevelggreadme.png?raw=true)
 
-``` r
-# Plot unemployment level
-gg1300 <- subset(df, seriesID=="LNS13000000")
-library(ggplot2)
-ggplot(gg1300, aes(x=date, y=value)) +
-    geom_line() +
-    labs(title = "Unemployment Level - Civ. Labor Force")
-```
-
-![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/unemplevggreadme.png?raw=true)
-
-``` r
-# Plot unemployment rate
-gg1400 <- subset(df, seriesID=="LNS14000000")
-library(ggplot2)
-ggplot(gg1400, aes(x=date, y=value)) +
-    geom_line() +
-    labs(title = "Unemployment Rate - Civ. Labor Force")
-```
-
-![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/unempggreadme.png?raw=true)
-
 ### Median Weekly Earnings
 
 ``` r
 library(blscrapeR)
-library(tidyr)
+library(tidyverse)
 # Median Usual Weekly Earnings by Occupation, Unadjusted Second Quartile.
 # In current dollars
-df <- bls_api(c("LEU0254530800", "LEU0254530600"), startyear = 2000, endyear = 2015) %>%
-    spread(seriesID, value) %>%
-    dateCast()
+df <- bls_api(c("LEU0254530800", "LEU0254530600"), startyear = 2000, endyear = 2016, registrationKey = Sys.getenv("BLS_KEY")) %>%
+    spread(seriesID, value) %>% dateCast()
 ```
 
 ``` r
@@ -171,7 +150,7 @@ library(blscrapeR)
 df <- get_bls_county()
 
 #Use map function with arguments.
-bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
+map_bls(map_data = df, fill_rate = "unemployed_rate", 
                labtitle = "Unemployment Rate by County")
 ```
 
