@@ -25,8 +25,6 @@
 #' @param stateName Optional argument if you only want to map a single state or a group of selected states. The argument
 #' accepts state full state names in quotes.
 #' @param labtitle The main title label for your map passed as a string. The default is no title.
-#' @param projection Choices of map projection are "lambert" or "mercator". By default, the function selects Mercator for single states
-#' and Lambert for nationwide views.
 #' @param lowFill The fill color of the lower values being mapped. The default color is green, but can be changed to any color accepted by
 #' \code{ggplot2::scale_fill_gradient}.
 #' @param highFill The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
@@ -54,9 +52,9 @@
 #'
 #'
 
-map_bls <- function(map_data, level=NULL, fips_year=2016, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection=NULL, lowFill="green", highFill="red"){
+map_bls <- function(map_data, level=NULL, fips_year=2016, fill_rate=NULL, labtitle=NULL, stateName=NULL, lowFill="green", highFill="red"){
     # Set some dummy variables. This keeps CRAN check happy.
-    map=long=lat=id=group=county_map_data=CRS='proj4string<-'=NULL
+    map=long=lat=id=group=county_map_data=CRS=state_check='proj4string<-'=NULL
     # Check to make sure all requred variables are there.
     if (is.null(fill_rate)){
         warning("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?")
@@ -74,55 +72,42 @@ map_bls <- function(map_data, level=NULL, fips_year=2016, fill_rate=NULL, labtit
     
     
     # This needs to be a normal IF statement. ifelse throwns and s3 error.
-    ifelse(tolower(level)=="county", shape <- tigris::counties(cb = TRUE, resolution = "20m", year = fips_year),
-           ifelse(tolower(level)=="state", shape <- tigris::states(cb = TRUE, resolution = "20m", year = fips_year), 
-                  print(warning("The 'level' argument needs to be set to 'county' or 'state'."))))
+    if(tolower(level)=="county"){
+        shape <- tigris::counties(cb = TRUE, resolution = "20m", year = fips_year)
+    }
+    if(tolower(level)=="state"){
+        shape <- tigris::states(cb = TRUE, resolution = "20m", year = fips_year)
+    }
     
     # Format spatial data fram to specified projection.
     # User Mercator projection for states unless the user overrides.
-
-    if (is.null(projection)){
-        map <- spTransform(shape, CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0
+    if (!is.null(stateName)){
+        map <- sp::spTransform(shape, CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0
                                     +x_0=0.0 +y_0=0 +k=1.0 +units=m +no_defs"))
         map@data$id <- rownames(map@data)
-    }else{
-        if (tolower(projection)=="lambert"){
-            map <- spTransform(shape, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
-                                  +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"))
-            map@data$id <- rownames(map@data)        }
-        if (tolower(projection)=="mercator"){
-            map <- spTransform(shape, CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0
-                                    +x_0=0.0 +y_0=0 +k=1.0 +units=m +no_defs"))
-            map@data$id <- rownames(map@data)
-        }else{
-            message("Supported projections are Lambert and Mercator. A null projection argument returns Mercator for this function.")
-        }
     }
     
+    # Use Lambert for entire country.
+    if (is.null(stateName)){
+        map <- sp::spTransform(shape, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
+                                  +y_0=0 +a=6370997 +b=6370997 +units=m +no_defs"))
+        map@data$id <- rownames(map@data)
+    }
+
     # Rotate and shrink ak.
-    ak <- map[map$STATEFP=="02",]
-    ak <- elide(ak, rotate=-50)
-    ak <- elide(ak, scale=max(apply(bbox(ak), 1, diff)) / 2.3)
-    ak <- elide(ak, shift=c(-2100000, -2500000))
+    ak <- subset(map, STATEFP=="02") %>% maptools::elide(rotate=-50)
+    ak <- maptools::elide(ak, scale=max(apply(bbox(ak), 1, diff)) / 2.5)
+    ak <- maptools::elide(ak, shift=c(-2100000, -2500000))
     proj4string(ak) <- proj4string(map)
     
     # Rotate and Shift hawi
-    hawi <- map[map$STATEFP=="15",]
-    hawi <- elide(hawi, rotate=-35)
-    hawi <- elide(hawi, shift=c(5400000, -1400000))
+    hawi <- subset(map, STATEFP=="15") %>% maptools::elide(hawi, rotate=-35)
+    hawi <- maptools::elide(hawi, shift=c(5400000, -1400000))
     proj4string(hawi) <- proj4string(map)
-    
-    # Also remove Puerto Rico (72), Guam (66), Virgin Islands (78), American Samoa (60) Mariana Islands (69)
-    # Micronesia (64), Marshall Islands (68), Palau (70), Minor Islands (74)
-    map <- map[!map$STATEFP %in% c("02", "15", "72", "66", "78", "60", "69",
-                                            "64", "68", "70", "74"),]
-    # Make sure other outling islands are removed.
-    map <- map[!map$STATEFP %in% c("81", "84", "86", "87", "89", "71", "76",
-                                            "95", "79"),]
-    map <- rbind(map, ak, hawi)
-    
     # Projuce map
-    map <- broom::tidy(map, region="GEOID")
+    map <- subset(map, !(STATEFP %in% c("02", "15", "72", "66", "78", "60", "69", "64", "68", "70", 
+                                        "74", "81", "84", "86", "87", "89", "71", "76", "95", "79"))) %>% rbind(ak, hawi) %>% 
+        broom::tidy(map, region="GEOID")
     # Remove helper data and save file. Be sure to remove .Randdom.seed if exists.
     rm(ak, shape, hawi)
     
@@ -139,12 +124,14 @@ map_bls <- function(map_data, level=NULL, fips_year=2016, fill_rate=NULL, labtit
 
         # If state list is valid. Grab State FIPS codes from internal data set and subset map.
         # Add state_id to map frame
+        state_fips <- blscrapeR::state_fips
         map$state_id <- substr(map$id, 1,2)
         state_rows <- sapply(stateName, function(x) grep(x, state_fips$state))
         state_selection <- state_fips$fips_state[state_rows]
         statelist <- list()
         map <- map[(map$state_id %in% state_selection),]
     }
+    
     # Plot
     # 
     # Working up to here---Need to figure out scale_fill_gradient in ggplot. Though this is working in the production version.
@@ -154,10 +141,11 @@ map_bls <- function(map_data, level=NULL, fips_year=2016, fill_rate=NULL, labtit
         ggplot2::geom_map(data=map_data, map=map, ggplot2::aes_string(map_id="fips", fill=fill_rate), color="#0e0e0e", size=0.25) +
         ggplot2::scale_fill_gradient(low=lowFill, high=highFill, na.value="grey50") +
         ggplot2::labs(title=labtitle) + 
-        ggplot2::theme(axis.line=ggplot2::element_blank(), axis.text.x=ggplot2::element_blank(), axis.text.y=ggplot2::element_blank(), axis.ticks=ggplot2::element_blank(),
-                       axis.title.x=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), panel.grid.major=ggplot2::element_blank(), panel.grid.minor=ggplot2::element_blank(),
-                       panel.border=ggplot2::element_blank(), panel.background=ggplot2::element_blank(), legend.title=ggplot2::element_blank())
+        ggplot2::theme(axis.line=ggplot2::element_blank(), axis.text.x=ggplot2::element_blank(), 
+                       axis.text.y=ggplot2::element_blank(), axis.ticks=ggplot2::element_blank(),
+                       axis.title.x=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), 
+                       panel.grid.major=ggplot2::element_blank(), panel.grid.minor=ggplot2::element_blank(),
+                       panel.border=ggplot2::element_blank(), panel.background=ggplot2::element_blank(), 
+                       legend.title=ggplot2::element_blank())
 }
 
-
-map_bls(state, fill_rate = "unemployed_rate")

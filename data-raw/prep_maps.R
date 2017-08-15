@@ -2,16 +2,16 @@
 # It also re-locates ak and hawi
 # This only needs to be run onece per year, or when the census releases a new shape file.
 
-#library(sp)
-#library(broom)
-#library(rgdal)
-#library(maptools)
-#library(devtools)
-#library(tigris)
+library(sp)
+library(broom)
+library(rgdal)
+library(maptools)
+library(devtools)
+library(tigris)
 
 # Read county shapefile from Tiger.
 # https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html
-county <- tigris::counties(cb = TRUE, resolution = "20m", year = 2015)
+county <- tigris::counties(cb = TRUE, resolution = "20m", year = 2016)
 
 #  Convert to Lambert Azimuthal Equal Area Projection
 us.map <- spTransform(county, CRS("+proj=laea +lat_0=45 +lon_0=-100 +x_0=0 
@@ -52,7 +52,7 @@ rm(county_map_data)
 ## County Map Mercator Projection.
 # Read county shapefile from Tiger.
 # https://www.census.gov/geo/maps-data/data/cbf/cbf_counties.html
-county <- tigris::counties(cb = TRUE, resolution = "20m", year = 2015)
+county <- tigris::counties(cb = TRUE, resolution = "20m", year = 2016)
 
 # Convert to Mercator projection.
 us.map <- spTransform(county, CRS("+proj=merc +a=6378137 +b=6378137 +lat_ts=0.0 +lon_0=0.0
@@ -74,7 +74,7 @@ proj4string(hawi) <- proj4string(us.map)
 
 # Also remove Puerto Rico (72), Guam (66), Virgin Islands (78), American Samoa (60) Mariana Islands (69)
 # Micronesia (64), Marshall Islands (68), Palau (70), Minor Islands (74)
-us.map <- us.map[!us.map$STATEFP %in% c("02", "15", "72", "66", "78", "60", "69",
+us.map <- us.map[!us.map$STATEFP %in% c("02", "15", "72", "66", "67", "68", "78", "60", "69",
                                         "64", "68", "70", "74"),]
 # Make sure other outling islands are removed.
 us.map <- us.map[!us.map$STATEFP %in% c("81", "84", "86", "87", "89", "71", "76",

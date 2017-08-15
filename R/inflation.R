@@ -4,6 +4,8 @@
 #' For example, if you want to see the value of a 2007 dollar in 2015, you would select 2015 as a base year and find 2007 in the table.
 #' @keywords bls api economics cpi unemployment inflation
 #' @importFrom stats aggregate
+#' @importFrom dplyr mutate select rename
+#' @importFrom tibble as_tibble
 #' @export inflation_adjust
 #' @examples
 #' \dontrun{
@@ -18,25 +20,24 @@ inflation_adjust <- function(base_year=NA){
         stop(message("Please enter your date as a four-digit integer."))
     }
     #Load file from BLS servers
-    temp<-tempfile()
+    temp <- tempfile()
+    # Add urlEXists here.
+    
     download.file("https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems",temp)
-    cu_main<-read.table(temp, header=FALSE, sep="\t", skip=1, stringsAsFactors=FALSE, strip.white=TRUE)
-    colnames(cu_main)<-c("series_id", "year", "period", "value", "footnote_codes")
+    cu_temp <- read.table(temp, header=FALSE, sep="\t", skip=1, stringsAsFactors=FALSE, strip.white=TRUE)
+    colnames(cu_temp) <- c("series_id", "year", "period", "value", "footnote_codes")
     unlink(temp)
     
     # Data prep.
-    cu_main <- subset(cu_main, series_id=="CUSR0000SA0" & period!="M13" & period!="S01" & period!="S02" & period!="S03") 
-    cu_main$date <-as.Date(paste(cu_main$year, cu_main$period,"01",sep="-"),"%Y-M%m-%d")
-    cu_main <- cu_main[c('date','value')]
-    
+    cu_main <- subset(cu_temp, series_id=="CUSR0000SA0" & period!="M13" & period!="S01" & period!="S02" & period!="S03") %>% tibble::as_tibble() %>%
+        dplyr::mutate(date=as.Date(paste(year, period,"01",sep="-"),"%Y-M%m-%d"), year=format(date, '%Y')) %>% 
+        dplyr::select(date, period, year, value)
     # Annual aggregation.
-    #cpi_main <- xts::xts(cu_main[,-1], order.by=cu_main[,1])
-    cu_main$year <- format(cu_main$date, '%Y')
-    avg.cpi <- aggregate(cu_main$value, by=list(cu_main$year), FUN=mean)
-    colnames(avg.cpi)<-c("year", "avg.cpi")
+    avg.cpi <- aggregate(cu_main$value, by=list(cu_main$year), FUN=mean) %>% dplyr::rename(year=Group.1, avg_cpi=x) %>% tibble::as_tibble()
     # Formula for calculating inflation example: $1.00 * (1980 CPI/ 2014 CPI) = 1980 price.
     avg.cpi$adj_value <- avg.cpi[,2] / avg.cpi[as.numeric(which(avg.cpi$year==as.character(base_year))),2]
     avg.cpi$base_year <- as.character(base_year)
     avg.cpi$pct_increase <- (1-avg.cpi$adj_value) * -100
     avg.cpi$adj_value <- round(avg.cpi$adj_value, 2)
 }
+

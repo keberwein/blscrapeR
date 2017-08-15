@@ -24,7 +24,7 @@ NULL
 #' @description A utility function to run a tryCatch on a URL.
 #' @param target url
 #' @importFrom utils capture.output
-#' @export
+#' @export urlExists
 urlExists <- function(target) {  
     tryCatch({  
         con <- url(target)  

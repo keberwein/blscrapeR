@@ -9,6 +9,8 @@
 #' @param stateName is an optional argument if you only want data for certain state(s). The argument is NULL by default and
 #' will return data for all 50 states.
 #' @importFrom stats na.omit
+#' @importFrom tibble as_tibble
+#' @importFrom dplyr rename mutate
 #' @export get_bls_county
 #' @examples  \dontrun{
 #' # Most recent month in the data set.
@@ -41,17 +43,13 @@ get_bls_county <- function(date_mth = NULL, stateName = NULL){
         temp<-tempfile()
         download.file("https://www.bls.gov/web/metro/laucntycur14.txt", temp)
     }
-    countyemp <- read.csv(temp, fill=T, header=F, sep="|", skip=6, stringsAsFactors=F, strip.white=T)
-    colnames(countyemp) <- c("area_code", "fips_state", "fips_county", "area_title", "period",
-                             "labor_force", "employed", "unemployed", "unemployed_rate")
+    countyemp <- read.csv(temp, fill=T, header=F, sep="|", skip=6, stringsAsFactors=F, strip.white=T) %>% tibble::as_tibble() %>%
+        dplyr::rename(area_code=V1, fips_state=V2, fips_county=V3, area_title=V4, period=V5, labor_force=V6, employed=V7, unemployed=V8, unemployed_rate=V9) %>%
+        # Get rid of empty rows at the bottom and set period to proper date format.
+        na.omit() %>% dplyr::mutate(period=as.Date(paste("01-", period, sep = ""), format = "%d-%b-%y"))
+    
     unlink(temp)
-    # Get rid of empty rows at the bottom.
-    countyemp <- na.omit(countyemp)
-    
-    # Set period to proper date format.
-    period <- contyemp$period
-    countyemp$period <- as.Date(paste("01-", countyemp$period, sep = ""), format = "%d-%b-%y")
-    
+
     # Check to see if user selected specific state(s).
     if (!is.null(stateName)){
         # Check to see if states exists.
@@ -62,14 +60,12 @@ get_bls_county <- function(date_mth = NULL, stateName = NULL){
         # If state list is valid. Grab State FIPS codes from internal data set and subset countyemp
         state_rows <- sapply(stateName, function(x) grep(x, state_fips$state))
         state_selection <- state_fips$fips_state[state_rows]
-        statelist <- list()
-        for (s in as.numeric(state_selection)) {
+
+        statelist <- purrr::map(state_selection, function(s){
             state_vals <- subset(countyemp, fips_state==s)
-            statelist[[s]] <- state_vals
-        }
-        
+        })
+
         countyemp <- do.call(rbind, statelist)
-        #countyemp <- data.table::rbindlist(statelist)
     }
     
     # Check for date or dates.
@@ -98,23 +94,20 @@ get_bls_county <- function(date_mth = NULL, stateName = NULL){
     if (is.null(date_mth)){
         date_mth <- max(countyemp$period)
     }
-    datalist <- list()
-    for (i in date_mth) {
+    
+    datalist <- purrr::map(date_mth, function(i){
         mth_vals <- subset(countyemp, period==i)
-        datalist[[i]] <- mth_vals
-    }
+    })
+    
     # Rebind.
     df <- do.call(rbind, datalist)
-    #df <- data.table::rbindlist(datalist)
-    # Correct column data fromats.
-    df$unemployed <- as.numeric(gsub(",", "", as.character(df$unemployed)))
-    df$employed <- as.numeric(gsub(",", "", as.character(df$employed)))
-    df$labor_force <- as.numeric(gsub(",", "", as.character(df$labor_force)))
     
-    # Get the FIPS code: Have to add leading zeros to any single digit number and combine them.
-    df$fips_county <- formatC(df$fips_county, width = 3, format = "d", flag = "0")
-    df$fips_state <- formatC(df$fips_state, width = 2, format = "d", flag = "0")
-    df$fips <- paste(df$fips_state,df$fips_county,sep="")
+    # Correct column data types.
+    df %<>% dplyr::mutate(unemployed=as.numeric(gsub(",", "", as.character(unemployed))), employed=as.numeric(gsub(",", "", as.character(employed))),
+                          labor_force=as.numeric(gsub(",", "", as.character(labor_force)))) %>%
+        # Get the FIPS code: Have to add leading zeros to any single digit number and combine them.
+        dplyr::mutate(fips_county=formatC(fips_county, width = 3, format = "d", flag = "0"),
+                      fips_state=formatC(df$fips_state, width = 2, format = "d", flag = "0"), fips=paste(df$fips_state,df$fips_county,sep=""))
     
     return(df)
 }

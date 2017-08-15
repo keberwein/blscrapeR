@@ -1,6 +1,6 @@
 #library(utils)
 
-# 2015 FIPS:
+# 2016 FIPS:
 # This will have to be examined every year for county name changes.
 fileUrl <- "http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt"
 download.file(fileUrl, destfile="county_fips.txt", method="curl")

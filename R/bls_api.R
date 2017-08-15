@@ -12,6 +12,8 @@
 #' @keywords bls api economics cpi unemployment inflation
 #' @importFrom jsonlite toJSON
 #' @importFrom httr content POST content_type_json
+#' @importFrom purrr map
+#' @importFrom tibble as_tibble
 #' @export bls_api
 #' @seealso \url{https://www.bls.gov/data/}
 #' @seealso \url{https://beta.bls.gov/dataQuery/search}
@@ -107,15 +109,15 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
     jsondat <- httr::content(httr::POST(base_url, body = payload, httr::content_type_json()))
     
     if(length(jsondat$Results) > 0) {
-        dt <- do.call("rbind",lapply(jsondat$Results$series, function(s) {
-            dt <- do.call("rbind", lapply(s$data, function(d) {
+        dt <- do.call("rbind",purrr::map(jsondat$Results$series, function(s) {
+            dt <- do.call("rbind", purrr::map(s$data, function(d) {
                 d[["footnotes"]] <- paste(unlist(d[["footnotes"]]), collapse = " ")
                 d[["seriesID"]] <- paste(unlist(s[["seriesID"]]), collapse = " ")
-                d <- lapply(lapply(d, unlist), paste, collapse=" ")
+                d <- purrr::map(purrr::map(d, unlist), paste, collapse=" ")
             }))
         }))
         jsondat$Results <- dt
-        df <- as.data.frame(jsondat$Results)
+        df <- tibble::as_tibble(jsondat$Results)
         df$value <- as.numeric(as.character(df$value))
         
         if ("year" %in% colnames(df)){
@@ -129,4 +131,3 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
     }
     return(df)
 }
-
