@@ -48,6 +48,11 @@ get_bls_county <- function(date_mth = NULL, stateName = NULL){
         # Get rid of empty rows at the bottom and set period to proper date format.
         na.omit() %>% dplyr::mutate(period=as.Date(paste("01-", period, sep = ""), format = "%d-%b-%y"))
     
+    # Get the FIPS code: Have to add leading zeros to any single digit number and combine them.
+    countyemp$fips_county <- formatC(countyemp$fips_county, width = 3, format = "d", flag = "0")
+    countyemp$fips_state <- formatC(countyemp$fips_state, width = 2, format = "d", flag = "0")
+    countyemp$fips <- paste(countyemp$fips_state,countyemp$fips_county,sep="")
+    
     unlink(temp)
 
     # Check to see if user selected specific state(s).
@@ -105,10 +110,6 @@ get_bls_county <- function(date_mth = NULL, stateName = NULL){
     # Correct column data types.
     df %<>% dplyr::mutate(unemployed=as.numeric(gsub(",", "", as.character(unemployed))), employed=as.numeric(gsub(",", "", as.character(employed))),
                           labor_force=as.numeric(gsub(",", "", as.character(labor_force))))
-    # Get the FIPS code: Have to add leading zeros to any single digit number and combine them.
-    df$fips_county <- formatC(df$fips_county, width = 3, format = "d", flag = "0")
-    df$fips_state <- formatC(df$fips_state, width = 2, format = "d", flag = "0")
-    df$fips <- paste(df$fips_state,df$fips_county,sep="")
-    
+
     return(df)
 }

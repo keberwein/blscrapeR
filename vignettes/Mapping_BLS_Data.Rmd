@@ -17,10 +17,9 @@ The example below shows the most recent unemployment rates for Florida.
 
 ```{r eval=FALSE}
 library(blscrapeR)
-# Map the unemployment rate for the Southeastern United States.
 df <- get_bls_county(stateName = "Florida")
 
-bls_map_county(map_data=df, fill_rate = "unemployed_rate", 
+map_bls(map_data=df, fill_rate = "unemployed_rate", 
                stateName = "Florida")
 ```
 
@@ -32,8 +31,8 @@ Also, the states can be called together to form larger districts. Below is an ex
 # Map the unemployment rate for the Southeastern United States.
 df <- get_bls_county(stateName = c("Florida", "Georgia", "Alabama"))
 
-bls_map_county(map_data=df, fill_rate = "unemployed_rate", 
-stateName = c("Florida", "Georgia", "Alabama"))
+map_bls(map_data=df, fill_rate = "unemployed_rate", projection = "lambert",
+               stateName = c("Florida", "Georgia", "Alabama"))
 ```
 
 ![](https://raw.githubusercontent.com/keberwein/keberwein.github.io/master/images/bls_img/bus_south_map.png)
@@ -42,7 +41,7 @@ stateName = c("Florida", "Georgia", "Alabama"))
 
 If you don't like any of the pre-fabricated maps, that's alright because `blscrapeR` provides the fortified map data, which includes `longitude`, `latitude` and `FIPS` codes. This data set is suitable for any kind of `ggplot2` map you can think of.
 
-####First, call the internal map data and have a look:
+First, call the internal map data and have a look:
 ```{r}
 library(blscrapeR)
 us_map <- county_map_data
@@ -51,7 +50,7 @@ head(us_map)
 
 Notice the `id` column looks a lot like one of the FIPS codes returned by the `get_bls_county()` function? This is actually a concatenation of the state + county FIPS codes. The first two numbers are the state FIPS and the last four are the county FIPS. These boundaries currently represent 20015/2016 and will be updated accordingly so they always represent the current year.
 
-####Next, produce your custom map:
+Next, produce your custom map:
 ```{r eval=FALSE}
 library(blscrapeR)
 library(ggplot2)
