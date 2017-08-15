@@ -90,7 +90,8 @@ get_bls_state <- function(date_mth=NULL, seasonality=TRUE){
         output <- cols
     })
 
-    df <- do.call(rbind, datalist) %>% tibble::as_tibble() %>%
+    df <- do.call(rbind, datalist)
+    df %<>% tibble::as_tibble() %>%
         # Convert to correct data types.
         dplyr::mutate(month=as.Date(paste('01', df$month), format = '%d %b %Y'),
                       civ_pop=as.numeric(gsub(",", "", civ_pop)),

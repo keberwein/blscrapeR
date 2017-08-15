@@ -155,7 +155,7 @@ bls_map_state <- function(map_data, fill_rate=NULL, labtitle=NULL, lowFill="gree
     #Plot
     ggplot2::ggplot() + 
         ggplot2::geom_map(data=map, map=map, ggplot2::aes(x=long, y=lat, map_id=id, group=group)) +
-        ggplot2::geom_map(data=map_data, map=map, ggplot2::aes_string(map_id="fips", fill=fill_rate), color="#0e0e0e", size=0.25) +
+        ggplot2::geom_map(data=map_data, map=map, ggplot2::aes_string(map_id="fips_state", fill=fill_rate), color="#0e0e0e", size=0.25) +
         ggplot2::scale_fill_gradient(low=lowFill, high=highFill, na.value="grey50") +
         ggplot2::labs(title=labtitle) + 
         ggplot2::theme(axis.line=ggplot2::element_blank(), axis.text.x=ggplot2::element_blank(), axis.text.y=ggplot2::element_blank(), axis.ticks=ggplot2::element_blank(),

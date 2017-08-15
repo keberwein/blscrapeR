@@ -47,7 +47,6 @@
 
 bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection=NULL, lowFill="green", highFill="red"){
     warning("This function has been deprecated, consider using map_bls() instead.")
-    Sys.sleep(10)
     
     if (is.null(fill_rate)){
         stop(message("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?"))
@@ -147,8 +146,7 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
 
 bls_map_state <- function(map_data, fill_rate=NULL, labtitle=NULL, lowFill="green", highFill="red"){
     warning("This function has been deprecated, consider using map_bls() instead.")
-    Sys.sleep(10)
-    
+
     if (is.null(fill_rate)){
         stop(message("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?"))
     }
