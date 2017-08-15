@@ -2,6 +2,7 @@ library(blscrapeR)
 library(jsonlite)
 library(httr)
 library(testthat)
+library(tibble)
 
 seriesid <-  'LAUCN040010000000005'
 payload <- list(seriesid = seriesid)
@@ -35,6 +36,7 @@ if(length(jsondat$Results) > 0) {
     }
 }
 
+df <- as_tibble(df)
 
 # Check actual fucntion
 out <- blscrapeR::bls_api('LAUCN040010000000005')
