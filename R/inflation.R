@@ -15,7 +15,7 @@
 #' 
 inflation_adjust <- function(base_year=NA){
     # Set some dummy variables. This keeps CRAN check happy.
-    series_id=period=index=coredata=footnote_codes=NULL
+    series_id=period=index=coredata=footnote_codes=value=Group.1=x=year=NULL
     if (nchar(base_year) != 4){
         stop(message("Please enter your date as a four-digit integer."))
     }

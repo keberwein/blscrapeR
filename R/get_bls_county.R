@@ -33,7 +33,7 @@
 
 get_bls_county <- function(date_mth = NULL, stateName = NULL){
     # Set some dummy variables. This keeps CRAN check happy.
-    countyemp=contyemp=fips_state=NULL
+    countyemp=contyemp=fips_state=V1=V2=V3=V4=V5=V6=V7=V8=V9=period=i=unemployed=employed=labor_force=NULL
     state_fips <- blscrapeR::state_fips
     # See if URL is available
     target <- blscrapeR::urlExists("https://www.bls.gov/web/metro/laucntycur14.txt")

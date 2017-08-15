@@ -21,7 +21,7 @@
 #'
 
 get_bls_state <- function(date_mth=NULL, seasonality=TRUE){
-    state.name=NULL
+    state.name=civ_pop=labor_force=employed=unemployed=NULL
     seas <- "https://www.bls.gov/web/laus/ststdsadata.txt"
     notseas <- "https://www.bls.gov/web/laus/ststdnsadata.txt"
     if (seasonality == TRUE){
