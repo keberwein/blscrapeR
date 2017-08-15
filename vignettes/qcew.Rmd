@@ -13,7 +13,7 @@ vignette: >
 
 The Quarterly Census of Employment and Wages (QCEW) is a division of the BLS. Some QCEW time-series data is available via the main BLS API, but the QCEW also houses quarterly data on their own API. The QCEW API returns employment and wage statistics sliced by area, industry type, or industry size. For further documentation on the QCEW API, you can refer to the [QCEW website](http://data.bls.gov/cew/doc/access/csv_data_slices.htm).
 
-###The QCEW API
+##The QCEW API
 
 The QCEW API is structured differently than the main BLS API. For this reason, the blscrapeR package includes a function for extracting these data.
 
@@ -24,7 +24,7 @@ library(blscrapeR)
 dat <- qcew_api(year=2016, qtr=1, slice="industry", sliceCode=5112)
 ```
 
-###Function Arguments
+##Function Arguments
 
 * The `year` argument is passed as a four-digit numeral. The data in the QCEW API begin on Q1 2012 and are current up to the most recently completed quarter.
 
@@ -38,19 +38,19 @@ dat <- qcew_api(year=2016, qtr=1, slice="industry", sliceCode=5112)
 
 The `qcew_api()` function accepts various codes in the `sliceCode` argument. The `sliceCode` that is used will depend on the slice we wish to see. There are three built-in data sets to help with our `sliceCode` selections.
 
-####Area Description Data (FIPS codes)
+##Area Description Data (FIPS codes)
 ```{r, eval=FALSE}
 areaCodes <- blscrapeR::area_titles
 head(areaCodes)
 ```
 
-####Industry Description Data (NIACS codes)
+##Industry Description Data (NIACS codes)
 ```{r, eval=FALSE}
 industryCodes <- blscrapeR::niacs
 head(industryCodes)
 ```
 
-####Industry Size Data (Size codes)
+##Industry Size Data (Size codes)
 ```{r, eval=FALSE}
 sizeCodes <- blscrapeR::size_titles
 head(sizeCodes)

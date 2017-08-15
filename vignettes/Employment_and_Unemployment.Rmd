@@ -15,7 +15,7 @@ vignette: >
 
 The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](http://www.bls.gov/data/). The selected examples below do not include all series or databases.
 
-###Catagories you will find useful are:
+##Catagories you will find useful are:
 
 * [CPS](http://data.bls.gov/cgi-bin/surveymost?ln) (Current Population Survey) includes employment and unemployment rates nationally.
 
@@ -35,7 +35,7 @@ The most difficult thing about working with BLS data is gaining a clear understa
 
 *Note: The hyperlinks above link to lists of the most popular seriesIDs, but are only a small sample of all the data tracked by the BLS.*
 
-####CPS
+##CPS
 
 An example of employment statistics from is a comparison of two different [unemployment rates](http://www.bls.gov/news.release/empsit.t15.htm) from the CPS. 
 
@@ -46,18 +46,12 @@ Below is the U-3 Unemployment Rate (the "official" rate) vs. the U-6 Unemploymen
 # More information on unemployment rates here:
 # http://www.bls.gov/news.release/empsit.t15.htm
 library(blscrapeR)
-library(ggplot2)
-library(tidyr)
+library(tidyverse)
 df <- bls_api(c("LNS13327709", "LNS14000000"), startyear = 2000, endyear = 2015) %>%
     spread(seriesID, value) %>%
     dateCast()
 
 tail(df)
-
-ggplot(data = df, aes(x = date)) + 
-    geom_line(aes(y = LNS14000000, color = "U-3")) +
-    geom_line(aes(y = LNS13327709, color = "U-6")) + 
-    labs(title = "US Unemployment") + ylab("Unemployment Rate") 
 ```
 
 
@@ -65,44 +59,31 @@ Another example from the CPS deals with median weekly earnings by occupation. In
 
 ```{r eval=FALSE}
 library(blscrapeR)
-library(ggplot2)
-library(tidyr)
+library(tidyverse)
 df <- bls_api(c("LEU0254530800", "LEU0254530600"), startyear = 2000, endyear = 2015) %>%
     spread(seriesID, value) %>%
     dateCast()
 
 tail(df)
 
-ggplot(data = df, aes(x = date)) + 
-    geom_line(aes(y = LEU0254530800, color = "Database Admins.")) +
-    geom_line(aes(y = LEU0254530600, color = "Software Devs.")) + 
-    labs(title = "Median Pay by Occupation") + ylab("Median Weekly Pay USD")
 ```
 
-
-####ATUS
+##ATUS
 
 The ATUS is a survey of how Americans use their time. A simple analysis could be how much time Americans spend watching television vs. how much time they spend socializing and communicating in a given day.
 
 ```{r eval=FALSE}
 library(blscrapeR)
-library(ggplot2)
-library(tidyr)
+library(tidyverse)
 
 df <- bls_api(c("TUU10101AA01014236", "TUU10101AA01013951"), startyear = 2005, endyear = 2015) %>%
     spread(seriesID, value) %>%
     dateCast()
 
 tail(df)
-
-ggplot(data = df, aes(x = date)) + 
-    geom_line(aes(y = TUU10101AA01014236, color = "Watching TV")) +
-    geom_line(aes(y = TUU10101AA01013951, color = "Communicating")) + 
-    labs(title = "Time Use (in hours)t") + ylab("Time Use")
 ```
 
-
-####CES
+##CES
 
 An example from the CES would be to calculate the penetration rate of a certain industry. We can do this by dividing the number of people employed in an industry by the total employed workforce.
 
@@ -110,7 +91,7 @@ For example, to determine the workforce penetration rate for the Education and H
 
 ```{r eval=FALSE}
 library(blscrapeR)
-library(tidyr)
+library(tidyverse)
 df <- bls_api(c("SMS01000000000000001", "SMS01000006500000001"),
                 startyear = 2006, endyear = 2016)
 
@@ -119,24 +100,18 @@ df$penetration_rt <- df$SMS01000006500000001 / df$SMS01000000000000001
 tail(df)
 ```
 
-####QCEW
+##QCEW
 
 The QCEW is a quarterly report that focuses primarily on specific cities, states and industries. For example, we could look at the total workforce in the Software Publishing industry in Santa Clara County, CA as compared to Orange County, FL:
 
 ```{r eval=FALSE}
 library(blscrapeR)
-library(ggplot2)
-library(tidyr)
+library(tidyverse)
 
 df <- bls_api(c("ENU0608510010", "ENU1209510010"), startyear = 2005, endyear = 2015) %>%
     spread(seriesID, value) %>%
     dateCast()
 
 tail(df)
-
-ggplot(data = df, aes(x = date)) + 
-    geom_line(aes(y = ENU0608510010, color = "Santa Clara, CA")) +
-    geom_line(aes(y = ENU1209510010, color = "Orange, FL")) + 
-    labs(title = "Total Employed by County") + ylab("Total Employed")
 
 ```

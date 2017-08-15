@@ -24,7 +24,7 @@ library(blscrapeR)
 dat <- qcew_api(year=2016, qtr=1, slice="industry", sliceCode=5112)
 ```
 
-###Function Arguments
+##Function Arguments
 
 * The `year` argument is passed as a four-digit numeral. The data in the QCEW API begin on Q1 2012 and are current up to the most recently completed quarter.
 
@@ -34,23 +34,23 @@ dat <- qcew_api(year=2016, qtr=1, slice="industry", sliceCode=5112)
 
 * The `sliceCode` argument should be either a NIACS code, FIPS code, or size code; depending on what is specified in the `slice` argument. For example, if "industry" is selected for the `slice` argument, the `sliceCode` argument must be a NIACS code. Likewise, if the `slice` argument is "area," a FIPS code should be specified. There are three data sets included in the `blscrapeR` package that lists the acceptable codes and their descriptions; `data(niacs)`, `data(area_codes)`, and `data(size_codes)`/
 
-###Included Data Sets
+##Included Data Sets
 
 The `qcew_api()` function accepts various codes in the `sliceCode` argument. The `sliceCode` that is used will depend on the slice we wish to see. There are three built-in data sets to help with our `sliceCode` selections.
 
-####Area Description Data (FIPS codes)
+##Area Description Data (FIPS codes)
 ```{r, eval=FALSE}
 areaCodes <- blscrapeR::area_titles
 head(areaCodes)
 ```
 
-####Industry Description Data (NIACS codes)
+##Industry Description Data (NIACS codes)
 ```{r, eval=FALSE}
 industryCodes <- blscrapeR::niacs
 head(industryCodes)
 ```
 
-####Industry Size Data (Size codes)
+##Industry Size Data (Size codes)
 ```{r, eval=FALSE}
 sizeCodes <- blscrapeR::size_titles
 head(sizeCodes)

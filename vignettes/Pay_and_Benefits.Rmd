@@ -15,7 +15,7 @@ vignette: >
 
 The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](http://www.bls.gov/data/). The selected examples below do not include all series or databases.
 
-###Catagories you will find useful are:
+##Catagories you will find useful are:
 
 * [OES](http://beta.bls.gov/dataQuery/find?fq=survey:[oe]&q=oe) (Occupational Employment Statistics) includes employment, benefits, and wages segmented by metro area and occupation.
 
@@ -29,7 +29,7 @@ The most difficult thing about working with BLS data is gaining a clear understa
 
 *Note: The hyperlinks above link to lists of the most popular seriesIDs, but are only a small sample of all the data tracked by the BLS.*
 
-####OES
+##OES
 
 The OES contains similar wage data found in the CPS, but often has more resolution in certain geographic areas. Unlike the CPS, the OES is an annual survey and does not keep time series data.
 
@@ -44,13 +44,12 @@ df <- bls_api(c("OEUM003674000000011302103", "OEUM004194000000011302108"))
 head(df)
 ```
 
-
 Another OES example would be to grab the most recent Annual mean wage for All Occupations in All Industries in the United States.
 
 ```{r eval=FALSE}
 library(blscrapeR)
 df <- bls_api("OEUN000000000000000000004")
-df
+head(df)
 ```
 
 
@@ -62,38 +61,34 @@ For example, if we want to see the total cost of benefits per hour work and also
 
 ```{r eval=FALSE}
 library(blscrapeR)
-library(tidyr)
-library(dplyr)
+library(tidyverse)
 df <- bls_api(c("CMU1030000000000D", "CMU1030000000000P"))
 
 # Spread series ids and rename columns to human readable format.
 df.sp <- spread(df, seriesID, value) %>%
-    rename("hourly_cost"=CMU1030000000000D, "pct_of_wages"=CMU1030000000000P)
+    rename("hourly_cost"=CMU1030000000000D, "pct_of_wages"=CMU1030000000000P) %>%
+    # Percentages are represented as floating integers. Fix this to avoid confusion.
+    mutate(pct_of_wages = pct_of_wages*0.01)
 
-# Percentages are represented as floating integers. Fix this to avoid confusion.
-df.sp$pct_of_wages <- df.sp$pct_of_wages*0.01
-df.sp
+head(df.sp)
 ```
 
-
-####National Compensation Survey-Benefits
+##National Compensation Survey-Benefits
 
 This survey includes data on how many Americans have access to certain benefits. For example, we can see the percentage of those who have access to paid vacation days and those who have access to Health insurance through their employers.
 
 ```{r eval=FALSE}
 library(blscrapeR)
-library(tidyr)
-library(dplyr)
+library(tidyverse)
 df <- bls_api(c("NBU10500000000000033030", "NBU11500000000000028178"))
 
 # Spread series ids and rename columns to human readable format.
 df.sp <- spread(df, seriesID, value) %>%
-    rename("pct_paid_vacation"=NBU10500000000000033030, "pct_health_ins"=NBU11500000000000028178)
+    rename("pct_paid_vacation"=NBU10500000000000033030, "pct_health_ins"=NBU11500000000000028178) %>%
+    # Value data are in whole numbers but represent percentages. Fix this to avoid confusion.
+    mutate(pct_of_wages = pct_of_wages*0.01, pct_health_ins = pct_health_ins*0.01)
 
-# Value data are in whole numbers but represent percentages. Fix this to avoid confusion.
-df.sp$pct_paid_vacation <- df.sp$pct_paid_vacation*0.01
-df.sp$pct_health_ins <- df.sp$pct_health_ins*0.01
-df.sp
+head(df.sp)
 ```
 
 
