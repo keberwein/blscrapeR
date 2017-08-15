@@ -19,9 +19,11 @@ Imports:
 	tibble
 Suggests:
 	testthat,
-    	knitr,
-    	rmarkdown,
-    	tigris
+    knitr,
+    rmarkdown,
+    tidyr,
+    tigris,
+    leaflet
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/blscrapeR
 BugReports: https://github.com/keberwein/blscrapeR/issues
