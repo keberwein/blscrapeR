@@ -59,7 +59,7 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
                 ,"\nThe endyear argument has automatically been set to ", format(Sys.Date(), "%Y"),".")
     }
     # Payload won't take NULL values, have to check every field.
-    # Probably a more elegant way do do this using an apply function.
+    # Probably a more elegant way do do this.
     if (exists("registrationKey") & !is.null(registrationKey)){
         if (registrationKey=="BLS_KEY"){
             payload["registrationKey"] <- as.character(Sys.getenv("BLS_KEY"))

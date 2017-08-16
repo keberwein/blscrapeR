@@ -14,9 +14,11 @@
 
 ## Documentation
 
-* Expanded mapping section of README.
+* Updated all existing vignettes to use tidyverse functions.
 
 * Edited mapping vignette to include new map_bls() function.
+
+* Added `tidyverse` style code to the readme and vignettes.
 
 # blscrapeR 2.1.5
 

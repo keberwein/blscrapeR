@@ -61,8 +61,8 @@ map_bls <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, pro
     }
     # Set some dummy variables. This keeps CRAN check happy.
     map=long=lat=id=group=county_map_data=NULL
-    # Assume if the dataset is by state or by county by the number of rows.
-    if(nrow(map_data) <= 51){
+    # Attempt to assume if the dataframe is state or county level by colnames.
+    if("gnisid" %in% names(map_data)){
         #Load pre-formatted map for ggplot.
         map <- blscrapeR::state_map_data
         #Unemployment statistics by county: Get and process data.
@@ -109,8 +109,6 @@ map_bls <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, pro
                 }
                 if (tolower(projection)=="mercator"){
                     map <- blscrapeR::county_map_merc
-                }else{
-                    message("Supported projections are Lambert and Mercator. A null projection argument returns Mercator for this function.")
                 }
             }
             # If state list is valid. Grab State FIPS codes from internal data set and subset map.
