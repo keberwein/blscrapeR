@@ -8,10 +8,10 @@
 #' @importFrom tibble as_tibble
 #' @export inflation_adjust
 #' @examples
-#' \dontrun{
+#' 
 #' ## Get historical USD values based on a 2010 dollar.
-#' values <- inflation_adjust(base_year = 2010)
-#' }
+#' values <- inflation_adjust(base_year = 2015)
+#' 
 #' 
 inflation_adjust <- function(base_year=NA){
     # Set some dummy variables. This keeps CRAN check happy.
@@ -33,11 +33,12 @@ inflation_adjust <- function(base_year=NA){
         dplyr::mutate(date=as.Date(paste(year, period,"01",sep="-"),"%Y-M%m-%d"), year=format(date, '%Y')) %>% 
         dplyr::select(date, period, year, value)
     # Annual aggregation.
-    avg.cpi <- aggregate(cu_main$value, by=list(cu_main$year), FUN=mean) %>% dplyr::rename(year=Group.1, avg_cpi=x) %>% tibble::as_tibble()
+    avg.cpi <- aggregate(cu_main$value, by=list(cu_main$year), FUN=mean) %>% dplyr::rename(year=Group.1, avg_cpi=x)
     # Formula for calculating inflation example: $1.00 * (1980 CPI/ 2014 CPI) = 1980 price.
     avg.cpi$adj_value <- avg.cpi[,2] / avg.cpi[as.numeric(which(avg.cpi$year==as.character(base_year))),2]
     avg.cpi$base_year <- as.character(base_year)
     avg.cpi$pct_increase <- (1-avg.cpi$adj_value) * -100
     avg.cpi$adj_value <- round(avg.cpi$adj_value, 2)
+    tibble::as_tibble(avg.cpi)
 }
 

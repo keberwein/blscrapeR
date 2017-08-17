@@ -23,21 +23,21 @@
 #' @param highFill The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
 #' \code{ggplot2::scale_fill_gradient}.
 #' @seealso \url{https://cran.r-project.org/package=tigris}
-#' @examples \dontrun{
+#' @examples 
 #' # Download the most current month unemployment statistics on a county level.
 #' df <- get_bls_county()
 #' 
 #' # Map the unemployment rate by county.
-#' bls_gg <- bls_map_county(map_data = df, fill_rate = "unemployed_rate", 
+#' bls_gg <- map_bls(map_data = df, fill_rate = "unemployed_rate", 
 #'                  labtitle = "Unemployment Rate")
 #' bls_gg
-#' 
-#' 
+#'  
+#' \dontrun{
 #' # Map the unemployment rate for Florida and Alabama.
 #' 
 #' df <- get_bls_county(stateName = c("Florida", "Alabama"))
 #' 
-#' bls_gg <- bls_map_county(map_data=df, fill_rate = "unemployed_rate", 
+#' bls_gg <- map_bls(map_data=df, fill_rate = "unemployed_rate", 
 #' stateName = c("Florida", "Alabama"))
 #' 
 #' bls_gg
@@ -47,7 +47,7 @@
 #' df <- get_bls_state("April 2016", seasonality = TRUE)
 #' 
 #' # Map the unemployment rate from data set.
-#' bls_gg <- bls_map_state(map_data = df, fill_rate = "unemployed_rate", 
+#' bls_gg <- map_bls(map_data = df, fill_rate = "unemployed_rate", 
 #'              labtitle = "Unemployment Rate")
 #' bls_gg
 #' 
@@ -67,14 +67,15 @@ map_bls <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, pro
         map <- blscrapeR::state_map_data
         #Unemployment statistics by county: Get and process data.
         #Plot
-        ggplot2::ggplot() + 
+        suppressWarnings(ggplot2::ggplot() + 
             ggplot2::geom_map(data=map, map=map, ggplot2::aes(x=long, y=lat, map_id=id, group=group)) +
             ggplot2::geom_map(data=map_data, map=map, ggplot2::aes_string(map_id="fips_state", fill=fill_rate), color="#0e0e0e", size=0.25) +
             ggplot2::scale_fill_gradient(low=lowFill, high=highFill, na.value="grey50") +
             ggplot2::labs(title=labtitle) + 
-            ggplot2::theme(axis.line=ggplot2::element_blank(), axis.text.x=ggplot2::element_blank(), axis.text.y=ggplot2::element_blank(), axis.ticks=ggplot2::element_blank(),
-                           axis.title.x=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), panel.grid.major=ggplot2::element_blank(), panel.grid.minor=ggplot2::element_blank(),
-                           panel.border=ggplot2::element_blank(), panel.background=ggplot2::element_blank(), legend.title=ggplot2::element_blank())
+            ggplot2::theme(axis.line=ggplot2::element_blank(), axis.text.x=ggplot2::element_blank(), axis.text.y=ggplot2::element_blank(), 
+                           axis.ticks=ggplot2::element_blank(), axis.title.x=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), 
+                           panel.grid.major=ggplot2::element_blank(), panel.grid.minor=ggplot2::element_blank(), panel.border=ggplot2::element_blank(), 
+                           panel.background=ggplot2::element_blank(), legend.title=ggplot2::element_blank(), plot.title = element_text(hjust = 0.5)))
     } else {
         # Load pre-formatted map for ggplot.
         if (is.null(projection)){
@@ -120,14 +121,15 @@ map_bls <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, pro
             map <- map[(map$state_id %in% state_selection),]
         }
         # Plot
-        ggplot2::ggplot() + 
+        suppressWarnings(ggplot2::ggplot() + 
             ggplot2::geom_map(data=map, map=map, ggplot2::aes(x=long, y=lat, map_id=id, group=group)) +
             ggplot2::geom_map(data=map_data, map=map, ggplot2::aes_string(map_id="fips", fill=fill_rate), color="#0e0e0e", size=0.25) +
             ggplot2::scale_fill_gradient(low=lowFill, high=highFill, na.value="grey50") +
             ggplot2::labs(title=labtitle) + 
-            ggplot2::theme(axis.line=ggplot2::element_blank(), axis.text.x=ggplot2::element_blank(), axis.text.y=ggplot2::element_blank(), axis.ticks=ggplot2::element_blank(),
-                           axis.title.x=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), panel.grid.major=ggplot2::element_blank(), panel.grid.minor=ggplot2::element_blank(),
-                           panel.border=ggplot2::element_blank(), panel.background=ggplot2::element_blank(), legend.title=ggplot2::element_blank())
+            ggplot2::theme(axis.line=ggplot2::element_blank(), axis.text.x=ggplot2::element_blank(), axis.text.y=ggplot2::element_blank(), 
+                           axis.ticks=ggplot2::element_blank(), axis.title.x=ggplot2::element_blank(), axis.title.y=ggplot2::element_blank(), 
+                           panel.grid.major=ggplot2::element_blank(), panel.grid.minor=ggplot2::element_blank(), panel.border=ggplot2::element_blank(), 
+                           panel.background=ggplot2::element_blank(), legend.title=ggplot2::element_blank(), plot.title = element_text(hjust = 0.5)))
         
     }
 }

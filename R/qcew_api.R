@@ -12,15 +12,15 @@
 #' There are three internal data sets containing acceptable slice codes to help with selections; \code{blscrapeR::niacs}
 #' contains industry codes and descriptions, \code{blscrapeR::area_titles} contains FIPS codes and area descriptions,
 #' and \code{blscrapeR::size_titles} contains industry size codes. These codes can be used for the \code{sliceCode} argument.
+#' @importFrom tibble as_tibble
 #' @keywords bls api economics cpi unemployment inflation
 #' @export qcew_api
 #' @seealso \url{https://data.bls.gov/cew/doc/access/csv_data_slices.htm}
 #' @examples
 #' 
-#' \dontrun{
 #' # A request for the employment levels and wages for NIACS 5112: Software Publishers.
 #' dat <- qcew_api(year=2015, qtr=1, slice="industry", sliceCode=5112)
-#' }
+#' 
 #' 
 qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
     if (is.null("slice") | is.null("sliceCode")){
@@ -63,6 +63,6 @@ qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
             message(paste("URL caused a warning. Please check your parameters and try again:", url))
             return(NULL)
         }
-    )    
+    ) %>% tibble::as_tibble()   
     return(qcewDat)
 }

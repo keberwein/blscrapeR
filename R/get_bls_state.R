@@ -11,10 +11,10 @@
 #' @importFrom dplyr mutate
 #' @export get_bls_state
 #' @examples
-#' \dontrun{
+#' 
 #' # Single series
 #' get_bls_state(date_mth = "May 2016", seasonality = TRUE)
-#' 
+#' \dontrun{
 #' # Multiple series
 #' get_bls_state(date_mth = c("April 2016", "May 2016"), seasonality = FALSE)
 #' }
@@ -97,7 +97,7 @@ get_bls_state <- function(date_mth=NULL, seasonality=TRUE){
                       civ_pop=as.numeric(gsub(",", "", civ_pop)),
                       labor_force=as.numeric(gsub(",", "", labor_force)),
                       employed=as.numeric(gsub(",", "", employed)),
-                      unemployed=as.numeric(gsub(",", "", unemployed)))
+                      unemployed=as.numeric(gsub(",", "", unemployed))) %>% tibble::as_tibble()
     
     # Add colunm for state fips codes.
     state_fips<-blscrapeR::state_fips

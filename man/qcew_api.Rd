@@ -28,10 +28,9 @@ A key is not required for the QCEW API.
 }
 \examples{
 
-\dontrun{
 # A request for the employment levels and wages for NIACS 5112: Software Publishers.
 dat <- qcew_api(year=2015, qtr=1, slice="industry", sliceCode=5112)
-}
+
 
 }
 \seealso{

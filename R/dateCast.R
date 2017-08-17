@@ -5,11 +5,11 @@
 #' @param dt_format A character string containing a valid date format. The default will return the ISO 8601 date format.
 #' @export dateCast
 #' @examples
-#' \dontrun{
+#' 
 #' ## Cast a date column to data frame returned by the bls_api() function.
-#' df <- bls_api("LAUCN040010000000005")
-#' df <- dateCast(df)
-#' }
+#' df <- bls_api("LAUCN040010000000005") %>%
+#' dateCast()
+#' 
 #' 
 dateCast <- function (api_df=NULL, dt_format=NULL){
     period <- api_df$period

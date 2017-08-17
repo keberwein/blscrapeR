@@ -32,15 +32,15 @@ For “quick and dirty” type of analysis, the package has some quick functions
 library(blscrapeR)
 # Grab the Unemployment Rate (U-3) 
 df <- quick_unemp_rate()
-tail(df, 5)
+head(df, 5)
 #> # A tibble: 5 x 6
 #>    year    period periodName value footnotes  seriesID
 #>   <dbl>    <list>     <list> <dbl>    <list>    <list>
-#> 1  2015 <chr [1]>  <chr [1]>   5.5 <chr [1]> <chr [1]>
-#> 2  2015 <chr [1]>  <chr [1]>   5.4 <chr [1]> <chr [1]>
-#> 3  2015 <chr [1]>  <chr [1]>   5.4 <chr [1]> <chr [1]>
-#> 4  2015 <chr [1]>  <chr [1]>   5.5 <chr [1]> <chr [1]>
-#> 5  2015 <chr [1]>  <chr [1]>   5.7 <chr [1]> <chr [1]>
+#> 1  2017 <chr [1]>  <chr [1]>   4.3 <chr [1]> <chr [1]>
+#> 2  2017 <chr [1]>  <chr [1]>   4.4 <chr [1]> <chr [1]>
+#> 3  2017 <chr [1]>  <chr [1]>   4.3 <chr [1]> <chr [1]>
+#> 4  2017 <chr [1]>  <chr [1]>   4.4 <chr [1]> <chr [1]>
+#> 5  2017 <chr [1]>  <chr [1]>   4.5 <chr [1]> <chr [1]>
 ```
 
 **DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
@@ -92,7 +92,7 @@ library(blscrapeR)
 # UNEMPLOYMENT LEVEL - Civilian labor force - LNS13000000
 # UNEMPLOYMENT RATE - Civilian labor force - LNS14000000
 df <- bls_api(c("LNS12000000", "LNS13000000", "LNS14000000"),
-              startyear = 2008, endyear = 2017, registrationKey = Sys.getenv("BLS_KEY")) %>%
+              startyear = 2008, endyear = 2017, registrationKey = "BLS_KEY") %>%
     # Add time-series dates
     dateCast()
 ```

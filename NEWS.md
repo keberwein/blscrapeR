@@ -8,7 +8,7 @@
 
 ## Enhancements
 
-* Updated internal functions to use "tidyverse" methods. This includes the addition of a few dependencies such as purrr, tibble, and dplyr.
+* Updated internal functions to use tidyverse methods. This includes the addition of a few dependencies such as purrr, tibble, and dplyr.
 
 * All data are now returned as tibbles.
 
@@ -16,9 +16,9 @@
 
 * Updated all existing vignettes to use tidyverse functions.
 
-* Edited mapping vignette to include new map_bls() function.
+* Edited mapping vignette to include new `map_bls()` function.
 
-* Added `tidyverse` style code to the readme and vignettes.
+* Added tidyverse style code to the readme and vignettes.
 
 # blscrapeR 2.1.5
 

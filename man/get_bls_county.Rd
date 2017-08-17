@@ -20,21 +20,21 @@ NOTE: Unlike many other BLS data sets, these data are never estimated, meaning t
 60 days behind the current data. The county data are also never seasonally adjusted.
 }
 \examples{
- \dontrun{
 # Most recent month in the data set.
 get_bls_county()
 
+\dontrun{
 # A specific month
-df <- get_bls_county("May 2016")
+df <- get_bls_county("May 2017")
 
 # Multiple months
-df <- get_bls_county(c("April 2016","May 2016"))
+df <- get_bls_county(c("April 2017","May 2017"))
 
 # A specific state
 df <- get_bls_county(stateName = "Florida")
 
 # Multiple states, multiple months
-df<- get_bls_county(date_mth = "April 2015", 
+df<- get_bls_county(date_mth = "April 2017", 
              stateName = c("Florida", "Alabama"))
 }
 

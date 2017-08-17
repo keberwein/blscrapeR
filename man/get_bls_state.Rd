@@ -16,10 +16,10 @@ A function to download and format state employment data. These data begin on Jan
 NOTE: The most current data will always be at least 30 days behind the current date, and depending on the day of your query, those numbers may be estimates.
 }
 \examples{
-\dontrun{
+
 # Single series
 get_bls_state(date_mth = "May 2016", seasonality = TRUE)
-
+\dontrun{
 # Multiple series
 get_bls_state(date_mth = c("April 2016", "May 2016"), seasonality = FALSE)
 }

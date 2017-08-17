@@ -16,10 +16,10 @@ by the \code{bls_api()} function.}
 A helper function to create a continuous date from Year and Period columns.
 }
 \examples{
-\dontrun{
+
 ## Cast a date column to data frame returned by the bls_api() function.
-df <- bls_api("LAUCN040010000000005")
-df <- dateCast(df)
-}
+df <- bls_api("LAUCN040010000000005") \%>\%
+dateCast()
+
 
 }

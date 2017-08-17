@@ -19,12 +19,12 @@
 #' @seealso \url{https://beta.bls.gov/dataQuery/search}
 #' @examples
 #' 
-#' \dontrun{
+#' 
 #' ## API Version 1.0 R Script Sample Code
 #' ## Single Series request
 #' df <- bls_api("LAUCN040010000000005")
 #' 
-#' 
+#' \dontrun{
 #' ## API Version 1.0 R Script Sample Code
 #' ## Multiple Series request with date params.
 #' df <- bls_api(c("LAUCN040010000000005", "LAUCN040010000000006"), 
