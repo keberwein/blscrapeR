@@ -23,7 +23,8 @@
 #' @param highFill The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
 #' \code{ggplot2::scale_fill_gradient}.
 #' @seealso \url{https://cran.r-project.org/package=tigris}
-#' @examples 
+#' @examples
+#' \dontrun{
 #' # Download the most current month unemployment statistics on a county level.
 #' df <- get_bls_county()
 #' 
@@ -32,7 +33,6 @@
 #'                  labtitle = "Unemployment Rate")
 #' bls_gg
 #'  
-#' \dontrun{
 #' # Map the unemployment rate for Florida and Alabama.
 #' 
 #' df <- get_bls_county(stateName = c("Florida", "Alabama"))

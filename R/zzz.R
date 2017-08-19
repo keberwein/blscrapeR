@@ -23,7 +23,8 @@
 #' @param highFill The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
 #' \code{ggplot2::scale_fill_gradient}.
 #' @seealso \url{https://cran.r-project.org/package=tigris}
-#' @examples \dontrun{
+#' @examples 
+#' \dontrun{
 #' # Download the most current month unemployment statistics on a county level.
 #' df <- get_bls_county()
 #' 
@@ -131,7 +132,8 @@ bls_map_county <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NU
 #' @param highFill The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
 #' \code{ggplot2::scale_fill_gradient}.
 #' @seealso \url{https://cran.r-project.org/package=tigris}
-#' @examples \dontrun{
+#' @examples 
+#' \dontrun{
 #' # Downlaod employment statistics for April 2016.
 #' df <- get_bls_state("April 2016", seasonality = TRUE)
 #' 

@@ -11,10 +11,10 @@
 #' @importFrom dplyr mutate
 #' @export get_bls_state
 #' @examples
-#' 
+#' \dontrun{
 #' # Single series
 #' get_bls_state(date_mth = "May 2016", seasonality = TRUE)
-#' \dontrun{
+#' 
 #' # Multiple series
 #' get_bls_state(date_mth = c("April 2016", "May 2016"), seasonality = FALSE)
 #' }

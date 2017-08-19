@@ -12,11 +12,11 @@
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr rename mutate
 #' @export get_bls_county
-#' @examples 
+#' @examples
+#' \dontrun{
 #' # Most recent month in the data set.
 #' get_bls_county()
 #' 
-#' \dontrun{
 #' # A specific month
 #' df <- get_bls_county("May 2017")
 #' 

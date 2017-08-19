@@ -36,6 +36,7 @@ county and state FIPS codes. They can not be used with the leaflet package but t
 downloaded from the Census website or with the \code{tigris} package. See the "Mapping BLS Data" vignette for this package.
 }
 \examples{
+\dontrun{
 # Download the most current month unemployment statistics on a county level.
 df <- get_bls_county()
 
@@ -44,7 +45,6 @@ bls_gg <- map_bls(map_data = df, fill_rate = "unemployed_rate",
                  labtitle = "Unemployment Rate")
 bls_gg
  
-\dontrun{
 # Map the unemployment rate for Florida and Alabama.
 
 df <- get_bls_county(stateName = c("Florida", "Alabama"))
