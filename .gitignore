@@ -5,3 +5,5 @@ inst/doc
 README.Rmd
 NEWS.Rmd
 .DS_Store
+.Rproj
+cran-comments.md
