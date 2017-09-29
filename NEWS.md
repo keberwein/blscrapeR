@@ -1,3 +1,9 @@
+# blscrapeR 3.01
+
+## Bug Fixes
+
+* Added an functionality and documentation for an "annual" argument for `qcew_api()`.
+
 # blscrapeR 3.0
 
 ## New Features

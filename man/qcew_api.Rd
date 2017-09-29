@@ -10,7 +10,7 @@ qcew_api(year = 2012, qtr = 1, slice = NULL, sliceCode = NULL)
 \item{year}{These data begin in 2012 and go to the most recent complete quarter. The argument can be entered
 as an integer or a character. The default is 2012.}
 
-\item{qtr}{Quarter: This can be any integer between 1 and 4. The argument can be entered
+\item{qtr}{Quarter: This can be any integer between 1 and 4, or "A" for annual. The argument can be entered
 as an integer or a character. The default is 1, which returns the first quarter.}
 
 \item{slice}{The slice should be one of the three data slices offered by the API; "industry", "area", or "size."}
@@ -29,7 +29,7 @@ A key is not required for the QCEW API.
 \examples{
 
 # A request for the employment levels and wages for NIACS 5112: Software Publishers.
-dat <- qcew_api(year=2015, qtr=1, slice="industry", sliceCode=5112)
+dat <- qcew_api(year=2015, qtr="A", slice="industry", sliceCode=5112)
 
 
 }

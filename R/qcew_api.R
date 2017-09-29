@@ -4,7 +4,7 @@
 #' A key is not required for the QCEW API.
 #' @param year These data begin in 2012 and go to the most recent complete quarter. The argument can be entered
 #' as an integer or a character. The default is 2012.
-#' @param qtr Quarter: This can be any integer between 1 and 4. The argument can be entered
+#' @param qtr Quarter: This can be any integer between 1 and 4, or "A" for annual. The argument can be entered
 #' as an integer or a character. The default is 1, which returns the first quarter.
 #' @param slice The slice should be one of the three data slices offered by the API; "industry", "area", or "size."
 #' @param sliceCode The slice codes depend on what slice you select. For example, if you select the "area" slice,
@@ -19,7 +19,7 @@
 #' @examples
 #' 
 #' # A request for the employment levels and wages for NIACS 5112: Software Publishers.
-#' dat <- qcew_api(year=2015, qtr=1, slice="industry", sliceCode=5112)
+#' dat <- qcew_api(year=2015, qtr="A", slice="industry", sliceCode=5112)
 #' 
 #' 
 qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
@@ -33,7 +33,6 @@ qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
         message("Please select slice as 'area', 'industry', or 'size'")
     }
     if (!is.numeric(year)){message("Please set a numeric year.")}
-    if (!is.numeric(qtr)){message("Please set a numeric quarter.")}
     if (slice=="area" & is.numeric(sliceCode) & !isTRUE(sliceCode %in% blscrapeR::area_titles$area_fips)){
         message("Invalid sliceCode, please check you FIPS code.")
     }
