@@ -1,4 +1,4 @@
-# blscrapeR 3.01
+# blscrapeR 3.0.1
 
 ## Bug Fixes
 
