@@ -13,9 +13,6 @@ matrix:
           r: release
           dist: trusty
           env: R_CODECOV=true
-        - os: linux
-          r: devel
-          dist: trusty
 
 before_install:
     - sudo add-apt-repository ppa:ubuntugis/ubuntugis-unstable --yes
