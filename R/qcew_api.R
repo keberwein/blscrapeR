@@ -19,16 +19,16 @@
 #' @examples
 #' 
 #' # A request for the employment levels and wages for NIACS 5112: Software Publishers.
-#' dat <- qcew_api(year=2015, qtr="A", slice="industry", sliceCode=5112)
+#' dat <- qcew_api(year=2015, qtr="A", slice="area", sliceCode="US000")
 #' 
 #' 
-qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
+qcew_api <- function(year=2015, qtr="A", slice=NULL, sliceCode=NULL){
     if (is.null("slice") | is.null("sliceCode")){
         message("Please specify a Slice and sliceCode. See function documentation for examples.")
     }
     
-    if (!is.character(year)) slice <- as.character(year)
-    if (!is.character(qtr)) slice <- as.character(qtr)
+    if (!is.character(year)) year <- as.character(year)
+    if (!is.character(qtr)) qtr <- as.character(qtr)
     
     slice.options <- c("industry", "area", "size")
     if (!is.character(slice)) slice <- as.character(slice)
