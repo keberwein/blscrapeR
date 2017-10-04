@@ -24,11 +24,19 @@ library(blscrapeR)
 dat <- qcew_api(year=2016, qtr=1, slice="industry", sliceCode=5112)
 ```
 
+We can also get annual averages by passing "A" as an argument to `qtr`.
+
+```{r, eval=FALSE}
+library(blscrapeR)
+dat <- qcew_api(year=2016, qtr="A", slice="industry", sliceCode=5112)
+```
+
+
 ##Function Arguments
 
 * The `year` argument is passed as a four-digit numeral. The data in the QCEW API begin on Q1 2012 and are current up to the most recently completed quarter.
 
-* The `qtr` argument is passed as a one-digit numeral. Values between 1 and 4 are accepted.
+* The `qtr` argument is passed as either a one-digit numeral or the character "A", which is used for annual averages.
 
 * The `slice` argument defines the QCEW data slice we would like to query. The current options are "industry", "area", and "size." One of these terms should be passed in quotes.
 

@@ -26,9 +26,13 @@ qcew_api <- function(year=2012, qtr=1, slice=NULL, sliceCode=NULL){
     if (is.null("slice") | is.null("sliceCode")){
         message("Please specify a Slice and sliceCode. See function documentation for examples.")
     }
+    
+    if (!is.character(year)) slice <- as.character(year)
+    if (!is.character(qtr)) slice <- as.character(qtr)
+    
     slice.options <- c("industry", "area", "size")
-    if (!is.character(slice)){slice <- as.character(slice)}
-    if (!is.character(sliceCode)){sliceCode <- as.character(sliceCode)}
+    if (!is.character(slice)) slice <- as.character(slice)
+    if (!is.character(sliceCode)) sliceCode <- as.character(sliceCode)
     if (!isTRUE(any(grepl(slice, slice.options)))){
         message("Please select slice as 'area', 'industry', or 'size'")
     }

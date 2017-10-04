@@ -4,6 +4,12 @@
 
 * Added an functionality and documentation for an "annual" argument for `qcew_api()`.
 
+## Vignettes
+
+* Added new feature examples to QCEW_API.Rmd.
+
+* Removed qcew.Rmd, since it was duplicated.
+
 # blscrapeR 3.0
 
 ## New Features
