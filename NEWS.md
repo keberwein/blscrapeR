@@ -1,3 +1,9 @@
+# blscrapeR 3.0.2
+
+## Enhancements
+
+* The `bls_api()` function now returns verbose error message if the api request fails.
+
 # blscrapeR 3.0.1
 
 ## Bug Fixes
