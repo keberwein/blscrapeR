@@ -1,5 +1,9 @@
 # blscrapeR 3.0.2
 
+## Bug fixes
+
+* The `bls_api()` function now returns the catalog data with a `catalog=TRUE` argument.
+
 ## Enhancements
 
 * The `bls_api()` function now returns verbose error message if the api request fails.
