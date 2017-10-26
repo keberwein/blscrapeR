@@ -108,7 +108,7 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
     # Here's the actual API call.
     jsondat <- httr::content(httr::POST(base_url, body = payload, httr::content_type_json()))
     
-    if(length(jsondat$status) == "REQUEST_SUCCEEDED") {
+    if(jsondat$status == "REQUEST_SUCCEEDED") {
         dt <- do.call("rbind", purrr::map(jsondat$Results$series, function(s) {
             dt <- do.call("rbind", purrr::map(s$data, function(d) {
                 d[["footnotes"]] <- paste(unlist(d[["footnotes"]]), collapse = " ")
