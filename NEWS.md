@@ -8,6 +8,8 @@
 
 * The `bls_api()` function now returns verbose error message if the api request fails.
 
+* Added BLS `series_ids` internal dataset.
+
 # blscrapeR 3.0.1
 
 ## Bug Fixes
