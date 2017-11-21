@@ -3,7 +3,7 @@
 #' @param periodicity_code The period of time of the surveys you are interested in. This is usually monthly, quarterly or annually.
 #' You can type full words or beginning letters. For example, \code{periodicity_code = "m"} or \code{periodicity_code = "monthly"}.
 #' @importFrom dplyr filter
-#' @importFrom stringr str_detect
+#' @importFrom stringr str_detect str_to_title
 #' @importFrom purrr map_chr
 #' @export
 #' @examples
@@ -20,8 +20,7 @@ search_ids <- function(keyword = NULL, periodicity_code = NULL, ...) {
     bls_ids <- blscrapeR::series_ids
     
     # We need to capitalize the first letters of the user input for the search to work properly.
-    # TODO This needs to capatilize each word in the string, not just the first.
-    keyword <- firstupper(keyword)
+    keyword <- sapply(keyword, stringr::str_to_title)
     
     if(!is.null(periodicity_code)) {
         periodicity_code <- firstupper(periodicity_code)
