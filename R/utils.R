@@ -41,3 +41,12 @@ urlExists <- function(target) {
     })  
 }  
 
+#' Internal function to cast the first letter of a word to upper-case.
+#' @param x A word or string to capatalize
+#' @param ... additional arguments.
+#' @keywords internal
+#' @export
+firstupper <- function(x) {
+    substr(x, 1, 1) <- toupper(substr(x, 1, 1))
+    x
+}
