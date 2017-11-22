@@ -16,7 +16,8 @@ Imports:
 	grDevices,
 	dplyr,
 	purrr,
-	tibble
+	tibble,
+	stringr
 Suggests:
 	testthat,
     knitr,

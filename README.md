@@ -126,7 +126,7 @@ library(blscrapeR)
 # UNEMPLOYMENT LEVEL - Civilian labor force - LNS13000000
 # UNEMPLOYMENT RATE - Civilian labor force - LNS14000000
 df <- bls_api(c("LNS12000000", "LNS13000000", "LNS14000000"),
-              startyear = 2008, endyear = 2017, registrationKey = "BLS_KEY") %>%
+              startyear = 2008, endyear = 2017, Sys.getenv("BLS_KEY")) %>%
     # Add time-series dates
     dateCast()
 ```
