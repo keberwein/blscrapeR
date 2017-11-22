@@ -6,7 +6,7 @@
 \usage{
 bls_api(seriesid, startyear = NULL, endyear = NULL,
   registrationKey = NULL, catalog = FALSE, calculations = FALSE,
-  annualaverage = FALSE)
+  annualaverage = FALSE, ...)
 }
 \arguments{
 \item{seriesid}{The BLS id of the series your trying to load. A common format would be 'LAUCN040010000000005'. 
@@ -24,6 +24,8 @@ If you need help finding seriesIDs, check the BLS website or the BLS Data Finder
 \item{calculations}{Returns year-over-year calculations if set to TRUE.}
 
 \item{annualaverage}{Returns an annual average if set to TRUE.}
+
+\item{...}{additional arguments}
 }
 \description{
 Return data frame from one or more requests via the US Bureau of Labor Statistics API. Provided arguments are in the form of BLS series ids.

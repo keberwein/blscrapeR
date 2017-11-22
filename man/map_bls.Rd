@@ -5,7 +5,7 @@
 \title{choropleth mapping of BLS data}
 \usage{
 map_bls(map_data, fill_rate = NULL, labtitle = NULL, stateName = NULL,
-  projection = NULL, lowFill = "green", highFill = "red")
+  projection = NULL, lowFill = "green", highFill = "red", ...)
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 
@@ -28,6 +28,8 @@ and Lambert for nationwide views.}
 
 \item{highFill}{The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
 \code{ggplot2::scale_fill_gradient}.}
+
+\item{...}{additional arguments}
 }
 \description{
 Return a ggplot object to render a choropleth map with state and/or county outlines.

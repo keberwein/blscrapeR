@@ -11,6 +11,8 @@ search_ids(keyword = NULL, periodicity_code = NULL, ...)
 
 \item{periodicity_code}{The period of time of the surveys you are interested in. This is usually monthly, quarterly or annually.
 You can type full words or beginning letters. For example, \code{periodicity_code = "m"} or \code{periodicity_code = "monthly"}.}
+
+\item{...}{additional arguments}
 }
 \description{
 Search the internal series_id data set.

@@ -4,7 +4,7 @@
 \alias{qcew_api}
 \title{Request data from the Quarterly Census of Employment and Wages.}
 \usage{
-qcew_api(year = 2015, qtr = "A", slice = NULL, sliceCode = NULL)
+qcew_api(year = 2015, qtr = "A", slice = NULL, sliceCode = NULL, ...)
 }
 \arguments{
 \item{year}{These data begin in 2012 and go to the most recent complete quarter. The argument can be entered
@@ -20,6 +20,8 @@ your \code{sliceCode} should be a FIPS code. If you select "industry," your \cod
 There are three internal data sets containing acceptable slice codes to help with selections; \code{blscrapeR::niacs}
 contains industry codes and descriptions, \code{blscrapeR::area_titles} contains FIPS codes and area descriptions,
 and \code{blscrapeR::size_titles} contains industry size codes. These codes can be used for the \code{sliceCode} argument.}
+
+\item{...}{additional arguments}
 }
 \description{
 Return data from the QCEW API. This is separate from the main BLS API and returns quarterly data

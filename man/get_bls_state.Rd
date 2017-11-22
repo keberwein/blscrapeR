@@ -4,12 +4,14 @@
 \alias{get_bls_state}
 \title{A function that returns county-level labor statistics}
 \usage{
-get_bls_state(date_mth = NULL, seasonality = TRUE)
+get_bls_state(date_mth = NULL, seasonality = TRUE, ...)
 }
 \arguments{
 \item{date_mth}{The month or months you would like data for. Accepts full month names and four-digit year.}
 
 \item{seasonality}{TRUE or FALSE. The default value is TRUE.}
+
+\item{...}{additional arguments}
 }
 \description{
 A function to download and format state employment data. These data begin on January 1976 to current. 
