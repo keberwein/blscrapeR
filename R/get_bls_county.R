@@ -7,6 +7,7 @@
 #' If NULL, it will return the most recent month in the database.
 #' @param stateName is an optional argument if you only want data for certain state(s). The argument is NULL by default and
 #' will return data for all 50 states.
+#' @param ... additional arguments
 #' @importFrom purrr map map_lgl map_int
 #' @importFrom stats na.omit
 #' @importFrom tibble as_tibble
@@ -32,7 +33,7 @@
 #'}
 #'
 
-get_bls_county <- function(date_mth = NULL, stateName = NULL){
+get_bls_county <- function(date_mth = NULL, stateName = NULL, ...){
     # Set some dummy variables. This keeps CRAN check happy.
     countyemp=contyemp=fips_state=V1=V2=V3=V4=V5=V6=V7=V8=V9=period=i=unemployed=employed=labor_force=NULL
     state_fips <- blscrapeR::state_fips

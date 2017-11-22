@@ -12,6 +12,7 @@
 #' There are three internal data sets containing acceptable slice codes to help with selections; \code{blscrapeR::niacs}
 #' contains industry codes and descriptions, \code{blscrapeR::area_titles} contains FIPS codes and area descriptions,
 #' and \code{blscrapeR::size_titles} contains industry size codes. These codes can be used for the \code{sliceCode} argument.
+#' @param ... additional arguments
 #' @importFrom tibble as_tibble
 #' @keywords bls api economics cpi unemployment inflation
 #' @export qcew_api
@@ -22,7 +23,7 @@
 #' dat <- qcew_api(year=2015, qtr="A", slice="area", sliceCode="US000")
 #' 
 #' 
-qcew_api <- function(year=2015, qtr="A", slice=NULL, sliceCode=NULL){
+qcew_api <- function(year=2015, qtr="A", slice=NULL, sliceCode=NULL, ...){
     if (is.null("slice") | is.null("sliceCode")){
         message("Please specify a Slice and sliceCode. See function documentation for examples.")
     }

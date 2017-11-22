@@ -4,6 +4,7 @@
 #' NOTE: The most current data will always be at least 30 days behind the current date, and depending on the day of your query, those numbers may be estimates.
 #' @param date_mth The month or months you would like data for. Accepts full month names and four-digit year.
 #' @param seasonality TRUE or FALSE. The default value is TRUE.
+#' @param ... additional arguments
 #' @import datasets
 #' @importFrom utils download.file read.csv read.table
 #' @importFrom tibble as_tibble
@@ -20,7 +21,7 @@
 #' }
 #'
 
-get_bls_state <- function(date_mth=NULL, seasonality=TRUE){
+get_bls_state <- function(date_mth=NULL, seasonality=TRUE, ...){
     state.name=civ_pop=labor_force=employed=unemployed=NULL
     seas <- "https://www.bls.gov/web/laus/ststdsadata.txt"
     notseas <- "https://www.bls.gov/web/laus/ststdnsadata.txt"

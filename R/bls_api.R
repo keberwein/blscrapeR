@@ -9,6 +9,7 @@
 #' @param catalog Series description information available only for certain data sets.
 #' @param calculations Returns year-over-year calculations if set to TRUE.
 #' @param annualaverage Returns an annual average if set to TRUE.
+#' @param ... additional arguments
 #' @keywords bls api economics cpi unemployment inflation
 #' @importFrom jsonlite toJSON
 #' @importFrom httr content POST content_type_json
@@ -47,7 +48,7 @@
 #' 
 # #TODO: Put an a warning if user exceeds maximun number of years allowed by the BLS.
 bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey = NULL, 
-                     catalog = FALSE, calculations = FALSE, annualaverage = FALSE){
+                     catalog = FALSE, calculations = FALSE, annualaverage = FALSE, ...){
     # Set some dummy variables. This keeps CRAN check happy.
     year=period=':='=seriesID=NULL
     # Begin constructing payload.

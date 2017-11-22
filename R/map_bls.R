@@ -22,6 +22,7 @@
 #' \code{ggplot2::scale_fill_gradient}.
 #' @param highFill The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
 #' \code{ggplot2::scale_fill_gradient}.
+#' @param ... additional arguments
 #' @seealso \url{https://cran.r-project.org/package=tigris}
 #' @examples
 #' \dontrun{
@@ -55,7 +56,7 @@
 #'
 #' @export
 
-map_bls <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection=NULL, lowFill="green", highFill="red"){
+map_bls <- function(map_data, fill_rate=NULL, labtitle=NULL, stateName=NULL, projection=NULL, lowFill="green", highFill="red", ...){
     if (is.null(fill_rate)){
         stop(message("Please specify a fill_rate in double quotes. What colunm in your data frame do you want to map?"))
     }
