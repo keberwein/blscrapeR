@@ -36,14 +36,48 @@ head(df, 5)
 #> # A tibble: 5 x 6
 #>    year    period periodName value footnotes  seriesID
 #>   <dbl>    <list>     <list> <dbl>    <list>    <list>
-#> 1  2017 <chr [1]>  <chr [1]>   4.3 <chr [1]> <chr [1]>
-#> 2  2017 <chr [1]>  <chr [1]>   4.4 <chr [1]> <chr [1]>
-#> 3  2017 <chr [1]>  <chr [1]>   4.3 <chr [1]> <chr [1]>
-#> 4  2017 <chr [1]>  <chr [1]>   4.4 <chr [1]> <chr [1]>
-#> 5  2017 <chr [1]>  <chr [1]>   4.5 <chr [1]> <chr [1]>
+#> 1  2017 <chr [1]>  <chr [1]>   4.1 <chr [1]> <chr [1]>
+#> 2  2017 <chr [1]>  <chr [1]>   4.2 <chr [1]> <chr [1]>
+#> 3  2017 <chr [1]>  <chr [1]>   4.4 <chr [1]> <chr [1]>
+#> 4  2017 <chr [1]>  <chr [1]>   4.3 <chr [1]> <chr [1]>
+#> 5  2017 <chr [1]>  <chr [1]>   4.4 <chr [1]> <chr [1]>
 ```
 
-**DISCLAIMER:** Some working knowledge of BLS series numbers are required here. The BLS [claims](http://www.bls.gov/developers/api_faqs.htm#signatures3) that they “do not currently have a catalog of series IDs.” The [BLS Data Finder website](http://beta.bls.gov/dataQuery/search) is a good place to nail down the series numbers we're looking for.
+Search BLS IDs
+--------------
+
+Some knowledge of BLS ids are needed to query the API. The package includes a "fuzzy search" function to help find these ids. There are currenlty more than 75,000 series ids in the package's internal dataset, `series_ids`. While these aren't all the series ids the BLS offers, it contains the most popular. The [BLS Data Finder](https://beta.bls.gov/dataQuery/search) is another good resource for finding series ids, that may not be in the internal dataset.
+
+``` r
+library(blscrapeR)
+# Find series ids relating to the total labor force in LA.
+ids <- search_ids(keyword = c("Labor Force", "Los Angeles"))
+head(ids)
+#> # A tibble: 6 x 4
+#>                                                                  series_title
+#>                                                                         <chr>
+#> 1 Labor Force: Balance Of California, State Less Los Angeles-Long Beach-Glend
+#> 2  Labor Force: Los Angeles-Long Beach-Glendale, Ca Metropolitan Division (S)
+#> 3 Labor Force: Balance Of California, State Less Los Angeles-Long Beach-Glend
+#> 4       Labor Force: Los Angeles-Long Beach, Ca Combined Statistical Area (U)
+#> 5                                     Labor Force: Los Angeles County, Ca (U)
+#> 6                                       Labor Force: Los Angeles City, Ca (U)
+#> # ... with 3 more variables: series_id <chr>, seasonal <chr>,
+#> #   periodicity_code <chr>
+```
+
+``` r
+library(blscrapeR)
+# Find series ids relating to median weekly earnings of women software developers.
+ids <- search_ids(keyword = c("Earnings", "Software", "Women"))
+head(ids)
+#> # A tibble: 1 x 4
+#>                                                                  series_title
+#>                                                                         <chr>
+#> 1 (Unadj)- Median Usual Weekly Earnings (Second Quartile), Employed Full Time
+#> # ... with 3 more variables: series_id <chr>, seasonal <chr>,
+#> #   periodicity_code <chr>
+```
 
 API Keys
 --------

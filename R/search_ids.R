@@ -5,6 +5,7 @@
 #' @importFrom dplyr filter
 #' @importFrom stringr str_detect str_to_title
 #' @importFrom purrr map_chr
+#' @importFrom tibble as_tibble
 #' @export
 #' @examples
 #' # Search for monthly Unemployment Rates for Women
@@ -37,10 +38,9 @@ search_ids <- function(keyword = NULL, periodicity_code = NULL, ...) {
     regwords <- keyword %>% purrr::map_chr(~ paste0("(?=.*", .,")")) %>% paste(collapse = "")
     
     # Filter on the regex expression.
-    search <- dplyr::filter(bls_ids, grepl(regwords, bls_ids$series_title, perl = T))
+    search <- dplyr::filter(bls_ids, grepl(regwords, bls_ids$series_title, perl = T)) %>% tibble::as_tibble()
     
     return(search)
 }
-
 
 
