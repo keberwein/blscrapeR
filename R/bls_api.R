@@ -117,7 +117,7 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
                 d <- purrr::map(purrr::map(d, unlist), paste, collapse=" ")
             }))
         }))
-      
+        
         jsondat$Results <- dt
         df <- tibble::as_tibble(jsondat$Results)
         df$value <- as.numeric(as.character(df$value))
