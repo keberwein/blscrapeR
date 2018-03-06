@@ -110,21 +110,20 @@ bls_api <- function (seriesid, startyear = NULL, endyear = NULL, registrationKey
     jsondat <- httr::content(httr::POST(base_url, body = payload, httr::content_type_json()))
     
     if(jsondat$status == "REQUEST_SUCCEEDED") {
-        dt <- do.call("rbind", purrr::map(jsondat$Results$series, function(s) {
-            dt <- do.call("rbind", purrr::map(s$data, function(d) {
+        df <- purrr::map_dfr(jsondat$Results$series, function(s) {
+            out <- purrr::map_dfr(s$data, function(d) {
                 d[["footnotes"]] <- paste(unlist(d[["footnotes"]]), collapse = " ")
                 d[["seriesID"]] <- paste(unlist(s[["seriesID"]]), collapse = " ")
                 d <- purrr::map(purrr::map(d, unlist), paste, collapse=" ")
-            }))
-        }))
+            })
+        })
         
-        jsondat$Results <- dt
-        df <- tibble::as_tibble(jsondat$Results)
         df$value <- as.numeric(as.character(df$value))
         
         if ("year" %in% colnames(df)){
             df$year <- as.numeric(as.character(df$year))
         }
+        
         message(jsondat$status)
     } else {
         # If request fails, return an empty data frame plus the json status and message.

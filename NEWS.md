@@ -1,3 +1,9 @@
+# blscrapeR 3.1.2
+
+## Bug fixes
+
+* The API sometimes adds an extra column for the most current month, which was causing irregular column shifts. Added logic to the map loop to automaticlly adjust for such situations.
+
 # blscrapeR 3.1.1
 
 ## Bug fixes
