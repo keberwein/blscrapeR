@@ -21,22 +21,19 @@ jsondat <- content(POST(base_url, body = payload, content_type_json()))
 if(length(jsondat$Results) > 0) {
     # Method borrowed from here:
     # https://github.com/fcocquemas/bulast/blob/master/R/bulast.R
-    dt <- do.call("rbind",lapply(jsondat$Results$series, function(s) {
-        dt <- do.call("rbind", lapply(s$data, function(d) {
+    df <- purrr::map_dfr(jsondat$Results$series, function(s) {
+        out <- purrr::map_dfr(s$data, function(d) {
             d[["footnotes"]] <- paste(unlist(d[["footnotes"]]), collapse = " ")
             d[["seriesID"]] <- paste(unlist(s[["seriesID"]]), collapse = " ")
-            d <- lapply(lapply(d, unlist), paste, collapse=" ")
-        }))
-    }))
-    jsondat$Results <- dt
-    df <- as.data.frame(jsondat$Results)
+            d <- purrr::map(purrr::map(d, unlist), paste, collapse=" ")
+        })
+    })
     df$value <- as.numeric(as.character(df$value))
     if ("year" %in% colnames(df)){
         df$year <- as.numeric(as.character(df$year))
     }
 }
 
-df <- as_tibble(df)
 
 # Check actual fucntion
 out <- blscrapeR::bls_api('LAUCN040010000000005')
