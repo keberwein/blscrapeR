@@ -5,7 +5,7 @@ Version: 3.1.2
 Authors@R: person("Kris", "Eberwein", email = "eberwein@knights.ucf.edu",
                   role = c("aut", "cre"))
 Description: Scrapes various data from <https://www.bls.gov/>. The U.S. Bureau of Labor Statistics is the statistical branch of the United States Department of Labor. The package has additional functions to help parse, analyze and visualize the data.
-Depends: R (>= 3.3.1)
+Depends: R (>= 3.3.0)
 Imports:
 	httr,
 	jsonlite,
