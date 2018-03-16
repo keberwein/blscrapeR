@@ -1,5 +1,9 @@
 # blscrapeR 3.1.2
 
+## Enhancements
+
+Updated NIACS and FIPS codes for 2018.
+
 ## Bug fixes
 
 * The API sometimes adds an extra column for the most current month, which was causing irregular column shifts. Added logic to the map loop to automaticlly adjust for such situations.
