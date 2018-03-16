@@ -5,7 +5,7 @@
 fileUrl <- "http://www2.census.gov/geo/docs/reference/codes/files/national_county.txt"
 download.file(fileUrl, destfile="county_fips.txt", method="curl")
 
-county_fips<-read.csv('county_fips.txt',
+county_fips<-read.csv('county_fips.csv',
                     header=FALSE,
                     sep=",",
                     colClasses = "character")
