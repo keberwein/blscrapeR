@@ -22,7 +22,6 @@ Suggests:
 	testthat,
     knitr,
     rmarkdown,
-    tidyverse,
     tigris,
     leaflet
 License: MIT + file LICENSE
