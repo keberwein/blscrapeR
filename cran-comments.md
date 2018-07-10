@@ -1,3 +1,5 @@
+## New Submission
+* This is a new submission of a previously archived package.
 
 ## Test environments
 * local OS X 10.13.3, R 3.4.4
