@@ -1,3 +1,9 @@
+# blscrapeR 3.1.3
+
+## Bug fixes
+
+* Fixed case issue in qcew annual data.
+
 # blscrapeR 3.1.2
 
 ## Enhancements

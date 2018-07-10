@@ -31,6 +31,8 @@ qcew_api <- function(year=2015, qtr="A", slice=NULL, sliceCode=NULL, ...){
     if (!is.character(year)) year <- as.character(year)
     if (!is.character(qtr)) qtr <- as.character(qtr)
     
+    qtr <- tolower(qtr)
+    
     slice.options <- c("industry", "area", "size")
     if (!is.character(slice)) slice <- as.character(slice)
     if (!is.character(sliceCode)) sliceCode <- as.character(sliceCode)
