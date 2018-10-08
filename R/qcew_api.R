@@ -20,13 +20,19 @@
 #' @examples
 #' 
 #' # A request for the employment levels and wages for NIACS 5112: Software Publishers.
-#' dat <- qcew_api(ye7r=2015, qtr="A", slice="area", sliceCode="US000")
+#' dat <- qcew_api(year=2018, qtr="A", slice="area", sliceCode="US000")
 #' 
 #' 
-qcew_api <- function(year=2015, qtr="A", slice=NULL, sliceCode=NULL, ...){
+qcew_api <- function(year=2018, qtr="A", slice=NULL, sliceCode=NULL, ...){
     if (is.null("slice") | is.null("sliceCode")){
         message("Please specify a Slice and sliceCode. See function documentation for examples.")
     }
+    
+    year = as.numeric(year)
+    
+    # This API only keeps four years of data.
+    if (year <= as.numeric(format(Sys.Date(), "%Y")) - 4)
+        warning("ERROR: The QCEW API only provides data for the last four years. Please ajust your arguments.")
     
     if (!is.character(year)) year <- as.character(year)
     if (!is.character(qtr)) qtr <- as.character(qtr)
