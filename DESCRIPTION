@@ -21,9 +21,7 @@ Imports:
 Suggests:
 	testthat,
     knitr,
-    rmarkdown,
-    tigris,
-    leaflet
+    rmarkdown
 License: MIT + file LICENSE
 URL: https://github.com/keberwein/blscrapeR
 BugReports: https://github.com/keberwein/blscrapeR/issues
