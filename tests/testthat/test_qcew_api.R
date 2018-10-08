@@ -1,7 +1,7 @@
 library(blscrapeR)
 library(testthat)
 
-year=2013; qtr=1; slice="industry"; sliceCode="5112";
+year=2017; qtr=1; slice="industry"; sliceCode="5112";
 baseURL <- "https://data.bls.gov/cew/data/api/"
 url <- paste0(baseURL, year, "/", qtr, "/", slice, "/", sliceCode, ".csv")
 temp <- tempfile()
@@ -10,5 +10,5 @@ qcewDat <- read.csv(temp, fill=TRUE, header=TRUE, sep=",", stringsAsFactors=FALS
                     strip.white=TRUE)
 
 # Check actual fucntion
-out <- blscrapeR::qcew_api(year=2013, qtr=1, slice="industry", sliceCode=5112)
+out <- blscrapeR::qcew_api(year=2017, qtr=1, slice="industry", sliceCode=5112)
 testthat::expect_identical(out, qcewDat)
