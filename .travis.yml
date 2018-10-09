@@ -11,7 +11,6 @@ matrix:
     include:
         - os: linux
           r: release
-          dist: trusty
           env: R_CODECOV=true
 
 before_install:
