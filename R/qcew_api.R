@@ -31,7 +31,7 @@ qcew_api <- function(year=2018, qtr="a", slice=NULL, sliceCode=NULL, ...){
     year = as.numeric(year)
     
     # This API only keeps four years of data.
-    if (year <= as.numeric(format(Sys.Date(), "%Y")) - 4)
+    if (year < as.numeric(format(Sys.Date(), "%Y")) - 4)
         warning("ERROR: The QCEW API only provides data for the last four years. Please ajust your arguments.")
     
     if (!is.character(year)) year <- as.character(year)
