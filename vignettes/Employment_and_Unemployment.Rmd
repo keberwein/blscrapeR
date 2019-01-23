@@ -13,31 +13,31 @@ vignette: >
 
 ## The BLS Data Landscape
 
-The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](http://www.bls.gov/data/). The selected examples below do not include all series or databases.
+The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](https://www.bls.gov/data/). The selected examples below do not include all series or databases.
 
 ##Catagories you will find useful are:
 
-* [CPS](http://data.bls.gov/cgi-bin/surveymost?ln) (Current Population Survey) includes employment and unemployment rates nationally.
+* [CPS](https://data.bls.gov/cgi-bin/surveymost?ln) (Current Population Survey) includes employment and unemployment rates nationally.
 
-* [LAUS](http://data.bls.gov/cgi-bin/surveymost?la) (Local Area Unemployment Statistics)
+* [LAUS](https://data.bls.gov/cgi-bin/surveymost?la) (Local Area Unemployment Statistics)
 
-* [CES](http://data.bls.gov/cgi-bin/surveymost?ce) (Current Employment Statistics) includes employment by industry.
+* [CES](https://data.bls.gov/cgi-bin/surveymost?ce) (Current Employment Statistics) includes employment by industry.
 
-* [OES](http://beta.bls.gov/dataQuery/find?fq=survey:[oe]&q=oe) (Occupational Employment Statistics) includes earnings and wages by industry, age, sex, etc.
+* [OES](https://beta.bls.gov/dataQuery/find?fq=survey:[oe]&q=oe) (Occupational Employment Statistics) includes earnings and wages by industry, age, sex, etc.
 
-* [JOLTS](http://data.bls.gov/cgi-bin/surveymost?jt) (Job Openings and Labor Turnover Survey)
+* [JOLTS](https://data.bls.gov/cgi-bin/surveymost?jt) (Job Openings and Labor Turnover Survey)
 
-* [QCEW](http://data.bls.gov/cgi-bin/surveymost?en) (Quarterly Census of Employment & Wages)
+* [QCEW](https://data.bls.gov/cgi-bin/surveymost?en) (Quarterly Census of Employment & Wages)
 
-* [BDM](http://data.bls.gov/cgi-bin/surveymost?bd) (Business Employment Dynamics)
+* [BDM](https://data.bls.gov/cgi-bin/surveymost?bd) (Business Employment Dynamics)
 
-* [ATUS](http://data.bls.gov/cgi-bin/surveymost?tu) (American Time Use Survey)
+* [ATUS](https://data.bls.gov/cgi-bin/surveymost?tu) (American Time Use Survey)
 
 *Note: The hyperlinks above link to lists of the most popular seriesIDs, but are only a small sample of all the data tracked by the BLS.*
 
 ##CPS
 
-An example of employment statistics from is a comparison of two different [unemployment rates](http://www.bls.gov/news.release/empsit.t15.htm) from the CPS. 
+An example of employment statistics from is a comparison of two different [unemployment rates](https://www.bls.gov/news.release/empsit.t15.htm) from the CPS. 
 
 Below is the U-3 Unemployment Rate (the "official" rate) vs. the U-6 Unemployment Rate, which includes all persons marginally attached to the labor force, plus total employed part time for economic reasons, plus all persons marginally attached to the labor force.
 

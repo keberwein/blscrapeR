@@ -11,7 +11,7 @@ vignette: >
 
 ## The QCEW Data Landscape
 
-The Quarterly Census of Employment and Wages (QCEW) is a division of the BLS. Some QCEW time-series data is available via the main BLS API, but the QCEW also houses quarterly data on their own API. The QCEW API returns employment and wage statistics sliced by area, industry type, or industry size. For further documentation on the QCEW API, you can refer to the [QCEW website](http://data.bls.gov/cew/doc/access/csv_data_slices.htm).
+The Quarterly Census of Employment and Wages (QCEW) is a division of the BLS. Some QCEW time-series data is available via the main BLS API, but the QCEW also houses quarterly data on their own API. The QCEW API returns employment and wage statistics sliced by area, industry type, or industry size. For further documentation on the QCEW API, you can refer to the [QCEW website](https://data.bls.gov/cew/doc/access/csv_data_slices.htm).
 
 ###The QCEW API
 

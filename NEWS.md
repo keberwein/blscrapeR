@@ -1,3 +1,11 @@
+# blscrapeR 3.1.5
+
+## Documentation
+
+* Converted BLS hyperlinks to https.
+
+* Fixed various dead hyperlinks.
+
 # blscrapeR 3.1.4
 
 ## Bug fixes

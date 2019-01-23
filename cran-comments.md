@@ -2,9 +2,9 @@
 * This is a new submission of a previously archived package.
 
 ## Test environments
-* local OS X 10.13.3, R 3.4.4
+* local Fedora 29, R 3.4.4
 * win-builder (devel and release)
-* Ubuntu 14.04 (on travis-ci), R 3.4.3
+* Ubuntu 14.04 (on travis-ci), R 3.5.1
 
 
 ## R CMD check results

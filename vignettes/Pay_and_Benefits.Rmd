@@ -13,17 +13,17 @@ vignette: >
 
 ## The BLS Data Landscape
 
-The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](http://www.bls.gov/data/). The selected examples below do not include all series or databases.
+The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](https://www.bls.gov/data/). The selected examples below do not include all series or databases.
 
 ##Catagories you will find useful are:
 
-* [OES](http://beta.bls.gov/dataQuery/find?fq=survey:[oe]&q=oe) (Occupational Employment Statistics) includes employment, benefits, and wages segmented by metro area and occupation.
+* [OES](https://beta.bls.gov/dataQuery/find?fq=survey:[oe]&q=oe) (Occupational Employment Statistics) includes employment, benefits, and wages segmented by metro area and occupation.
 
-* [Employer Cost for Employee Compensation](http://data.bls.gov/cgi-bin/surveymost?cm)
+* [Employer Cost for Employee Compensation](https://data.bls.gov/cgi-bin/surveymost?cm)
 
-* [National Compensation Survey-Benefits](http://data.bls.gov/cgi-bin/surveymost?nb) includes survey data of those who have benefits available and who takes advantage of those benefits.
+* [National Compensation Survey-Benefits](https://data.bls.gov/cgi-bin/surveymost?nb) includes survey data of those who have benefits available and who takes advantage of those benefits.
 
-* [Work Stoppages Data](http://data.bls.gov/cgi-bin/surveymost?ws)
+* [Work Stoppages Data](https://data.bls.gov/cgi-bin/surveymost?ws)
 
 * Other wage data can be found in the CPS, CES, and QCEW, which are covered in the [Employment seciton](https://github.com/keberwein/blscrapeR/blob/master/vignettes/Employment_and_Unemployment.Rmd) of these vignettes.
 

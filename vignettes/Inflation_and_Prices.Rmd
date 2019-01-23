@@ -13,37 +13,37 @@ vignette: >
 
 ## The BLS Data Landscape
 
-The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](http://www.bls.gov/data/). The selected examples below do not include all series or databases.
+The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](https://www.bls.gov/data/). The selected examples below do not include all series or databases.
 
 ##Catagories you will find useful are:
 
 ## CPI (Consumer Price Index)
 The CPI data tracks the prices paid by urban consumers for a representative basket of goods and services. The CPI is the primary metric used to calculate inflation.
 
-* [CPI All Urban Consumers (Current Series)](http://data.bls.gov/cgi-bin/surveymost?cu)
+* [CPI All Urban Consumers (Current Series)](https://data.bls.gov/cgi-bin/surveymost?cu)
 
-* [CPI Urban Wage Earners and Clerical Workers (Current Series)](http://data.bls.gov/cgi-bin/surveymost?cw)
+* [CPI Urban Wage Earners and Clerical Workers (Current Series)](https://data.bls.gov/cgi-bin/surveymost?cw)
 
-* [CPI All Urban Consumers (Chained CPI)](http://data.bls.gov/cgi-bin/surveymost?su)
+* [CPI All Urban Consumers (Chained CPI)](https://data.bls.gov/cgi-bin/surveymost?su)
 
-* [CPI Average Price Data](http://data.bls.gov/cgi-bin/surveymost?ap)
+* [CPI Average Price Data](https://data.bls.gov/cgi-bin/surveymost?ap)
 
 #### PPI (Producer Price Index)
 The PPI data tracks the average change in selling prices received by domestic producers for their output over time.
 
-* [PPI Industry Data](http://data.bls.gov/cgi-bin/surveymost?ap)
+* [PPI Industry Data](https://data.bls.gov/cgi-bin/surveymost?ap)
 
-* [PPI Commodity Data](http://data.bls.gov/cgi-bin/surveymost?wp) includes "headline" FD-ID indexes.
+* [PPI Commodity Data](https://data.bls.gov/cgi-bin/surveymost?wp) includes "headline" FD-ID indexes.
 
 ## IPP (International Price Program)
 
-* [IPP Import/Export Price Indexes](http://data.bls.gov/cgi-bin/surveymost?ei)
+* [IPP Import/Export Price Indexes](https://data.bls.gov/cgi-bin/surveymost?ei)
 
 *Note: The hyperlinks above link to lists of the most popular seriesIDs, but are only a small sample of all the data tracked by the BLS.*
 
 ##CPI: Tracking Inflation
 
-Although there are many measures of inflation, the CPI's "Consumer Price Index for All Urban Consumers: All Items" is normally the headline inflation rate one would hear about on the news ([see FRED](https://fred.stlouisfed.org/series/CPIAUCSL)). For other measures of inflation, the [BLS FAQ](http://www.bls.gov/cpi/cpifaq.htm#Question_12) on the subject is worth reading.
+Although there are many measures of inflation, the CPI's "Consumer Price Index for All Urban Consumers: All Items" is normally the headline inflation rate one would hear about on the news ([see FRED](https://fred.stlouisfed.org/series/CPIAUCSL)).
 
 Getting these data from the `blscrapeR` package is easy enough:
 
@@ -65,7 +65,7 @@ df <- inflation_adjust(1995)
 tail(df)
 ```
 
-If we want to check our results, we can head over to the CPI [Inflation Calculator](http://data.bls.gov/cgi-bin/cpicalc.pl) on the BLS website.
+If we want to check our results, we can head over to the CPI [Inflation Calculator](https://data.bls.gov/cgi-bin/cpicalc.pl) on the BLS website.
 
 ##CPI: Tracking Escalation
 
