@@ -1,3 +1,9 @@
+# blscrapeR 3.1.6
+
+## Testing
+
+* Nightly API tests on various platforms caused error due to reaching daily query limit. Removed automated test runs in favor of testing manually.
+
 # blscrapeR 3.1.5
 
 ## Documentation

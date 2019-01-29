@@ -1,6 +1,3 @@
-## New Submission
-* This is a new submission of a previously archived package.
-
 ## Test environments
 * local Fedora 29, R 3.4.4
 * win-builder (devel and release)
