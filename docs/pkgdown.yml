@@ -1,0 +1,10 @@
+pandoc: '2.6'
+pkgdown: 1.3.0
+pkgdown_sha: ~
+articles:
+  Employment_and_Unemployment: Employment_and_Unemployment.html
+  Inflation_and_Prices: Inflation_and_Prices.html
+  Mapping_BLS_Data: Mapping_BLS_Data.html
+  Pay_and_Benefits: Pay_and_Benefits.html
+  QCEW_API: QCEW_API.html
+
