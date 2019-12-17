@@ -9,7 +9,7 @@
 #' 
 #'
 #' @usage data(series_ids)
-#' @note Last updated 2017-11-15
+#' @note Last updated 2019-12-15
 "series_ids"
 
 
@@ -57,7 +57,7 @@
 
 #' Dataset containing NIACS codes for industry lookups.
 #'
-#' Built-in dataset to look up industries by NIACS code.
+#' Built-in dataset to look up industries by NAICS code.
 #' To access the data directly, issue the command \code{niacs)}.
 #' \itemize{
 #'   \item \code{industry_code}: Industry code
@@ -69,9 +69,28 @@
 #' 
 #'
 #' @usage data(niacs)
-#' @note Last updated 2016-09-30
+#' @note Last updated 22019-12-15
 #' @format A data frame with 2469 rows and 2 variables
 "niacs"
+
+#' Dataset containing NIACS codes for industry lookups.
+#'
+#' Built-in dataset to look up industries by NAICS code.
+#' To access the data directly, issue the command \code{naics)}.
+#' \itemize{
+#'   \item \code{industry_code}: Industry code
+#'   \item \code{industry_title}: Industry title
+#' }
+#'
+#' @docType data
+#' @keywords internal
+#' 
+#'
+#' @usage data(naics)
+#' @note Last updated 2019-12-15
+#' @format A data frame with 2469 rows and 2 variables
+"naics"
+
 
 
 #' Dataset containing size codes for US industries by size.

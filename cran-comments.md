@@ -1,5 +1,5 @@
 ## Test environments
-* local Fedora 29, R 3.5.2
+* local Fedora 31, R 3.6.1
 * win-builder (devel and release)
 * Ubuntu 14.04 (on travis-ci), R 3.5.1
 

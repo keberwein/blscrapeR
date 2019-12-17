@@ -4,9 +4,15 @@
 \alias{bls_map_county}
 \title{choropleth mapping of BLS data}
 \usage{
-bls_map_county(map_data, fill_rate = NULL, labtitle = NULL,
-  stateName = NULL, projection = NULL, lowFill = "green",
-  highFill = "red")
+bls_map_county(
+  map_data,
+  fill_rate = NULL,
+  labtitle = NULL,
+  stateName = NULL,
+  projection = NULL,
+  lowFill = "green",
+  highFill = "red"
+)
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 

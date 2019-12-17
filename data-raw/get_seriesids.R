@@ -29,7 +29,7 @@ series_ids <- bind_rows(ln_dat, le_dat, la_dat)
 
 rm(doc, ln_dat, le_dat, la_dat)
 
-devtools::use_data(series_ids, overwrite = TRUE)
+usethis::use_data(series_ids, overwrite = TRUE)
 
 
 

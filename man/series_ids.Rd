@@ -4,7 +4,7 @@
 \name{series_ids}
 \alias{series_ids}
 \title{Dataset containing BLS series ids and descriptions.}
-\format{An object of class \code{data.frame} with 79029 rows and 4 columns.}
+\format{An object of class \code{data.frame} with 88815 rows and 4 columns.}
 \usage{
 data(series_ids)
 }
@@ -14,6 +14,6 @@ Currently limited to the CPS and LAUS.
 To access the data directly, issue the command \code{series_ids)}.
 }
 \note{
-Last updated 2017-11-15
+Last updated 2019-12-15
 }
 \keyword{internal}

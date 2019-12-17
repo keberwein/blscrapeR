@@ -4,9 +4,16 @@
 \alias{map_bls}
 \title{choropleth mapping of BLS data}
 \usage{
-map_bls(map_data, fill_rate = NULL, labtitle = NULL,
-  stateName = NULL, projection = NULL, lowFill = "green",
-  highFill = "red", ...)
+map_bls(
+  map_data,
+  fill_rate = NULL,
+  labtitle = NULL,
+  stateName = NULL,
+  projection = NULL,
+  lowFill = "green",
+  highFill = "red",
+  ...
+)
 }
 \arguments{
 \item{map_data}{Dataframe to be used as the map's measures. Usually a result of 

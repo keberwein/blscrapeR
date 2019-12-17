@@ -4,9 +4,16 @@
 \alias{bls_api}
 \title{Basic Request Mechanism for BLS Tables}
 \usage{
-bls_api(seriesid, startyear = NULL, endyear = NULL,
-  registrationKey = NULL, catalog = FALSE, calculations = FALSE,
-  annualaverage = FALSE, ...)
+bls_api(
+  seriesid,
+  startyear = NULL,
+  endyear = NULL,
+  registrationKey = NULL,
+  catalog = FALSE,
+  calculations = FALSE,
+  annualaverage = FALSE,
+  ...
+)
 }
 \arguments{
 \item{seriesid}{The BLS id of the series your trying to load. A common format would be 'LAUCN040010000000005'. 

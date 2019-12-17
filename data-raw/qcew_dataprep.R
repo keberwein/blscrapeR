@@ -8,8 +8,8 @@ area_titles <- read.csv("area_titles.csv")
 niacs <- read.csv("niacs.csv")
 size_titles <- read.csv("size_titles.csv")
 
-devtools::use_data(area_titles, area_titles)
-devtools::use_data(niacs, niacs)
-devtools::use_data(size_titles, size_titles)
+usethis::use_data(area_titles, area_titles)
+usethis::use_data(niacs, niacs)
+usethis::use_data(size_titles, size_titles)
 
 rm(area_titles, niacs, size_titles)

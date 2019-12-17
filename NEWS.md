@@ -1,3 +1,12 @@
+# blscrapeR 3.2.0
+
+## Features
+
+* Added the ability for `inflation_adjust()` function to extend to data before 1947. Using the old base, the data now extents to 1913.
+
+* Added a new `naics` data set. This is meant to replace the old `niacs` data set, which was mis-spelled. The old data set remains in place for backward compatibility.
+
+
 # blscrapeR 3.1.6
 
 ## Testing

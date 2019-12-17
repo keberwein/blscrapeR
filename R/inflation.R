@@ -1,4 +1,4 @@
-#' @title Convert the Value of a US Dollar to a Given Year
+#' @title Convert the Value of a US Dollar to a Given Year on or before 1913.
 #' @description Returns a data frame that uses data from the Consumer Price Index (All Goods) to convert the value of a US Dollar [$1.00 USD] over time.
 #' @param base_year = A string or integer argument to represent the base year that you would like dollar values converted to. 
 #' For example, if you want to see the value of a 2007 dollar in 2015, you would select 2015 as a base year and find 2007 in the table.
@@ -29,10 +29,17 @@ inflation_adjust <- function(base_year=NA, ...){
     colnames(cu_temp) <- c("series_id", "year", "period", "value", "footnote_codes")
     unlink(temp)
     
+    if(as.numeric(base_year < 1947)){
+        cu_parse <- subset(cu_temp, series_id=="CUUR0000SA0" & period!="M13" & period!="S01" & period!="S02" & period!="S03") 
+    } else(
+        cu_parse <- subset(cu_temp, series_id=="CUSR0000SA0" & period!="M13" & period!="S01" & period!="S02" & period!="S03") 
+    )
+    
     # Data prep.
-    cu_main <- subset(cu_temp, series_id=="CUSR0000SA0" & period!="M13" & period!="S01" & period!="S02" & period!="S03") %>% tibble::as_tibble() %>%
+    cu_main <- cu_parse %>% tibble::as_tibble() %>%
         dplyr::mutate(date=as.Date(paste(year, period,"01",sep="-"),"%Y-M%m-%d"), year=format(date, '%Y')) %>% 
         dplyr::select(date, period, year, value)
+    
     # Annual aggregation.
     avg.cpi <- aggregate(cu_main$value, by=list(cu_main$year), FUN=mean) %>% dplyr::rename(year=Group.1, avg_cpi=x)
     # Formula for calculating inflation example: $1.00 * (1980 CPI/ 2014 CPI) = 1980 price.
@@ -42,4 +49,3 @@ inflation_adjust <- function(base_year=NA, ...){
     avg.cpi$adj_value <- round(avg.cpi$adj_value, 2)
     tibble::as_tibble(avg.cpi)
 }
-
