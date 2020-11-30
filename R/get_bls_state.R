@@ -1,5 +1,5 @@
 
-#' @title A function that returns county-level labor statistics
+#' @title A function that returns state-level labor statistics
 #' @description A function to download and format state employment data. These data begin on January 1976 to current. 
 #' NOTE: The most current data will always be at least 30 days behind the current date, and depending on the day of your query, those numbers may be estimates.
 #' @param date_mth The month or months you would like data for. Accepts full month names and four-digit year.
