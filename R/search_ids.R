@@ -9,9 +9,10 @@
 #' @importFrom tibble as_tibble
 #' @export
 #' @examples
+#' \dontrun{
 #' # Search for monthly Unemployment Rates for Women
 #' ids <- search_ids(keyword = c("Unemployment Rate", "Women"), periodicity_code = "M")
-#' 
+#' }
 
 
 search_ids <- function(keyword = NULL, periodicity_code = NULL, ...) {
