@@ -4,7 +4,9 @@
 \name{series_ids}
 \alias{series_ids}
 \title{Dataset containing BLS series ids and descriptions.}
-\format{An object of class \code{data.frame} with 88815 rows and 4 columns.}
+\format{
+An object of class \code{data.frame} with 88815 rows and 4 columns.
+}
 \usage{
 data(series_ids)
 }

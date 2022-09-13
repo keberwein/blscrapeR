@@ -5,7 +5,11 @@
 \alias{county_map_data}
 \alias{county_map_merc}
 \title{Dataset for mapping U.S. counties with a Mercator projection}
-\format{A data frame with 55,413 rows and 7 variables}
+\format{
+A data frame with 55,413 rows and 7 variables
+
+A data frame with 55,413 rows and 7 variables
+}
 \usage{
 data(county_map_merc)
 

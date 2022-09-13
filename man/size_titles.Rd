@@ -4,7 +4,9 @@
 \name{size_titles}
 \alias{size_titles}
 \title{Dataset containing size codes for US industries by size.}
-\format{A data frame with 10 rows and 2 variables}
+\format{
+A data frame with 10 rows and 2 variables
+}
 \usage{
 data(size_titles)
 }

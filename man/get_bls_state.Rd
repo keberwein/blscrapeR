@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_bls_state.R
 \name{get_bls_state}
 \alias{get_bls_state}
-\title{A function that returns county-level labor statistics}
+\title{A function that returns state-level labor statistics}
 \usage{
 get_bls_state(date_mth = NULL, seasonality = TRUE, ...)
 }

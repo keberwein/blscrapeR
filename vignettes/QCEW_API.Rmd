@@ -21,14 +21,14 @@ For example, if we wanted to gather the quarterly employment and wage informatio
 
 ```{r, eval=FALSE}
 library(blscrapeR)
-dat <- qcew_api(year=2016, qtr=1, slice="industry", sliceCode=5112)
+dat <- qcew_api(year=2021, qtr=1, slice="industry", sliceCode=10)
 ```
 
 We can also get annual averages by passing "A" as an argument to `qtr`.
 
 ```{r, eval=FALSE}
 library(blscrapeR)
-dat <- qcew_api(year=2016, qtr="A", slice="industry", sliceCode=5112)
+dat <- qcew_api(year=2021, qtr="A", slice="industry", sliceCode=10)
 ```
 
 

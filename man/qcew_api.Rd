@@ -4,7 +4,13 @@
 \alias{qcew_api}
 \title{Request data from the Quarterly Census of Employment and Wages.}
 \usage{
-qcew_api(year = 2018, qtr = "a", slice = NULL, sliceCode = NULL, ...)
+qcew_api(
+  year = c(format(Sys.Date(), "\%Y")),
+  qtr = "1",
+  slice = NULL,
+  sliceCode = NULL,
+  ...
+)
 }
 \arguments{
 \item{year}{These data begin in 2012 and go to the most recent complete quarter. The argument can be entered
@@ -31,7 +37,7 @@ A key is not required for the QCEW API.
 \examples{
 
 # A request for the employment levels and wages for NIACS 5112: Software Publishers.
-dat <- qcew_api(year=2017, qtr="a", slice="industry", sliceCode=5112)
+dat <- qcew_api(c(format(Sys.Date(), "\%Y")), qtr="1", slice="industry", sliceCode=10)
 
 
 }

@@ -4,7 +4,9 @@
 \name{state_map_data}
 \alias{state_map_data}
 \title{Dataset for mapping U.S. states}
-\format{A data frame with 13,660 rows and 7 variables}
+\format{
+A data frame with 13,660 rows and 7 variables
+}
 \usage{
 data(state_map_data)
 }

@@ -4,7 +4,9 @@
 \name{county_fips}
 \alias{county_fips}
 \title{Dataset containing FIPS codes for mapping and lookup.}
-\format{A data frame with 3235 rows and 5 variables}
+\format{
+A data frame with 3235 rows and 5 variables
+}
 \usage{
 data(county_fips)
 }

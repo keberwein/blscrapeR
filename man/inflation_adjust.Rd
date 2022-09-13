@@ -2,7 +2,7 @@
 % Please edit documentation in R/inflation.R
 \name{inflation_adjust}
 \alias{inflation_adjust}
-\title{Convert the Value of a US Dollar to a Given Year}
+\title{Convert the Value of a US Dollar to a Given Year on or before 1913.}
 \usage{
 inflation_adjust(base_year = NA, ...)
 }

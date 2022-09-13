@@ -4,7 +4,9 @@
 \name{niacs}
 \alias{niacs}
 \title{Dataset containing NIACS codes for industry lookups.}
-\format{A data frame with 2469 rows and 2 variables}
+\format{
+A data frame with 2469 rows and 2 variables
+}
 \usage{
 data(niacs)
 }

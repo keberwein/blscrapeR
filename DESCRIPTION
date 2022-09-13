@@ -27,3 +27,4 @@ URL: https://github.com/keberwein/blscrapeR
 BugReports: https://github.com/keberwein/blscrapeR/issues
 LazyData: true
 VignetteBuilder: knitr
+RoxygenNote: 7.2.1

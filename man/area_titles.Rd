@@ -4,7 +4,9 @@
 \name{area_titles}
 \alias{area_titles}
 \title{Dataset containing FIPS codes for counties, states and MSAs.}
-\format{A data frame with 4723 rows and 2 variables}
+\format{
+A data frame with 4723 rows and 2 variables
+}
 \usage{
 data(area_titles)
 }
