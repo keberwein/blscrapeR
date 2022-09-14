@@ -1,3 +1,14 @@
+# blscrapeR 3.2.1
+
+## Bug Fixes
+
+* Addressed changes made by the BLS for the QEW data sets.
+
+* Fixed typos in documentation.
+
+* Changed examples so automated CRAN testing won't exhaust daily API limit.
+
+
 # blscrapeR 3.2.0
 
 ## Features

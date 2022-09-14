@@ -1,7 +1,6 @@
 ## Test environments
-* local Fedora 31, R 3.6.1
+* local Fedora 31, R 4.05
 * win-builder (devel and release)
-* Travis-CI, R 3.6.1
 
 
 ## R CMD check results
