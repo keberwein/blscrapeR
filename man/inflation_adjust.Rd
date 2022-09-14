@@ -17,9 +17,10 @@ Returns a data frame that uses data from the Consumer Price Index (All Goods) to
 }
 \examples{
 
+\dontrun{
 ## Get historical USD values based on a 2010 dollar.
 values <- inflation_adjust(base_year = 2015)
-
+}
 
 }
 \keyword{api}

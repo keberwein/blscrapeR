@@ -7,7 +7,7 @@
 set_bls_key(key = NA, overwrite = NA)
 }
 \arguments{
-\item{key}{The API key provided to you from the BLS formated in quotes. A key can be acquired at \url{https://data.bls.gov/registrationEngine/}}
+\item{key}{The API key provided to you from the BLS formatted in quotes. A key can be acquired at \url{https://data.bls.gov/registrationEngine/}}
 
 \item{overwrite}{If this is set to TRUE, it will overwrite an existing BLS_KEY that you already have in your \code{.Renviron} file.}
 }
@@ -22,7 +22,7 @@ original file for disaster recovery purposes.
 
 \dontrun{
 set_bls_key("111111abc")
-# First time, relead your enviornment so you can use the key without restarting R.
+# First time, reload your environment so you can use the key without restarting R.
 readRenviron("~/.Renviron")
 # You can check it with:
 Sys.getenv("BLS_KEY")
@@ -31,7 +31,7 @@ Sys.getenv("BLS_KEY")
 \dontrun{
 # If you need to overwrite an existing key:
 set_bls_key("111111abc", overwrite = TRUE)
-# First time, relead your enviornment so you can use the key without restarting R.
+# First time, reload your environment so you can use the key without restarting R.
 readRenviron("~/.Renviron")
 # You can check it with:
 Sys.getenv("BLS_KEY")

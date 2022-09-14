@@ -18,7 +18,8 @@ You can type full words or beginning letters. For example, \code{periodicity_cod
 Search the internal series_id data set.
 }
 \examples{
+\dontrun{
 # Search for monthly Unemployment Rates for Women
 ids <- search_ids(keyword = c("Unemployment Rate", "Women"), periodicity_code = "M")
-
+}
 }
