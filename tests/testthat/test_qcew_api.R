@@ -13,5 +13,5 @@ qcewDat <- read.csv(temp, fill=TRUE, header=TRUE, sep=",", stringsAsFactors=FALS
                     strip.white=TRUE)
 
 # Check actual fucntion
-out <- blscrapeR::qcew_api(year=2017, qtr=1, slice="industry", sliceCode=10)
+out <- blscrapeR::qcew_api(year=c(format(Sys.Date(), "%Y")), qtr=1, slice="industry", sliceCode=10)
 #testthat::expect_identical(out, qcewDat)
