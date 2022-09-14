@@ -5,7 +5,7 @@
 #' used in package functions by simply typing BLS_KEY. If you do not have an \code{.Renviron} file, the function will create on for you. 
 #' If you already have an \code{.Renviron} file, the function will append the key to your existing file, while making a backup of your 
 #' original file for disaster recovery purposes.
-#' @param key The API key provided to you from the BLS formated in quotes. A key can be acquired at \url{https://data.bls.gov/registrationEngine/}
+#' @param key The API key provided to you from the BLS formatted in quotes. A key can be acquired at \url{https://data.bls.gov/registrationEngine/}
 #' @param overwrite If this is set to TRUE, it will overwrite an existing BLS_KEY that you already have in your \code{.Renviron} file.
 #' @importFrom utils write.table
 #' @export set_bls_key
@@ -13,7 +13,7 @@
 #' 
 #' \dontrun{
 #' set_bls_key("111111abc")
-#' # First time, relead your enviornment so you can use the key without restarting R.
+#' # First time, reload your environment so you can use the key without restarting R.
 #' readRenviron("~/.Renviron")
 #' # You can check it with:
 #' Sys.getenv("BLS_KEY")
@@ -22,7 +22,7 @@
 #' \dontrun{
 #' # If you need to overwrite an existing key:
 #' set_bls_key("111111abc", overwrite = TRUE)
-#' # First time, relead your enviornment so you can use the key without restarting R.
+#' # First time, reload your environment so you can use the key without restarting R.
 #' readRenviron("~/.Renviron")
 #' # You can check it with:
 #' Sys.getenv("BLS_KEY")

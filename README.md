@@ -4,7 +4,7 @@ blscrapeR <img src="man/figures/blscrapeR_hex.png" align="right" />
 
 [![Build Status](https://travis-ci.org/keberwein/blscrapeR.png?branch=master)](https://travis-ci.org/keberwein/blscrapeR) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/blscrapeR)](http://www.r-pkg.org/badges/version/blscrapeR) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](http://www.repostatus.org/badges/latest/active.svg)](http://www.repostatus.org/#active)
 
-Designed to be a tidy API wrapper for the Bureau of Labor Statistics (BLS.) The package has additional functions to help parse, analyze and visualize the data. The package utalizes "tidyverse" concepts for internal functionality and encourages the use of those concepts with the output data.
+Designed to be a tidy API wrapper for the Bureau of Labor Statistics (BLS.) The package has additional functions to help parse, analyze and visualize the data. The package utilizes "tidyverse" concepts for internal functionality and encourages the use of those concepts with the output data.
 
 Install
 -------
@@ -46,7 +46,7 @@ head(df, 5)
 Search BLS IDs
 --------------
 
-Some knowledge of BLS ids are needed to query the API. The package includes a "fuzzy search" function to help find these ids. There are currenlty more than 75,000 series ids in the package's internal dataset, `series_ids`. While these aren't all the series ids the BLS offers, it contains the most popular. The [BLS Data Finder](https://beta.bls.gov/dataQuery/search) is another good resource for finding series ids, that may not be in the internal dataset.
+Some knowledge of BLS ids are needed to query the API. The package includes a "fuzzy search" function to help find these ids. There are currently more than 75,000 series ids in the package's internal data set, `series_ids`. While these aren't all the series ids the BLS offers, it contains the most popular. The [BLS Data Finder](https://beta.bls.gov/dataQuery/search) is another good resource for finding series ids, that may not be in the internal data set.
 
 ``` r
 library(blscrapeR)

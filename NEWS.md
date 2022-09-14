@@ -25,11 +25,11 @@
 
 ## Bug fixes
 
-* Fixed area in tesing module where `qcew_api()` function was pulling inproper dates.
+* Fixed area in testing module where `qcew_api()` function was pulling improper dates.
 
 ## Enhancements
 
-* Added logic to `qcew_api()` that throws a warning if useer attempts to query dates outside of the API's range.
+* Added logic to `qcew_api()` that throws a warning if user attempts to query dates outside of the API's range.
 
 Updated NIACS and FIPS codes for 2018.
 
@@ -47,7 +47,7 @@ Updated NIACS and FIPS codes for 2018.
 
 ## Bug fixes
 
-* The API sometimes adds an extra column for the most current month, which was causing irregular column shifts. Added logic to the map loop to automaticlly adjust for such situations.
+* The API sometimes adds an extra column for the most current month, which was causing irregular column shifts. Added logic to the map loop to automatically adjust for such situations.
 
 # blscrapeR 3.1.1
 
@@ -59,7 +59,7 @@ Updated NIACS and FIPS codes for 2018.
 
 * The `bls_api()` function now returns verbose error message if the api request fails.
 
-* Added BLS `series_ids` internal dataset.
+* Added BLS `series_ids` internal data set.
 
 * Added `search_ids()` function to search the internal series_ids data set.
 
@@ -307,7 +307,7 @@ The change is backward compatible since the user is sill able to enter their api
 
 ## Major Changes
 
-* Removed shape files from package data to cut down on size. This fundamentally changes the way the mapping functions work. Opted instead, for spacial poly data frames rendered from the shapefiles.
+* Removed shape files from package data to cut down on size. This fundamentally changes the way the mapping functions work. Opted instead, for spacial poly data frames rendered from the shape files.
 
 
 # blscrapeR 0.2.0

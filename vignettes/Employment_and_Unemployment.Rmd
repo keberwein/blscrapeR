@@ -15,7 +15,7 @@ vignette: >
 
 The most difficult thing about working with BLS data is gaining a clear understanding on what data are available and what they represent. Some of the more popular data sets can be found on the [BLS Databases, Tables & Calculations website](https://www.bls.gov/data/). The selected examples below do not include all series or databases.
 
-##Catagories you will find useful are:
+##Categories you will find useful are:
 
 * [CPS](https://data.bls.gov/cgi-bin/surveymost?ln) (Current Population Survey) includes employment and unemployment rates nationally.
 
