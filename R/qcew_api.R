@@ -19,9 +19,10 @@
 #' @seealso \url{https://data.bls.gov/cew/doc/access/csv_data_slices.htm}
 #' @examples
 #' 
+#'  \dontrun{
 #' # A request for the employment levels and wages for NIACS 5112: Software Publishers.
 #' dat <- qcew_api(c(format(Sys.Date(), "%Y")), qtr="1", slice="industry", sliceCode=10)
-#' 
+#' }
 #' 
 qcew_api <- function(year=c(format(Sys.Date(), "%Y")), qtr="1", slice=NULL, sliceCode=NULL, ...){
     if (is.null("slice") | is.null("sliceCode")){
