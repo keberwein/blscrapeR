@@ -18,6 +18,7 @@
 #' @export bls_api
 #' @seealso \url{https://www.bls.gov/data/}
 #' @seealso \url{https://beta.bls.gov/dataQuery/search}
+#' @return A tibble from the BLS API.
 #' @examples
 #' 
 #' 

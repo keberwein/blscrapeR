@@ -11,6 +11,9 @@ set_bls_key(key = NA, overwrite = NA)
 
 \item{overwrite}{If this is set to TRUE, it will overwrite an existing BLS_KEY that you already have in your \code{.Renviron} file.}
 }
+\value{
+No return value. A convenience function used for API Key configuration.
+}
 \description{
 This function will add your BLS API key to your \code{.Renviron} file so it can be called securely without being stored 
 in your code. After you have installed your key, it can be called any time by typing \code{Sys.getenv("BLS_KEY")} and can be 

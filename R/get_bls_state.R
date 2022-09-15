@@ -11,6 +11,7 @@
 #' @importFrom purrr map
 #' @importFrom dplyr mutate
 #' @export get_bls_state
+#' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
 #' # Single series

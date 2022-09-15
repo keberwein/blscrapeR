@@ -5,6 +5,7 @@
 \title{Compound_pipe}
 \usage{
 lhs \%<>\% rhs
+No return value, a utility function to export magrittr pipes to be used in internal package code.
 }
 \description{
 Compound_pipe

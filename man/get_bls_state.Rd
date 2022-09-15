@@ -13,6 +13,9 @@ get_bls_state(date_mth = NULL, seasonality = TRUE, ...)
 
 \item{...}{additional arguments}
 }
+\value{
+A tibble from the BLS API.
+}
 \description{
 A function to download and format state employment data. These data begin on January 1976 to current. 
 NOTE: The most current data will always be at least 30 days behind the current date, and depending on the day of your query, those numbers may be estimates.

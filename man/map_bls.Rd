@@ -39,6 +39,9 @@ and Lambert for nationwide views.}
 
 \item{...}{additional arguments}
 }
+\value{
+A \code{ggplot2} object based on information provided by the \code{map_data} argument.
+}
 \description{
 Return a ggplot object to render a choropleth map with state and/or county outlines.
 The map files contain 2016 FIPS codes and can be used with any data set containing

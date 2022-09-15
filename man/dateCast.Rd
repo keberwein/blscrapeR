@@ -12,6 +12,9 @@ by the \code{bls_api()} function.}
 
 \item{dt_format}{A character string containing a valid date format. The default will return the ISO 8601 date format.}
 }
+\value{
+A tibble from the source \code{api_df} with an additional date column based on the date format given in \code{dt_format}.
+}
 \description{
 A helper function to create a continuous date from Year and Period columns.
 }

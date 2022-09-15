@@ -24,6 +24,7 @@
 #' \code{ggplot2::scale_fill_gradient}.
 #' @param ... additional arguments
 #' @seealso \url{https://cran.r-project.org/package=tigris}
+#' @return A \code{ggplot2} object based on information provided by the \code{map_data} argument.
 #' @examples
 #' \dontrun{
 #' # Download the most current month unemployment statistics on a county level.

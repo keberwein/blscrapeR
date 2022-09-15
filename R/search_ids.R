@@ -8,6 +8,7 @@
 #' @importFrom purrr map_chr
 #' @importFrom tibble as_tibble
 #' @export
+#' @return A tibble from the the internal data set \code{bls_ids}
 #' @examples
 #' \dontrun{
 #' # Search for monthly Unemployment Rates for Women

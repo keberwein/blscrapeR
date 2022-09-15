@@ -35,6 +35,9 @@ and Lambert for nationwide views.}
 \item{highFill}{The fill color of the higher values being mapped. The default color is green, but can be changed to any color accepted by
 \code{ggplot2::scale_fill_gradient}.}
 }
+\value{
+A \code{ggplot2} object based on information provided by the \code{map_data} argument.
+}
 \description{
 Return a ggplot object to render a choropleth map with county outlines.
 The map files contain 2015 FIPS codes and can be used with any data set containing

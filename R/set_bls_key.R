@@ -9,6 +9,7 @@
 #' @param overwrite If this is set to TRUE, it will overwrite an existing BLS_KEY that you already have in your \code{.Renviron} file.
 #' @importFrom utils write.table
 #' @export set_bls_key
+#' @return No return value. A convenience function used for API Key configuration.
 #' @examples
 #' 
 #' \dontrun{
@@ -29,6 +30,9 @@
 #' }
 
 set_bls_key <- function(key=NA, overwrite=NA){
+    # Get working dir so we can change it back later, if needed.
+    oldwd <- getwd()
+    on.exit(setwd(oldwd))
     # go to the home dir. and look for an .Renviron file. If not, create one.
     setwd(Sys.getenv("HOME"))
     if(file.exists(".Renviron")){

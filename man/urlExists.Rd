@@ -9,6 +9,9 @@ urlExists(target)
 \arguments{
 \item{target}{url}
 }
+\value{
+A logical of \code{TRUE} or \code{FALSE}.
+}
 \description{
 A utility function to run a tryCatch on a URL.
 }

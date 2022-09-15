@@ -6,6 +6,9 @@
 \usage{
 quick_unemp_level()
 }
+\value{
+A tibble from the BLS API.
+}
 \description{
 Returns the unemployment level. SeriesID: LNS13000000.
 If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.

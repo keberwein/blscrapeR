@@ -29,6 +29,9 @@ and \code{blscrapeR::size_titles} contains industry size codes. These codes can 
 
 \item{...}{additional arguments}
 }
+\value{
+A tibble from the BLS API.
+}
 \description{
 Return data from the QCEW API. This is separate from the main BLS API and returns quarterly data
 sliced by industry, area or size. Industry is identified by NIACS code and area is identified by FIPS code.

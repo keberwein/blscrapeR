@@ -15,6 +15,9 @@ will return data for all 50 states.}
 
 \item{...}{additional arguments}
 }
+\value{
+A tibble from the BLS API.
+}
 \description{
 A function to download and format state employment data.
 Due to limitations in the data source, the function can only return data from the last 12 months.

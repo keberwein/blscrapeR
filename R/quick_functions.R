@@ -4,6 +4,7 @@
 #' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_unemp_rate
+#' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
 #' df <- quick_unemp_rate()
@@ -25,6 +26,7 @@ quick_unemp_rate <- function (){
 #' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_unemp_level
+#' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
 #' df <- quick_unemp_level()
@@ -46,6 +48,7 @@ quick_unemp_level <- function (){
 #' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_employed_rate
+#' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
 #' df <- quick_employed_rate()
@@ -69,6 +72,7 @@ quick_employed_rate <- function (){
 #' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_employed_level
+#' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
 #' df <- quick_employed_level()
@@ -89,6 +93,7 @@ quick_employed_level <- function (){
 #' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_laborForce_level
+#' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
 #' df <- quick_laborForce_level()
@@ -109,6 +114,7 @@ quick_laborForce_level <- function (){
 #' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick unemployment rate
 #' @export quick_laborForce_rate
+#' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
 #' df <- quick_laborForce_rate()
@@ -129,6 +135,7 @@ quick_laborForce_rate <- function (){
 #' If you installed a BLS_KEY with the \code{set_bls_key()} function, it will detect it and use your key. This counts against your daily query limit.
 #' @keywords quick nonfarm_employed
 #' @export quick_nonfarm_employed
+#' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
 #' df <- quick_nonfarm_employed()

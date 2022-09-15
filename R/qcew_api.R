@@ -17,6 +17,7 @@
 #' @keywords bls api economics cpi unemployment inflation
 #' @export qcew_api
 #' @seealso \url{https://data.bls.gov/cew/doc/access/csv_data_slices.htm}
+#' @return A tibble from the BLS API.
 #' @examples
 #' 
 #'  \dontrun{

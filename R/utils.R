@@ -6,6 +6,7 @@
 #' @keywords internal
 #' @importFrom magrittr %>%
 #' @usage lhs \%>\% rhs
+#' @return No return value, a utility function to export magrittr pipes to be used in internal package code.
 #' @export
 NULL
 
@@ -16,6 +17,7 @@ NULL
 #' @keywords internal
 #' @importFrom magrittr %<>%
 #' @usage lhs \%<>\% rhs
+#' No return value, a utility function to export magrittr pipes to be used in internal package code.
 #' @export
 NULL
 
@@ -24,6 +26,7 @@ NULL
 #' @description A utility function to run a tryCatch on a URL.
 #' @param target url
 #' @importFrom utils capture.output
+#' @return A logical of \code{TRUE} or \code{FALSE}.
 #' @export urlExists
 urlExists <- function(target) {  
     tryCatch({  
@@ -45,6 +48,7 @@ urlExists <- function(target) {
 #' @param x A word or string to capatalize
 #' @param ... additional arguments.
 #' @keywords internal
+#' @return A string with the first letter of \code{x} as capital letter.
 #' @export
 firstupper <- function(x) {
     substr(x, 1, 1) <- toupper(substr(x, 1, 1))

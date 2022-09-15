@@ -14,6 +14,9 @@ You can type full words or beginning letters. For example, \code{periodicity_cod
 
 \item{...}{additional arguments}
 }
+\value{
+A tibble from the the internal data set \code{bls_ids}
+}
 \description{
 Search the internal series_id data set.
 }

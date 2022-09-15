@@ -6,6 +6,9 @@
 \usage{
 lhs \%>\% rhs
 }
+\value{
+No return value, a utility function to export magrittr pipes to be used in internal package code.
+}
 \description{
 Pipe operator
 }

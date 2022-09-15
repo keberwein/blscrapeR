@@ -34,6 +34,9 @@ If you need help finding seriesIDs, check the BLS website or the BLS Data Finder
 
 \item{...}{additional arguments}
 }
+\value{
+A tibble from the BLS API.
+}
 \description{
 Return data frame from one or more requests via the US Bureau of Labor Statistics API. Provided arguments are in the form of BLS series ids.
 }

@@ -13,6 +13,7 @@
 #' @importFrom tibble as_tibble
 #' @importFrom dplyr rename mutate
 #' @export get_bls_county
+#' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
 #' # Most recent month in the data set.

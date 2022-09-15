@@ -11,6 +11,9 @@ firstupper(x)
 
 \item{...}{additional arguments.}
 }
+\value{
+A string with the first letter of \code{x} as capital letter.
+}
 \description{
 Internal function to cast the first letter of a word to upper-case.
 }
