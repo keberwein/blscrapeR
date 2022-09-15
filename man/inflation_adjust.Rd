@@ -14,13 +14,16 @@ For example, if you want to see the value of a 2007 dollar in 2015, you would se
 }
 \value{
 A tibble from the BLS API.
+}
+\description{
+Returns a data frame that uses data from the Consumer Price Index (All Goods) to convert the value of a US Dollar [$1.00 USD] over time.
+}
+\examples{
 \dontrun{
 ## Get historical USD values based on a 2010 dollar.
 values <- inflation_adjust(base_year = 2015)
 }
-}
-\description{
-Returns a data frame that uses data from the Consumer Price Index (All Goods) to convert the value of a US Dollar [$1.00 USD] over time.
+
 }
 \keyword{api}
 \keyword{bls}

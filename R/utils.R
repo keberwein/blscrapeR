@@ -17,7 +17,7 @@ NULL
 #' @keywords internal
 #' @importFrom magrittr %<>%
 #' @usage lhs \%<>\% rhs
-#' No return value, a utility function to export magrittr pipes to be used in internal package code.
+#' @return No return value, a utility function to export magrittr pipes to be used in internal package code.
 #' @export
 NULL
 
