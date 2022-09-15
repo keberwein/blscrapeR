@@ -6,6 +6,8 @@
 
 * Fixed typos in documentation.
 
+* Added return values to documentation.
+
 * Changed examples so automated CRAN testing won't exhaust daily API limit.
 
 
