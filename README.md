@@ -2,7 +2,7 @@
 blscrapeR <img src="man/figures/blscrapeR_hex.png" align="right" />
 ===================================================================
 
-[![Build Status](https://travis-ci.org/keberwein/blscrapeR.png?branch=master)](https://travis-ci.org/keberwein/blscrapeR) [![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/blscrapeR)](https://www.r-pkg.org/badges/version/blscrapeR) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
+[![CRAN\_Status\_Badge](https://www.r-pkg.org/badges/version/blscrapeR)](https://www.r-pkg.org/badges/version/blscrapeR) [![Project Status: Active - The project has reached a stable, usable state and is being actively developed.](https://www.repostatus.org/badges/latest/active.svg)](https://www.repostatus.org/#active)
 
 Designed to be a tidy API wrapper for the Bureau of Labor Statistics (BLS.) The package has additional functions to help parse, analyze and visualize the data. The package utilizes "tidyverse" concepts for internal functionality and encourages the use of those concepts with the output data.
 
@@ -168,65 +168,6 @@ ggplot(data = df, aes(x = date)) +
 
 *For more advanced usage, please see the [package vignettes](https://github.com/keberwein/blscrapeR/tree/master/vignettes).*
 
-Basic Mapping
--------------
 
-Like the the “quick functions” for requesting API data, there are two "quick" map functions, `bls_map_county()` and `bls_map_state()`. These functions are designed to work with two helper functions `get_bls_county()` and get `get_bls_state()`. Each helper function downloads recent data for unemployment rate, unemployment level, employment rate, employment level and civilian labor force. These functions do not pull data from the API, rather they pull data from text files and *do not* count against daily query limits.
 
-**Note:** Even though the `get_bls` functions return data in the correct formats, the `bls_map` functions can be used with any data set that includes FIPS codes.
 
-The example below maps the current unemployment rate by county. Alaska and Hawaii have to re-located to save space.
-
-``` r
-library(blscrapeR)
-# Grap the data in a pre-formatted data frame.
-# If no argument is passed to the function it will load the most recent month's data.
-df <- get_bls_county()
-
-#Use map function with arguments.
-map_bls(map_data = df, fill_rate = "unemployed_rate", 
-               labtitle = "Unemployment Rate by County")
-```
-
-![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/blscrape_docfig3.png?raw=true)
-
-Advanced Mapping
-----------------
-
-What's R mapping without some interactivity? Below we’re using two additional packages, `leaflet`, which is popular for creating interactive maps and `tigris`, which allows us to download the exact shape files we need for these data and includes a few other nice tools.
-
-``` r
-# Leaflet map
-library(blscrapeR)
-library(tigris)
-library(leaflet)
-map.shape <- counties(cb = TRUE, year = 2015)
-df <- get_bls_county()
-
-# Slice the df down to only the variables we need and rename "fips" colunm
-# so I can get a cleaner merge later.
-df <- df[, c("unemployed_rate", "fips")]
-colnames(df) <- c("unemployed_rate", "GEOID")
-
-# Merge df with spatial object.
-leafmap <- geo_join(map.shape, df, by="GEOID")
-
-# Format popup data for leaflet map.
-popup_dat <- paste0("<strong>County: </strong>", 
-                    leafmap$NAME, 
-                    "<br><strong>Value: </strong>", 
-                    leafmap$unemployed_rate)
-
-pal <- colorQuantile("YlOrRd", NULL, n = 20)
-# Render final map in leaflet.
-leaflet(data = leafmap) %>% addTiles() %>%
-    addPolygons(fillColor = ~pal(unemployed_rate), 
-                fillOpacity = 0.8, 
-                color = "#BDBDC3", 
-                weight = 1,
-                popup = popup_dat)
-```
-
-**Note:** This is just a static image since the full map would not be as portable for the purpose of documentation.
-
-![](https://github.com/keberwein/keberwein.github.io/blob/master/images/bls_img/blscrape_docfig3-1.png?raw=true)

@@ -21,6 +21,7 @@ inflation_adjust <- function(base_year=NA, ...){
     if (nchar(base_year) != 4){
         stop(message("Please enter your date as a four-digit integer."))
     }
+    
     #Load file from BLS servers
     temp <- tempfile()
     # Add urlEXists here.
