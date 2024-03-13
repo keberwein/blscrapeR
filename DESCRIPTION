@@ -1,19 +1,17 @@
 Package: blscrapeR
 Type: Package
-Title: An API Wrapper for the Bureau of Labor Statistics (BLS)
-Version: 3.2.2
+Title: An API Wrapper for the United States Bureau of Labor Statistics
+Version: 4.0.0
 Authors@R: person("Kris", "Eberwein", email = "kris.eberwein@gmail.com",
                   role = c("aut", "cre"))
-Description: Scrapes various data from <https://www.bls.gov/>. The U.S. Bureau of Labor Statistics is the statistical branch of the United States Department of Labor. The package has additional functions to help parse, analyze and visualize the data.
+Description: Scrapes various data from United States Bureau of Labor Statistics. The Bureau of Labor Statistics is the statistical branch of the United States Department of Labor. The package has additional functions to help parse, analyze and visualize the data.
 Depends: R (>= 3.5.0)
 Imports:
 	httr,
 	jsonlite,
-	ggplot2,
 	magrittr,
 	utils,
 	stats,
-	grDevices,
 	dplyr,
 	purrr,
 	tibble,
@@ -27,4 +25,4 @@ URL: https://github.com/keberwein/blscrapeR
 BugReports: https://github.com/keberwein/blscrapeR/issues
 LazyData: true
 VignetteBuilder: knitr
-RoxygenNote: 7.2.1
+RoxygenNote: 7.2.3

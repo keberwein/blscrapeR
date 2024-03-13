@@ -19,6 +19,6 @@ To access the data directly, issue the command \code{naics)}.
 }
 }
 \note{
-Last updated 2019-12-15
+Last updated 2024-03-13
 }
 \keyword{internal}

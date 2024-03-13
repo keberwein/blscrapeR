@@ -20,6 +20,6 @@ To access the data directly, issue the command \code{area_titles)}.
 }
 }
 \note{
-Last updated 2016-09-30
+Last updated 2024-03-13
 }
 \keyword{internal}

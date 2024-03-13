@@ -50,7 +50,7 @@ urlExists <- function(target) {
 #' @keywords internal
 #' @return A string with the first letter of \code{x} as capital letter.
 #' @export
-firstupper <- function(x) {
+firstupper <- function(x, ...) {
     substr(x, 1, 1) <- toupper(substr(x, 1, 1))
     x
 }

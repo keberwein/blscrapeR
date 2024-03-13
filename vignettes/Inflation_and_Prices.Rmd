@@ -55,17 +55,19 @@ head(df)
 
 Due to the limitations of the API, we are only able to gather twenty years of data per request. However the formula for calculating inflation is based on the 1980 dollar, so the data from the API aren't sufficient.
 
-The package includes a function that collects information form the CPI beginning at 1947 and calculates inflation. Since these data are not pulled directly from the API, the `inflation_adjust()` function does not count against your daily API call limit.
+The package includes a function that collects information form the CPI beginning at 1947 and calculates inflation.
 
-To find out the value of a 1995 dollar in 2015, we just make a simple function call. Note that in the results, 2016 represents an incomplete year at the time this document was created.
+To find out the value of a January 2015 dollar in January 2023, we just make a simple function call.
 
 ```{r eval=FALSE}
-library(blscrapeR)
-df <- inflation_adjust(1995)
-tail(df)
+df <- inflation_adjust("2015-01-01") %>%
+    arrange(desc(date))
+head(df)
 ```
 
 If we want to check our results, we can head over to the CPI [Inflation Calculator](https://data.bls.gov/cgi-bin/cpicalc.pl) on the BLS website.
+
+### 
 
 ##CPI: Tracking Escalation
 

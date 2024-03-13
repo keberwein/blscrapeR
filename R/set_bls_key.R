@@ -7,7 +7,7 @@
 #' original file for disaster recovery purposes.
 #' @param key The API key provided to you from the BLS formatted in quotes. A key can be acquired at \url{https://data.bls.gov/registrationEngine/}
 #' @param overwrite If this is set to TRUE, it will overwrite an existing BLS_KEY that you already have in your \code{.Renviron} file.
-#' @importFrom utils write.table
+#' @importFrom utils write.table read.table
 #' @export set_bls_key
 #' @return No return value. A convenience function used for API Key configuration.
 #' @examples

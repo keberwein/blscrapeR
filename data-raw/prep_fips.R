@@ -1,4 +1,5 @@
 #library(utils)
+#library(usethis)
 
 # 2016 FIPS:
 # This will have to be examined every year for county name changes.
@@ -15,7 +16,7 @@ names(county_fips) <- c("state", "fips_state", "fips_county", "county", "type")
 rm(.Random.seed)
 rm(fileUrl)
 # Use devtools to save data set.
-devtools::use_data(county_fips, overwrite = TRUE)
+usethis::use_data(county_fips, overwrite = TRUE)
 rm(county_fips)
 
 
@@ -23,7 +24,7 @@ rm(county_fips)
 fileUrl <- "http://www2.census.gov/geo/docs/reference/state.txt"
 download.file(fileUrl, destfile="state_fips.txt", method="curl")
 
-state_fips<-read.csv('state_fips.txt',
+state_fips<-read.csv('state_fips.csv',
                       header=TRUE,
                       sep="|",
                       colClasses = "character")
@@ -32,5 +33,5 @@ names(state_fips) <- c("fips_state", "state_abb", "state", "gnisid")
 rm(.Random.seed)
 rm(fileUrl)
 # Use devtools to save data set.
-devtools::use_data(state_fips, overwrite = TRUE)
+usethis::use_data(state_fips, overwrite = TRUE)
 rm(state_fips)

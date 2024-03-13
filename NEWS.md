@@ -1,3 +1,23 @@
+# blscrapeR 4.0.0
+
+## Bug Fixes
+
+* Fixed API call 403 issue with `inflation_adjust()` function.
+
+## Features
+
+* Added `county_fips()` function to list county FIPS codes for a specific state.
+
+## Data
+
+* Updated all internal data sets.
+
+## Removed
+
+* Removed all mapping functions and data, recommend to use the `tigris` package for these activities.
+* Removed qcew_api function.
+
+
 # blscrapeR 3.2.2
 
 ## Bug Fixes

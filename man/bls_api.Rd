@@ -69,11 +69,6 @@ calculations = TRUE, annualaverage = TRUE, catalog = TRUE)
 }
 
 }
-\seealso{
-\url{https://www.bls.gov/data/}
-
-\url{https://beta.bls.gov/dataQuery/search}
-}
 \keyword{api}
 \keyword{bls}
 \keyword{cpi}

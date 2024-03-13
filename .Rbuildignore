@@ -8,3 +8,5 @@
 ^cran-comments\.md$
 ^appveyor\.yml$
 ^CRAN-SUBMISSION$
+^revdep$
+^\.github$

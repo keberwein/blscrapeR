@@ -1,53 +1,72 @@
-#' @title Convert the Value of a US Dollar to a Given Year on or before 1913.
+#' @title Convert the Value of a US Dollar to a Given month on or after 1947.
 #' @description Returns a data frame that uses data from the Consumer Price Index (All Goods) to convert the value of a US Dollar [$1.00 USD] over time.
-#' @param base_year = A string or integer argument to represent the base year that you would like dollar values converted to. 
-#' For example, if you want to see the value of a 2007 dollar in 2015, you would select 2015 as a base year and find 2007 in the table.
+#' @param base_date = A string argument to represent the base month that you would like dollar values converted to. 
+#' For example, if you want to see the value of a Jan. 2015 dollar in Jan. 2023, you would select "2015-01-01" as a base date and find Jan 2023 in the table.
 #' @param ... additional arguments
 #' @keywords bls api economics cpi unemployment inflation
-#' @importFrom stats aggregate
-#' @importFrom dplyr mutate select rename
+#' @importFrom stats aggregate lag
+#' @importFrom dplyr mutate select rename arrange pull
 #' @importFrom tibble as_tibble
 #' @export inflation_adjust
 #' @return A tibble from the BLS API.
 #' @examples
 #' \dontrun{
-#' ## Get historical USD values based on a 2010 dollar.
-#' values <- inflation_adjust(base_year = 2015)
+#' ## Get historical USD values based on a dollar from Jan 2015.
+#' values <- inflation_adjust(base_year = "2015-01-01")
 #' }
 #' 
-inflation_adjust <- function(base_year=NA, ...){
+inflation_adjust <- function(base_date=NA, ...){
     # Set some dummy variables. This keeps CRAN check happy.
     series_id=period=index=coredata=footnote_codes=value=Group.1=x=year=NULL
-    if (nchar(base_year) != 4){
-        stop(message("Please enter your date as a four-digit integer."))
+    
+    # Check args
+    if (!is.na(base_date)) {
+        if (!grepl("^\\d{4}-\\d{2}-\\d{2}$", base_date)) {
+            stop("base_date must be in yyyy-mm-dd format.")
+        }
+        if (as.Date(base_date) <= as.Date("1947-01-01")) {
+            stop("base_date must be greater than 1947-01-01.")
+        }
+    } else {
+        stop("base_date argument is required.")
     }
     
-    #Load file from BLS servers
-    temp <- tempfile()
-    # Add urlEXists here.
+    #Load file from local data
+    cu_main_dat <- blscrapeR::cu_main
+    # Get last year from cu_main
+    cu_dat_year <- max(cu_main_dat$year)
     
-    download.file("https://download.bls.gov/pub/time.series/cu/cu.data.1.AllItems",temp)
-    cu_temp <- read.table(temp, header=FALSE, sep="\t", skip=1, stringsAsFactors=FALSE, strip.white=TRUE)
-    colnames(cu_temp) <- c("series_id", "year", "period", "value", "footnote_codes")
-    unlink(temp)
-    
-    if(as.numeric(base_year < 1947)){
-        cu_parse <- subset(cu_temp, series_id=="CUUR0000SA0" & period!="M13" & period!="S01" & period!="S02" & period!="S03") 
-    } else(
-        cu_parse <- subset(cu_temp, series_id=="CUSR0000SA0" & period!="M13" & period!="S01" & period!="S02" & period!="S03") 
-    )
+    #Make API call for to API using max year as the startyear, and the current year as the endyear.
+    if (Sys.getenv("BLS_KEY") != "") {
+        cu_temp <- bls_api("CUUR0000SA0", startyear = cu_dat_year, endyear = as.numeric(format(Sys.Date(), "%Y")),
+                           Sys.getenv("BLS_KEY"))
+    } else {
+        cu_temp <- bls_api("CUUR0000SA0", startyear = cu_dat_year, endyear = as.numeric(format(Sys.Date(), "%Y")))
+    }
     
     # Data prep.
-    cu_main <- cu_parse %>% tibble::as_tibble() %>%
+    cu_main <- cu_temp %>%
         dplyr::mutate(date=as.Date(paste(year, period,"01",sep="-"),"%Y-M%m-%d"), year=format(date, '%Y')) %>% 
         dplyr::select(date, period, year, value)
+    # Bind data sets.
+    cu_bound <- dplyr::bind_rows(cu_main, cu_main_dat)
     
     # Annual aggregation.
-    avg.cpi <- aggregate(cu_main$value, by=list(cu_main$year), FUN=mean) %>% dplyr::rename(year=Group.1, avg_cpi=x)
-    # Formula for calculating inflation example: $1.00 * (1980 CPI/ 2014 CPI) = 1980 price.
-    avg.cpi$adj_value <- avg.cpi[,2] / avg.cpi[as.numeric(which(avg.cpi$year==as.character(base_year))),2]
-    avg.cpi$base_year <- as.character(base_year)
-    avg.cpi$pct_increase <- (1-avg.cpi$adj_value) * -100
-    avg.cpi$adj_value <- round(avg.cpi$adj_value, 2)
-    tibble::as_tibble(avg.cpi)
+    base_value <- cu_bound %>%
+        filter(date == base_date) %>%
+        select(value) %>%
+        pull()
+    
+    # Calculate the adjustment factor
+    df_out <- cu_bound %>%
+        filter(date >= base_date) %>%
+        arrange(date) %>%
+        mutate(base_date = base_date) %>%
+        # Formula for calculating inflation example: $1.00 * (1980 CPI/ 2014 CPI) = 1980 price.
+        #mutate(adj_dollar_value = round(value / base_value, 2)) %>%
+        mutate(adj_dollar_value = ceiling(value / base_value * 100) / 100) %>%
+        mutate(month_ovr_month_pct_change = (value / lag(value) - 1) * 100)
+
+return(df_out)
+
 }

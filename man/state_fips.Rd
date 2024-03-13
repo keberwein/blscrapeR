@@ -23,6 +23,6 @@ To access the data directly, issue the command \code{datastate_fips)}.
 }
 }
 \note{
-Last updated 2016-05-27
+Last updated 2024-03-13
 }
 \keyword{internal}

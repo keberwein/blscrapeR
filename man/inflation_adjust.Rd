@@ -2,13 +2,13 @@
 % Please edit documentation in R/inflation.R
 \name{inflation_adjust}
 \alias{inflation_adjust}
-\title{Convert the Value of a US Dollar to a Given Year on or before 1913.}
+\title{Convert the Value of a US Dollar to a Given month on or after 1947.}
 \usage{
-inflation_adjust(base_year = NA, ...)
+inflation_adjust(base_date = NA, ...)
 }
 \arguments{
-\item{base_year}{= A string or integer argument to represent the base year that you would like dollar values converted to. 
-For example, if you want to see the value of a 2007 dollar in 2015, you would select 2015 as a base year and find 2007 in the table.}
+\item{base_date}{= A string argument to represent the base month that you would like dollar values converted to. 
+For example, if you want to see the value of a Jan. 2015 dollar in Jan. 2023, you would select "2015-01-01" as a base date and find Jan 2023 in the table.}
 
 \item{...}{additional arguments}
 }
@@ -20,8 +20,8 @@ Returns a data frame that uses data from the Consumer Price Index (All Goods) to
 }
 \examples{
 \dontrun{
-## Get historical USD values based on a 2010 dollar.
-values <- inflation_adjust(base_year = 2015)
+## Get historical USD values based on a dollar from Jan 2015.
+values <- inflation_adjust(base_year = "2015-01-01")
 }
 
 }
