@@ -1,14 +1,12 @@
 ## Test environments
-* local Fedora 31, R 4.05
-* win-builder (devel and release)
-* mac release
+* local Fedora 33, R 4.05
+* win-latest (devel)
+* ubuntu-latest (devel)
+* ubuntu-latest (release)
 * rhub
 
 ## R CMD check results
 
 0 errors | 0 warnings | 1 note
 
-* This is a new release from a previously archived package.
-
-## Downstream dependencies
-There are currently no downstream dependencies.
+* This is a new release.
