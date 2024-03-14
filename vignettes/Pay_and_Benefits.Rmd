@@ -25,7 +25,7 @@ The most difficult thing about working with BLS data is gaining a clear understa
 
 * [Work Stoppages Data](https://data.bls.gov/cgi-bin/surveymost?ws)
 
-* Other wage data can be found in the CPS, CES, and QCEW, which are covered in the [Employment sectioon](https://github.com/keberwein/blscrapeR/blob/master/vignettes/Employment_and_Unemployment.Rmd) of these vignettes.
+* Other wage data can be found in the CPS, CES, and QCEW, which are covered in the [Employment section](https://github.com/keberwein/blscrapeR/blob/master/vignettes/Employment_and_Unemployment.Rmd) of these vignettes.
 
 *Note: The hyperlinks above link to lists of the most popular seriesIDs, but are only a small sample of all the data tracked by the BLS.*
 

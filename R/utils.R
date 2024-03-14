@@ -45,7 +45,7 @@ urlExists <- function(target) {
 }  
 
 #' Internal function to cast the first letter of a word to upper-case.
-#' @param x A word or string to capatalize
+#' @param x A word or string to capitalize
 #' @param ... additional arguments.
 #' @keywords internal
 #' @return A string with the first letter of \code{x} as capital letter.

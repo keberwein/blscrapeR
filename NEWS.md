@@ -2,7 +2,7 @@
 
 ## Bug Fixes
 
-* Fixed API call 403 issue with `inflation_adjust()` function.
+* Fixed call 403 issue with `inflation_adjust()` function.
 
 ## Features
 
@@ -28,7 +28,7 @@
 
 * Added return values to documentation.
 
-* Changed examples so automated CRAN testing won't exhaust daily API limit.
+* Changed examples so automated CRAN testing won't exhaust daily limit.
 
 
 # blscrapeR 3.2.0
@@ -50,7 +50,7 @@
 
 ## Documentation
 
-* Converted BLS hyperlinks to https.
+* Converted hyperlinks to https.
 
 * Fixed various dead hyperlinks.
 
@@ -197,7 +197,7 @@ Updated NIACS and FIPS codes for 2018.
 ## Bug Fixes
 * Updated URLs for the get_bls_state() function.
 
-## Tets
+## Test
 * Updated tests for the get_bls_state() function.
 
 
@@ -212,7 +212,7 @@ Updated NIACS and FIPS codes for 2018.
 * Added 404 error handling to the main bls_api() function.
 
 ## Data
-* Added three data sets; niacs, size_titles, and area_titles. These data sets act as helpers for the QCEW API and provide industry and area codes that the API regularly uses.
+* Added three data sets; NIACS, size_titles, and area_titles. These data sets act as helpers for the QCEW API and provide industry and area codes that the API regularly uses.
 
 ## Bug Fixes
 * Updated URLs for the get_bls_county() function.
@@ -220,7 +220,7 @@ Updated NIACS and FIPS codes for 2018.
 ## Documentation
 * Added documentation for the qcew_api() function.
 
-* Added documentation for the three new data sets; niacs, size_titles, and area_titles.
+* Added documentation for the three new data sets; NIACS, size_titles, and area_titles.
 
 * Added a vignette for the qcew_api() function.
 
@@ -349,7 +349,7 @@ The change is backward compatible since the user is sill able to enter their api
 
 * Complete re-write of old `get_data()` function to pull from API only.
 
-* Added arguments to `get_data()` to pass the BLS API perams.
+* Added arguments to `get_data()` to pass the BLS API parameters.
 
 
 # blscrapeR 0.1.0
@@ -358,7 +358,7 @@ The change is backward compatible since the user is sill able to enter their api
 
 * Added `bls_state_data()` function to pull most recent sate-level employment data for mapping.
 
-* Added arguments to `get_data()` to pass the BLS API perams.
+* Added arguments to `get_data()` to pass the BLS API parameters.
 
 * Added documentation for data sets.
 
