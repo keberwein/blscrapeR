@@ -1,3 +1,11 @@
+# blscrapeR 4.0.1
+
+## Bug Fixes
+
+* Added the API address to the Description file.
+
+* Removed the `set_bls_key()` function to remain in compliance with CRAN policies.
+
 # blscrapeR 4.0.0
 
 ## Bug Fixes

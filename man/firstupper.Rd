@@ -7,7 +7,7 @@
 firstupper(x, ...)
 }
 \arguments{
-\item{x}{A word or string to capatalize}
+\item{x}{A word or string to capitalize}
 
 \item{...}{additional arguments.}
 }

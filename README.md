@@ -95,25 +95,6 @@ You should consider [getting an API key](http://data.bls.gov/registrationEngine/
 | Optional annual averages | Yes                      | No                         |
 | Series descriptions      | Yes                      | No                         |
 
-### Key Install
-
-``` r
-library(blscrapeR)
-set_bls_key("YOUR_KEY_IN_QUOTATIONS")
-# First time, reload your enviornment so you can use the key without restarting R.
-readRenviron("~/.Renviron")
-# You can check it with:
-Sys.getenv("BLS_KEY")
-```
-
-Note: The above script will add a line to your `.Renviron` file to be re-used when ever you are in the package. If you are not comfortable with that, you can add the following line to your `.Renviron` file manually to produce the same result.
-
-`BLS_KEY='YOUR_KEY_IN_SINGLE_QUOTES'`
-
-Advanced Usage
---------------
-
-Now that you have an API key installed, you can call your key in the package’s function arguments with `"BLS_KEY"`. Don't forget the quotes! If you just HAVE to have your key hard-coded in your scripts, you can also pass they key as a string.
 
 ### Download Multiple BLS Series at Once
 
