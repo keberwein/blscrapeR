@@ -7,7 +7,9 @@
 
 ## Bug Fixes
 
-* Fixed an issue where `dateCast()` incorrectly parsed quarterly data periods as months.
+* Fixed `inflation_adjust()` returning all zeros for `month_ovr_month_pct_change`. The function was using `stats::lag()` instead of `dplyr::lag()`, which shifts time-series attributes rather than actual values.
+
+* Fixed `inflation_adjust()` crashing with a error when the BLS API request fails (e.g. invalid API key). The function now falls back to internally cached CPI data with a warning, or stops with a clear error message if the requested base date is beyond the cached data range.
 
 # blscrapeR 4.0.1
 

@@ -4,7 +4,7 @@
 #' For example, if you want to see the value of a Jan. 2015 dollar in Jan. 2023, you would select "2015-01-01" as a base date and find Jan 2023 in the table.
 #' @param ... additional arguments
 #' @keywords bls api economics cpi unemployment inflation
-#' @importFrom stats aggregate lag
+#' @importFrom stats aggregate
 #' @importFrom dplyr mutate select rename arrange pull
 #' @importFrom tibble as_tibble
 #' @export inflation_adjust
@@ -44,12 +44,23 @@ inflation_adjust <- function(base_date=NA, ...){
         cu_temp <- bls_api("CUUR0000SA0", startyear = cu_dat_year, endyear = as.numeric(format(Sys.Date(), "%Y")))
     }
     
-    # Data prep.
-    cu_main <- cu_temp %>%
-        dplyr::mutate(date=as.Date(paste(year, period,"01",sep="-"),"%Y-M%m-%d"), year=format(date, '%Y')) %>% 
-        dplyr::select(date, period, year, value)
-    # Bind data sets.
-    cu_bound <- dplyr::bind_rows(cu_main, cu_main_dat)
+    # Guard against empty API response: fall back to internal data or stop
+    if (nrow(cu_temp) == 0) {
+        if (as.Date(base_date) > max(cu_main_dat$date)) {
+            stop("BLS API request failed and base_date is beyond the internally cached data. ",
+                 "Please check your API key (BLS_KEY) and try again.")
+        }
+        warning("BLS API request failed. Falling back to internally cached CPI data through ",
+                max(cu_main_dat$date), ".")
+        cu_bound <- cu_main_dat
+    } else {
+        # Data prep.
+        cu_main <- cu_temp %>%
+            dplyr::mutate(date=as.Date(paste(year, period,"01",sep="-"),"%Y-M%m-%d"), year=format(date, '%Y')) %>% 
+            dplyr::select(date, period, year, value)
+        # Bind data sets.
+        cu_bound <- dplyr::bind_rows(cu_main, cu_main_dat)
+    }
     
     # Annual aggregation.
     base_value <- cu_bound %>%
@@ -65,7 +76,7 @@ inflation_adjust <- function(base_date=NA, ...){
         # Formula for calculating inflation example: $1.00 * (1980 CPI/ 2014 CPI) = 1980 price.
         #mutate(adj_dollar_value = round(value / base_value, 2)) %>%
         mutate(adj_dollar_value = ceiling(value / base_value * 100) / 100) %>%
-        mutate(month_ovr_month_pct_change = (value / lag(value) - 1) * 100)
+        mutate(month_ovr_month_pct_change = (value / dplyr::lag(value) - 1) * 100)
 
 return(df_out)
 
