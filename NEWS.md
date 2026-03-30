@@ -1,3 +1,10 @@
+# blscrapeR 4.0.2
+
+## Enhancements
+
+* Updated deprecated `tidyr::spread()` usages to `tidyr::pivot_wider()`.
+* Removed outdated `.travis.yml` CI configuration in favor of GitHub Actions.
+
 # blscrapeR 4.0.1
 
 ## Bug Fixes

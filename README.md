@@ -132,7 +132,7 @@ library(tidyverse)
 # Median Usual Weekly Earnings by Occupation, Unadjusted Second Quartile.
 # In current dollars
 df <- bls_api(c("LEU0254530800", "LEU0254530600"), startyear = 2000, endyear = 2016, registrationKey = Sys.getenv("BLS_KEY")) %>%
-    spread(seriesID, value) %>% dateCast()
+    pivot_wider(names_from = seriesID, values_from = value) %>% dateCast()
 ```
 
 ``` r
