@@ -26,7 +26,15 @@ Before getting started, you’ll probably want to head over to the BLS and [get 
 Basic Usage
 -----------
 
-For “quick and dirty” type of analysis, the package has some quick functions that will pull metrics from the API without series numbers. These quick functions include unemployment, employment, and civilian labor force on a national level.
+For “quick and dirty” type of analysis, the package has some quick functions that will pull metrics from the API without series numbers. These include:
+
+* `quick_unemp_rate()`: Official Unemployment Rate (U-3)
+* `quick_unemp_level()`: Unemployment Level
+* `quick_employed_rate()`: Employment-Population Ratio
+* `quick_employed_level()`: Employment Level
+* `quick_laborForce_rate()`: Labor Force Participation Rate
+* `quick_laborForce_level()`: Civilian Labor Force Level
+* `quick_nonfarm_employed()`: Total Nonfarm Payroll Employment
 
 ``` r
 library(blscrapeR)
@@ -79,6 +87,27 @@ head(ids)
 #> #   periodicity_code <chr>
 ```
 
+Geographic Identification (County FIPS)
+---------------------------------------
+
+When working with local data, it's often necessary to use Federal Information Processing Series (FIPS) codes to identify specific regions. The package includes a helper function to list county FIPS codes for a given state.
+
+``` r
+library(blscrapeR)
+# Get a list of all county FIPS codes for Florida.
+fl_fips <- county_fips(state = "FL")
+head(fl_fips)
+#> # A tibble: 6 x 3
+#>   fips_state fips_county county_name
+#>   <chr>      <chr>       <chr>      
+#> 1 12         001         Alachua    
+#> 2 12         003         Baker      
+#> 3 12         005         Bay        
+#> 4 12         007         Bradford   
+#> 5 12         009         Brevard    
+#> 6 12         011         Broward    
+```
+
 API Keys
 --------
 
@@ -111,6 +140,22 @@ df <- bls_api(c("LNS12000000", "LNS13000000", "LNS14000000"),
     # Add time-series dates
     dateCast()
 ```
+
+### Advanced API v2 Features
+
+Registered users (with an API key) can request additional calculations, annual averages, and catalog descriptions.
+
+``` r
+library(blscrapeR)
+# Request data with year-over-year calculations and annual averages.
+df <- bls_api(c("LNS14000000"), 
+              startyear = 2010, endyear = 2020, 
+              registrationKey = "BLS_KEY", 
+              calculations = TRUE, annualaverage = TRUE, catalog = TRUE)
+head(df)
+```
+
+**Tip:** If you have set your API key in your `.Renviron` using `set_bls_key()`, you can simply pass the string `"BLS_KEY"` as the `registrationKey` argument to automatically use it.
 
 ``` r
 # Plot employment level
