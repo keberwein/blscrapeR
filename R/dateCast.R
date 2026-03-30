@@ -17,7 +17,13 @@ dateCast <- function (api_df=NULL, dt_format=NULL){
     year <- api_df$year
     
     if ("year" %in% colnames(api_df) & "period" %in% colnames(api_df)){
-        api_df$date <- as.Date(paste(api_df$year, ifelse(api_df$period == "M13", 12, substr(api_df$period, 2, 3)), "01", sep="-"))
+        month_str <- ifelse(api_df$period == "M13", "12",
+                     ifelse(api_df$period == "Q01", "01",
+                     ifelse(api_df$period == "Q02", "04",
+                     ifelse(api_df$period == "Q03", "07",
+                     ifelse(api_df$period == "Q04", "10",
+                     substr(api_df$period, 2, 3))))))
+        api_df$date <- as.Date(paste(api_df$year, month_str, "01", sep="-"))
     }else{
         message("Please be sure to have columns named 'year' and 'period' in your dataframe as they are returned from the bls_api() function.")
     }
