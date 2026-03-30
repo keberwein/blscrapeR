@@ -59,7 +59,8 @@ inflation_adjust <- function(base_date=NA, ...){
             dplyr::mutate(date=as.Date(paste(year, period,"01",sep="-"),"%Y-M%m-%d"), year=format(date, '%Y')) %>% 
             dplyr::select(date, period, year, value)
         # Bind data sets.
-        cu_bound <- dplyr::bind_rows(cu_main, cu_main_dat)
+        cu_bound <- dplyr::bind_rows(cu_main, cu_main_dat) %>%
+            dplyr::distinct(date, .keep_all = TRUE)
     }
     
     # Annual aggregation.
@@ -75,7 +76,7 @@ inflation_adjust <- function(base_date=NA, ...){
         mutate(base_date = base_date) %>%
         # Formula for calculating inflation example: $1.00 * (1980 CPI/ 2014 CPI) = 1980 price.
         #mutate(adj_dollar_value = round(value / base_value, 2)) %>%
-        mutate(adj_dollar_value = ceiling(value / base_value * 100) / 100) %>%
+        mutate(adj_dollar_value = round(value / base_value, 2)) %>%
         mutate(month_ovr_month_pct_change = (value / dplyr::lag(value) - 1) * 100)
 
 return(df_out)
