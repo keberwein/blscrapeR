@@ -7,3 +7,5 @@ NEWS.Rmd
 .DS_Store
 .Rproj
 cran-comments.md
+/doc/
+/Meta/

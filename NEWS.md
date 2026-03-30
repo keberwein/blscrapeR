@@ -1,3 +1,14 @@
+# blscrapeR 4.0.2
+
+## Enhancements
+
+* Updated deprecated `tidyr::spread()` usages to `tidyr::pivot_wider()`.
+* Removed outdated `.travis.yml` CI configuration in favor of GitHub Actions.
+
+## Bug Fixes
+
+* Fixed an issue where `dateCast()` incorrectly parsed quarterly data periods as months.
+
 # blscrapeR 4.0.1
 
 ## Bug Fixes
