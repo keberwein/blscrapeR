@@ -1,4 +1,4 @@
-# blscrapeR 4.0.2
+# blscrapeR 4.0.2 (2026-04-01)
 
 ## Enhancements
 

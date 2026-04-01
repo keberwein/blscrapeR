@@ -16,7 +16,7 @@ This is an update to blscrapeR 4.0.1, which is currently on CRAN.
 
 ## R CMD check results
 
-0 errors | 0 warnings | 1 note
+0 errors | 0 warnings | 1 note (future file timestamps)
 
 ## Notes:
 Found the following (possibly) invalid URLs:
