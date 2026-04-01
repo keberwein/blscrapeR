@@ -1,39 +1,29 @@
-## Resubmission
-Corrected two items of concern by CRAN review.
+## Update
 
-* Added the API address to the Description file.
+This is an update to blscrapeR 4.0.1, which is currently on CRAN.
 
-* Removed the `set_bls_key()` function to remain in compliance with CRAN policies regarding writing files to user space. Also, removed any mention of the function from documentation and vignettes.
+### Changes in this version
 
+* Fixed multiple bugs in `inflation_adjust()`: incorrect `month_ovr_month_pct_change` values, crash on API failure, and a data duplication issue.
+* Updated deprecated `tidyr::spread()` usages to `tidyr::pivot_wider()`.
+* Removed outdated `.travis.yml` CI configuration.
 
 ## Test environments
-* local Fedora 33, R 4.05
-* win-latest (devel)
-* ubuntu-latest (devel)
-* ubuntu-latest (release)
-* rhub
+* windows-latest (R release)
+* ubuntu-latest (R devel)
+* ubuntu-latest (R release)
+* macos-latest (R release)
 
 ## R CMD check results
 
-0 errors | 0 warnings | 2 notes
+0 errors | 0 warnings | 1 note
 
 ## Notes:
-CRAN repository db overrides:
-  X-CRAN-Comment: Archived on 2023-02-07 for repeated policy violation.
-  
-    * This package was previously archived due to CRAN violations, which have all been fixed. The violations regarded bad URL links in documentation and vignettes.
-
-
 Found the following (possibly) invalid URLs:
   URL: https://www.bls.gov/
     From: DESCRIPTION
     Status: 403
     Message: Forbidden
 
-    * The following note was generated when I added the BLS url to the DESCRIPTION file as requested by CRAN reviewer. The url is valid.
-
-
-    
-    
-
+  * This URL is valid and accessible in a browser. The BLS web server returns 403 to automated/non-browser requests.
 

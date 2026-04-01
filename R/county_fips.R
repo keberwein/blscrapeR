@@ -3,6 +3,7 @@
 #' @param state = A string containing a standard state short abbreviation, i.e. FL, WA, OH, etc.
 #' @param ... additional arguments
 #' @importFrom stats aggregate
+#' @importFrom utils data
 #' @importFrom dplyr filter
 #' @importFrom tibble as_tibble
 #' @importFrom stringr str_trim
@@ -32,8 +33,10 @@ county_fips <- function(state, ...) {
         stop("Invalid state abbreviation. Please provide a valid US state or territory.")
     }
     
-    fips_in <- blscrapeR::county_fips
-    
+    dat_env <- new.env(parent = emptyenv())
+    data("county_fips", envir = dat_env)
+    fips_in <- dat_env[["county_fips"]]
+
     fips <- fips_in %>% filter(state == state_in) %>% tibble::as_tibble()
     
     return(fips)
