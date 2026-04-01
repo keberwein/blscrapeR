@@ -11,6 +11,10 @@
 
 * Fixed `inflation_adjust()` crashing with a error when the BLS API request fails (e.g. invalid API key). The function now falls back to internally cached CPI data with a warning, or stops with a clear error message if the requested base date is beyond the cached data range.
 
+* Resolved a data duplication bug in `inflation_adjust()` that occurred when merging live API results with cached internal data.
+
+* Updated `inflation_adjust()` to use standard `round(..., 2)` for inflation-adjusted dollar values.
+
 # blscrapeR 4.0.1
 
 ## Bug Fixes
