@@ -23,7 +23,7 @@ The most difficult thing about working with BLS data is gaining a clear understa
 
 * [CES](https://data.bls.gov/cgi-bin/surveymost?ce) (Current Employment Statistics) includes employment by industry.
 
-* [OES](https://beta.bls.gov/dataQuery/find?fq=survey:[oe]&q=oe) (Occupational Employment Statistics) includes earnings and wages by industry, age, sex, etc.
+* OES (Occupational Employment Statistics) includes earnings and wages by industry, age, sex, etc.
 
 * [JOLTS](https://data.bls.gov/cgi-bin/surveymost?jt) (Job Openings and Labor Turnover Survey)
 

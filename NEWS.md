@@ -1,4 +1,10 @@
-# blscrapeR 4.0.2
+# blscrapeR 4.0.3 (2026-04-06)
+
+## Bug Fixes
+
+* Removed broken `beta.bls.gov` hyperlinks in `README.md` and vignettes that were failing CRAN checks.
+
+# blscrapeR 4.0.2 (2026-04-01)
 
 ## Enhancements
 

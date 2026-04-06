@@ -12,3 +12,6 @@
 ^\.github$
 ^doc$
 ^Meta$
+^\.claude$
+^\.RData$
+^\.Rhistory$

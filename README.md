@@ -54,7 +54,7 @@ head(df, 5)
 Search BLS IDs
 --------------
 
-Some knowledge of BLS ids are needed to query the API. The package includes a "fuzzy search" function to help find these ids. There are currently more than 75,000 series ids in the package's internal data set, `series_ids`. While these aren't all the series ids the BLS offers, it contains the most popular. The [BLS Data Finder](https://beta.bls.gov/dataQuery/search) is another good resource for finding series ids, that may not be in the internal data set.
+Some knowledge of BLS ids are needed to query the API. The package includes a "fuzzy search" function to help find these ids. There are currently more than 75,000 series ids in the package's internal data set, `series_ids`. While these aren't all the series ids the BLS offers, it contains the most popular. The BLS Data Finder is another good resource for finding series ids, that may not be in the internal data set.
 
 ``` r
 library(blscrapeR)
