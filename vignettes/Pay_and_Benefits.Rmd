@@ -17,7 +17,7 @@ The most difficult thing about working with BLS data is gaining a clear understa
 
 ##Catagories you will find useful are:
 
-* [OES](https://beta.bls.gov/dataQuery/find?fq=survey:[oe]&q=oe) (Occupational Employment Statistics) includes employment, benefits, and wages segmented by metro area and occupation.
+* OES (Occupational Employment Statistics) includes employment, benefits, and wages segmented by metro area and occupation.
 
 * [Employer Cost for Employee Compensation](https://data.bls.gov/cgi-bin/surveymost?cm)
 
